@@ -9,7 +9,7 @@
 
 # BACKEND CAPSTONE- "EXPERIENCE RIGHT"
 
-# Information to come.... 
+## Information to come.... 
 (For a little insight take a look at my sketchboard below)
 
 ### Sketching Out the Project 
