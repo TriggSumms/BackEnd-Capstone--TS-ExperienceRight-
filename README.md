@@ -9,7 +9,8 @@
 
 # BACKEND CAPSTONE- "EXPERIENCE RIGHT"
 
-#Information to come.... For a little insight take a look at my sketchboard below
+# Information to come.... 
+(For a little insight take a look at my sketchboard below)
 
 ### Sketching Out the Project 
 [Link to SketchBoard](https://sketchboard.me/BCofWoKCUoAq)
