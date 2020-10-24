@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Tabloid.Models
+namespace ExperienceRight_BackCapTS.Models
 {
     public class Comment
     {

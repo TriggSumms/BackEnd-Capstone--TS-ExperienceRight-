@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using Tabloid.Models;
 
 namespace ExperienceRight_BackCapTS.Models
 {
@@ -48,5 +49,10 @@ namespace ExperienceRight_BackCapTS.Models
                 return $"{FirstName} {LastName}";
             }
         }
+
+        //Had to bringin elements to tie to the get all userprofile SQL call:
+        public Business Business { get; set; }
+
+
+        public Category Category { get; set; }
     }
-}

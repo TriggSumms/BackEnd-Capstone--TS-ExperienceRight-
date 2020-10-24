@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using ExperienceRight_BackCapTS.Models;
 using ExperienceRight_BackCapTS.Utils;
+using Tabloid.Models;
 
 namespace ExperienceRight_BackCapTS.Repositories
 {
@@ -19,9 +20,13 @@ namespace ExperienceRight_BackCapTS.Repositories
                     cmd.CommandText = @"
                         SELECT up.Id, up.FirebaseUserId, up.FirstName, up.LastName, up.DisplayName, 
                                up.Email, up.CreateDateTime, up.ProfileImageLocation, up.UserTypeId, 
-                               ut.Name AS UserTypeName
+                               ut.Name AS UserTypeName,
+                               b.EstablishmentName, b.Bio, b.Address, b.HoursOfOperation, b.Phone, b.UserProfileId, b.CategoryId,
+                               c.Id, c.Name AS CategoryName
                           FROM UserProfile up
                                LEFT JOIN UserType ut on up.UserTypeId = ut.Id
+                               LEFT JOIN Business b on up.Id = b.Id
+                               LEFT JOIN Category c on b.CategoryId = c.Id
                          WHERE FirebaseUserId = @FirebaseuserId";
 
                     DbUtils.AddParameter(cmd, "@FirebaseUserId", firebaseUserId);
@@ -45,8 +50,24 @@ namespace ExperienceRight_BackCapTS.Repositories
                             UserType = new UserType()
                             {
                                 Id = DbUtils.GetInt(reader, "UserTypeId"),
-                                Name = DbUtils.GetString(reader, "UserTypeName"),
-                            }
+                                Name = DbUtils.GetString(reader, "UserTypeName")
+                            },
+                            Business = new Business()
+                            {
+                                Id = DbUtils.GetInt(reader, "BusinessId"),
+                                EstablishmentName = DbUtils.GetString(reader, "EstablishmentName"),
+                                Bio = DbUtils.GetString(reader, "Bio"),
+                                Address = DbUtils.GetString(reader, "Address"),
+                                HoursOfOperation = DbUtils.GetString(reader, "HoursOfOperation"),
+                                Phone = DbUtils.GetString(reader, "Phone"),
+                                UserProfileId = DbUtils.GetInt(reader, "UserProfileId"),
+                                CategoryId = DbUtils.GetInt(reader, "UserTypeId"),
+                                Category = new Category()
+                                {
+                                    Id = DbUtils.GetInt(reader, "CategoryId"),
+                                    Name = DbUtils.GetString(reader, "CategoryName")
+                                }
+                            },
                         };
                     }
                     reader.Close();
