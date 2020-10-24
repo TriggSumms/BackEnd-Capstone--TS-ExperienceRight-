@@ -8,7 +8,7 @@
 <br/>
 
 # BACKEND CAPSTONE- "EXPERIENCE RIGHT"
-### Trigg Summs
+
 
 
 ## Information to come.... 
