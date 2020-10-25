@@ -19,19 +19,8 @@ namespace ExperienceRight_BackCapTS.Controllers
             _userTypeRepository = userTypeRepository;
         }
 
-        //[HttpGet]
-        //public IActionResult Get()
-        //{
-        //    return Ok(_userProfileRepository.GetAllActive());
-        //}
-
-        //[HttpGet("inactive")]
-        //public IActionResult GetInactive()
-        //{
-        //    return Ok(_userProfileRepository.GetAllInactive());
-        //}
         [HttpGet]
-        public IActionResult GetAll()
+        public IActionResult GetAllUsersANDBusinessz()
         {
             return Ok(_userProfileRepository.GetAllUsersANDBusinessz());
         }

@@ -59,16 +59,20 @@ namespace ExperienceRight_BackCapTS.Repositories
                         SELECT up.Id, up.FirebaseUserId, up.FirstName, up.LastName, up.DisplayName, 
                                up.Email, up.CreateDateTime, up.ProfileImageLocation, up.UserTypeId, 
                                ut.Name AS UserTypeName,
-                                b.Id, b.EstablishmentName, b.Bio, b.Address, b.HoursOfOperation, b.Phone, b.UserProfileId, b.CategoryId,
+                               b.Id AS BusinessId, b.EstablishmentName, b.Bio, b.Address, b.HoursOfOperation, b.Phone, b.UserProfileId, b.CategoryId,
                                c.Id, c.Name AS CategoryName
                           FROM UserProfile up
                                LEFT JOIN UserType ut on up.UserTypeId = ut.Id
-                               LEFT JOIN Business b on up.Id = b.UserProfileId
+                               LEFT JOIN Business b on b.UserProfileId = up.Id
                                LEFT JOIN Category c on b.CategoryId = c.Id
                          ";
 
                     var reader = cmd.ExecuteReader();
                     var userProfiles = new List<UserProfile>();
+
+                  // userProfiles = null;
+                   // Business = null;
+
                     while (reader.Read())
                     {
                         var userProfile = (new UserProfile()
