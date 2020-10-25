@@ -5,13 +5,12 @@ namespace ExperienceRight_BackCapTS.Repositories
 {
     public interface IUserProfileRepository
     {
-        void Add(UserProfile userProfile);
-        //List<UserProfile> GetAllActive();
-        //List<UserProfile> GetAllInactive();
-        UserProfile GetByFirebaseUserId(string firebaseUserId);
-        UserProfile GetUserProfileById(int id);
-        void UpdateUserProfile(UserProfile userProfile);
-
-
+        void AddBusinessProfile(UserProfile userProfile);
+        void AddUserProfile(UserProfile userProfile);
+        List<UserProfile> GetAllUsersANDBusinessz();
+        UserProfile GetBusinessByFirebaseUserId(string firebaseUserId);
+        UserProfile GetProfileById(int id);
+        UserProfile GetUserByFirebaseUserId(string firebaseUserId);
+        UserProfile GetUserORBusinessByFirebaseUserId(string firebaseUserId);
     }
 }

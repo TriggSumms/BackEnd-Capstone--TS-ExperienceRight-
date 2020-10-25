@@ -61,7 +61,7 @@ namespace ExperienceRight_BackCapTS.Models
         public Category Category { get; set; }
 
 
-       // [DisplayName("Played by")]
-       // public List<Business> Businesss { get; set; }
+        [DisplayName("Played by")]
+        public List<Business> Businesss { get; set; }
     }
 }

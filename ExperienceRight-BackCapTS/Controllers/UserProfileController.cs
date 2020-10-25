@@ -30,38 +30,62 @@ namespace ExperienceRight_BackCapTS.Controllers
         //{
         //    return Ok(_userProfileRepository.GetAllInactive());
         //}
+        [HttpGet]
+        public IActionResult GetAll()
+        {
+            return Ok(_userProfileRepository.GetAllUsersANDBusinessz());
+        }
 
-        [HttpGet("{firebaseUserId}")]
+        [HttpGet("user/{firebaseUserId}")]
         public IActionResult GetUserProfile(string firebaseUserId)
         {
-            return Ok(_userProfileRepository.GetByFirebaseUserId(firebaseUserId));
+            return Ok(_userProfileRepository.GetUserByFirebaseUserId(firebaseUserId));
+        }
+
+        [HttpGet("business/{firebaseUserId}")]
+        public IActionResult GetBusinessProfile(string firebaseUserId)
+        {
+            return Ok(_userProfileRepository.GetBusinessByFirebaseUserId(firebaseUserId));
         }
 
         [HttpGet("user/{id}")]
         public IActionResult GetUserProfileById(int id)
         {
-            return Ok(_userProfileRepository.GetUserProfileById(id));
+            return Ok(_userProfileRepository.GetProfileById(id));
         }
 
-        [HttpPost]
-        public IActionResult Post(UserProfile userProfile)
+        [HttpPost("UserProfile")]
+        public IActionResult UserProfilePost(UserProfile userProfile)
         {
             userProfile.CreateDateTime = DateTime.Now;
             userProfile.UserTypeId = UserType.Anonymous_ID;
             //userProfile.IsActive = true;
-            _userProfileRepository.Add(userProfile);
+            _userProfileRepository.AddUserProfile(userProfile);
             return CreatedAtAction(
                 nameof(GetUserProfile),
                 new { firebaseUserId = userProfile.FirebaseUserId },
                 userProfile);
         }
 
-        [HttpPut("{id}")]
-        public ActionResult Put(UserProfile userProfile)
+        [HttpPost("BusinessProfile")]
+        public IActionResult BusinessProfilePost(UserProfile userProfile)
         {
-            _userProfileRepository.UpdateUserProfile(userProfile);
-            return NoContent();
+            userProfile.CreateDateTime = DateTime.Now;
+            userProfile.UserTypeId = UserType.Business_ID;
+            //userProfile.IsActive = true;
+            _userProfileRepository.AddBusinessProfile(userProfile);
+            return CreatedAtAction(
+                nameof(GetUserProfile),
+                new { firebaseUserId = userProfile.FirebaseUserId },
+                userProfile);
         }
+
+        //[HttpPut("{id}")]
+        //public ActionResult Put(UserProfile userProfile)
+        //{
+        //    _userProfileRepository.UpdateUserProfile(userProfile);
+        //    return NoContent();
+        //}
 
     }
 }
