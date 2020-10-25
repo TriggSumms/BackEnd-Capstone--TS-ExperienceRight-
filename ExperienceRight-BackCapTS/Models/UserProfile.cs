@@ -2,7 +2,11 @@
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using Tabloid.Models;
+using ExperienceRight_BackCapTS.Models;
+
+using System.Collections.Generic;
+using System.ComponentModel;
+
 
 namespace ExperienceRight_BackCapTS.Models
 {
@@ -55,4 +59,9 @@ namespace ExperienceRight_BackCapTS.Models
 
 
         public Category Category { get; set; }
+
+
+       // [DisplayName("Played by")]
+       // public List<Business> Businesss { get; set; }
     }
+}

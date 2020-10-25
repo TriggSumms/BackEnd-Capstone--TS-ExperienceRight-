@@ -10,19 +10,25 @@ namespace ExperienceRight_BackCapTS.Models
     {
         public int Id { get; set; }
 
-        public int PostId { get; set; }
+        public int ReviewId { get; set; }
+        public int UserProfileId { get; set; }
+
+       // public int BusinessId { get; set; }
+
+        public Review Review { get; set; }
+        public UserProfile UserProfile { get; set; }
+
+       // public Business Business { get; set; }
+
+        //Props below
 
         [StringLength(255)]
         public string Subject { get; set; }
-        public int UserProfileId { get; set; }
+       
         public string Content { get; set; }
 
         [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
         public DateTime CreateDateTime { get; set; }
-
-        public Post Post { get; set; }
-        public UserProfile UserProfile { get; set; }
-
 
     }
 }

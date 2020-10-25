@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using ExperienceRight_BackCapTS.Models;
 using ExperienceRight_BackCapTS.Utils;
-using Tabloid.Models;
+
 
 namespace ExperienceRight_BackCapTS.Repositories
 {
@@ -54,14 +54,14 @@ namespace ExperienceRight_BackCapTS.Repositories
                             },
                             Business = new Business()
                             {
-                                Id = DbUtils.GetInt(reader, "BusinessId"),
+                                Id = DbUtils.GetInt(reader, "Id"),
                                 EstablishmentName = DbUtils.GetString(reader, "EstablishmentName"),
                                 Bio = DbUtils.GetString(reader, "Bio"),
                                 Address = DbUtils.GetString(reader, "Address"),
                                 HoursOfOperation = DbUtils.GetString(reader, "HoursOfOperation"),
                                 Phone = DbUtils.GetString(reader, "Phone"),
                                 UserProfileId = DbUtils.GetInt(reader, "UserProfileId"),
-                                CategoryId = DbUtils.GetInt(reader, "UserTypeId"),
+                                CategoryId = DbUtils.GetInt(reader, "CategoryId"),
                                 Category = new Category()
                                 {
                                     Id = DbUtils.GetInt(reader, "CategoryId"),

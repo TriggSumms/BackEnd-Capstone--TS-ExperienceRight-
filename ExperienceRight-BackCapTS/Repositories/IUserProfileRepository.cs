@@ -11,5 +11,7 @@ namespace ExperienceRight_BackCapTS.Repositories
         UserProfile GetByFirebaseUserId(string firebaseUserId);
         UserProfile GetUserProfileById(int id);
         void UpdateUserProfile(UserProfile userProfile);
+
+
     }
 }

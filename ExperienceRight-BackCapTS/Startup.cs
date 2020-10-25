@@ -23,7 +23,10 @@ namespace ExperienceRight_BackCapTS
         {
            services.AddTransient<IUserProfileRepository, UserProfileRepository>();
            services.AddTransient<IUserTypeRepository, UserTypeRepository>();
-            //services.AddTransient<IPostRepository, PostRepository>();
+           services.AddTransient<IReviewRepository, ReviewRepository>();
+           services.AddTransient<ICommentRepository, CommentRepository>();
+           services.AddTransient<IFrequencyRepository, FrequencyRepository>();
+           services.AddTransient<ICategoryRepository, CategoryRepository>();
 
 
 
