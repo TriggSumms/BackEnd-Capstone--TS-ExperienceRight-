@@ -27,6 +27,7 @@ namespace ExperienceRight_BackCapTS
            services.AddTransient<ICommentRepository, CommentRepository>();
            services.AddTransient<IFrequencyRepository, FrequencyRepository>();
            services.AddTransient<ICategoryRepository, CategoryRepository>();
+           services.AddTransient<IBusinessRepository, BusinessRepository>();
 
 
 

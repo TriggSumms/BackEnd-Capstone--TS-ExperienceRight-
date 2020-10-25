@@ -57,12 +57,37 @@
 
 
 
-                        SELECT c.Id, c.ReviewId, c.UserProfileId, c.Subject, c.Content, c.CreateDateTime,
-                               up.Email, up.DisplayName, up.FirstName, up.LastName, up.ProfileImageLocation,
-                               up.CreateDateTime AS UserProfileCreationDate, up.FirebaseUserId, up.UserTypeId,
-                               ut.Name AS UserTypeName
-                        FROM Comment c
-                        LEFT JOIN UserProfile up on c.UserProfileId = up.Id
-                        LEFT JOIN UserType ut ON up.UserTypeId = ut.id
-                        WHERE c.Id = @id
-                        ORDER BY c.CreateDateTime DESC
+                              SELECT b.EstablishmentName, b.Bio, b.Address, b.HoursOfOperation, b.Phone, b.UserProfileId, b.CategoryId,
+                              
+                              c.Id, c.Name AS CategoryName,
+                              
+                              up.FirstName, up.LastName, up.DisplayName, up.FirebaseUserId,
+                              up.Email, up.CreateDateTime AS UserProfileCreationDate, up.ProfileImageLocation, up.UserTypeId, 
+
+                              ut.Name AS UserTypeName
+
+                         FROM Business b
+                              
+                              LEFT JOIN UserProfile up ON b.UserProfileId = up.id
+                              LEFT JOIN UserType ut ON up.UserTypeId = ut.id
+                              LEFT JOIN Category c ON b.CategoryId = c.id
+                       
+                        ORDER BY EstablishmentName ASC
+
+
+                                                      SELECT b.EstablishmentName, b.Bio, b.Address, b.HoursOfOperation, b.Phone, b.UserProfileId, b.CategoryId,
+                              
+                              c.Id, c.Name AS CategoryName,
+                              
+                              up.FirstName, up.LastName, up.DisplayName, up.FirebaseUserId,
+                              up.Email, up.CreateDateTime AS UserProfileCreationDate, up.ProfileImageLocation, up.UserTypeId, 
+
+                              ut.Name AS UserTypeName
+
+                         FROM Business b
+                              
+                              LEFT JOIN UserProfile up ON b.UserProfileId = up.id
+                              LEFT JOIN UserType ut ON up.UserTypeId = ut.id
+                              LEFT JOIN Category c ON b.CategoryId = c.id
+                        
+                              WHERE b.id = 1
