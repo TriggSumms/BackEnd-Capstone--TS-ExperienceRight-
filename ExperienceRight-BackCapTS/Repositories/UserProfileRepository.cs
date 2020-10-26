@@ -545,138 +545,142 @@ namespace ExperienceRight_BackCapTS.Repositories
             }
         }
 
-        //public void Add(UserProfile userProfile)
-        //{
-        //    using (var conn = Connection)
-        //    {
-        //        conn.Open();
-        //        using (var cmd = conn.CreateCommand())
-        //        {
-        //            cmd.CommandText = @"INSERT INTO UserProfile (FirebaseUserId, FirstName, LastName, DisplayName, 
-        //                                                             Email, CreateDateTime, ProfileImageLocation, UserTypeId)
-        //                                    OUTPUT INSERTED.ID
-        //                                    VALUES (@FirebaseUserId, @FirstName, @LastName, @DisplayName, 
-        //                                            @Email, @CreateDateTime, @ProfileImageLocation, @UserTypeId)";
-        //            DbUtils.AddParameter(cmd, "@FirebaseUserId", userProfile.FirebaseUserId);
-        //            DbUtils.AddParameter(cmd, "@FirstName", userProfile.FirstName);
-        //            DbUtils.AddParameter(cmd, "@LastName", userProfile.LastName);
-        //            DbUtils.AddParameter(cmd, "@DisplayName", userProfile.DisplayName);
-        //            DbUtils.AddParameter(cmd, "@Email", userProfile.Email);
-        //            DbUtils.AddParameter(cmd, "@CreateDateTime", userProfile.CreateDateTime);
-        //            DbUtils.AddParameter(cmd, "@ProfileImageLocation", userProfile.ProfileImageLocation);
-        //            DbUtils.AddParameter(cmd, "@UserTypeId", userProfile.UserTypeId);
+        public void Add(UserProfile userProfile)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"INSERT INTO UserProfile (FirebaseUserId, FirstName, LastName, DisplayName, 
+                                                                     Email, CreateDateTime, ProfileImageLocation, UserTypeId)
+                                            OUTPUT INSERTED.ID
+                                            VALUES (@FirebaseUserId, @FirstName, @LastName, @DisplayName, 
+                                                    @Email, @CreateDateTime, @ProfileImageLocation, @UserTypeId)";
+                    DbUtils.AddParameter(cmd, "@FirebaseUserId", userProfile.FirebaseUserId);
+                    DbUtils.AddParameter(cmd, "@FirstName", userProfile.FirstName);
+                    DbUtils.AddParameter(cmd, "@LastName", userProfile.LastName);
+                    DbUtils.AddParameter(cmd, "@DisplayName", userProfile.DisplayName);
+                    DbUtils.AddParameter(cmd, "@Email", userProfile.Email);
+                    DbUtils.AddParameter(cmd, "@CreateDateTime", userProfile.CreateDateTime);
+                    DbUtils.AddParameter(cmd, "@ProfileImageLocation", userProfile.ProfileImageLocation);
+                    DbUtils.AddParameter(cmd, "@UserTypeId", userProfile.UserTypeId);
 
 
-        //            userProfile.Id = (int)cmd.ExecuteScalar();
-        //        }
+                    userProfile.Id = (int)cmd.ExecuteScalar();
+                }
 
-        //        conn.Open();
-        //        using (var cmd = conn.CreateCommand())
-        //        {
-        //            cmd.CommandText = @"
-        //                    INSERT INTO Business(
-        //                            EstablishmentName, Bio, Address, HoursOfOperation, Phone, UserProfileId, CategoryId)
-        //                    OUTPUT INSERTED.ID
-        //                    VALUES (
-        //                             @EstablishmentName, @Bio, @Address, @HoursOfOperation, @Phone, @UserProfileId, @CategoryId)";
-
-
-        //            DbUtils.AddParameter(cmd, "@EstablishmentName", userProfile.business.EstablishmentName);
-        //            DbUtils.AddParameter(cmd, "@Bio", userProfile.business.Bio);
-        //            DbUtils.AddParameter(cmd, "@Address", userProfile.business.Address);
-        //            DbUtils.AddParameter(cmd, "@HoursOfOperation", userProfile.business.HoursOfOperation);
-        //            DbUtils.AddParameter(cmd, "@Phone", userProfile.business.Phone);
-        //            //DbUtils.AddParameter(cmd, "@UserProfileId", business.UserProfileId);
-        //            DbUtils.AddParameter(cmd, "@CategoryId", userProfile.business.CategoryId);
-
-        //            userProfile.business.Id = (int)cmd.ExecuteScalar();
-        //        }
-
-        //    }
-
-        //}
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                            INSERT INTO Business(
+                                    EstablishmentName, Bio, Address, HoursOfOperation, Phone, UserProfileId, CategoryId)
+                            OUTPUT INSERTED.ID
+                            VALUES (
+                                     @EstablishmentName, @Bio, @Address, @HoursOfOperation, @Phone, @UserProfileId, @CategoryId)";
 
 
+                    DbUtils.AddParameter(cmd, "@EstablishmentName", userProfile.Business.EstablishmentName);
+                    DbUtils.AddParameter(cmd, "@Bio", userProfile.Business.Bio);
+                    DbUtils.AddParameter(cmd, "@Address", userProfile.Business.Address);
+                    DbUtils.AddParameter(cmd, "@HoursOfOperation", userProfile.Business.HoursOfOperation);
+                    DbUtils.AddParameter(cmd, "@Phone", userProfile.Business.Phone);
+                    //DbUtils.AddParameter(cmd, "@UserProfileId", business.UserProfileId);
+                    DbUtils.AddParameter(cmd, "@CategoryId", userProfile.Business.CategoryId);
+
+                    userProfile.Business.Id = (int)cmd.ExecuteScalar();
+                }
+
+            }
+
+        }
 
 
-        //public void AddBusinessProfile(UserProfile userProfile)
-        //      {
-        //          using (var conn = Connection)
-        //          {
-        //              conn.Open();
-        //              using (var cmd = conn.CreateCommand())
-        //              {
-        //                  cmd.CommandText = @"INSERT INTO UserProfile (FirebaseUserId, FirstName, LastName, DisplayName, 
-        //                                                               Email, CreateDateTime, ProfileImageLocation, UserTypeId)
-        //                                      OUTPUT INSERTED.ID
-        //                                      VALUES (@FirebaseUserId, @FirstName, @LastName, @DisplayName, 
-        //                                              @Email, @CreateDateTime, @ProfileImageLocation, @UserTypeId)";
-        //                  DbUtils.AddParameter(cmd, "@FirebaseUserId", userProfile.FirebaseUserId);
-        //                  DbUtils.AddParameter(cmd, "@FirstName", userProfile.FirstName);
-        //                  DbUtils.AddParameter(cmd, "@LastName", userProfile.LastName);
-        //                  DbUtils.AddParameter(cmd, "@DisplayName", userProfile.DisplayName);
-        //                  DbUtils.AddParameter(cmd, "@Email", userProfile.Email);
-        //                  DbUtils.AddParameter(cmd, "@CreateDateTime", userProfile.CreateDateTime);
-        //                  DbUtils.AddParameter(cmd, "@ProfileImageLocation", userProfile.ProfileImageLocation);
-        //                  DbUtils.AddParameter(cmd, "@UserTypeId", userProfile.UserTypeId);
 
 
-        //                  userProfile.Id = (int)cmd.ExecuteScalar();
-        //              }
-
-        //              conn.Open();
-        //              using (var cmd = conn.CreateCommand())
-        //              {
-        //                  cmd.CommandText = @"
-        //                      INSERT INTO Business(
-        //                              EstablishmentName, Bio, Address, HoursOfOperation, Phone, UserProfileId, CategoryId)
-        //                      OUTPUT INSERTED.ID
-        //                      VALUES (
-        //                               @EstablishmentName, @Bio, @Address, @HoursOfOperation, @Phone, @UserProfileId, @CategoryId)";
-
-
-        //                  DbUtils.AddParameter(cmd, "@EstablishmentName", userProfile.Business.EstablishmentName);
-        //                  DbUtils.AddParameter(cmd, "@Bio", userProfile.Business.Bio);
-        //                  DbUtils.AddParameter(cmd, "@Address", userProfile.Business.Address);
-        //                  DbUtils.AddParameter(cmd, "@HoursOfOperation", userProfile.Business.HoursOfOperation);
-        //                  DbUtils.AddParameter(cmd, "@Phone", userProfile.Business.Phone);
-        //                  //DbUtils.AddParameter(cmd, "@UserProfileId", business.UserProfileId);
-        //                  DbUtils.AddParameter(cmd, "@CategoryId", userProfile.Business.CategoryId);
-
-        //                  userProfile.Business.Id = (int)cmd.ExecuteScalar();
-        //              }
-
-        //          }
-
-        //      }
-        //      public void AddUserProfile(UserProfile userProfile)
-        //      {
-        //          using (var conn = Connection)
-        //          {
-        //              conn.Open();
-        //              using (var cmd = conn.CreateCommand())
-        //              {
-        //                  cmd.CommandText = @"INSERT INTO UserProfile (FirebaseUserId, FirstName, LastName, DisplayName, 
-        //                                                               Email, CreateDateTime, ProfileImageLocation, UserTypeId)
-        //                                      OUTPUT INSERTED.ID
-        //                                      VALUES (@FirebaseUserId, @FirstName, @LastName, @DisplayName, 
-        //                                              @Email, @CreateDateTime, @ProfileImageLocation, @UserTypeId)";
-        //                  DbUtils.AddParameter(cmd, "@FirebaseUserId", userProfile.FirebaseUserId);
-        //                  DbUtils.AddParameter(cmd, "@FirstName", userProfile.FirstName);
-        //                  DbUtils.AddParameter(cmd, "@LastName", userProfile.LastName);
-        //                  DbUtils.AddParameter(cmd, "@DisplayName", userProfile.DisplayName);
-        //                  DbUtils.AddParameter(cmd, "@Email", userProfile.Email);
-        //                  DbUtils.AddParameter(cmd, "@CreateDateTime", userProfile.CreateDateTime);
-        //                  DbUtils.AddParameter(cmd, "@ProfileImageLocation", userProfile.ProfileImageLocation);
-        //                  DbUtils.AddParameter(cmd, "@UserTypeId", userProfile.UserTypeId);
+        public void AddBusinessProfile(UserProfile userProfile)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"INSERT INTO UserProfile (FirebaseUserId, FirstName, LastName, DisplayName, 
+                                                                       Email, CreateDateTime, ProfileImageLocation, UserTypeId)
+                                              OUTPUT INSERTED.ID
+                                              VALUES (@FirebaseUserId, @FirstName, @LastName, @DisplayName, 
+                                                      @Email, @CreateDateTime, @ProfileImageLocation, @UserTypeId)";
+                    DbUtils.AddParameter(cmd, "@FirebaseUserId", userProfile.FirebaseUserId);
+                    DbUtils.AddParameter(cmd, "@FirstName", userProfile.FirstName);
+                    DbUtils.AddParameter(cmd, "@LastName", userProfile.LastName);
+                    DbUtils.AddParameter(cmd, "@DisplayName", userProfile.DisplayName);
+                    DbUtils.AddParameter(cmd, "@Email", userProfile.Email);
+                    DbUtils.AddParameter(cmd, "@CreateDateTime", userProfile.CreateDateTime);
+                    DbUtils.AddParameter(cmd, "@ProfileImageLocation", userProfile.ProfileImageLocation);
+                    DbUtils.AddParameter(cmd, "@UserTypeId", userProfile.UserTypeId);
 
 
-        //                  userProfile.Id = (int)cmd.ExecuteScalar();
-        //              }
+                    userProfile.Id = (int)cmd.ExecuteScalar();
+                }
 
-        //          }
+                
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                              INSERT INTO Business(
+                                      EstablishmentName, Bio, Address, HoursOfOperation, Phone, UserProfileId, CategoryId)
+                              OUTPUT INSERTED.ID
+                              VALUES (
+                                       @EstablishmentName, @Bio, @Address, @HoursOfOperation, @Phone, @UserProfileId, @CategoryId)";
 
-        //      }
+
+                    DbUtils.AddParameter(cmd, "@EstablishmentName", userProfile.Business.EstablishmentName);
+                    DbUtils.AddParameter(cmd, "@Bio", userProfile.Business.Bio);
+                    DbUtils.AddParameter(cmd, "@Address", userProfile.Business.Address);
+                    DbUtils.AddParameter(cmd, "@HoursOfOperation", userProfile.Business.HoursOfOperation);
+                    DbUtils.AddParameter(cmd, "@Phone", userProfile.Business.Phone);
+                    //DbUtils.AddParameter(cmd, "@UserProfileId", business.UserProfileId);
+                    DbUtils.AddParameter(cmd, "@CategoryId", userProfile.Business.CategoryId);
+
+                    userProfile.Business.Id = (int)cmd.ExecuteScalar();
+                }
+
+            }
+
+        }
+
+
+
+
+        public void AddUserProfile(UserProfile userProfile)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"INSERT INTO UserProfile (FirebaseUserId, FirstName, LastName, DisplayName, 
+                                                                       Email, CreateDateTime, ProfileImageLocation, UserTypeId)
+                                              OUTPUT INSERTED.ID
+                                              VALUES (@FirebaseUserId, @FirstName, @LastName, @DisplayName, 
+                                                      @Email, @CreateDateTime, @ProfileImageLocation, @UserTypeId)";
+                    DbUtils.AddParameter(cmd, "@FirebaseUserId", userProfile.FirebaseUserId);
+                    DbUtils.AddParameter(cmd, "@FirstName", userProfile.FirstName);
+                    DbUtils.AddParameter(cmd, "@LastName", userProfile.LastName);
+                    DbUtils.AddParameter(cmd, "@DisplayName", userProfile.DisplayName);
+                    DbUtils.AddParameter(cmd, "@Email", userProfile.Email);
+                    DbUtils.AddParameter(cmd, "@CreateDateTime", userProfile.CreateDateTime);
+                    DbUtils.AddParameter(cmd, "@ProfileImageLocation", userProfile.ProfileImageLocation);
+                    DbUtils.AddParameter(cmd, "@UserTypeId", userProfile.UserTypeId);
+
+
+                    userProfile.Id = (int)cmd.ExecuteScalar();
+                }
+
+            }
+
+        }
 
         //          //        public void UpdateUserProfile(UserProfile userProfile)
         //          //        {
