@@ -2,8 +2,9 @@ import React, { useContext } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import { UserProfileContext } from "../providers/UserProfileProvider";
 import Login from "./Login";
-import RegisterConsumer from "./RegisterConsumer";
-import RegisterBusiness from "./RegisterConsumer";
+//import RegisterConsumer from "./RegisterConsumer";
+import Register from "./Register";
+//import RegisterBusiness from "./RegisterBusiness";
 import Hello from "./Hello";
 // import PostList from "./Posts/PostList";
 // import CommentList from "./Comments/CommentList";
@@ -54,13 +55,17 @@ export default function ApplicationViews() {
           <Login />
         </Route>
 
-        <Route path="/customerRegister">
-          <RegisterConsumer />
-        </Route>
+    <Route path="/register">
+          <Register />
+        </Route> 
 
-        <Route path="/businessRegister">
+                {/* <Route path="/customerRegister">
+          <RegisterConsumer />
+        </Route> */}
+
+        {/* <Route path="/businessRegister">
           <RegisterBusiness />
-        </Route>
+        </Route> */}
 
         {/* Comment Routes */}
 

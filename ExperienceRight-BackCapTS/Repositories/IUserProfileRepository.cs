@@ -5,7 +5,7 @@ namespace ExperienceRight_BackCapTS.Repositories
 {
     public interface IUserProfileRepository
     {
-        void AddBusinessProfile(UserProfile userProfile);
+        //void AddBusinessProfile(UserProfile userProfile, int id);
         void AddUserProfile(UserProfile userProfile);
         List<UserProfile> GetAllUsersANDBusinessz();
         UserProfile GetBusinessByFirebaseUserId(string firebaseUserId);

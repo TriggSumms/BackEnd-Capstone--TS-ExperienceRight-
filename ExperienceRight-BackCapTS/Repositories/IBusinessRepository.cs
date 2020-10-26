@@ -5,6 +5,7 @@ namespace ExperienceRight_BackCapTS.Repositories
 {
     public interface IBusinessRepository
     {
+        //void AddBusiness(Business business, int userProfileId);
         void AddBusiness(Business business);
         void DeleteBusiness(int id);
 

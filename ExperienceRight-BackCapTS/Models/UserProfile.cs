@@ -54,7 +54,7 @@ namespace ExperienceRight_BackCapTS.Models
             }
         }
 
-        //Had to bringin elements to tie to the get all userprofile SQL call:
+        //Had to bring in elements to tie to the get all userprofile SQL call:
         public Business Business { get; set; }
 
         public List<Business> Businessz { get; set; }

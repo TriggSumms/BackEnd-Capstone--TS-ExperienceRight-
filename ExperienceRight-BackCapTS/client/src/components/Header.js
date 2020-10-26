@@ -82,11 +82,14 @@ export default function Header() {
                   <NavLink tag={RRNavLink} to="/login">Login</NavLink>
                 </NavItem>
                 <NavItem>
+                  <NavLink tag={RRNavLink} to="/register">Register</NavLink>
+                </NavItem>
+                {/* <NavItem>
                   <NavLink tag={RRNavLink} to="/customerRegister">Register as Consumer</NavLink>
                 </NavItem>
                 <NavItem>
                   <NavLink tag={RRNavLink} to="/businessRegister">Register as Business</NavLink>
-                </NavItem>
+                </NavItem> */}
               </>
             }
           </Nav>

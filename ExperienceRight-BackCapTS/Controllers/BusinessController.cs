@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using ExperienceRight_BackCapTS.Models;
 using ExperienceRight_BackCapTS.Repositories;
@@ -49,16 +50,26 @@ namespace ExperienceRight_BackCapTS.Controllers
                 return Ok(business);
             }
 
-            [HttpPost]
-            public IActionResult Business(Business business)
-            {
+        //[HttpPost]
+        //public IActionResult Business(Business business)
+        //{
 
-                //review.CreateDateTime = DateTime.Now;
-                _businessRepository.AddBusiness(business);
-                return CreatedAtAction("Get", new { id = business.Id }, business);
-            }
+        //    //review.CreateDateTime = DateTime.Now;
+        //    _businessRepository.AddBusiness(business);
+        //    return CreatedAtAction("Get", new { id = business.Id }, business);
+        //}
 
-            [HttpPut("edit/{id}")]
+        [HttpPost]
+        public IActionResult Business(Business business)
+        {
+           var currentId = GetCurrentUserProfile();
+            //review.CreateDateTime = DateTime.Now;
+            _businessRepository.AddBusiness(business);
+            return CreatedAtAction("Get", new { id = business.Id, userProfileId = currentId}, business);
+        }
+
+
+        [HttpPut("edit/{id}")]
             public IActionResult Put(int id, Business business)
             {
                 if (id != business.Id)
@@ -76,17 +87,25 @@ namespace ExperienceRight_BackCapTS.Controllers
                 return NoContent();
             }
 
-            // **Add the id with no slash before it in the route and do the same in the provider with the fetch call. 
-            // Because React doesn't like it when it has to go down more than one level for the id.
-            //[HttpGet("myreviews{id}")]
-            //public IActionResult GetUserReviews(int id)
-            //{
-            //    var businessz = _businessRepository.GetAllBusinesszForSpecificUser(id);
-            //    return Ok(businessz);
-            //}
 
 
-
+        private UserProfile GetCurrentUserProfile()
+        {
+            var firebaseUserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            return _userProfileRepository.GetUserByFirebaseUserId(firebaseUserId);
         }
+
+        // **Add the id with no slash before it in the route and do the same in the provider with the fetch call. 
+        // Because React doesn't like it when it has to go down more than one level for the id.
+        //[HttpGet("myreviews{id}")]
+        //public IActionResult GetUserReviews(int id)
+        //{
+        //    var businessz = _businessRepository.GetAllBusinesszForSpecificUser(id);
+        //    return Ok(businessz);
+        //}
+
+
+
+    }
     }
 
