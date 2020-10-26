@@ -10,7 +10,7 @@ export default function RegisterBusiness() {
   const [lastName, setLastName] = useState();
   const [displayName, setDisplayName] = useState();
   const [email, setEmail] = useState();
-  const [imageLocation, setImageLocation] = useState();
+  const [profileImageLocation, setProfileImageLocation] = useState();
   const [password, setPassword] = useState();
   const [confirmPassword, setConfirmPassword] = useState();
 //   const [EstablishmentName, setEstablishmentName] = useState();
@@ -25,8 +25,8 @@ export default function RegisterBusiness() {
     if (password && password !== confirmPassword) {
       alert("Passwords don't match. Do better.");
     } else {
-      const userProfile = { firstName, lastName, displayName, imageLocation, email /* establishmentName, bio, address, HoursOfOperation, phone, category  */};
-      register(userProfile, password)
+      const userProfile = { firstName, lastName, displayName, profileImageLocation, email /* establishmentName, bio, address, HoursOfOperation, phone, category  */};
+      registerBusiness(userProfile, password)
         .then(() => history.push("/"));
     }
  };
@@ -51,8 +51,8 @@ export default function RegisterBusiness() {
           <Input id="email" type="text" onChange={e => setEmail(e.target.value)} />
         </FormGroup>
         <FormGroup>
-          <Label htmlFor="imageLocation">Profile Image URL</Label>
-          <Input id="imageLocation" type="text" onChange={e => setImageLocation(e.target.value)} />
+          <Label htmlFor="profileImageLocation">Profile Image URL</Label>
+          <Input id="profileImageLocation" type="text" onChange={e => setProfileImageLocation(e.target.value)} />
         </FormGroup>
         <FormGroup>
           <Label for="password">Password</Label>
