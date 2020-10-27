@@ -33,7 +33,7 @@ namespace ExperienceRight_BackCapTS.Repositories
 
                     reader.Close();
 
-                    return userType;
+                    return userType; 
                 }
             }
         }

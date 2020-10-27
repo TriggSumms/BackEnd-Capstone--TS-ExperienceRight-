@@ -15,7 +15,7 @@ const UserDetails = () => {
     return null;
   }
 
-  console.log(user)
+  //console.log(user)
   return (
     <>
       <div className="usersContainer">

@@ -10,7 +10,7 @@ namespace ExperienceRight_BackCapTS.Models
         [MaxLength(20)]
         public string Name { get; set; }
 
-        public static int Business_ID => 1;
-        public static int Anonymous_ID => 2;
+        //public static int Business_ID => 1;
+        //public static int Anonymous_ID => 2;
     }
 }

@@ -2,17 +2,21 @@ import React, { useContext } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import { UserProfileContext } from "../providers/UserProfileProvider";
 import Login from "./Login";
-import Register from "./RegisterConsumer";
+//import RegisterConsumer from "./RegisterConsumer";
+import Register from "./Register";
+//import RegisterBusiness from "./RegisterBusiness";
 import Hello from "./Hello";
-// import PostList from "./Posts/PostList";
+ import ProfileReviewList from "./Reviews/ProfileReviewList";
+ import ReviewDetail from "./Reviews/ReviewDetail";
+import ReviewAddForm from "./Reviews/ReviewAddForm";
 // import CommentList from "./Comments/CommentList";
 // import CommentAddForm from "./Comments/CommentAddForm";
 // import CommentEditForm from "./Comments/CommentEditForm.js";
 // import CommentDelete from "./Comments/CommentDelete";
-// import PostDetail from "./Posts/PostDetail";
+
 // import UnapprovedPostList from "./Posts/UnapprovedPostList";
 // import AuthorViewList from "./Posts/AuthorViewList";
-// import PostForm from "./Posts/PostForm";
+
 // import PostEditForm from "./Posts/PostEditForm";
 // import PostDelete from "./Posts/PostDelete";
 // import PostTagList from "./Tags/PostTagList";
@@ -53,14 +57,21 @@ export default function ApplicationViews() {
           <Login />
         </Route>
 
-        <Route path="/register">
+    <Route path="/register">
           <Register />
-        </Route>
+        </Route> 
 
+                {/* <Route path="/customerRegister">
+          <RegisterConsumer />
+        </Route> */}
+
+        {/* <Route path="/businessRegister">
+          <RegisterBusiness />
+        </Route> */}
 
         {/* Comment Routes */}
-
-        {/* <Route path="/post/:id/comments" exact>
+{/*
+         <Route path="/post/:id/comments" exact>
           {isLoggedIn ? <CommentList /> : <Redirect to="/login" />}
         </Route>
 
@@ -99,19 +110,19 @@ export default function ApplicationViews() {
         {/* ---- POST ROUTES ---- */}
  
 
-{/* 
-        <Route path="/posts" exact>
-          {isLoggedIn ? <PostList /> : <Redirect to="/login" />}
+
+        <Route path="/reviews" exact>
+          {isLoggedIn ? <ProfileReviewList /> : <Redirect to="/login" />}
+        </Route>
+ 
+        <Route exact path="/reviews/details/:id">
+          {isLoggedIn ? <ReviewDetail /> : <Redirect to="/login" />}
         </Route>
 
-        <Route exact path="/posts/details/:id">
-          {isLoggedIn ? <PostDetail /> : <Redirect to="/login" />}
+        <Route path="/reviews/add">
+          {isLoggedIn ? <ReviewAddForm /> : <Redirect to="/login" />}
         </Route>
-
-        <Route path="/posts/add">
-          {isLoggedIn ? <PostForm /> : <Redirect to="/login" />}
-        </Route>
-
+{/*
         <Route path="/posts/unapproved" exact>
           {isLoggedIn && sessionUser.userTypeId === 1 ? <UnapprovedPostList /> : <Redirect to="/login" />}
         </Route>

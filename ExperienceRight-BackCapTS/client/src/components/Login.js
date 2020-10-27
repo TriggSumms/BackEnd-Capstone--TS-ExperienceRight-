@@ -32,7 +32,8 @@ export default function Login() {
           <Button>Login</Button>
         </FormGroup>
         <em>
-          Not registered? <Link to="register">Register</Link>
+          {/* Not Registered? <br></br>...<Link to="/customerRegister">Register as Customer</Link> OR <Link to="/businessRegister">Register as Business</Link> */}
+          Not Registered? <br></br>...<Link to="/register">Register </Link> 
         </em>
       </fieldset>
     </Form>

@@ -4,16 +4,16 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Tabloid.Models
+namespace ExperienceRight_BackCapTS.Models
 {
-    public class Category
+    public class Frequency
     {
         public int Id { get; set; }
 
         [StringLength(40, MinimumLength = 1)]
 
         [Required]
-        [MaxLength(50)]
+        [MaxLength(100)]
         public string Name { get; set; }
     }
 }

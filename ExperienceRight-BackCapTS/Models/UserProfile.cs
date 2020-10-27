@@ -2,6 +2,11 @@
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using ExperienceRight_BackCapTS.Models;
+
+using System.Collections.Generic;
+using System.ComponentModel;
+
 
 namespace ExperienceRight_BackCapTS.Models
 {
@@ -48,5 +53,16 @@ namespace ExperienceRight_BackCapTS.Models
                 return $"{FirstName} {LastName}";
             }
         }
+
+        //Had to bring in elements to tie to the get all userprofile SQL call:
+        public Business Business { get; set; }
+
+        public List<Business> Businessz { get; set; }
+
+        public Category Category { get; set; }
+
+
+       // [DisplayName("Played by")]
+       // public List<Business> Businesss { get; set; }
     }
 }

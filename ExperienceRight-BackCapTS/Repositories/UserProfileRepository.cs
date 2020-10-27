@@ -2,6 +2,8 @@
 using Microsoft.Extensions.Configuration;
 using ExperienceRight_BackCapTS.Models;
 using ExperienceRight_BackCapTS.Utils;
+using System.Data.SqlClient;
+using System.Linq;
 
 namespace ExperienceRight_BackCapTS.Repositories
 {
@@ -9,7 +11,115 @@ namespace ExperienceRight_BackCapTS.Repositories
     {
         public UserProfileRepository(IConfiguration configuration) : base(configuration) { }
 
-        public UserProfile GetByFirebaseUserId(string firebaseUserId)
+        //private UserProfile NewUserProfileFromReader(SqlDataReader reader)
+        //{
+        //    return new UserProfile()
+        //    {
+        //        Id = reader.GetInt32(reader.GetOrdinal("Id")),
+        //        FirebaseUserId = reader.GetString(reader.GetOrdinal("FirebaseUserId")),
+        //        DisplayName = reader.GetString(reader.GetOrdinal("DisplayName")),
+        //        FirstName = reader.GetString(reader.GetOrdinal("FirstName")),
+        //        LastName = reader.GetString(reader.GetOrdinal("LastName")),
+        //        Email = reader.GetString(reader.GetOrdinal("Email")),
+        //        CreateDateTime = reader.GetDateTime(reader.GetOrdinal("CreateDateTime")),
+        //        ProfileImageLocation = DbUtils.GetNullableString(reader, "ProfileImageLocation"),
+        //        UserTypeId = reader.GetInt32(reader.GetOrdinal("UserTypeId")),
+        //        UserType = new UserType()
+        //        {
+        //            Id = reader.GetInt32(reader.GetOrdinal("UserTypeId")),
+        //            Name = reader.GetString(reader.GetOrdinal("UserTypeName"))
+        //        },
+        //        //BusinessId = reader.GetInt32(reader.GetOrdinal("BusinessId")),
+        //        business = new Business()
+        //        {
+        //            Id = DbUtils.GetInt(reader, "Id"),
+        //            EstablishmentName = DbUtils.GetString(reader, "EstablishmentName"),
+        //            Bio = DbUtils.GetString(reader, "Bio"),
+        //            Address = DbUtils.GetString(reader, "Address"),
+        //            HoursOfOperation = DbUtils.GetString(reader, "HoursOfOperation"),
+        //            Phone = DbUtils.GetString(reader, "Phone"),
+        //            UserProfileId = DbUtils.GetInt(reader, "UserProfileId"),
+        //            CategoryId = DbUtils.GetInt(reader, "CategoryId"),
+        //            Category = new Category()
+        //            {
+        //                Id = DbUtils.GetInt(reader, "CategoryId"),
+        //                Name = DbUtils.GetString(reader, "CategoryName")
+        //            }
+        //        },
+        //    };
+        //}
+        //public List<UserProfile> GetAllUsersANDBusinessz()
+        //{
+        //    using (var conn = Connection)
+        //    {
+        //        conn.Open();
+        //        using (var cmd = conn.CreateCommand())
+        //        {
+        //            cmd.CommandText = @"
+        //                SELECT up.Id, up.FirebaseUserId, up.FirstName, up.LastName, up.DisplayName, 
+        //                       up.Email, up.CreateDateTime, up.ProfileImageLocation, up.UserTypeId, 
+        //                       ut.Name AS UserTypeName,
+        //                       b.Id AS BusinessId, b.EstablishmentName, b.Bio, b.Address, b.HoursOfOperation, b.Phone, b.UserProfileId, b.CategoryId,
+        //                       c.Id, c.Name AS CategoryName
+        //                  FROM UserProfile up
+        //                       LEFT JOIN UserType ut on up.UserTypeId = ut.Id
+        //                       LEFT JOIN Business b on b.UserProfileId = up.Id
+        //                       LEFT JOIN Category c on b.CategoryId = c.Id
+        //                 ";
+
+        //            var reader = cmd.ExecuteReader();
+        //            var userProfiles = new List<UserProfile>();
+
+        //            // userProfiles = null;
+        //            // Business = null;
+
+        //            while (reader.Read())
+        //            {
+        //                var userProfile = (new UserProfile()
+        //                {
+        //                    Id = DbUtils.GetInt(reader, "Id"),
+        //                    FirebaseUserId = DbUtils.GetString(reader, "FirebaseUserId"),
+        //                    FirstName = DbUtils.GetString(reader, "FirstName"),
+        //                    LastName = DbUtils.GetString(reader, "LastName"),
+        //                    DisplayName = DbUtils.GetString(reader, "DisplayName"),
+        //                    Email = DbUtils.GetString(reader, "Email"),
+        //                    CreateDateTime = DbUtils.GetDateTime(reader, "CreateDateTime"),
+        //                    ProfileImageLocation = DbUtils.GetString(reader, "ProfileImageLocation"),
+        //                    UserTypeId = DbUtils.GetInt(reader, "UserTypeId"),
+        //                    UserType = new UserType()
+        //                    {
+        //                        Id = DbUtils.GetInt(reader, "UserTypeId"),
+        //                        Name = DbUtils.GetString(reader, "UserTypeName")
+        //                    },
+        //                    Business = new Business()
+        //                    {
+        //                        Id = DbUtils.GetInt(reader, "BusinessId"),
+        //                        EstablishmentName = DbUtils.GetString(reader, "EstablishmentName"),
+        //                        Bio = DbUtils.GetString(reader, "Bio"),
+        //                        Address = DbUtils.GetString(reader, "Address"),
+        //                        HoursOfOperation = DbUtils.GetString(reader, "HoursOfOperation"),
+        //                        Phone = DbUtils.GetString(reader, "Phone"),
+        //                        UserProfileId = DbUtils.GetInt(reader, "UserProfileId"),
+        //                        CategoryId = DbUtils.GetInt(reader, "CategoryId"),
+        //                        Category = new Category()
+        //                        {
+        //                            Id = DbUtils.GetInt(reader, "CategoryId"),
+        //                            Name = DbUtils.GetString(reader, "CategoryName")
+        //                        }
+        //                    }
+        //                });
+
+        //                userProfiles.Add(userProfile);
+        //            }
+
+        //            reader.Close();
+
+        //            return userProfiles;
+        //        }
+        //    }
+        //}
+
+        public List<UserProfile> GetAllUsersANDBusinessz()
         {
             using (var conn = Connection)
             {
@@ -17,12 +127,306 @@ namespace ExperienceRight_BackCapTS.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                        SELECT up.Id, up.FirebaseUserId, up.FirstName, up.LastName, up.DisplayName, 
+                        SELECT up.Id AS UserProfileId, up.FirebaseUserId, up.FirstName, up.LastName, up.DisplayName, 
                                up.Email, up.CreateDateTime, up.ProfileImageLocation, up.UserTypeId, 
-                               ut.Name AS UserTypeName
+                               ut.Name AS UserTypeName,
+                               b.Id AS BusinessId, b.EstablishmentName, b.Bio, b.Address, b.HoursOfOperation, b.Phone, b.UserProfileId AS BusinessUserProfileId, b.CategoryId,
+                               c.Id, c.Name AS CategoryName
                           FROM UserProfile up
                                LEFT JOIN UserType ut on up.UserTypeId = ut.Id
+                               LEFT JOIN Business b on b.UserProfileId = up.Id
+                               LEFT JOIN Category c on b.CategoryId = c.Id
+                         ";
+
+                    var reader = cmd.ExecuteReader();
+                    var userProfiles = new List<UserProfile>();
+
+                    // userProfiles = null;
+                    // Business = null;
+
+                    while (reader.Read())
+                    {
+                        var userProfileId = DbUtils.GetInt(reader, "UserProfileId");
+
+                        var existingUserProfile = userProfiles.FirstOrDefault(up => up.Id == userProfileId);
+                        if (existingUserProfile == null)
+                        {
+                            existingUserProfile = new UserProfile()
+                            {
+                                Id = userProfileId,
+                                FirebaseUserId = DbUtils.GetString(reader, "FirebaseUserId"),
+                                FirstName = DbUtils.GetString(reader, "FirstName"),
+                                LastName = DbUtils.GetString(reader, "LastName"),
+                                DisplayName = DbUtils.GetString(reader, "DisplayName"),
+                                Email = DbUtils.GetString(reader, "Email"),
+                                CreateDateTime = DbUtils.GetDateTime(reader, "CreateDateTime"),
+                                ProfileImageLocation = DbUtils.GetString(reader, "ProfileImageLocation"),
+                                UserTypeId = DbUtils.GetInt(reader, "UserTypeId"),
+                                UserType = new UserType()
+                                {
+                                    Id = DbUtils.GetInt(reader, "UserTypeId"),
+                                    Name = DbUtils.GetString(reader, "UserTypeName")
+                                },
+                                Businessz = new List<Business>()
+
+                            };
+
+                            userProfiles.Add(existingUserProfile);
+                        }
+
+                        if (DbUtils.IsNotDbNull(reader, "BusinessId"))
+                        {
+                            existingUserProfile.Businessz.Add(new Business()
+                            {
+                                Id = DbUtils.GetInt(reader, "BusinessId"),
+                                EstablishmentName = DbUtils.GetString(reader, "EstablishmentName"),
+                                Bio = DbUtils.GetString(reader, "Bio"),
+                                Address = DbUtils.GetString(reader, "Address"),
+                                HoursOfOperation = DbUtils.GetString(reader, "HoursOfOperation"),
+                                Phone = DbUtils.GetString(reader, "Phone"),
+                                UserProfileId = userProfileId,
+                                CategoryId = DbUtils.GetInt(reader, "CategoryId"),
+                                Category = new Category()
+                                {
+                                    Id = DbUtils.GetInt(reader, "CategoryId"),
+                                    Name = DbUtils.GetString(reader, "CategoryName")
+                                }
+
+                            });
+                        }
+                    }
+
+                    reader.Close();
+
+                    return userProfiles;
+                }
+            }
+        }
+
+
+        public UserProfile GetUserORBusinessByFirebaseUserId(string firebaseUserId)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                        SELECT up.Id AS UserProfileId, up.FirebaseUserId, up.FirstName, up.LastName, up.DisplayName, 
+                               up.Email, up.CreateDateTime, up.ProfileImageLocation, up.UserTypeId, 
+                               ut.Name AS UserTypeName,
+                               b.Id AS BusinessId, b.EstablishmentName, b.Bio, b.Address, b.HoursOfOperation, b.Phone, b.UserProfileId AS BusinessUserProfileId, b.CategoryId,
+                               c.Id, c.Name AS CategoryName
+                          FROM UserProfile up
+                               LEFT JOIN UserType ut on up.UserTypeId = ut.Id
+                               LEFT JOIN Business b on b.UserProfileId = up.Id
+                               LEFT JOIN Category c on b.CategoryId = c.Id
                          WHERE FirebaseUserId = @FirebaseuserId";
+
+                    DbUtils.AddParameter(cmd, "@FirebaseUserId", firebaseUserId);
+                    var reader = cmd.ExecuteReader();
+
+                    UserProfile userProfile = null;
+
+
+                    while (reader.Read())
+                    {
+                        var userProfileId = DbUtils.GetInt(reader, "UserProfileId");
+
+
+                        if (userProfile == null)
+                        {
+                            userProfile = new UserProfile()
+                            {
+                                Id = userProfileId,
+                                FirebaseUserId = DbUtils.GetString(reader, "FirebaseUserId"),
+                                FirstName = DbUtils.GetString(reader, "FirstName"),
+                                LastName = DbUtils.GetString(reader, "LastName"),
+                                DisplayName = DbUtils.GetString(reader, "DisplayName"),
+                                Email = DbUtils.GetString(reader, "Email"),
+                                CreateDateTime = DbUtils.GetDateTime(reader, "CreateDateTime"),
+                                ProfileImageLocation = DbUtils.GetString(reader, "ProfileImageLocation"),
+                                UserTypeId = DbUtils.GetInt(reader, "UserTypeId"),
+                                UserType = new UserType()
+                                {
+                                    Id = DbUtils.GetInt(reader, "UserTypeId"),
+                                    Name = DbUtils.GetString(reader, "UserTypeName")
+                                },
+                                Businessz = new List<Business>()
+                            };
+
+                            if (DbUtils.IsNotDbNull(reader, "BusinessId"))
+                            {
+                                userProfile.Businessz.Add(new Business()
+                                {
+                                    Id = DbUtils.GetInt(reader, "BusinessId"),
+                                    EstablishmentName = DbUtils.GetString(reader, "EstablishmentName"),
+                                    Bio = DbUtils.GetString(reader, "Bio"),
+                                    Address = DbUtils.GetString(reader, "Address"),
+                                    HoursOfOperation = DbUtils.GetString(reader, "HoursOfOperation"),
+                                    Phone = DbUtils.GetString(reader, "Phone"),
+                                    UserProfileId = userProfileId,
+                                    CategoryId = DbUtils.GetInt(reader, "CategoryId"),
+                                    Category = new Category()
+                                    {
+                                        Id = DbUtils.GetInt(reader, "CategoryId"),
+                                        Name = DbUtils.GetString(reader, "CategoryName")
+                                    }
+
+                                });
+                            }
+                        }
+                    }
+
+                    reader.Close();
+
+                    return userProfile;
+                }
+            }
+        }
+
+        //            UserProfile userProfile = null;
+
+        //            var reader = cmd.ExecuteReader();
+        //            if (reader.Read())
+        //            {
+        //                userProfile = new UserProfile()
+        //                {
+        //                    Id = DbUtils.GetInt(reader, "Id"),
+        //                    FirebaseUserId = DbUtils.GetString(reader, "FirebaseUserId"),
+        //                    FirstName = DbUtils.GetString(reader, "FirstName"),
+        //                    LastName = DbUtils.GetString(reader, "LastName"),
+        //                    DisplayName = DbUtils.GetString(reader, "DisplayName"),
+        //                    Email = DbUtils.GetString(reader, "Email"),
+        //                    CreateDateTime = DbUtils.GetDateTime(reader, "CreateDateTime"),
+        //                    ProfileImageLocation = DbUtils.GetString(reader, "ProfileImageLocation"),
+        //                    UserTypeId = DbUtils.GetInt(reader, "UserTypeId"),
+        //                    UserType = new UserType()
+        //                    {
+        //                        Id = DbUtils.GetInt(reader, "UserTypeId"),
+        //                        Name = DbUtils.GetString(reader, "UserTypeName")
+        //                    },
+        //                    Business = new Business()
+        //                    {
+        //                        Id = DbUtils.GetInt(reader, "Id"),
+        //                        EstablishmentName = DbUtils.GetString(reader, "EstablishmentName"),
+        //                        Bio = DbUtils.GetString(reader, "Bio"),
+        //                        Address = DbUtils.GetString(reader, "Address"),
+        //                        HoursOfOperation = DbUtils.GetString(reader, "HoursOfOperation"),
+        //                        Phone = DbUtils.GetString(reader, "Phone"),
+        //                        UserProfileId = DbUtils.GetInt(reader, "UserProfileId"),
+        //                        CategoryId = DbUtils.GetInt(reader, "CategoryId"),
+        //                        Category = new Category()
+        //                        {
+        //                            Id = DbUtils.GetInt(reader, "CategoryId"),
+        //                            Name = DbUtils.GetString(reader, "CategoryName")
+        //                        }
+        //                    },
+        //                };
+        //            }
+        //            reader.Close();
+
+        //            return userProfile;
+        //        }
+        //    }
+        //}
+
+        public UserProfile GetBusinessByFirebaseUserId(string firebaseUserId)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                        SELECT up.Id AS UserProfileId, up.FirebaseUserId, up.FirstName, up.LastName, up.DisplayName, 
+                               up.Email, up.CreateDateTime, up.ProfileImageLocation, up.UserTypeId, 
+                               ut.Name AS UserTypeName,
+                               b.Id AS BusinessId, b.EstablishmentName, b.Bio, b.Address, b.HoursOfOperation, b.Phone, b.UserProfileId AS BusinessUserProfileId, b.CategoryId,
+                               c.Id, c.Name AS CategoryName
+                          FROM UserProfile up
+                               LEFT JOIN UserType ut on up.UserTypeId = ut.Id
+                               LEFT JOIN Business b on b.UserProfileId = up.Id
+                               LEFT JOIN Category c on b.CategoryId = c.Id
+                         WHERE ut.Id= 1 AND FirebaseUserId = @FirebaseuserId";
+
+                    DbUtils.AddParameter(cmd, "@FirebaseUserId", firebaseUserId);
+                    var reader = cmd.ExecuteReader();
+
+                    UserProfile userProfile = null;
+
+
+                    while (reader.Read())
+                    {
+                        var userProfileId = DbUtils.GetInt(reader, "UserProfileId");
+
+
+                        if (userProfile == null)
+                        {
+                            userProfile = new UserProfile()
+                            {
+                                Id = userProfileId,
+                                FirebaseUserId = DbUtils.GetString(reader, "FirebaseUserId"),
+                                FirstName = DbUtils.GetString(reader, "FirstName"),
+                                LastName = DbUtils.GetString(reader, "LastName"),
+                                DisplayName = DbUtils.GetString(reader, "DisplayName"),
+                                Email = DbUtils.GetString(reader, "Email"),
+                                CreateDateTime = DbUtils.GetDateTime(reader, "CreateDateTime"),
+                                ProfileImageLocation = DbUtils.GetString(reader, "ProfileImageLocation"),
+                                UserTypeId = DbUtils.GetInt(reader, "UserTypeId"),
+                                UserType = new UserType()
+                                {
+                                    Id = DbUtils.GetInt(reader, "UserTypeId"),
+                                    Name = DbUtils.GetString(reader, "UserTypeName")
+                                },
+                                Businessz = new List<Business>()
+                            };
+
+                            if (DbUtils.IsNotDbNull(reader, "BusinessId"))
+                            {
+                                userProfile.Businessz.Add(new Business()
+                                {
+                                    Id = DbUtils.GetInt(reader, "BusinessId"),
+                                    EstablishmentName = DbUtils.GetString(reader, "EstablishmentName"),
+                                    Bio = DbUtils.GetString(reader, "Bio"),
+                                    Address = DbUtils.GetString(reader, "Address"),
+                                    HoursOfOperation = DbUtils.GetString(reader, "HoursOfOperation"),
+                                    Phone = DbUtils.GetString(reader, "Phone"),
+                                    UserProfileId = userProfileId,
+                                    CategoryId = DbUtils.GetInt(reader, "CategoryId"),
+                                    Category = new Category()
+                                    {
+                                        Id = DbUtils.GetInt(reader, "CategoryId"),
+                                        Name = DbUtils.GetString(reader, "CategoryName")
+                                    }
+
+                                });
+                            }
+                        }
+                    }
+
+                    reader.Close();
+
+                    return userProfile;
+                }
+            }
+        }
+
+
+        public UserProfile GetUserByFirebaseUserId(string firebaseUserId)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                        SELECT up.Id AS UserProfileId, up.FirebaseUserId, up.FirstName, up.LastName, up.DisplayName, 
+                               up.Email, up.CreateDateTime, up.ProfileImageLocation, up.UserTypeId, 
+                               ut.Name AS UserTypeName                      
+                          FROM UserProfile up
+                               LEFT JOIN UserType ut on up.UserTypeId = ut.Id
+                         WHERE ut.Id= 2 AND FirebaseUserId = @FirebaseuserId";
 
                     DbUtils.AddParameter(cmd, "@FirebaseUserId", firebaseUserId);
 
@@ -33,7 +437,7 @@ namespace ExperienceRight_BackCapTS.Repositories
                     {
                         userProfile = new UserProfile()
                         {
-                            Id = DbUtils.GetInt(reader, "Id"),
+                            Id = DbUtils.GetInt(reader, "UserProfileId"),
                             FirebaseUserId = DbUtils.GetString(reader, "FirebaseUserId"),
                             FirstName = DbUtils.GetString(reader, "FirstName"),
                             LastName = DbUtils.GetString(reader, "LastName"),
@@ -45,7 +449,7 @@ namespace ExperienceRight_BackCapTS.Repositories
                             UserType = new UserType()
                             {
                                 Id = DbUtils.GetInt(reader, "UserTypeId"),
-                                Name = DbUtils.GetString(reader, "UserTypeName"),
+                                Name = DbUtils.GetString(reader, "UserTypeName")
                             }
                         };
                     }
@@ -56,104 +460,200 @@ namespace ExperienceRight_BackCapTS.Repositories
             }
         }
 
-        //public List<UserProfile> GetAllActive()
+        public UserProfile GetProfileById(int id)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    {
+                        cmd.CommandText = @"
+                        SELECT up.Id AS UserProfileId, up.FirebaseUserId, up.FirstName, up.LastName, up.DisplayName, 
+                               up.Email, up.CreateDateTime, up.ProfileImageLocation, up.UserTypeId, 
+                               ut.Name AS UserTypeName,
+                               b.Id AS BusinessId, b.EstablishmentName, b.Bio, b.Address, b.HoursOfOperation, b.Phone, b.UserProfileId AS BusinessUserProfileId, b.CategoryId,
+                               c.Id, c.Name AS CategoryName
+                          FROM UserProfile up
+                               LEFT JOIN UserType ut on up.UserTypeId = ut.Id
+                               LEFT JOIN Business b on b.UserProfileId = up.Id
+                               LEFT JOIN Category c on b.CategoryId = c.Id
+                        WHERE UserProfileId = @id";
+
+                        //cmd.Parameters.AddWithValue("@id", id);
+
+                        DbUtils.AddParameter(cmd, "@id", id);
+
+                        var reader = cmd.ExecuteReader();
+
+                        UserProfile userProfile = null;
+
+                        while (reader.Read())
+                        {
+                            var userProfileId = DbUtils.GetInt(reader, "UserProfileId");
+
+
+                            if (userProfile == null)
+                            {
+                                userProfile = new UserProfile()
+                                {
+                                    Id = userProfileId,
+                                    FirebaseUserId = DbUtils.GetString(reader, "FirebaseUserId"),
+                                    FirstName = DbUtils.GetString(reader, "FirstName"),
+                                    LastName = DbUtils.GetString(reader, "LastName"),
+                                    DisplayName = DbUtils.GetString(reader, "DisplayName"),
+                                    Email = DbUtils.GetString(reader, "Email"),
+                                    CreateDateTime = DbUtils.GetDateTime(reader, "CreateDateTime"),
+                                    ProfileImageLocation = DbUtils.GetString(reader, "ProfileImageLocation"),
+                                    UserTypeId = DbUtils.GetInt(reader, "UserTypeId"),
+                                    UserType = new UserType()
+                                    {
+                                        Id = DbUtils.GetInt(reader, "UserTypeId"),
+                                        Name = DbUtils.GetString(reader, "UserTypeName")
+                                    },
+                                    Businessz = new List<Business>()
+                                };
+
+                                if (DbUtils.IsNotDbNull(reader, "BusinessId"))
+                                {
+                                    userProfile.Businessz.Add(new Business()
+                                    {
+                                        Id = DbUtils.GetInt(reader, "BusinessId"),
+                                        EstablishmentName = DbUtils.GetString(reader, "EstablishmentName"),
+                                        Bio = DbUtils.GetString(reader, "Bio"),
+                                        Address = DbUtils.GetString(reader, "Address"),
+                                        HoursOfOperation = DbUtils.GetString(reader, "HoursOfOperation"),
+                                        Phone = DbUtils.GetString(reader, "Phone"),
+                                        UserProfileId = userProfileId,
+                                        CategoryId = DbUtils.GetInt(reader, "CategoryId"),
+                                        Category = new Category()
+                                        {
+                                            Id = DbUtils.GetInt(reader, "CategoryId"),
+                                            Name = DbUtils.GetString(reader, "CategoryName")
+                                        }
+
+                                    });
+                                }
+
+                            }
+                        }
+                        reader.Close();
+
+                        return userProfile;
+                    }
+                }
+            }
+        }
+
+        //public void Add(UserProfile userProfile)
         //{
         //    using (var conn = Connection)
         //    {
         //        conn.Open();
         //        using (var cmd = conn.CreateCommand())
         //        {
-        //            cmd.CommandText = @"
-        //               SELECT up.id, up.FirebaseUserId, up.FirstName, up.LastName, up.DisplayName, up.Email,
-        //                      up.CreateDateTime, up.IsActive, up.ProfileImageLocation, up.UserTypeId, 
-        //                      ut.[Name] AS UserTypeName
-        //                 FROM UserProfile up
-        //                      LEFT JOIN UserType ut ON up.UserTypeId = ut.id
-        //                WHERE IsActive = 1
-        //                    ORDER BY DisplayName
-        //                ";
-        //            var reader = cmd.ExecuteReader();
-        //            var userProfile = new List<UserProfile>();
+        //            cmd.CommandText = @"INSERT INTO UserProfile (FirebaseUserId, FirstName, LastName, DisplayName, 
+        //                                                             Email, CreateDateTime, ProfileImageLocation, UserTypeId)
+        //                                    OUTPUT INSERTED.ID
+        //                                    VALUES (@FirebaseUserId, @FirstName, @LastName, @DisplayName, 
+        //                                            @Email, @CreateDateTime, @ProfileImageLocation, @UserTypeId)";
+        //            DbUtils.AddParameter(cmd, "@FirebaseUserId", userProfile.FirebaseUserId);
+        //            DbUtils.AddParameter(cmd, "@FirstName", userProfile.FirstName);
+        //            DbUtils.AddParameter(cmd, "@LastName", userProfile.LastName);
+        //            DbUtils.AddParameter(cmd, "@DisplayName", userProfile.DisplayName);
+        //            DbUtils.AddParameter(cmd, "@Email", userProfile.Email);
+        //            DbUtils.AddParameter(cmd, "@CreateDateTime", userProfile.CreateDateTime);
+        //            DbUtils.AddParameter(cmd, "@ProfileImageLocation", userProfile.ProfileImageLocation);
+        //            DbUtils.AddParameter(cmd, "@UserTypeId", userProfile.UserTypeId);
 
-        //            while (reader.Read())
-        //            {
-        //                userProfile.Add(new UserProfile()
 
-        //                {
-        //                    Id = DbUtils.GetInt(reader, "Id"),
-        //                    FirebaseUserId = DbUtils.GetString(reader, "FirebaseUserId"),
-        //                    FirstName = DbUtils.GetString(reader, "FirstName"),
-        //                    LastName = DbUtils.GetString(reader, "LastName"),
-        //                    DisplayName = DbUtils.GetString(reader, "DisplayName"),
-        //                    Email = DbUtils.GetString(reader, "Email"),
-        //                    CreateDateTime = DbUtils.GetDateTime(reader, "CreateDateTime"),
-        //                    ProfileImageLocation = DbUtils.GetString(reader, "ProfileImageLocation"),
-        //                    UserTypeId = DbUtils.GetInt(reader, "UserTypeId"),
-        //                    UserType = new UserType()
-        //                    {
-        //                        Id = DbUtils.GetInt(reader, "UserTypeId"),
-        //                        Name = DbUtils.GetString(reader, "UserTypeName"),
-        //                    }
-        //                });
-        //            }
-
-        //            reader.Close();
-
-        //            return userProfile;
+        //            userProfile.Id = (int)cmd.ExecuteScalar();
         //        }
+
+        //        conn.Open();
+        //        using (var cmd = conn.CreateCommand())
+        //        {
+        //            cmd.CommandText = @"
+        //                    INSERT INTO Business(
+        //                            EstablishmentName, Bio, Address, HoursOfOperation, Phone, UserProfileId, CategoryId)
+        //                    OUTPUT INSERTED.ID
+        //                    VALUES (
+        //                             @EstablishmentName, @Bio, @Address, @HoursOfOperation, @Phone, @UserProfileId, @CategoryId)";
+
+
+        //            DbUtils.AddParameter(cmd, "@EstablishmentName", userProfile.Business.EstablishmentName);
+        //            DbUtils.AddParameter(cmd, "@Bio", userProfile.Business.Bio);
+        //            DbUtils.AddParameter(cmd, "@Address", userProfile.Business.Address);
+        //            DbUtils.AddParameter(cmd, "@HoursOfOperation", userProfile.Business.HoursOfOperation);
+        //            DbUtils.AddParameter(cmd, "@Phone", userProfile.Business.Phone);
+        //            //DbUtils.AddParameter(cmd, "@UserProfileId", business.UserProfileId);
+        //            DbUtils.AddParameter(cmd, "@CategoryId", userProfile.Business.CategoryId);
+
+        //            userProfile.Business.Id = (int)cmd.ExecuteScalar();
+        //        }
+
         //    }
+
         //}
 
-        //public List<UserProfile> GetAllInactive()
+
+
+
+        //public void AddBusinessProfile(UserProfile userProfile)
         //{
         //    using (var conn = Connection)
         //    {
         //        conn.Open();
         //        using (var cmd = conn.CreateCommand())
         //        {
-        //            cmd.CommandText = @"
-        //               SELECT up.id, up.FirebaseUserId, up.FirstName, up.LastName, up.DisplayName, up.Email,
-        //                      up.CreateDateTime, up.IsActive, up.ProfileImageLocation, up.UserTypeId,
-        //                      ut.[Name] AS UserTypeName
-        //                 FROM UserProfile up
-        //                      LEFT JOIN UserType ut ON up.UserTypeId = ut.id
-        //                WHERE IsActive = 0
-        //                    ORDER BY DisplayName
-        //                ";
-        //            var reader = cmd.ExecuteReader();
-        //            var userProfile = new List<UserProfile>();
+        //            cmd.CommandText = @"INSERT INTO UserProfile (FirebaseUserId, FirstName, LastName, DisplayName, 
+        //                                                               Email, CreateDateTime, ProfileImageLocation, UserTypeId)
+        //                                      OUTPUT INSERTED.ID
+        //                                      VALUES (@FirebaseUserId, @FirstName, @LastName, @DisplayName, 
+        //                                              @Email, @CreateDateTime, @ProfileImageLocation, @UserTypeId)";
+        //            DbUtils.AddParameter(cmd, "@FirebaseUserId", userProfile.FirebaseUserId);
+        //            DbUtils.AddParameter(cmd, "@FirstName", userProfile.FirstName);
+        //            DbUtils.AddParameter(cmd, "@LastName", userProfile.LastName);
+        //            DbUtils.AddParameter(cmd, "@DisplayName", userProfile.DisplayName);
+        //            DbUtils.AddParameter(cmd, "@Email", userProfile.Email);
+        //            DbUtils.AddParameter(cmd, "@CreateDateTime", userProfile.CreateDateTime);
+        //            DbUtils.AddParameter(cmd, "@ProfileImageLocation", userProfile.ProfileImageLocation);
+        //            DbUtils.AddParameter(cmd, "@UserTypeId", userProfile.UserTypeId);
 
-        //            while (reader.Read())
-        //            {
-        //                userProfile.Add(new UserProfile()
 
-        //                {
-        //                    Id = DbUtils.GetInt(reader, "Id"),
-        //                    FirebaseUserId = DbUtils.GetString(reader, "FirebaseUserId"),
-        //                    FirstName = DbUtils.GetString(reader, "FirstName"),
-        //                    LastName = DbUtils.GetString(reader, "LastName"),
-        //                    DisplayName = DbUtils.GetString(reader, "DisplayName"),
-        //                    Email = DbUtils.GetString(reader, "Email"),
-        //                    CreateDateTime = DbUtils.GetDateTime(reader, "CreateDateTime"),
-        //                    ProfileImageLocation = DbUtils.GetString(reader, "ProfileImageLocation"),
-        //                    UserTypeId = DbUtils.GetInt(reader, "UserTypeId"),
-        //                    UserType = new UserType()
-        //                    {
-        //                        Id = DbUtils.GetInt(reader, "UserTypeId"),
-        //                        Name = DbUtils.GetString(reader, "UserTypeName"),
-        //                    }
-                           
-        //                });
-        //            }
-
-        //            reader.Close();
-
-        //            return userProfile;
+        //            userProfile.Id = (int)cmd.ExecuteScalar();
         //        }
+
+                
+        //        using (var cmd = conn.CreateCommand())
+        //        {
+        //            cmd.CommandText = @"
+        //                      INSERT INTO Business(
+        //                              EstablishmentName, Bio, Address, HoursOfOperation, Phone, UserProfileId, CategoryId)
+        //                      OUTPUT INSERTED.ID
+        //                      VALUES (
+        //                               @EstablishmentName, @Bio, @Address, @HoursOfOperation, @Phone, @UserProfileId, @CategoryId)";
+
+
+        //            DbUtils.AddParameter(cmd, "@EstablishmentName", userProfile.Business.EstablishmentName);
+        //            DbUtils.AddParameter(cmd, "@Bio", userProfile.Business.Bio);
+        //            DbUtils.AddParameter(cmd, "@Address", userProfile.Business.Address);
+        //            DbUtils.AddParameter(cmd, "@HoursOfOperation", userProfile.Business.HoursOfOperation);
+        //            DbUtils.AddParameter(cmd, "@Phone", userProfile.Business.Phone);
+        //            //DbUtils.AddParameter(cmd, "@UserProfileId", business.UserProfileId);
+        //            DbUtils.AddParameter(cmd, "@CategoryId", userProfile.Business.CategoryId);
+
+        //            userProfile.Business.Id = (int)cmd.ExecuteScalar();
+        //        }
+
         //    }
+
         //}
 
-        public void Add(UserProfile userProfile)
+
+
+
+        public void AddUserProfile(UserProfile userProfile)
         {
             using (var conn = Connection)
             {
@@ -161,10 +661,10 @@ namespace ExperienceRight_BackCapTS.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"INSERT INTO UserProfile (FirebaseUserId, FirstName, LastName, DisplayName, 
-                                                                 Email, CreateDateTime, ProfileImageLocation, UserTypeId)
-                                        OUTPUT INSERTED.ID
-                                        VALUES (@FirebaseUserId, @FirstName, @LastName, @DisplayName, 
-                                                @Email, @CreateDateTime, @ProfileImageLocation, @UserTypeId)";
+                                                                       Email, CreateDateTime, ProfileImageLocation, UserTypeId)
+                                              OUTPUT INSERTED.ID
+                                              VALUES (@FirebaseUserId, @FirstName, @LastName, @DisplayName, 
+                                                      @Email, @CreateDateTime, @ProfileImageLocation, @UserTypeId)";
                     DbUtils.AddParameter(cmd, "@FirebaseUserId", userProfile.FirebaseUserId);
                     DbUtils.AddParameter(cmd, "@FirstName", userProfile.FirstName);
                     DbUtils.AddParameter(cmd, "@LastName", userProfile.LastName);
@@ -173,96 +673,79 @@ namespace ExperienceRight_BackCapTS.Repositories
                     DbUtils.AddParameter(cmd, "@CreateDateTime", userProfile.CreateDateTime);
                     DbUtils.AddParameter(cmd, "@ProfileImageLocation", userProfile.ProfileImageLocation);
                     DbUtils.AddParameter(cmd, "@UserTypeId", userProfile.UserTypeId);
-                   
+
 
                     userProfile.Id = (int)cmd.ExecuteScalar();
                 }
+
             }
+
         }
+        //public void AddBusinessProfile(UserProfile userProfile, int id)
+        //{
+        //    using (var conn = Connection)
+        //    {
+        //        conn.Open();
+        //        using (var cmd = conn.CreateCommand())
+        //        {
+        //            cmd.CommandText = @"INSERT INTO UserProfile (FirebaseUserId, FirstName, LastName, DisplayName, 
+        //                                                               Email, CreateDateTime, ProfileImageLocation, UserTypeId)
+        //                                      OUTPUT INSERTED.ID
+        //                                      VALUES (@FirebaseUserId, @FirstName, @LastName, @DisplayName, 
+        //                                              @Email, @CreateDateTime, @ProfileImageLocation, @UserTypeId)";
+        //            DbUtils.AddParameter(cmd, "@FirebaseUserId", userProfile.FirebaseUserId);
+        //            DbUtils.AddParameter(cmd, "@FirstName", userProfile.FirstName);
+        //            DbUtils.AddParameter(cmd, "@LastName", userProfile.LastName);
+        //            DbUtils.AddParameter(cmd, "@DisplayName", userProfile.DisplayName);
+        //            DbUtils.AddParameter(cmd, "@Email", userProfile.Email);
+        //            DbUtils.AddParameter(cmd, "@CreateDateTime", userProfile.CreateDateTime);
+        //            DbUtils.AddParameter(cmd, "@ProfileImageLocation", userProfile.ProfileImageLocation);
+        //            DbUtils.AddParameter(cmd, "@UserTypeId", userProfile.UserTypeId);
 
 
-        public UserProfile GetUserProfileById(int id)
-        {
-            using (var conn = Connection)
-            {
-                conn.Open();
-                using (var cmd = conn.CreateCommand())
-                {
-                    {
-                        cmd.CommandText = @"SELECT 
-                              u.id, u.FirebaseUserId, u.FirstName, u.LastName, u.DisplayName, u.Email, 
-                              u.CreateDateTime, u.ProfileImageLocation, u.UserTypeId,
-                              ut.[Name] AS UserTypeName
-                         FROM UserProfile u
-                              LEFT JOIN UserType ut ON u.UserTypeId = ut.id
-                        WHERE u.Id = @id";
+        //            userProfile.Id = (int)cmd.ExecuteScalar();
+        //        }
 
-                        cmd.Parameters.AddWithValue("@id", id);
-                        var reader = cmd.ExecuteReader();
+        //    }
+
+        //}
+
+        //          //        public void UpdateUserProfile(UserProfile userProfile)
+        //          //        {
+        //          //            using (var conn = Connection)
+        //          //            {
+        //          //                conn.Open();
+        //          //                using (var cmd = conn.CreateCommand())
+        //          //                {
+        //          //                    cmd.CommandText = @"
+        //          //                            UPDATE UserProfile
+        //          //                            SET 
+        //          //                                Email = @email, 
+        //          //                                FirebaseUserId = @firebaseUserId,
+        //          //                                FirstName = @firstName, 
+        //          //                                LastName = @lastName,
+        //          //                                DisplayName = @displayName,
+        //          //                                CreateDateTime = @createDateTime,
+        //          //                                ProfileImageLocation = @profileImageLocation, 
+        //          //		                        UserTypeId = @userTypeId
+        //          //                            WHERE Id = @id";
+        //          //                    cmd.Parameters.AddWithValue("@id", userProfile.Id);
+        //          //                    cmd.Parameters.AddWithValue("@email", userProfile.Email);
+        //          //                    cmd.Parameters.AddWithValue("@firebaseUserId", userProfile.FirebaseUserId);
+        //          //                    cmd.Parameters.AddWithValue("@firstName", userProfile.FirstName);
+        //          //                    cmd.Parameters.AddWithValue("@lastName", userProfile.LastName);
+        //          //                    cmd.Parameters.AddWithValue("@displayName", userProfile.DisplayName);
+        //          //                    cmd.Parameters.AddWithValue("@createDateTime", userProfile.CreateDateTime);
+        //          //                    cmd.Parameters.AddWithValue("@profileImageLocation", DbUtils.ValueOrDBNull(userProfile.ProfileImageLocation));
+        //          //                    cmd.Parameters.AddWithValue("@userTypeId", userProfile.UserTypeId);
+        //          //                    cmd.ExecuteNonQuery();
+        //          //                }
+        //          //            }
+        //          //        }
 
 
-                        if (reader.Read())
-                        {
-                            UserProfile userProfile = new UserProfile
-                            {
-                                Id = reader.GetInt32(reader.GetOrdinal("Id")),
-                                FirebaseUserId = reader.GetString(reader.GetOrdinal("FirebaseUserId")),
-                                Email = reader.GetString(reader.GetOrdinal("Email")),
-                                FirstName = reader.GetString(reader.GetOrdinal("FirstName")),
-                                LastName = reader.GetString(reader.GetOrdinal("LastName")),
-                                DisplayName = reader.GetString(reader.GetOrdinal("DisplayName")),
-                                CreateDateTime = reader.GetDateTime(reader.GetOrdinal("CreateDateTime")),
-                                ProfileImageLocation = DbUtils.GetNullableString(reader, "ProfileImageLocation"),
-                                UserTypeId = reader.GetInt32(reader.GetOrdinal("UserTypeId")),
-                                UserType = new UserType()
-                                {
-                                    Id = reader.GetInt32(reader.GetOrdinal("UserTypeId")),
-                                    Name = reader.GetString(reader.GetOrdinal("UserTypeName"))
-                                },
 
-                            };
-                            reader.Close();
-                            return userProfile;
-                        }
-                        reader.Close();
-                        return null;
-                    }
-                }
-            }
-        }
 
-        public void UpdateUserProfile(UserProfile userProfile)
-        {
-            using (var conn = Connection)
-            {
-                conn.Open();
-                using (var cmd = conn.CreateCommand())
-                {
-                    cmd.CommandText = @"
-                            UPDATE UserProfile
-                            SET 
-                                Email = @email, 
-                                FirebaseUserId = @firebaseUserId,
-                                FirstName = @firstName, 
-                                LastName = @lastName,
-                                DisplayName = @displayName,
-                                CreateDateTime = @createDateTime,
-                                ProfileImageLocation = @profileImageLocation, 
-		                        UserTypeId = @userTypeId
-                            WHERE Id = @id";
-                    cmd.Parameters.AddWithValue("@id", userProfile.Id);
-                    cmd.Parameters.AddWithValue("@email", userProfile.Email);
-                    cmd.Parameters.AddWithValue("@firebaseUserId", userProfile.FirebaseUserId);
-                    cmd.Parameters.AddWithValue("@firstName", userProfile.FirstName);
-                    cmd.Parameters.AddWithValue("@lastName", userProfile.LastName);
-                    cmd.Parameters.AddWithValue("@displayName", userProfile.DisplayName);
-                    cmd.Parameters.AddWithValue("@createDateTime", userProfile.CreateDateTime);
-                    cmd.Parameters.AddWithValue("@profileImageLocation", DbUtils.ValueOrDBNull(userProfile.ProfileImageLocation));
-                    cmd.Parameters.AddWithValue("@userTypeId", userProfile.UserTypeId);
-                    cmd.ExecuteNonQuery();
-                }
-            }
-        }
 
     }
 }

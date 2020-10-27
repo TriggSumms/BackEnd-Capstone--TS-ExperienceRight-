@@ -66,26 +66,38 @@ export function UserProfileProvider(props) {
       });
   };
 
-  const registerBusiness = (userProfile, password) => {
+  // const registerBusiness = (userProfile, password) => {
+  //   return firebase.auth().createUserWithEmailAndPassword(userProfile.email, password)
+  //     .then((createResponse) => saveUser({ ...userProfile, firebaseUserId: createResponse.user.uid }))
+  //     //.then((createResponse) => saveUser({ ...userProfile, ...Business, firebaseUserId: createResponse.user.uid }))
+  //     .then((savedUserProfile) => {
+  //       sessionStorage.setItem("userProfile", JSON.stringify(savedUserProfile))
+  //       setIsLoggedIn(true);
+  //     });
+  // };
+  // // const getToken = () => firebase.auth().currentUser.getIdToken();
+
+  // const registerConsumer =
+  //  (userProfile, password) => {
+  //   return firebase.auth().createUserWithEmailAndPassword(userProfile.email, password)
+  //     .then((createResponse) => saveUser({ ...userProfile, firebaseUserId: createResponse.user.uid }))
+  //     .then((savedUserProfile) => {
+  //       sessionStorage.setItem("userProfile", JSON.stringify(savedUserProfile))
+  //       setIsLoggedIn(true);
+  //     });
+  // };
+
+  const register = (userProfile, password) => {
     return firebase.auth().createUserWithEmailAndPassword(userProfile.email, password)
       .then((createResponse) => saveUser({ ...userProfile, firebaseUserId: createResponse.user.uid }))
-      //.then((createResponse) => saveUser({ ...userProfile, ...Business, firebaseUserId: createResponse.user.uid }))
       .then((savedUserProfile) => {
         sessionStorage.setItem("userProfile", JSON.stringify(savedUserProfile))
         setIsLoggedIn(true);
       });
   };
 
-  const registerConsumer = (userProfile, password) => {
-    return firebase.auth().createUserWithEmailAndPassword(userProfile.email, password)
-      .then((createResponse) => saveUser({ ...userProfile, firebaseUserId: createResponse.user.uid }))
-      .then((savedUserProfile) => {
-        sessionStorage.setItem("userProfile", JSON.stringify(savedUserProfile))
-        setIsLoggedIn(true);
-      });
-  };
 
-  const getToken = () => firebase.auth().currentUser.getIdToken();
+ const getToken = () => firebase.auth().currentUser.getIdToken(); 
 
 
   const getUserProfile = (firebaseUserId) => {
@@ -107,6 +119,9 @@ export function UserProfileProvider(props) {
         }
       }).then(resp => resp.json()));
   };
+
+
+  //Will need to (maybe 3 of em?) ....duplicate this fetch call and structure the fetch to the backend
 
   const saveUser = (userProfile) => {
     return getToken().then((token) =>
@@ -132,20 +147,29 @@ export function UserProfileProvider(props) {
       }));
   };
 
-  const getAllUserTypes = () =>
-    getToken().then((token) =>
-      fetch("/api/usertype", {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      }).then(resp => resp.json())
-        .then(setUserTypes));
-
-
+  // const getAllUserTypes = () =>{
+    
+  // getToken().then((token) =>
+  //     fetch("/api/usertype", {
+  //       method: "GET",
+  //       headers: {
+  //         Authorization: `Bearer ${token}`
+  //       }
+  //     }).then(resp => resp.json())
+  //       .then(setUserTypes));
+  //   }
+        const getAllUserTypes = () => {
+          return fetch("/api/usertype", {
+              method: "GET",
+              headers: {
+                  "Content-Type": "application/json"
+              }
+          }).then(resp => resp.json())
+          .then(setUserTypes);
+      }
 
   return (
-    <UserProfileContext.Provider value={{ users, isLoggedIn, userProfile, login, logout, registerBusiness, registerConsumer, getToken, setUsers, getAllUsers, getUserProfile, updateUser, getUserId,  userTypes, getAllUserTypes }}>
+    <UserProfileContext.Provider value={{ users, isLoggedIn, userProfile, login, logout, register, getToken, setUsers, getAllUsers, getUserProfile, updateUser, getUserId,  userTypes, getAllUserTypes }}>
       {isFirebaseReady
         ? props.children
         : <Spinner className="app-spinner dark" />}

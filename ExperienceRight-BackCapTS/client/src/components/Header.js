@@ -27,7 +27,7 @@ export default function Header() {
     <div>
       <Navbar color="light" light expand="md">
         <NavbarBrand className="navLogo" tag={RRNavLink} to="/">
-          <img src="https://res.cloudinary.com/dhduglm4j/image/upload/v1602603540/tabloid_euehri.png" alt="Tabloid Logo" />
+          <img src="" alt="ER Logo" />
         </NavbarBrand>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
@@ -56,9 +56,11 @@ export default function Header() {
                 <NavItem>
                   <NavLink tag={RRNavLink} to={`/posts/myposts/${sessionUser.id}`}>My Posts</NavLink>
                 </NavItem> */}
-
                 <NavItem>
-                  <NavLink tag={RRNavLink} to="/users">Users</NavLink>
+                  <NavLink tag={RRNavLink} to="/reviews">Reviews</NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink tag={RRNavLink} to="/users">Home List</NavLink>
                 </NavItem>
               </>
             }
@@ -84,6 +86,12 @@ export default function Header() {
                 <NavItem>
                   <NavLink tag={RRNavLink} to="/register">Register</NavLink>
                 </NavItem>
+                {/* <NavItem>
+                  <NavLink tag={RRNavLink} to="/customerRegister">Register as Consumer</NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink tag={RRNavLink} to="/businessRegister">Register as Business</NavLink>
+                </NavItem> */}
               </>
             }
           </Nav>
