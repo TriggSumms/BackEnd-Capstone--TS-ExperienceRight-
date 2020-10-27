@@ -34,7 +34,7 @@ export default function Review({ review }) {
   // }
 
 
-  if (sessionUser.userTypeId === 1 ) {
+  if (sessionUser.userTypeId === 2 ) {
     return (
       <>
       <div className="authorPostItem">
@@ -68,7 +68,7 @@ export default function Review({ review }) {
               <em className="postsAuthor">{review.userProfile.fullName} </em>
             </div>
             <div className="authorPostHeaderRight">
-              <h5>Rate:{review.rating}</h5>
+              <h5>Rate:{review.rating}/10</h5>
               <i>{new Intl.DateTimeFormat('en-US').format(new Date(review.dateOfExperience))}</i>
             </div> 
           </div>

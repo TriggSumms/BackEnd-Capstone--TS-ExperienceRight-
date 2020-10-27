@@ -12,7 +12,7 @@ export default function ReviewAddForm() {
 //    const { frequencies, AllFrequencies} = useContext(ReviewContext);
     const { addReview, frequencies, getAllFrequencies } = useContext(ReviewContext);
     const [frequencyId, setFrequencyId] = useState();
-   const [rating, setRating] = useState(``);
+   const [rating, setRating] = useState();
 
     const sessionUser = JSON.parse(sessionStorage.getItem("userProfile"));
 
@@ -21,10 +21,10 @@ export default function ReviewAddForm() {
     const [review, setReview] = useState({
         title: "",
         content: "",
-        rating: "",
+        rating: 1,
         dateOfExperience: "",
         frequencyId: "",
-        businessId: "",
+        businessId: 1,
         userProfileId: sessionUser.id
     });
 
@@ -32,22 +32,8 @@ export default function ReviewAddForm() {
     
 
     
-    // render(<ReactStars
-    //     count={5}
-    //     onChange={ratingChanged}
-    //     size={24}
-    //     color2={'#ffd700'} />,
-      
-    //     document.getElementById('where-to-render')
-    //   );
-    // const firstExample = {
-    //     size: 30,
-    //     value: 2.5,
-    //     edit: false
-    //   }
-      //reviewrating = parseInt(review.rating);
 
-     const onChange = event => setRating(parseInt(event.target.value));
+    // const onChange = event => setRating(parseInt(event.target.value));
 
       const secondExample = {
         size: 50,
@@ -60,12 +46,11 @@ export default function ReviewAddForm() {
         //onChange={e => setRating(parseInt(e.target.value))}
          onChange: newValue => {
         // //     setRating(newValue)
-           console.log(`Example 2: new value is ${newValue}`)}
-         // rating = parseInt(newValue);
-        //{review.rating} = newValue
-      
+           console.log(`Example 2: new value is ${newValue}`)}      
       } 
-     console.log("wowtest", setRating)
+ 
+     console.log("wowtest", setRating);
+     //console.log("wowtest", newValue);
      
     //  const ratingChanged = (newRating) => {
     //     console.log(newRating)
@@ -73,21 +58,20 @@ export default function ReviewAddForm() {
 
 
 
+//START FREQUENCY GRAB
 
-
-
-    //   const onChange = e => {
-    //     const stateToChange = { ...review };
-    //     stateToChange[e.target.newValue = e.target.review.rating];
-    //     setReview(stateToChange);
-    // };
-
-
+    const parsedFreq = parseInt(frequencyId);
+    review.frequencyId = parsedFreq;
 
     useEffect(() => {
         getAllFrequencies();
     }, [])
-    console.log("TEST", frequencyId)
+
+    const handleChange = (e) => {
+        setFrequencyId(e.target.value);
+    }
+//END FREQUENCY GRAB
+
 
 
     const handleFieldChange = e => {
@@ -95,6 +79,12 @@ export default function ReviewAddForm() {
         stateToChange[e.target.id] = e.target.value;
         setReview(stateToChange);
     };
+
+    // const handleFieldChangey = e => {
+    //     const stateToChange = { ...frequency };
+    //     stateToChange[e.target.id] = e.target.value;
+    //     setFrequency(stateToChange);
+    // };
     // const handleFieldyChange = e => {
     //     const stateToChange = { ...review };
     //     stateToChange[e.target.value] = (parseInt(e.target.value));
@@ -102,6 +92,8 @@ export default function ReviewAddForm() {
     // };
 
 
+
+//REVIEW CREATION METHOD
     const createNewReview = e => {
         e.preventDefault();
         if (review.title === "") {
@@ -110,17 +102,12 @@ export default function ReviewAddForm() {
         } else {
             setIsLoading(true);
         }
-
-        // const parsedFreq = parseInt(frequencyId);
-        // review.frequencyId = parsedFreq;
-
         addReview(review)
             .then((r) => {
                 history.push(`/reviews/details/${r.id}`)
             })
-
     };
-
+//END REVIEW CREATION
 
 
     return (
@@ -138,7 +125,7 @@ export default function ReviewAddForm() {
                             value={review.title}
                         />
                         <Label for="category">Frequency Of Visit</Label>
-                        <br />
+                        {/* <br />
                         <select id="frequencyId" className="userEditDropdown" onChange={e => setFrequencyId(parseInt(e.target.value))}>
                         {frequencies.map(frequency =>
                             
@@ -146,6 +133,19 @@ export default function ReviewAddForm() {
                                     {frequency.name}
                                 </option>
                         )}
+                        </select>
+                        <br /> */}
+                                                <br />
+                        <select className="userEditDropdown" onChange={handleChange}>
+                            {frequencies.map(frequency =>
+                                review.id === review.frequencyId ?
+                                    <option selected value={frequency.id}>
+                                        {frequency.name}
+                                    </option> :
+                                    <option value={frequency.id}>
+                                        {frequency.name}
+                                    </option>
+                            )}
                         </select>
                         <br />
 
@@ -186,7 +186,7 @@ export default function ReviewAddForm() {
                             //  id="rating"
                             // id="rating" 
                             //  value= {review.rating}
-                            onChange={onChange} value={review.rating}
+                           // onChange={onChange} value={review.rating}
                            //onChange ={handleFieldyChange}
                             //onChange={e => setRating(parseInt(e.target.value))}
                             // placeholder="rating"

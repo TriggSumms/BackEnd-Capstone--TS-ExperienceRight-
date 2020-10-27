@@ -1,13 +1,13 @@
 import React, { useContext, useEffect, useState } from "react";
-import Review from "./Review";
-import { ReviewContext } from "../../providers/ReviewProvider";
+import Business from "./Business";
+import { BusinessContext } from "../../providers/ReviewProvider";
 import { Link, useHistory } from "react-router-dom";
 
 
-export default function ProfileReviewList() {
+export default function BusinessList() {
   // const { posts, getAllPosts } = useContext(PostContext);
   // const userProfile = JSON.parse(sessionStorage.getItem("userProfile"))
-  const { reviews, getAllReviews } = useContext(ReviewContext);
+  const { businesses, getAllBusinesses } = useContext(BusinessContext);
   const sessionUser = JSON.parse(sessionStorage.getItem("userProfile"));
   
 
@@ -15,25 +15,21 @@ export default function ProfileReviewList() {
   
 
   useEffect(() => {
-    getAllReviews();
+    getAllBusinesses();
   }, []);
 
-//   if (sessionUser.userTypeId === 1) {
+  //if (sessionUser.userTypeId === 1) {
     return (
-
-        <>
-        
-     <section>
+      <section>
         <div class="postCard">
           <div className="postHeader">
             <div className="postHeaderDetails">
               <div>
-                <h1>Business</h1>
+                <h1>Listing out all the businesses in DB</h1>
               </div>
               <div>
                 <p>
-                    
-                  {/* <a class="btn-red" href="/reviews/userview">User View</a> */}
+                  {/* <a class="btn-red" href="/businesses/userview">User View</a> */}
                 </p>
               </div>
 
@@ -64,15 +60,32 @@ export default function ProfileReviewList() {
                   <th></th>
                 </tr>
               </thead>
-              {reviews.map(r =>
-                <Review key={r.id} review={r} />
+              {businesses.map(b =>
+                <Business key={b.id} business={b} />
               )}
             </table>
           </div>
         </div>
       </section>
    
+//   } else {
+//     return (
+//       <>
+        // <div class="postCard">
+        //   <div className="postHeader">
+        //     <h1>Reviews</h1>
+        //     <p>
+        //       <Link class="btn-red" to="/reviews/add">New Review</Link>
+        //     </p>
+        //   </div>
+        //   <section className="authorPostCards">
+        //     {reviews.map(r =>
+        //       <Review key={r.id} review={r} />
+        //     )}
+        //   </section>
+        // </div>
+    //   </>
+   
+              )
+  }
 
-        </>
-    );
-}
