@@ -6,6 +6,9 @@ import Login from "./Login";
 import Register from "./Register";
 //import RegisterBusiness from "./RegisterBusiness";
 import Hello from "./Hello";
+import BusinessREGISTRATIONaddForm from "./Business/BusinessREGISTRATIONaddForm";
+import BusinessList from "./Business/BusinessList";
+import BusinessProfileDetails from "./Business/BusinessProfileDetails";
  import ProfileReviewList from "./Reviews/ProfileReviewList";
  import ReviewDetail from "./Reviews/ReviewDetail";
 import ReviewAddForm from "./Reviews/ReviewAddForm";
@@ -61,53 +64,17 @@ export default function ApplicationViews() {
           <Register />
         </Route> 
 
-                {/* <Route path="/customerRegister">
-          <RegisterConsumer />
-        </Route> */}
-
-        {/* <Route path="/businessRegister">
-          <RegisterBusiness />
-        </Route> */}
-
-        {/* Comment Routes */}
-{/*
-         <Route path="/post/:id/comments" exact>
-          {isLoggedIn ? <CommentList /> : <Redirect to="/login" />}
+{/*  */}
+        <Route path="/businesses/details/:id" exact>
+          {isLoggedIn ? <BusinessProfileDetails /> : <Redirect to="/login" />}
         </Route>
-
-        <Route path="/post/:postId/comments/add" exact>
-          {isLoggedIn ? <CommentAddForm /> : <Redirect to="/login" />}
+        <Route path="/businesses" exact>
+          {isLoggedIn ? <BusinessList /> : <Redirect to="/login" />}
         </Route>
-
-        <Route path="/comments/edit/:id" exact>
-          {isLoggedIn ? <CommentEditForm /> : <Redirect to="/login" />}
+        <Route path="/businesses/registerthebusiness" exact>
+          {isLoggedIn ? <BusinessREGISTRATIONaddForm /> : <Redirect to="/login" />}
         </Route>
-
-        <Route path="/comments/:id/delete" exact>
-          {isLoggedIn ? <CommentDelete /> : <Redirect to="/login" />}
-        </Route> */}
-
-
-        {/* CATEGORIES ROUTES */}
-        {/* <Route path="/categories" exact>
-          {isLoggedIn && sessionUser.userTypeId === 1 ? <CategoryList /> : <Redirect to="/login" />}
-        </Route>
-
-        <Route path="/categories/add">
-          {isLoggedIn && sessionUser.userTypeId === 1 ? <CategoryAddForm /> : <Redirect to="/login" />}
-        </Route>
-
-        <Route path="/categories/:id" exact>
-          {isLoggedIn && sessionUser.userTypeId === 1 ? <CategoryEditForm /> : <Redirect to="/login" />}
-        </Route>
-
-        <Route path="/categories/delete/:id" exact>
-          {isLoggedIn && sessionUser.userTypeId === 1 ? <DeleteCategoryAlert /> : <Redirect to="/login" />}
-        </Route>
- */}
-
-
-        {/* ---- POST ROUTES ---- */}
+       
  
 
 
@@ -115,7 +82,7 @@ export default function ApplicationViews() {
           {isLoggedIn ? <ProfileReviewList /> : <Redirect to="/login" />}
         </Route>
  
-        <Route exact path="/reviews/details/:id">
+        <Route path="/reviews/details/:id" exact>
           {isLoggedIn ? <ReviewDetail /> : <Redirect to="/login" />}
         </Route>
 

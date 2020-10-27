@@ -49,6 +49,19 @@ namespace ExperienceRight_BackCapTS.Controllers
             return Ok(review);
         }
 
+
+        [HttpGet("business{id}")]
+        public IActionResult GetBuisnessSpecificReviews(int id)
+        {
+            var reviews = _reviewRepository.GetAllReviewsForaSpecificBusinessId(id);
+            if (reviews == null)
+            {
+                return NotFound();
+            }
+            return Ok(reviews);
+        }
+
+
         [HttpPost]
         public IActionResult Review(Review review)
         {

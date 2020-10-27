@@ -58,9 +58,9 @@ namespace ExperienceRight_BackCapTS.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                              SELECT b.EstablishmentName, b.Bio, b.Address, b.HoursOfOperation, b.Phone, b.UserProfileId, b.CategoryId,
+                              SELECT b.Id, b.EstablishmentName, b.Bio, b.Address, b.HoursOfOperation, b.Phone, b.UserProfileId, b.CategoryId,
                               
-                              c.Id, c.Name AS CategoryName,
+                              c.Name AS CategoryName,
                               
                               up.FirstName, up.LastName, up.DisplayName, up.FirebaseUserId,
                               up.Email, up.CreateDateTime AS UserProfileCreationDate, up.ProfileImageLocation, up.UserTypeId, 
@@ -149,9 +149,9 @@ namespace ExperienceRight_BackCapTS.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                              SELECT b.EstablishmentName, b.Bio, b.Address, b.HoursOfOperation, b.Phone, b.UserProfileId, b.CategoryId,
+                         SELECT b.Id, b.EstablishmentName, b.Bio, b.Address, b.HoursOfOperation, b.Phone, b.UserProfileId, b.CategoryId,
                               
-                              c.Id, c.Name AS CategoryName,
+                               c.Name AS CategoryName,
                               
                               up.FirstName, up.LastName, up.DisplayName, up.FirebaseUserId,
                               up.Email, up.CreateDateTime AS UserProfileCreationDate, up.ProfileImageLocation, up.UserTypeId, 
@@ -163,6 +163,7 @@ namespace ExperienceRight_BackCapTS.Repositories
                               LEFT JOIN UserProfile up ON b.UserProfileId = up.id
                               LEFT JOIN UserType ut ON up.UserTypeId = ut.id
                               LEFT JOIN Category c ON b.CategoryId = c.id
+                        
                         
                               WHERE b.id = @id";
 

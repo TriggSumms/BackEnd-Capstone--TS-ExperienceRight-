@@ -41,23 +41,11 @@ export default function Header() {
 
             {isLoggedIn &&
               <>
-                {/* <NavItem>
-                  <NavLink tag={RRNavLink} to="/posts">Posts</NavLink>
-                </NavItem>
-
-                <NavItem>
-                  <NavLink tag={RRNavLink} to="/categories">Categories</NavLink>
-                </NavItem>
-
-                <NavItem>
-                  <NavLink tag={RRNavLink} to="/tags">Tag</NavLink>
-                </NavItem> */}
-{/* 
-                <NavItem>
-                  <NavLink tag={RRNavLink} to={`/posts/myposts/${sessionUser.id}`}>My Posts</NavLink>
-                </NavItem> */}
                 <NavItem>
                   <NavLink tag={RRNavLink} to="/reviews">Reviews</NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink tag={RRNavLink} to="/businesses">Businesses</NavLink>
                 </NavItem>
                 <NavItem>
                   <NavLink tag={RRNavLink} to="/users">Home List</NavLink>

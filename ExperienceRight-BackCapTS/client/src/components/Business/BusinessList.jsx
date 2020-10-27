@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import Business from "./Business";
-import { BusinessContext } from "../../providers/ReviewProvider";
+import { BusinessContext } from "../../providers/BusinessProvider";
 import { Link, useHistory } from "react-router-dom";
 
 

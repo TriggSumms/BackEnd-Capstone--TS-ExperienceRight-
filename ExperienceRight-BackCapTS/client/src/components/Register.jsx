@@ -27,16 +27,21 @@ console.log("TEST", userTypeId)
 
 
   const registerClick = (e) => {
-debugger
+ 
     e.preventDefault();
     if (password && password !== confirmPassword) {
       alert("Passwords don't match. Ima need to have that info to make sure your not reverse roboto catfishing me.");
     } else {
       // const parsedUserType = parseInt(userTypeId)
-
+console.log("wow", userProfile)
       const userProfile = {  userTypeId, firstName, lastName, displayName, profileImageLocation, email };
-      register(userProfile, password)
-        .then(() => history.push("/"));
+      console.log("test5", userProfile);
+      register(userProfile, password);
+        if(userProfile.userTypeId === 2) {
+          history.push("/");
+        } else{
+          history.push("/businesses/registerthebusiness");
+        }
     }
   };
 

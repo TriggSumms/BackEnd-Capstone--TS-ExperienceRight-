@@ -24,9 +24,9 @@ export const BusinessProvider = (props) => {
 
   // React js seems to hate multiple slashes in the fetch routes.
   // So just add the id with no slash but inside string interpolation
-//   const getAllReviewsByUser = (id) => {
+//   const getAllReviewsForBusiness = (id) => {
 //     return getToken().then((token) =>
-//       fetch(`/api/reviews/myreviews${id}`, {
+//       fetch(`/api/reviews/reviews${id}`, {
 //         method: "GET",
 //         headers: {
 //           Authorization: `Bearer ${token}`
@@ -47,33 +47,34 @@ export const BusinessProvider = (props) => {
 
 //   };
 
-//   const getById = (id) => {
-//     getToken().then((token) =>
-//       fetch(`/api/review/${id}`, {
-//         method: "GET",
-//         headers: {
-//           Authorization: `Bearer ${token}`
-//         }
-//       })).then((resp) => resp.json())
-//       .then(setReview);
-//   };
+  const getBusinessById = (id) => {
+    getToken().then((token) =>
+      fetch(`/api/business/${id}`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })).then((resp) => resp.json())
+      .then(setBusiness);
+  };
 
-//   const addReview = (review) => {
-//     return getToken().then((token) =>
-//       fetch("/api/review", {
-//         method: "POST",
-//         headers: {
-//           Authorization: `Bearer ${token}`,
-//           "Content-Type": "application/json",
-//         },
-//         body: JSON.stringify(review)
-//       }).then(resp => {
-//         if (resp.ok) {
-//           return resp.json();
-//         }
-//         throw new Error("Unauthorized");
-//       }))
-//   };
+  const addBusiness = (business) => {
+    return getToken().then((token) =>
+      fetch("/api/business", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(business)
+      })
+      .then(resp => {
+        if (resp.ok) {
+          return resp.json();
+        }
+        throw new Error("Unauthorized");
+      }))
+  };
 
 //   const updateReview = (id, review) => {
 //     return getToken().then((token) =>
@@ -98,12 +99,14 @@ export const BusinessProvider = (props) => {
 
 //       }))
 
-
+// getTheCount(id) {
+//     return fetch(`${remoteURL}/plants/?userId=${id}&_expand=user`).then(result => result.json())
+// }
 
   return (
     <BusinessContext.Provider value={{
     //   business, businesses, getAllBusinesses, getById, addReview setBusiness, getAllReviewsByUser
-    business, businesses, getAllBusinesses, setBusiness
+    business, businesses, getAllBusinesses, setBusiness, getBusinessById, addBusiness
     }}>
       {props.children}
     </BusinessContext.Provider>
