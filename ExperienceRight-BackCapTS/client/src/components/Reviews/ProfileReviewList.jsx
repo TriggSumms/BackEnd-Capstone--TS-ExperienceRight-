@@ -4,7 +4,7 @@ import { ReviewContext } from "../../providers/ReviewProvider";
 import { Link, useHistory } from "react-router-dom";
 
 
-export default function ReviewList() {
+export default function ProfileReviewList() {
   // const { posts, getAllPosts } = useContext(PostContext);
   // const userProfile = JSON.parse(sessionStorage.getItem("userProfile"))
   const { reviews, getAllReviews } = useContext(ReviewContext);
@@ -18,14 +18,17 @@ export default function ReviewList() {
     getAllReviews();
   }, []);
 
-  //if (sessionUser.userTypeId === 1) {
+//   if (sessionUser.userTypeId === 1) {
     return (
-      <section>
+
+        <>
+        
+     <section>
         <div class="postCard">
           <div className="postHeader">
             <div className="postHeaderDetails">
               <div>
-                <h1>Reviews</h1>
+                <h1>Business</h1>
               </div>
               <div>
                 <p>
@@ -38,7 +41,7 @@ export default function ReviewList() {
           </div>
           <div class="toggle">
             <div>
-              <a href="/reviews/unapproved" className="unapprovedPosts">View All Unapproved</a>
+              {/* <a href="/reviews/unapproved" className="unapprovedPosts">View All Unapproved</a> */}
             </div>
           </div>
           <div className="post-container">
@@ -68,24 +71,7 @@ export default function ReviewList() {
         </div>
       </section>
    
-//   } else {
-//     return (
-//       <>
-        // <div class="postCard">
-        //   <div className="postHeader">
-        //     <h1>Reviews</h1>
-        //     <p>
-        //       <Link class="btn-red" to="/reviews/add">New Review</Link>
-        //     </p>
-        //   </div>
-        //   <section className="authorPostCards">
-        //     {reviews.map(r =>
-        //       <Review key={r.id} review={r} />
-        //     )}
-        //   </section>
-        // </div>
-    //   </>
-   
-              )
-  }
 
+        </>
+    );
+}

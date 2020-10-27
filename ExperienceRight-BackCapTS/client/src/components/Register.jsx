@@ -1,33 +1,61 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { UserProfileContext } from "../providers/UserProfileProvider";
 
 export default function Register() {
   const history = useHistory();
-  const { register } = useContext(UserProfileContext);
+  const { register, userTypes, getAllUserTypes } = useContext(UserProfileContext);
   const [firstName, setFirstName] = useState();
   const [lastName, setLastName] = useState();
   const [displayName, setDisplayName] = useState();
   const [email, setEmail] = useState();
+  const [userTypeId, setUserTypeId] = useState();
   const [profileImageLocation, setProfileImageLocation] = useState();
   const [password, setPassword] = useState();
   const [confirmPassword, setConfirmPassword] = useState();
+   const [user, setUser] = useState();
+ 
+  
+
+
+  useEffect(() => {      
+  getAllUserTypes()
+}, []);
+
+console.log("TEST", userTypeId)
+
 
   const registerClick = (e) => {
+debugger
     e.preventDefault();
     if (password && password !== confirmPassword) {
       alert("Passwords don't match. Ima need to have that info to make sure your not reverse roboto catfishing me.");
     } else {
-      const userProfile = { firstName, lastName, displayName, profileImageLocation, email };
+      // const parsedUserType = parseInt(userTypeId)
+
+      const userProfile = {  userTypeId, firstName, lastName, displayName, profileImageLocation, email };
       register(userProfile, password)
         .then(() => history.push("/"));
     }
   };
 
+
   return (
     <Form className="registration-form" onSubmit={registerClick}>
-      <fieldset>
+       <fieldset>
+      <Label for="category">What Type of user are you?</Label>
+      <br />
+      <select id="userTypeId" className="userEditDropdown" onChange={e => setUserTypeId(parseInt(e.target.value))}>
+                        {userTypes.map(userType =>
+                            
+                                <option value={userType.id}>
+                                    {userType.name}
+                                </option>
+                        )}
+    </select> 
+    <br />
+
         <FormGroup>
           <Label htmlFor="firstName">First Name</Label>
           <Input id="firstName" type="text" onChange={e => setFirstName(e.target.value)} />

@@ -6,7 +6,7 @@ using ExperienceRight_BackCapTS.Repositories;
 
 namespace ExperienceRight_BackCapTS.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class UserProfileController : ControllerBase
@@ -32,25 +32,25 @@ namespace ExperienceRight_BackCapTS.Controllers
 
 
 
-        //[HttpGet("{firebaseUserId}")]
-        //public IActionResult GetByFirebaseUserId(string firebaseUserId)
-        //{
-        //    var userProfile = _userProfileRepository.GetUserByFirebaseUserId(firebaseUserId);
-        //    if (userProfile == null)
-        //    {
-        //        return NotFound();
-        //    }
-        //    return Ok(userProfile);
-        //}
-
-
-
-
-        [HttpGet("customer/{firebaseUserId}")]
-        public IActionResult GetUserProfile(string firebaseUserId)
+        [HttpGet("{firebaseUserId}")]
+        public IActionResult GetByFirebaseUserId(string firebaseUserId)
         {
-            return Ok(_userProfileRepository.GetUserByFirebaseUserId(firebaseUserId));
+            var userProfile = _userProfileRepository.GetUserByFirebaseUserId(firebaseUserId);
+            if (userProfile == null)
+            {
+                return NotFound();
+            }
+            return Ok(userProfile);
         }
+
+
+
+
+        //[HttpGet("customer/{firebaseUserId}")]
+        //public IActionResult GetUserProfile(string firebaseUserId)
+        //{
+        //    return Ok(_userProfileRepository.GetUserByFirebaseUserId(firebaseUserId));
+        //}
 
         //[HttpGet("business/{firebaseUserId}")]
         //public IActionResult GetBusinessProfile(string firebaseUserId)
@@ -64,30 +64,31 @@ namespace ExperienceRight_BackCapTS.Controllers
             return Ok(_userProfileRepository.GetProfileById(id));
         }
 
+        [HttpPost]
+        public IActionResult Post(UserProfile userProfile)
+        {
+            userProfile.CreateDateTime = DateTime.Now;
+            //userProfile.UserTypeId = UserType.Id;
+           // userProfile.UserTypeId = UserType.Anonymous_ID;
+            _userProfileRepository.AddUserProfile(userProfile);
+            return CreatedAtAction(
+                //nameof(GetUserProfile),
+                nameof(GetByFirebaseUserId),
+                new { firebaseUserId = userProfile.FirebaseUserId },
+                userProfile);
+        }
+
         //[HttpPost]
-        //public IActionResult UserProfile(UserProfile userProfile)
+        //public IActionResult Post(UserProfile userProfile)
         //{
         //    userProfile.CreateDateTime = DateTime.Now;
         //    userProfile.UserTypeId = UserType.Anonymous_ID;
         //    _userProfileRepository.AddUserProfile(userProfile);
         //    return CreatedAtAction(
         //        nameof(GetUserProfile),
-        //       // nameof(GetByFirebaseUserId),
         //        new { firebaseUserId = userProfile.FirebaseUserId },
         //        userProfile);
         //}
-
-        [HttpPost]
-        public IActionResult Post(UserProfile userProfile)
-        {
-            userProfile.CreateDateTime = DateTime.Now;
-            userProfile.UserTypeId = UserType.Anonymous_ID;
-            _userProfileRepository.AddUserProfile(userProfile);
-            return CreatedAtAction(
-                nameof(GetUserProfile),
-                new { firebaseUserId = userProfile.FirebaseUserId },
-                userProfile);
-        }
 
 
 

@@ -147,17 +147,26 @@ export function UserProfileProvider(props) {
       }));
   };
 
-  const getAllUserTypes = () =>
-    getToken().then((token) =>
-      fetch("/api/usertype", {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      }).then(resp => resp.json())
-        .then(setUserTypes));
-
-
+  // const getAllUserTypes = () =>{
+    
+  // getToken().then((token) =>
+  //     fetch("/api/usertype", {
+  //       method: "GET",
+  //       headers: {
+  //         Authorization: `Bearer ${token}`
+  //       }
+  //     }).then(resp => resp.json())
+  //       .then(setUserTypes));
+  //   }
+        const getAllUserTypes = () => {
+          return fetch("/api/usertype", {
+              method: "GET",
+              headers: {
+                  "Content-Type": "application/json"
+              }
+          }).then(resp => resp.json())
+          .then(setUserTypes);
+      }
 
   return (
     <UserProfileContext.Provider value={{ users, isLoggedIn, userProfile, login, logout, register, getToken, setUsers, getAllUsers, getUserProfile, updateUser, getUserId,  userTypes, getAllUserTypes }}>
