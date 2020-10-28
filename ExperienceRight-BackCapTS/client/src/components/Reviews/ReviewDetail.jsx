@@ -52,7 +52,7 @@ export default function ReviewDetail() {
                                 <a href={`/reviews/edit/${review.id}`} className="btn btn-outline-primary mx-1" title="Edit">
                                     <i className="fas fa-pencil-alt">Edit</i>
                                 </a>
-                                <a href={`/posts/delete/${review.id}`} className="btn btn-outline-primary mx-1" title="Delete">
+                                <a href={`/reviews/delete/${review.id}`} className="btn btn-outline-primary mx-1" title="Delete">
                                     <i className="fas fa-trash">Delete</i>
                                 </a>
                             </div>

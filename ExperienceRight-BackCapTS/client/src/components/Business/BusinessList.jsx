@@ -68,23 +68,7 @@ export default function BusinessList() {
         </div>
       </section>
    
-//   } else {
-//     return (
-//       <>
-        // <div class="postCard">
-        //   <div className="postHeader">
-        //     <h1>Reviews</h1>
-        //     <p>
-        //       <Link class="btn-red" to="/reviews/add">New Review</Link>
-        //     </p>
-        //   </div>
-        //   <section className="authorPostCards">
-        //     {reviews.map(r =>
-        //       <Review key={r.id} review={r} />
-        //     )}
-        //   </section>
-        // </div>
-    //   </>
+
    
               )
   }

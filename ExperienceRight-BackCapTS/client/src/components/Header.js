@@ -50,6 +50,9 @@ export default function Header() {
                 <NavItem>
                   <NavLink tag={RRNavLink} to="/users">Home List</NavLink>
                 </NavItem>
+                <NavItem>
+                  <NavLink tag={RRNavLink} to={`/reviews/myreviews/${sessionUser.id}`}>My Reviews</NavLink>
+                </NavItem>
               </>
             }
           </Nav>

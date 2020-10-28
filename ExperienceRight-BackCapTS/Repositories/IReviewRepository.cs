@@ -17,6 +17,8 @@ namespace ExperienceRight_BackCapTS.Repositories
 
         List<Review> GetAllReviewsForaSpecificBusinessId(int businessId);
 
+        List<Review> GetAllReviewsForaSpecificUserId(int id);
+
         //List<Post> GetAllUnapprovedPosts();
 
     }

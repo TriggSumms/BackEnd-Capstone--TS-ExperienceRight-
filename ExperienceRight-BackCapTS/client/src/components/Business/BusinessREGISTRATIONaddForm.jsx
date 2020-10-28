@@ -10,13 +10,13 @@ import { Button, Form, FormGroup, Label, Input, DropdownToggle, DropdownMenu, Dr
 export default function BusinessREGISTRATIONaddForm() {
     const history = useHistory();
     //    const { frequencies, AllFrequencies} = useContext(ReviewContext);
-    const { addBusiness } = useContext(BusinessContext);
-    //const [frequencyId, setFrequencyId] = useState();
-
-
+    const { addBusiness, categories, getAllCategories } = useContext(BusinessContext);
+    const [categoryId, setCategoryId] = useState();
     const sessionUser = JSON.parse(sessionStorage.getItem("userProfile"));
 
-     const [isLoading, setIsLoading] = useState(false);
+
+
+    const [isLoading, setIsLoading] = useState(false);
 
 
 
@@ -25,14 +25,12 @@ export default function BusinessREGISTRATIONaddForm() {
         bio: "",
         address: "",
         hoursOfOperation: "",
-        categoryId: 1,
+        categoryId: "",
         phone: "",
         userProfileId: sessionUser.id
     });
 
-console.log("testingbusinessvalue", business)
-
-
+    console.log("testingbusinessvalue", business)
 
     const handleFieldChange = e => {
         const stateToChange = { ...business };
@@ -40,20 +38,8 @@ console.log("testingbusinessvalue", business)
         setBusiness(stateToChange);
     };
 
-    // const handleFieldChangey = e => {
-    //     const stateToChange = { ...frequency };
-    //     stateToChange[e.target.id] = e.target.value;
-    //     setFrequency(stateToChange);
-    // };
-    // const handleFieldyChange = e => {
-    //     const stateToChange = { ...review };
-    //     stateToChange[e.target.value] = (parseInt(e.target.value));
-    //     setRating(stateToChange);
-    // };
 
-
-
-    //REVIEW CREATION METHOD
+    //START REVIEW CREATION METHOD
     const createNewBusiness = e => {
         e.preventDefault();
         if (business.establishment === "") {
@@ -70,37 +56,31 @@ console.log("testingbusinessvalue", business)
     //END REVIEW CREATION
 
 
+
+    //START Category GRAB
+    const parsedCat = parseInt(categoryId);
+    business.categoryId = parsedCat;
+
+    useEffect(() => {
+        getAllCategories();
+    }, [])
+
+    const handleChange = (e) => {
+        setCategoryId(e.target.value);
+    }
+    //END =Category GRAB
+
+
+
+
     return (
         <>
             <Form className="newPostForm">
                 <FormGroup className="newPost">
                     <div >
                         {/* CREATE A HELLO DIALOGUE FOR THE ACCOUNT HOLDER */}
+                        {/* <div>Hello, {business.userProfile.profileImageLocation} please fill out </div> */}
 
-                        {/* <Label for="category">Frequency Of Visit</Label>
-                        {/* <br />
-                        <select id="frequencyId" className="userEditDropdown" onChange={e => setFrequencyId(parseInt(e.target.value))}>
-                        {frequencies.map(frequency =>
-                            
-                                <option value={frequency.id}>
-                                    {frequency.name}
-                                </option>
-                        )}
-                        </select>
-                        <br /> */}
-                        {/* <br />
-                        <select className="userEditDropdown" onChange={handleChange}>
-                            {frequencies.map(frequency =>
-                                review.id === review.frequencyId ?
-                                    <option selected value={frequency.id}>
-                                        {frequency.name}
-                                    </option> :
-                                    <option value={frequency.id}>
-                                        {frequency.name}
-                                    </option>
-                            )}
-                        </select>
-                        <br /> */}
 
                         <FormGroup>
                             <Label for="EstablishmentName">Establishment Name...</Label>
@@ -126,6 +106,19 @@ console.log("testingbusinessvalue", business)
                             //onChange={e => setBio(e.target.value)}
                             />
                         </FormGroup>
+                        <Label for="category">Sector Category</Label>
+                        <select className="userEditDropdown" onChange={handleChange}>
+                            {categories.map(category =>
+                                business.id === business.categoryId ?
+                                    <option selected value={category.id}>
+                                        {category.name}
+                                    </option> :
+                                    <option value={category.id}>
+                                        {category.name}
+                                    </option>
+                            )}
+                        </select>
+                        <br />
                         <FormGroup>
                             <Label for="Address">Address...</Label>
                             <Input
@@ -143,7 +136,7 @@ console.log("testingbusinessvalue", business)
                             <Input
                                 id="hoursOfOperation"
                                 type="text"
-                               required
+                                required
                                 onChange={handleFieldChange}
                                 placeholder="What are the Business Hours..."
                                 value={business.hoursOfOperation}
@@ -162,13 +155,6 @@ console.log("testingbusinessvalue", business)
                             // onChange={e => setPhone(e.target.value)}
                             />
                         </FormGroup>
-                        {/*  <FormGroup>
-        <Label for="Category">Category</Label>
-          <Input id="Category" type="text" onChange={e => setCategory(e.target.value)} />
-        </FormGroup>  */}
-                        {/* <FormGroup>
-           <Button>Submit Business Form</Button>
-       </FormGroup> */}
                         <div>
                             <Button
                                 className="newPostSubmitButton"

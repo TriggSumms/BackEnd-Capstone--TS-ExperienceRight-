@@ -8,6 +8,7 @@ export const BusinessProvider = (props) => {
   const { getToken } = useContext(UserProfileContext);
   const [businesses, setBusinesses] = useState([]);
   const [business, setBusiness] = useState({});
+  const [categories, setCategories] = useState([]);
   
 
 
@@ -99,14 +100,26 @@ export const BusinessProvider = (props) => {
 
 //       }))
 
+
+const getAllCategories = () => {
+  return fetch("/api/category", {
+      method: "GET",
+      headers: {
+          "Content-Type": "application/json"
+      }
+  }).then(resp => resp.json())
+  .then(setCategories);
+}
+
 // getTheCount(id) {
 //     return fetch(`${remoteURL}/plants/?userId=${id}&_expand=user`).then(result => result.json())
 // }
 
+
   return (
     <BusinessContext.Provider value={{
     //   business, businesses, getAllBusinesses, getById, addReview setBusiness, getAllReviewsByUser
-    business, businesses, getAllBusinesses, setBusiness, getBusinessById, addBusiness
+    categories, business, businesses, getAllBusinesses, setBusiness, getBusinessById, addBusiness, getAllCategories
     }}>
       {props.children}
     </BusinessContext.Provider>
