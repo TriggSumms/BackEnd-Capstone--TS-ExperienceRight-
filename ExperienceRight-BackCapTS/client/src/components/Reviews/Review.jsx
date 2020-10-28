@@ -10,6 +10,7 @@ export default function Review({ review }) {
   //const defaultImage = 'https://res.cloudinary.com/dhduglm4j/image/upload/v1602603540/tabloid_euehri.png';
   const { updateReview } = useContext(ReviewContext);
   const history = useHistory();
+  
 
 
   // const editedPost = {
@@ -34,7 +35,7 @@ export default function Review({ review }) {
   // }
 
 
-  if (sessionUser.userTypeId === 2 ) {
+ 
     return (
       <>
       <div className="authorPostItem">
@@ -78,7 +79,7 @@ export default function Review({ review }) {
     </>
     );
   } 
-}
+
 //   else if (sessionUser.userTypeId === 1) { 
 //     return (
 //       <> 

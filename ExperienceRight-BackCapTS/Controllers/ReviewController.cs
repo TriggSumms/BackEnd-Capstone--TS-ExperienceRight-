@@ -49,6 +49,32 @@ namespace ExperienceRight_BackCapTS.Controllers
             return Ok(review);
         }
 
+        //BEGIN USER SPECIFIC LISTS
+        [HttpGet("business{id}")]
+        public IActionResult GetBuisnessSpecificReviews(int id)
+        {
+            var reviews = _reviewRepository.GetAllReviewsForaSpecificBusinessId(id);
+            if (reviews == null)
+            {
+                return NotFound();
+            }
+            return Ok(reviews);
+        }
+
+
+        [HttpGet("userspecific{id}")]
+        public IActionResult GetUserSpecificReviews(int id)
+        {
+            var reviews = _reviewRepository.GetAllReviewsForaSpecificUserId(id);
+            if (reviews == null)
+            {
+                return NotFound();
+            }
+            return Ok(reviews);
+        }
+        //END USER SPECIFIC LISTS
+
+
         [HttpPost]
         public IActionResult Review(Review review)
         {

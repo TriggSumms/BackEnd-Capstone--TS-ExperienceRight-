@@ -24,9 +24,31 @@ export const ReviewProvider = (props) => {
 
   // React js seems to hate multiple slashes in the fetch routes.
   // So just add the id with no slash but inside string interpolation
-  const getAllReviewsByUser = (id) => {
+//   const getAllReviewsByUser = (id) => {
+//     return getToken().then((token) =>
+//       fetch(`/api/reviews/myreviews${id}`, {
+//         method: "GET",
+//         headers: {
+//           Authorization: `Bearer ${token}`
+//         }
+//       }).then((resp) => resp.json())
+//         .then(setReviews));
+//   }
+
+  const  getAllReviewsforBusiness = (id) => {
     return getToken().then((token) =>
-      fetch(`/api/reviews/myreviews${id}`, {
+      fetch(`/api/review/business${id}`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }).then((resp) => resp.json())
+        .then(setReviews));
+  }
+
+  const  getAllReviewsforUserList = (id) => {
+    return getToken().then((token) =>
+      fetch(`/api/review/myreviews${id}`, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`
@@ -110,7 +132,7 @@ export const ReviewProvider = (props) => {
 
   return (
     <ReviewContext.Provider value={{
-     frequencies, review, reviews, getAllReviews, getById, addReview, updateReview, deleteReview, setReview, getAllReviewsByUser, getAllFrequencies
+     frequencies, review, reviews, getAllReviews, getById, addReview, updateReview, deleteReview, setReview, getAllFrequencies,  getAllReviewsforBusiness, getAllReviewsforUserList
     }}>
       {props.children}
     </ReviewContext.Provider>
