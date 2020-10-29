@@ -7,10 +7,10 @@ import { Form, FormGroup, Label, Input, Button } from "reactstrap";
 
 
 const CommentEditForm = () => {
-    let userId = sessionStorage.userProfileId;
+    let userId = sessionStorage.userProfileId
     console.log(userId);
-    const { id } = useParams();
     const history = useHistory();
+    const { reviewId, id } = useParams();
 
     const { editComment, comment, getCommentById } = useContext(CommentContext);
     console.log(comment);
@@ -58,8 +58,6 @@ const CommentEditForm = () => {
         console.log("edited Commofoment", editedComment)
 
         setIsLoading(false);
-        //editComment(editedComment.Id, editedComment)
-        //history.push(`/post/${id}/comment`);
         editComment(editedComment).then(() =>
             history.push(`/review/${comment.reviewId}/comments`))
     };
@@ -92,11 +90,11 @@ const CommentEditForm = () => {
                     </FormGroup>
 
                 </Form>}
-            <Button type="button" color="success" onClick={e => { editCurrentComment() }}>Save</Button> &nbsp;&nbsp;
-            <Link to={`/review/${id}/comments`}><Button type="button" color="warning">Cancel</Button></Link>
+           
+            <Link to={`/review/${comment.reviewId}/comments`}><Button type="button" color="warning">Cancel</Button></Link>
 
             <Button className="submitComment" type="button" color="success" isLoading={isLoading} onClick={editCurrentComment}>
-                {'Save Updated Comment'}
+                {'Save Updates'}
             </Button>
 
 

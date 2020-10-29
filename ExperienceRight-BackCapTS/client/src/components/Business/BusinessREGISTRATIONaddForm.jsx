@@ -13,12 +13,13 @@ export default function BusinessREGISTRATIONaddForm() {
     const { addBusiness, categories, getAllCategories } = useContext(BusinessContext);
     const [categoryId, setCategoryId] = useState();
     const sessionUser = JSON.parse(sessionStorage.getItem("userProfile"));
-
-
-
     const [isLoading, setIsLoading] = useState(false);
 
 
+
+
+
+    
 
     const [business, setBusiness] = useState({
         establishmentName: "",
@@ -49,9 +50,12 @@ export default function BusinessREGISTRATIONaddForm() {
             setIsLoading(true);
         }
         addBusiness(business)
-            .then((b) => {
-                history.push(`/businesses/details/${b.id}`)
-            })
+            // .then((b) => {
+            //     history.push(`/businesses/details/${b.id}`)
+           //  })
+           .then(() => {
+            history.push(`/businesshello`)
+           })
     };
     //END REVIEW CREATION
 

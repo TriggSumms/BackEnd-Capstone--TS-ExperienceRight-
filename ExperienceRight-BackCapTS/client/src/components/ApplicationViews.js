@@ -5,7 +5,9 @@ import Login from "./Login";
 //import RegisterConsumer from "./RegisterConsumer";
 import Register from "./Register";
 //import RegisterBusiness from "./RegisterBusiness";
-import Hello from "./Hello";
+import MainPageMessage from "./MainPageMessage";
+import HelloReviewer from "./HelloReviewer";
+import HelloBusiness from "./HelloBusiness";
 import BusinessREGISTRATIONaddForm from "./Business/BusinessREGISTRATIONaddForm";
 import UserSpecificReviewsList from "./Reviews/UserSpecificReviewsList";
 import BusinessList from "./Business/BusinessList";
@@ -22,9 +24,10 @@ import CommentDelete from "./Comments/CommentDelete";
 
 
 
+
 export default function ApplicationViews() {
   const { isLoggedIn } = useContext(UserProfileContext);
-  //const sessionUser = JSON.parse(sessionStorage.getItem("userProfile"));
+  const sessionUser = JSON.parse(sessionStorage.getItem("userProfile"));
 
   return (
 
@@ -32,7 +35,15 @@ export default function ApplicationViews() {
       <Switch>
 
       <Route path="/" exact>
-          {isLoggedIn ? <Hello /> : <Redirect to="/login" />}
+          {isLoggedIn ? <MainPageMessage /> : <Redirect to="/login" />}
+        </Route>
+
+        <Route path="/businesshello" exact>
+          {isLoggedIn && sessionUser.userTypeId === 1 ? <HelloBusiness /> : <Redirect to="/login" />}
+        </Route>
+
+        <Route path="/helloreviewer" exact>
+          {isLoggedIn  && sessionUser.userTypeId === 2  ? <HelloReviewer /> : <Redirect to="/login" />}
         </Route>
 
         <Route path="/login">
@@ -50,11 +61,11 @@ export default function ApplicationViews() {
           {isLoggedIn ? <BusinessProfileDetails /> : <Redirect to="/login" />}
         </Route>
         <Route path="/businesses" exact>
-          {isLoggedIn ? <BusinessList /> : <Redirect to="/login" />}
+          {isLoggedIn  && sessionUser.userTypeId === 2 ? <BusinessList /> : <Redirect to="/login" />}
         </Route>
         <Route path="/businesses/registerthebusiness" exact>
           {/* {isLoggedIn && sessionUser.userTypeId === 1 ? <BusinessREGISTRATIONaddForm /> : <Redirect to="/login" />} */}
-          {isLoggedIn ? <BusinessREGISTRATIONaddForm /> : <Redirect to="/login" />}
+          {isLoggedIn  && sessionUser.userTypeId === 1 ? <BusinessREGISTRATIONaddForm /> : <Redirect to="/login" />}
         </Route>
        
  
@@ -68,21 +79,21 @@ export default function ApplicationViews() {
           {isLoggedIn ? <ReviewDetail /> : <Redirect to="/login" />}
         </Route>
 
-        <Route path="/reviews/add" exact>
-          {isLoggedIn ? <ReviewAddForm /> : <Redirect to="/login" />}
+        <Route path="/reviews/add/:id" exact>
+          {isLoggedIn  && sessionUser.userTypeId === 2 ? <ReviewAddForm /> : <Redirect to="/login" />}
         </Route>
 
         <Route path="/reviews/edit/:id">
-          {isLoggedIn ? <ReviewEditForm /> : <Redirect to="/login" />}
+          {isLoggedIn && sessionUser.userTypeId === 2 ? <ReviewEditForm /> : <Redirect to="/login" />}
         </Route>
 
         <Route path="/reviews/delete/:id">
-          {isLoggedIn ? <ReviewDeleteForm /> : <Redirect to="/login" />}
+          {isLoggedIn  && sessionUser.userTypeId === 2 ? <ReviewDeleteForm /> : <Redirect to="/login" />}
         </Route>
 
         <Route path="/reviews/myreviews/:id" exact>
           {/* {isLoggedIn && sessionUser.userTypeId === 1 ? <BusinessREGISTRATIONaddForm /> : <Redirect to="/login" />} */}
-          {isLoggedIn ? <UserSpecificReviewsList /> : <Redirect to="/login" />}
+          {isLoggedIn  && sessionUser.userTypeId === 2 ? <UserSpecificReviewsList /> : <Redirect to="/login" />}
         </Route>
 
 
@@ -108,15 +119,15 @@ export default function ApplicationViews() {
         </Route>
 
         <Route path="/review/:reviewId/comments/add" exact>
-          {isLoggedIn ? <CommentAddForm /> : <Redirect to="/login" />}
+          {isLoggedIn  && sessionUser.userTypeId === 1 ? <CommentAddForm /> : <Redirect to="/login" />}
         </Route>
 
         <Route path="/comments/edit/:id" exact>
-          {isLoggedIn ? <CommentEditForm /> : <Redirect to="/login" />}
+          {isLoggedIn  && sessionUser.userTypeId === 1 ? <CommentEditForm /> : <Redirect to="/login" />}
         </Route>
 
         <Route path="/review/:reviewId/comments/delete/:commentId" exact>
-          {isLoggedIn ? <CommentDelete /> : <Redirect to="/login" />}
+          {isLoggedIn  && sessionUser.userTypeId === 1 ? <CommentDelete /> : <Redirect to="/login" />}
         </Route>
 
 

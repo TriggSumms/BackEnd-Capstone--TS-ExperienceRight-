@@ -29,13 +29,10 @@ namespace ExperienceRight_BackCapTS.Controllers
 
 
 
-
-
-
         [HttpGet("{firebaseUserId}")]
         public IActionResult GetByFirebaseUserId(string firebaseUserId)
         {
-            var userProfile = _userProfileRepository.GetUserByFirebaseUserId(firebaseUserId);
+            var userProfile = _userProfileRepository.GetUserORBusinessByFirebaseUserId(firebaseUserId);
             if (userProfile == null)
             {
                 return NotFound();
@@ -45,24 +42,13 @@ namespace ExperienceRight_BackCapTS.Controllers
 
 
 
-
-        //[HttpGet("customer/{firebaseUserId}")]
-        //public IActionResult GetUserProfile(string firebaseUserId)
-        //{
-        //    return Ok(_userProfileRepository.GetUserByFirebaseUserId(firebaseUserId));
-        //}
-
-        //[HttpGet("business/{firebaseUserId}")]
-        //public IActionResult GetBusinessProfile(string firebaseUserId)
-        //{
-        //    return Ok(_userProfileRepository.GetBusinessByFirebaseUserId(firebaseUserId));
-        //}
-
         [HttpGet("user/{id}")]
         public IActionResult GetUserProfileById(int id)
         {
             return Ok(_userProfileRepository.GetProfileById(id));
         }
+
+
 
         [HttpPost]
         public IActionResult Post(UserProfile userProfile)
@@ -89,11 +75,6 @@ namespace ExperienceRight_BackCapTS.Controllers
         //        new { firebaseUserId = userProfile.FirebaseUserId },
         //        userProfile);
         //}
-
-
-
-
-
 
 
         //[HttpPost("BusinessProfile")]

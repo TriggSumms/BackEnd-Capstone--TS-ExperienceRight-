@@ -11,8 +11,10 @@ export function UserProfileProvider(props) {
   const userProfile = sessionStorage.getItem("userProfile");
   const [isLoggedIn, setIsLoggedIn] = useState(userProfile != null);
   const [users, setUsers] = useState([]);
-
   const [userTypes, setUserTypes] = useState([]);
+
+
+
 
   const [isFirebaseReady, setIsFirebaseReady] = useState(false);
   useEffect(() => {
@@ -42,21 +44,31 @@ export function UserProfileProvider(props) {
   //       .then(setUsers));
 
 
-//Had to adjust some spare code here and remove the parameter for Isactive 
+// //Had to adjust some spare code here and remove the parameter for Isactive 
+//   const login = (email, pw) => {
+//     return firebase.auth().signInWithEmailAndPassword(email, pw)
+//       .then((signInResponse) => getUserProfile(signInResponse.user.uid))
+//       .then((userProfile) => {
+//         { console.log(userProfile) }
+//         if (userProfile) {
+//           sessionStorage.setItem("userProfile", JSON.stringify(userProfile));
+//           setIsLoggedIn(true);
+//         }
+//         else {
+//           alert("This account has been deactivated by an administrator.")
+//         }
+//       });
+//   };
+
   const login = (email, pw) => {
     return firebase.auth().signInWithEmailAndPassword(email, pw)
       .then((signInResponse) => getUserProfile(signInResponse.user.uid))
       .then((userProfile) => {
-        { console.log(userProfile) }
-        if (userProfile) {
-          sessionStorage.setItem("userProfile", JSON.stringify(userProfile));
-          setIsLoggedIn(true);
-        }
-        else {
-          alert("This account has been deactivated by an administrator.")
-        }
+        sessionStorage.setItem("userProfile", JSON.stringify(userProfile));
+        setIsLoggedIn(true);
       });
   };
+
 
   const logout = () => {
     return firebase.auth().signOut()
@@ -100,6 +112,8 @@ export function UserProfileProvider(props) {
  const getToken = () => firebase.auth().currentUser.getIdToken(); 
 
 
+
+ //Adjusted this on the backend to pull in buisness Info
   const getUserProfile = (firebaseUserId) => {
     return getToken().then((token) =>
       fetch(`${apiUrl}/${firebaseUserId}`, {

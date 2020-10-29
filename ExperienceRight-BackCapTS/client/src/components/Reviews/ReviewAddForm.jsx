@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import { ReviewContext } from "../../providers/ReviewProvider";
 import { BusinessContext } from "../../providers/BusinessProvider";
-import { useHistory, Link } from "react-router-dom";
+import { useHistory, Link, useParams } from "react-router-dom";
 import { Button, Form, FormGroup, Label, Input, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import ReactStars from 'react-stars'
 import { render } from 'react-dom'
@@ -15,6 +15,7 @@ export default function ReviewAddForm() {
     const [frequencyId, setFrequencyId] = useState();
     const [businessId, setBusinessId] = useState();
     const [rating, setRating] = useState();
+    //const { businessId } = useParams();
 
     const sessionUser = JSON.parse(sessionStorage.getItem("userProfile"));
 
@@ -25,10 +26,10 @@ export default function ReviewAddForm() {
     const [review, setReview] = useState({
         title: "",
         content: "",
-        rating: rating,
+        rating: "",
         dateOfExperience: "",
         frequencyId: "",
-        businessId: "",
+        businessId: businessId,
         userProfileId: sessionUser.id
     });
 
@@ -42,6 +43,9 @@ export default function ReviewAddForm() {
 
     //START RATING REVIEW INPUT
     // const onChange = event => setRating(parseInt(event.target.value));
+
+    const parsedRating = parseInt(rating);
+    review.rating = parsedRating;
 
     const secondExample = {
         size: 50,
@@ -76,7 +80,7 @@ export default function ReviewAddForm() {
         getAllBusinesses();
     }, [])
 
-    const handleBizChange = (e) => {
+    const handleBuizChange = (e) => {
         setBusinessId(e.target.value);
     }
     //END Business GRAB
@@ -130,13 +134,11 @@ export default function ReviewAddForm() {
                 <FormGroup className="newPost">
                     <div >
                     <Label for="title">Business Selector</Label>
+                    {/* {business.id} */}
                     <br />
-                        <select className="userEditDropdown" onChange={handleBizChange}>
+                        <select className="userEditDropdown" onChange={handleBuizChange}>
+                        <option default value={review.businessId}></option>
                             {businesses.map(business =>
-                                review.id === review.businessId ?
-                                    <option selected value={business.id}>
-                                        {business.establishmentName}
-                                    </option> :
                                     <option value={business.id}>
                                         {business.establishmentName}
                                     </option>
@@ -177,18 +179,6 @@ export default function ReviewAddForm() {
                             )}
                         </select>
                         <br />
-
-
-                        {/* <Label for="imageLocation">Image URL</Label>
-                        <Input
-                            type="text"
-                            required
-                            onChange={handleFieldChange}
-                            id="imageLocation"
-                            placeholder="Url"
-                            value={post.imageLocation}
-                        /> */}
-
                         <Label for="content">Content</Label>
                         <Input
                             type="text"

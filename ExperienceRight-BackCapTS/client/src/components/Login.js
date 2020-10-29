@@ -6,9 +6,11 @@ import { UserProfileContext } from "../providers/UserProfileProvider";
 export default function Login() {
   const history = useHistory();
   const { login } = useContext(UserProfileContext);
-
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
+
+
+
 
   const loginSubmit = (e) => {
     e.preventDefault();
@@ -16,6 +18,28 @@ export default function Login() {
       .then(() => history.push("/"))
       .catch(() => alert("Invalid email or password"));
   };
+
+
+//Working on a Route after login
+  // useEffect(() => {      
+  //   getAllUserTypes()
+  // }, []);
+  // const loginSubmit = (e) => {
+  //   e.preventDefault();
+  //   login(email, password)
+  //     // .then(() => history.push("/"))
+
+  //     .then(() => {
+  //       if (userProfile.userTypeId === 2) {
+  //         history.push("/helloreviewer");
+  //       } else if (userProfile.userTypeId === 1) {
+  //         history.push("/businesses/registerthebusiness");
+  //       }
+  //     })
+  //     .catch(() => alert("Invalid email or password"));
+  // };
+//End Practice Route
+
 
   return (
     <Form className="login-form" onSubmit={loginSubmit}>

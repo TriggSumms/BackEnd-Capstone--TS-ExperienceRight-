@@ -15,7 +15,7 @@ export default function BusinessProfileDetails() {
   const { id } = useParams();
 
 
-
+console.log("whats in sessionstorage", sessionStorage)
 
   useEffect(() => {
       getBusinessById(id)
@@ -90,7 +90,7 @@ if (!business || !business.userProfile) {
 				<span class="fee"><strong>34K</strong>Followers</span>
 			</div> */}
 			<div class="appo">
-				<a href="#" class="btn">Add Review</a>
+				<a href="#" class="btn"><Link class="btn" to={`/reviews/add/${business.id}`}>Add a Review</Link></a>
 			</div>
 		</div>
 		<div class="locations">

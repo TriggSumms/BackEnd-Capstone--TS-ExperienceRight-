@@ -12,6 +12,8 @@ namespace ExperienceRight_BackCapTS.Repositories
         void UpdateBusiness(Business business);
         List<Business> GetAllBusinessz();
         Business GetBusinessById(int id);
-        Business GetUserBusinessById(int id, int userProfileId);
+        //Business GetUserBusinessById(int id, int userProfileId);
+
+        Business GetUserBusinessById(int id);
     }
 }

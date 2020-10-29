@@ -38,21 +38,35 @@ export default function Header() {
                 <NavLink tag={RRNavLink} to="/">Home</NavLink>
               </NavItem>
             }
-
             {isLoggedIn &&
               <>
                 <NavItem>
                   <NavLink tag={RRNavLink} to="/reviews">Reviews</NavLink>
                 </NavItem>
+                {/* <NavItem>
+                  <NavLink tag={RRNavLink} to="/">Home List</NavLink>
+                </NavItem> */}
+              </>
+            }
+            {isLoggedIn && sessionUser.userTypeId === 2 && 
+              <>
                 <NavItem>
                   <NavLink tag={RRNavLink} to="/businesses">Businesses</NavLink>
                 </NavItem>
                 <NavItem>
-                  <NavLink tag={RRNavLink} to="/users">Home List</NavLink>
-                </NavItem>
-                <NavItem>
                   <NavLink tag={RRNavLink} to={`/reviews/myreviews/${sessionUser.id}`}>My Reviews</NavLink>
                 </NavItem>
+              </>
+            }
+            {isLoggedIn && sessionUser.userTypeId === 1 &&
+              <>
+                <NavItem>
+                  <NavLink tag={RRNavLink} to={`/businesses/details/${sessionUser.id}`}>My Business Profile</NavLink>
+                  </NavItem>
+                  <NavItem>
+                  <NavLink tag={RRNavLink} to="/users">BUIZ USER TEST</NavLink>
+                </NavItem>
+
               </>
             }
           </Nav>

@@ -9,55 +9,56 @@ import Comment from "./Comment";
 import { useHistory } from "react-router-dom";
 
 export default function CommentList() {
-    const { comments, getAllCommentsByReviewId  } = useContext(CommentContext);
-
-    const { review, getReview } = useContext(ReviewContext)
-    const { reviewId } = useParams();
+    const { comments, getAllCommentsByReviewId } = useContext(CommentContext);
+    const sessionUser = JSON.parse(sessionStorage.getItem("userProfile"));
+    const { reviewId, id } = useParams();
     const { history } = useHistory();
 
 
     useEffect(() => {
         getAllCommentsByReviewId(reviewId);
-        //getPost(id);
+
     }, []);
-   // console.log("id", reviewId);
 
-
-
-    return (
-        <>
-            <section>
-                <div>
-                    <h1>Comments</h1>
-                    <Link to={`comments/add`}><Button color="primary">Add New Comment</Button></Link>
-                </div>
-
-                <h4>Subject</h4>
-                <p>{comments && comments.subject}</p>
-
-                <h6>Comment</h6>
-                <p>{comments && comments.content}</p>
-
-                <h6>DisplayName</h6>
-                <p>{comments && comments.userProfile}</p>
-
-                <h6>Date</h6>
-                <p>{comments && comments.createDateTime}</p>
-
-
-                <Link to={`/reviews`}><Button>
-                    Back To Reviews
-            </Button></Link>
-                {comments.map(c => {
-
-                    return <Comment key={c.id} comment={c} />
-                })}
-            </section>
-
-
-
-
-        </>
-    );
-};
+    if (sessionUser.userTypeId === 2) {
+        return (
+            <>
+                <section>
+                    <div>
+                        <h3>Business Response's</h3>
+                    </div>
+                    <br></br>
+                    <Link to={`/reviews/details/${reviewId}`}>
+                        <Button> Back To the Review Details</Button>
+                    </Link>
+                    {comments.map(c => {
+                        return <Comment key={c.id} comment={c} />
+                    })}
+                </section>
+            </>
+        );
+    }
+    else if (sessionUser.userTypeId === 1) {
+        return (
+            <>
+                <section>
+                    <div>
+                        <h3>Customer Response Manager: </h3>
+                        <Link to={`comments/add`}><Button color="primary">Add New Comment</Button></Link>
+                    </div>
+                    <br></br>
+                    <Link to={`/reviews/details/${reviewId}`}>
+                        <Button> Back To the Review Details</Button>
+                    </Link>
+                    {comments.map(c => {
+                        return <Comment key={c.id} comment={c} />
+                    })}
+                </section>
+            </>
+        );
+    }
+    else {
+        return null
+    }
+}
 

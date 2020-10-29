@@ -184,7 +184,8 @@ namespace ExperienceRight_BackCapTS.Repositories
             }
         }
 
-        public Business GetUserBusinessById(int id, int userProfileId)
+       // public Business GetUserBusinessById(int id, int userProfileId)
+            public Business GetUserBusinessById(int id)
         {
             using (var conn = Connection)
             {
@@ -207,10 +208,12 @@ namespace ExperienceRight_BackCapTS.Repositories
                               LEFT JOIN UserType ut ON up.UserTypeId = ut.id
                               LEFT JOIN Category c ON b.CategoryId = c.id
                        
-                        WHERE b.id = @id AND b.UserProfileId = @userProfileId";
+                            WHERE b.id = @id AND up.id = @id";
+
+                    //WHERE b.id = @id AND up.UserProfileId = @userProfileId";
 
                     DbUtils.AddParameter(cmd, "@id", id);
-                    DbUtils.AddParameter(cmd, "@userProfileId", userProfileId);
+                    //DbUtils.AddParameter(cmd, "@userProfileId", userProfileId);
                     var reader = cmd.ExecuteReader();
 
                     Business business = null;
