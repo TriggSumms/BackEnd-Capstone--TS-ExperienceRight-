@@ -196,18 +196,6 @@ export default function ReviewEditForm() {
                                         )}
                                     </Input>
                                 </FormGroup>
-                                {/* <FormGroup>
-                                    <Label for="imageLocation">Image Location</Label>
-                                    <Input
-                                        type="text"
-                                        id="imageLocation"
-                                        required
-                                        defaultValue={editedPost.imageLocation}
-                                        name="imageLocation"
-                                        onChange={handleFieldChange}
-                                    /> 
-                                </FormGroup>*/}
-
                                     <FormGroup>
                                         <Label for="dateOfExperience">Date of Experience</Label>
                                         <Input

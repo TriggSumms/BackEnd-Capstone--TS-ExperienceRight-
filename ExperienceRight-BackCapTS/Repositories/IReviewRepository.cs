@@ -9,7 +9,7 @@ namespace ExperienceRight_BackCapTS.Repositories
         public Review GetReviewsById(int id);
         void Add(Review review);
         void UpdateReview(Review review);
-        void DeleteReview(int id);
+        void DeleteReview(int reviewId);
 
         Review GetUserReviewsById(int id, int userProfileId);
 

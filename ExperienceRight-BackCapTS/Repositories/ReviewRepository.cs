@@ -499,7 +499,7 @@ namespace ExperienceRight_BackCapTS.Repositories
             }
         }
 
-        public void DeleteReview(int id)
+        public void DeleteReview(int reviewId)
         {
             using (var conn = Connection)
             {
@@ -507,10 +507,11 @@ namespace ExperienceRight_BackCapTS.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                            DELETE FROM Review
-                            WHERE Id = @id
-                        ";
-                    DbUtils.AddParameter(cmd, "@id", id);
+                            
+                            DELETE FROM Comment WHERE ReviewId = @Id;
+                            DELETE FROM Review WHERE Id = @Id";
+                    
+                    DbUtils.AddParameter(cmd, "@Id", reviewId);
                     cmd.ExecuteNonQuery();
 
 

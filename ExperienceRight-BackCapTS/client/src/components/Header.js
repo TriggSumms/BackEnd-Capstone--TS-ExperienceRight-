@@ -41,7 +41,7 @@ export default function Header() {
             {isLoggedIn &&
               <>
                 <NavItem>
-                  <NavLink tag={RRNavLink} to="/reviews">Reviews</NavLink>
+                  <NavLink tag={RRNavLink} to="/reviews">Review LIST</NavLink>
                 </NavItem>
                 {/* <NavItem>
                   <NavLink tag={RRNavLink} to="/">Home List</NavLink>
@@ -63,9 +63,9 @@ export default function Header() {
                 <NavItem>
                   <NavLink tag={RRNavLink} to={`/businesses/details/${sessionUser.id}`}>My Business Profile</NavLink>
                   </NavItem>
-                  <NavItem>
+                  {/* <NavItem>
                   <NavLink tag={RRNavLink} to="/users">BUIZ USER TEST</NavLink>
-                </NavItem>
+                </NavItem> */}
 
               </>
             }

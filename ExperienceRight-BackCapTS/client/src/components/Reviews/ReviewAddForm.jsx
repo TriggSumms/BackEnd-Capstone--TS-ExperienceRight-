@@ -8,20 +8,22 @@ import { render } from 'react-dom'
 
 
 export default function ReviewAddForm() {
-
+    const sessionUser = JSON.parse(sessionStorage.getItem("userProfile"));
     const { addReview, frequencies, getAllFrequencies } = useContext(ReviewContext);
     const { businesses, getAllBusinesses } = useContext(BusinessContext);
     const history = useHistory();
     const [frequencyId, setFrequencyId] = useState();
-    const [businessId, setBusinessId] = useState();
+    //const [businessId, setBusinessId] = useState();
     const [rating, setRating] = useState();
-    //const { businessId } = useParams();
+    const { id } = useParams();
 
-    const sessionUser = JSON.parse(sessionStorage.getItem("userProfile"));
-
+    
     const [isLoading, setIsLoading] = useState(false);
 
 
+
+
+    // console.log(id)
 
     const [review, setReview] = useState({
         title: "",
@@ -29,7 +31,7 @@ export default function ReviewAddForm() {
         rating: "",
         dateOfExperience: "",
         frequencyId: "",
-        businessId: businessId,
+        businessId: parseInt(id),
         userProfileId: sessionUser.id
     });
 
@@ -71,19 +73,24 @@ export default function ReviewAddForm() {
     //END RATING REVIEW
 
 
-    //START Business GRAB
 
-    const parsedBuiz = parseInt(businessId);
-    review.businessId = parsedBuiz;
 
-    useEffect(() => {
-        getAllBusinesses();
-    }, [])
+    
+    // //START Business GRAB
 
-    const handleBuizChange = (e) => {
-        setBusinessId(e.target.value);
-    }
-    //END Business GRAB
+//Will need this info in the scenario that I want a user to select the business under review
+
+    // const parsedBuiz = parseInt(businessId);
+    // review.businessId = parsedBuiz;
+
+    // useEffect(() => {
+    //     getAllBusinesses();
+    // }, [])
+
+    // const handleBuizChange = (e) => {
+    //     setBusinessId(e.target.value);
+    // }
+    // //END Business GRAB
 
 
 
@@ -128,14 +135,17 @@ export default function ReviewAddForm() {
     //END REVIEW CREATION
 
 
+
+
     return (
         <>
             <Form className="newPostForm">
                 <FormGroup className="newPost">
                     <div >
-                    <Label for="title">Business Selector</Label>
-                    {/* {business.id} */}
-                    <br />
+                {/* Might use this selector process in later list */}
+                        {/* <Label for="title">Business Selector</Label> */}
+                        {/* {business.id} */}
+                        {/* <br />
                         <select className="userEditDropdown" onChange={handleBuizChange}>
                         <option default value={review.businessId}></option>
                             {businesses.map(business =>
@@ -143,9 +153,14 @@ export default function ReviewAddForm() {
                                         {business.establishmentName}
                                     </option>
                             )}
-                        </select>
-                        <br />
-
+                        </select> */}
+                        <div>
+                            <br></br>
+                            <h4>Tell the Business about your experience...</h4>
+                            ...and remember reviews are anonymous
+                            <br></br>
+                        </div>
+                        <br></br>
                         <Label for="title">Title</Label>
                         <Input
                             type="text"
@@ -156,29 +171,20 @@ export default function ReviewAddForm() {
                             value={review.title}
                         />
                         <Label for="category">Frequency Of Visit</Label>
-                        {/* <br />
-                        <select id="frequencyId" className="userEditDropdown" onChange={e => setFrequencyId(parseInt(e.target.value))}>
-                        {frequencies.map(frequency =>
-                            
-                                <option value={frequency.id}>
-                                    {frequency.name}
-                                </option>
-                        )}
-                        </select>
-                        <br /> */}
-                        <br />
-                        <select className="userEditDropdown" onChange={handleFreqChange}>
-                            {frequencies.map(frequency =>
-                                review.id === review.frequencyId ?
-                                    <option selected value={frequency.id}>
-                                        {frequency.name}
-                                    </option> :
-                                    <option value={frequency.id}>
-                                        {frequency.name}
-                                    </option>
+                        <Input
+                            type="select"
+                            className="userEditDropDown"
+                            onChange={handleFreqChange}
+                            value={parseInt(frequencyId)}
+                            id="frequencyId"
+                            name="frequencyId"
+                        >
+                            <option > Choose an option</option>
+                            {frequencies.map(frequency => {
+                                return <option selected value={frequency.id}>{frequency.name}</option>
+                            }
                             )}
-                        </select>
-                        <br />
+                        </Input>
                         <Label for="content">Content</Label>
                         <Input
                             type="text"

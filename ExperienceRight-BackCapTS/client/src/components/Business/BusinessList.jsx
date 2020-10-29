@@ -25,7 +25,7 @@ export default function BusinessList() {
           <div className="postHeader">
             <div className="postHeaderDetails">
               <div>
-                <h1>Listing out all the businesses in DB</h1>
+                {/* <h1>Listing out all the businesses in DB</h1> */}
               </div>
               <div>
                 <p>
@@ -46,9 +46,9 @@ export default function BusinessList() {
               <thead className="postTableHeader">
                 <tr>
                   <th className="postTitle-header">
-                    Title
+                    LIST OF BUSINESSES
                 </th>
-                  <th className="postUserName-header">
+                  {/* <th className="postUserName-header">
                     DisplayName
                 </th>
                   <th className="postCategory-header">
@@ -56,7 +56,7 @@ export default function BusinessList() {
                 </th>
                   <th className="postDate-header">
                     Experience Date
-                </th>
+                </th> */}
                   <th></th>
                 </tr>
               </thead>

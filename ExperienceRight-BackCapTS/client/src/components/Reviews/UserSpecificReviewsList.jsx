@@ -20,13 +20,14 @@ export default function UserSpecificReviewsList() {
         getAllReviewsforUserList(JSON.parse(userProfile).id);
     }, []);
 
-   // console.log("userProfile:", JSON.parse(userProfile));
+
+
+
+
 
     //   if (!review || !review.userProfile) {
     //     return null
     // }
-
-
 
     return (
 
@@ -76,10 +77,10 @@ export default function UserSpecificReviewsList() {
                                             <i class="fa fa-star-o"></i>
                                             <i class="fa fa-star-o"></i>
                                         </span>
-                                        <span class="rating-count">000 Ratings</span>
+                                        {/* <span class="rating-count">000 Ratings</span> */}
                                     </div>
                                     <div class="comments">
-                                        <span class="comment-count"><strong>340</strong> Reviews</span>
+                                        <span class="comment-count"><strong>{reviews.length}</strong> Reviews Made</span>
                                     </div>
                                     {/* <div class="consultation">
 				<span class="fee"><strong>34K</strong>Followers</span>

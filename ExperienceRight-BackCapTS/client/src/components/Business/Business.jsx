@@ -1,7 +1,9 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import Review from "../Reviews/Review"
 import { BusinessContext } from "../../providers/BusinessProvider";
-import { Card, CardBody, Button } from "reactstrap";
-import { Link, useHistory } from "react-router-dom";
+import { ReviewContext } from "../../providers/ReviewProvider";
+import { useParams, Link, useHistory } from "react-router-dom";
+import { Card, CardBody, Button, CardHeader } from "reactstrap";
 import "./BusinessProfile.scss";
 
 
@@ -9,26 +11,37 @@ export default function Business({ business }) {
   const sessionUser = JSON.parse(sessionStorage.getItem("userProfile"));
   //const defaultImage = 'https://res.cloudinary.com/dhduglm4j/image/upload/v1602603540/tabloid_euehri.png';
   //const { updateReview } = useContext(ReviewContext);
+  const { reviews, getAllReviewsforBusiness, getAllReviews } = useContext(ReviewContext);
+  const {  getBusinessById } = useContext(BusinessContext);
+  const { id } = useParams();
   const history = useHistory();
- 
+
+  //console.log("whats in sessionstorage", sessionStorage)
 
 
-//console.log(business)
+  useEffect(() => {
+    getBusinessById(id)
+  }, []);
 
-// const [liveCountz, setLiveCountz] = useState([])
-// const gettheCurrentAmountOfReviews = () => {
-//     getTheCount(id)
-//         .then(countFromDB => {
-//             const ReviewCount = countFromDB.filter(officialCountDB => {
-//                 if (officialCountDB.review === false) {
-//                     return officialCountDB
-//                 }
-//             })
-//             setReviewCountz(ReviewCount)
-//         })
-// }
+     useEffect(() => {
+    getAllReviews();
+  }, []); 
+  
+  // var total = 0;
+  // for(var i = 0; i < reviews.length; i++) {
+  //     total += review[i];
+  // }
 
 
+  
+  // var avg = total / reviews.length;
+//   let reviewCountperBiz = business.reviews.filter(it => it.id.includes(''));
+
+// console.log("count", reviewCountperBiz)
+  
+
+
+console.log(business)
 
     return (
       <>
@@ -82,7 +95,7 @@ export default function Business({ business }) {
 				<span class="rating-count">000 Ratings</span>
 			</div>
 			<div class="comments">
-				<span class="comment-count"><strong>340</strong> Reviews</span>
+				<span class="comment-count"><strong>{reviews.length}</strong> Reviews</span>
 			</div>
 			{/* <div class="consultation">
 				<span class="fee"><strong>34K</strong>Followers</span>

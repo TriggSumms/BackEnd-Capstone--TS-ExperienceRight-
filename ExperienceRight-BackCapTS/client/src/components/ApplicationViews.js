@@ -9,6 +9,7 @@ import MainPageMessage from "./MainPageMessage";
 import HelloReviewer from "./HelloReviewer";
 import HelloBusiness from "./HelloBusiness";
 import BusinessREGISTRATIONaddForm from "./Business/BusinessREGISTRATIONaddForm";
+import BusinessProfileEdit from "./Business/BusinessProfileEdit"
 import UserSpecificReviewsList from "./Reviews/UserSpecificReviewsList";
 import BusinessList from "./Business/BusinessList";
 import BusinessProfileDetails from "./Business/BusinessProfileDetails";
@@ -67,7 +68,9 @@ export default function ApplicationViews() {
           {/* {isLoggedIn && sessionUser.userTypeId === 1 ? <BusinessREGISTRATIONaddForm /> : <Redirect to="/login" />} */}
           {isLoggedIn  && sessionUser.userTypeId === 1 ? <BusinessREGISTRATIONaddForm /> : <Redirect to="/login" />}
         </Route>
-       
+        <Route path="/businesses/edit/:id" exact>
+          {isLoggedIn && sessionUser.userTypeId === 1 ?  <BusinessProfileEdit /> : <Redirect to="/login" />}
+        </Route>
  
 
 
@@ -97,22 +100,8 @@ export default function ApplicationViews() {
         </Route>
 
 
-        {/* <Route path="/review/:id/comments" exact>
-          {isLoggedIn ? <CommentList /> : <Redirect to="/login" />}
-        </Route>
 
-        <Route path="/review/:postId/comments/add" exact>
-          {isLoggedIn ? <CommentAddForm /> : <Redirect to="/login" />}
-        </Route>
 
-        <Route path="/comments/edit/:id" exact>
-          {isLoggedIn ? <CommentEditForm /> : <Redirect to="/login" />}
-        </Route>
-
-        <Route path="/comments/:id/delete" exact>
-          {isLoggedIn ? <CommentDelete /> : <Redirect to="/login" />}
-        </Route> */}
-                {/* Comment Routes */}
 
         <Route path="/review/:reviewId/comments" exact>
           {isLoggedIn ? <CommentList /> : <Redirect to="/login" />}

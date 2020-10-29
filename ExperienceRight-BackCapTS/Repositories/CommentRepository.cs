@@ -281,10 +281,10 @@ namespace ExperienceRight_BackCapTS.Repositories
                 {
                     cmd.CommandText = @"
                                  DELETE FROM Comment
-                                 WHERE Id = @id
+                                 WHERE Id = @Id
                              ";
 
-                    cmd.Parameters.AddWithValue("@id", id);
+                    cmd.Parameters.AddWithValue("@Id", id);
                     cmd.ExecuteNonQuery();
                 }
             }

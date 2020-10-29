@@ -23,31 +23,6 @@ export const BusinessProvider = (props) => {
         .then(setBusinesses));
   };
 
-  // React js seems to hate multiple slashes in the fetch routes.
-  // So just add the id with no slash but inside string interpolation
-//   const getAllReviewsForBusiness = (id) => {
-//     return getToken().then((token) =>
-//       fetch(`/api/reviews/reviews${id}`, {
-//         method: "GET",
-//         headers: {
-//           Authorization: `Bearer ${token}`
-//         }
-//       }).then((resp) => resp.json())
-//         .then(setReviews));
-//   }
-
-//   const getAllUnapprovedPosts = () => {
-//     getToken().then((token) =>
-//       fetch(`${apiUrl}/unapproved`, {
-//         method: "GET",
-//         headers: {
-//           Authorization: `Bearer ${token}`
-//         }
-//       }).then(resp => resp.json())
-//         .then(setUnapprovedPosts));
-
-//   };
-
   const getBusinessById = (id) => {
     getToken().then((token) =>
       fetch(`/api/business/${id}`, {
@@ -77,17 +52,18 @@ export const BusinessProvider = (props) => {
       }))
   };
 
-//   const updateReview = (id, review) => {
-//     return getToken().then((token) =>
-//       fetch(`/api/review/edit/${id}`, {
-//         method: "PUT",
-//         headers: {
-//           Authorization: `Bearer ${token}`,
-//           "Content-Type": "application/json"
-//         },
-//         body: JSON.stringify(review)
-//       }))
-//   };
+  const updateBusiness = (id, business) => {
+    return getToken().then((token) =>
+      fetch(`/api/business/edit/${id}`, {
+        method: "PUT",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(business)
+      }))
+  };
+
 
 //   const deleteReview = (id) =>
 //     getToken().then((token) =>
@@ -119,7 +95,7 @@ const getAllCategories = () => {
   return (
     <BusinessContext.Provider value={{
     //   business, businesses, getAllBusinesses, getById, addReview setBusiness, getAllReviewsByUser
-    categories, business, businesses, getAllBusinesses, setBusiness, getBusinessById, addBusiness, getAllCategories
+    categories, business, businesses, getAllBusinesses, setBusiness, getBusinessById, addBusiness, getAllCategories, updateBusiness
     }}>
       {props.children}
     </BusinessContext.Provider>
