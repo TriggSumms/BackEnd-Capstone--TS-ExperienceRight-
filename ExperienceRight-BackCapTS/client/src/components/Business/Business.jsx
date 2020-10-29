@@ -88,7 +88,7 @@ export default function Business({ business }) {
 				<span class="fee"><strong>34K</strong>Followers</span>
 			</div> */}
 			<div class="appo">
-				<a href="#" class="btn">Add Review</a>
+      <a href={`/businesses/details/${business.id}`} className="btn btn-outline-primary mx-1">View Business Profile</a>
 			</div>
 		</div>
 		<div class="locations">

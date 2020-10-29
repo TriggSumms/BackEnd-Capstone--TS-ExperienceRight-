@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function Hello() {
+export default function MainPageMessage() {
   return (
     <span style={{
       position: "fixed",
@@ -9,7 +9,7 @@ export default function Hello() {
       top: "50%",
       marginTop: "-0.5rem",
       textAlign: "center",
-      fontSize: "20vh",
-    }}>hello!</span>
+      fontSize: "20px"
+    }}>TEST</span>
   );
 }

@@ -513,6 +513,8 @@ namespace ExperienceRight_BackCapTS.Repositories
                     DbUtils.AddParameter(cmd, "@id", id);
                     cmd.ExecuteNonQuery();
 
+
+
                 }
             }
         }

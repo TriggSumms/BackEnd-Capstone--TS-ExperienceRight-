@@ -28,7 +28,7 @@ export default function ProfileReviewList() {
           <div className="postHeader">
             <div className="postHeaderDetails">
               <div>
-                <h1>Business</h1>
+                <h1>Reviews</h1>
               </div>
               <div>
                 <p>
@@ -50,16 +50,16 @@ export default function ProfileReviewList() {
               <thead className="postTableHeader">
                 <tr>
                   <th className="postTitle-header">
-                    Title
+                    The List of every Review
                 </th>
                   <th className="postUserName-header">
-                    DisplayName
+           
                 </th>
                   <th className="postCategory-header">
-                    Frequency Of Visits
+                   
                 </th>
                   <th className="postDate-header">
-                    Experience Date
+                   
                 </th>
                   <th></th>
                 </tr>

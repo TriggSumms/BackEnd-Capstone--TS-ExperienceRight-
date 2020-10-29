@@ -26,57 +26,48 @@ export default function Register() {
 console.log("TEST", userTypeId)
 
 
-  // const registerClick = (e) => {
-  //   e.preventDefault();
-  //   if (password && password !== confirmPassword) {
-  //     alert("Passwords don't match. Ima need to have that info to make sure your not reverse roboto catfishing me.");
-  //   } else {
-  //     const userProfile = {  userTypeId, firstName, lastName, displayName, profileImageLocation, email };
-  //     //console.log("test5", userProfile);
-  //     register(userProfile, password);
-  //       if(userProfile.userTypeId === 2) {
-  //         history.push("/");
-  //       } else{
-  //         history.push("/businesses/registerthebusiness");
-  //       }
-  //   }
-  // };
 
-  
+
+
   const registerClick = (e) => {
     e.preventDefault();
     if (password && password !== confirmPassword) {
-      alert("Passwords don't match. Ima need to have that info to make sure your not reverse roboto catfishing me.");
+      alert("Passwords don't match. Please correct.");
     } else {
-      debugger
+      
       const userProfile = {  userTypeId, firstName, lastName, displayName, profileImageLocation, email };
       console.log("test5", userProfile);
-      register(userProfile, password);
-      console.log("test6", userProfile);
-        if(userProfile.userTypeId === 2) {
-          history.push("/businesses/registerthebusiness");
-        } else{
+      register(userProfile, password)
+     
+
+       .then(() => { if(userProfile.userTypeId === 2) {
+          history.push("/helloreviewer");
+        } else if(userProfile.userTypeId === 1) {
           history.push("/businesses/registerthebusiness");
         }
     }
+    )}
   };
+
+
+  //.then(() => history.push("/"));
   //console.log("test7", userProfile.userType);
 
 
   return (
     <Form className="registration-form" onSubmit={registerClick}>
        <fieldset>
-      <Label for="]userTypeId">What Type of user are you?</Label>
-      {/* <br /> */}
-      <select id="userTypeId" className="userEditDropdown" onChange={e => setUserTypeId(parseInt(e.target.value))}>
+      <Label for="userTypeId">What Type of user are you?</Label>
+      <br />
+      <select id="userTypeId" className="userEditDropdown"  /* defaultValue={userType.id === 1} */ onChange={e => setUserTypeId(parseInt(e.target.value))}>
                         {userTypes.map(userType =>
                             
-                                <option default value={userType.id}>
+                                <option value={userType.id}>
                                     {userType.name}
                                 </option>
                         )}
     </select> 
-    {/* <br /> */}
+    <br />
 
         <FormGroup>
           <Label htmlFor="firstName">First Name</Label>

@@ -12,6 +12,8 @@ export function CommentProvider(props) {
     const [comments, setComments] = useState([]);
     const [comment, setComment] = useState({});
 
+    const [CommentAlertONComment, SetCommentAlertONComment] = useState({});
+
     //List all the Action Methods in Code Blocks Below
     //Get all Comments by id,must match API. Makes fetch calls to the API.
     const getAllCommentsByReviewId = (id) =>
@@ -25,17 +27,30 @@ export function CommentProvider(props) {
             }).then(resp => resp.json())
                 .then(setComments));
 
-    // const getCommentById = (id) =>
-    //     getToken().then((token) =>
-    //         fetch(apiUrl + "/post/" + id, {
-    //             method: "GET",
-    //             headers: {
-    //                 Authorization: `Bearer ${token}`
-    //             }
-    //         }).then(resp => resp.json())
-    //             .then(setComment));
+    const getAllsmallCommentsByReviewId = (id) =>
+        getToken().then((token) =>
+            fetch(apiUrl + "/review/" + id, {
+                method: "GET",
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    "Content-type": "application/json"
+                }
+            }).then(resp => resp.json())
+                .then(SetCommentAlertONComment));
 
-    // Get Comment By Single Id
+
+
+    const getCommentByIdFORDELETE = (id) =>
+        getToken().then((token) =>
+            fetch(`${apiUrl}/${id}`, {
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`
+
+                }
+            }).then(res => res.json())
+
+        );
 
     const getCommentById = (id) =>
         getToken().then((token) =>
@@ -46,8 +61,8 @@ export function CommentProvider(props) {
 
                 }
             }).then(res => res.json())
-               // .then(setComment));
-        );
+                .then(setComment));
+
 
     //Add a new comment  
     const addComment = (newComment) => {
@@ -92,7 +107,7 @@ export function CommentProvider(props) {
     ///Must return your catalog of actions
     return (
 
-        <CommentContext.Provider value={{ getCommentById, comment, setComment, comments, getAllCommentsByReviewId , addComment, editComment, deleteComment }}>
+        <CommentContext.Provider value={{ CommentAlertONComment, getCommentById, comment, setComment, comments, getAllsmallCommentsByReviewId, getAllCommentsByReviewId, addComment, editComment, deleteComment, getCommentByIdFORDELETE }}>
             {props.children}
         </CommentContext.Provider>
     );
