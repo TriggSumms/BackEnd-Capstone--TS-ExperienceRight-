@@ -69,7 +69,7 @@ export default function ApplicationViews() {
           {isLoggedIn  && sessionUser.userTypeId === 1 ? <BusinessREGISTRATIONaddForm /> : <Redirect to="/login" />}
         </Route>
         <Route path="/businesses/edit/:id" exact>
-          {isLoggedIn && sessionUser.userTypeId === 1 ?  <BusinessProfileEdit /> : <Redirect to="/login" />}
+          {isLoggedIn ?  <BusinessProfileEdit /> : <Redirect to="/login" />}
         </Route>
  
 

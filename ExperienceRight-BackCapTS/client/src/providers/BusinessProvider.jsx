@@ -52,9 +52,9 @@ export const BusinessProvider = (props) => {
       }))
   };
 
-  const updateBusiness = (id, business) => {
+  const updateBusiness = (business) => {
     return getToken().then((token) =>
-      fetch(`/api/business/edit/${id}`, {
+      fetch(`/api/business/edit/${business.id}`, {
         method: "PUT",
         headers: {
           Authorization: `Bearer ${token}`,

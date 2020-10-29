@@ -12,34 +12,18 @@ export default function ReviewEditForm() {
     const [businessId, setBusinessId] = useState();
     const [frequencyId, setFrequencyId] = useState();
     const [rating, setRating] = useState();
+    const [isLoading, setIsLoading] = useState(false);
     //UseParams pulls in the id information from applications view 
     const { id } = useParams();
     const history = useHistory();
 
 
-    //SET OUR NEWLY EDITED OBJECT
-    const [editedReview, setEditedReview] = useState({
-        title: "",
-        content: "",
-        rating: rating,
-        dateOfExperience: "",
-        frequencyId: "",
-        businessId: "",
-        userProfileId: review.userProfileId,
-        id: review.id
 
-    });
+    const [editedReview, setEditedReview] = useState({});
 
 
 
     //Bringin in the dropdowns and targeting & Starting my useEffect process by getting the ID of Review
-    const handleBuizChange = (e) => {
-        setBusinessId(e.target.value);
-    }
-    const handleFreqChange = (f) => {
-        setFrequencyId(f.target.value);
-    }
-
     useEffect(() => {
         getById(parseInt(id));
     }, [])
@@ -51,62 +35,65 @@ export default function ReviewEditForm() {
         getAllBusinesses();
     }, [])
 
-    //END DROPDOWN AND SINGLE ID call
-
-
-
-
     useEffect(() => {
         setEditedReview(review)
     }, [review]);
 
-
-
-
-    const editReview = (e) => {
-        updateReview({
-            title: editedReview.title,
-            content: editedReview.content,
-            rating: editedReview.rating,
-            frequencyId: editedReview.frequencyChange,
-            dateOfExperience: editedReview.dateOfExperience,
-            id: review.id
-        })
-
-        const parsedFreq = parseInt(frequencyId);
-        editedReview.frequencyId = parsedFreq;
-
-        if (!editedReview.reviewId) {
-            editedReview.frequencyId = review.frequencyId;
-        }
-
-        const parsedBuiz = parseInt(businessId);
-        editedReview.businessId = parsedBuiz;
-
-        if (!editedReview.reviewId) {
-            editedReview.businessId = review.businessId;
-        }
-
-        updateReview(editedReview.id, editedReview)
-            .then(() => {
-                history.push(`/reviews/details/${id}`);
-            }
-            )
-        console.log("editedFinalReview", editedReview)
+    const handleBuizChange = (e) => {
+        const stateToChange = { ...editedReview };
+        stateToChange[e.target.id] = e.target.value;
+        setEditedReview(stateToChange);
     }
-
+    const handleFreqChange = (e) => {
+        const stateToChange = { ...editedReview };
+        stateToChange[e.target.id] = e.target.value;
+        setEditedReview(stateToChange);
+    }
     const handleFieldChange = e => {
         const stateToChange = { ...editedReview };
         stateToChange[e.target.id] = e.target.value;
         setEditedReview(stateToChange);
     };
 
+    //END DROPDOWN AND SINGLE ID call
 
 
 
-    if (!editedReview) {
-        return null
+
+
+
+
+
+
+    const editReview = (e) => {
+        e.preventDefault();
+        setIsLoading(true);
+        const thatEditedReview = ({
+            id: parseInt(review.id),
+            title: editedReview.title,
+            content: editedReview.content,
+            rating: editedReview.rating,
+            frequencyId: parseInt(editedReview.frequencyId),
+            userProfileId: parseInt(review.userProfileId),
+            businessId: parseInt(review.businessId),
+            dateOfExperience: editedReview.dateOfExperience,
+
+        })
+
+        updateReview(thatEditedReview);
+        setIsLoading(false)
+
+        history.push(`/reviews/details/${id}`);
     }
+
+
+
+
+
+    // if (!editedReview) {
+    //     return null
+    // }
+
     return (
         <>
             <div className="container pt-4">
@@ -165,66 +152,58 @@ export default function ReviewEditForm() {
                                 </FormGroup>
                                 <FormGroup>
                                     <Label for="category">Frequency</Label>
-                                    <br />
-                                    {/* <select className="userEditDropdown" onChange={handleFreqChange}>
-                                        <option default value={frequencyId}></option>
-
-                                        {frequencies.map(frequency => {
-
-
-                                            return <option key={frequency.id} value={frequency.id}>{frequency.name}</option>
-                                            // <option selected value={frequency.id}>
-                                            //     {frequency.name}
-                                            // </option> 
-                                        }
-                                        )}
-                                    </select> */}
-                                    {/* <br />*/}
-              
                                     <Input
                                         type="select"
                                         className="userEditDropDown"
                                         onChange={handleFreqChange}
-                                        value={parseInt(editedReview.frequencyChange)}
+                                        value={parseInt(editedReview.frequencyId)}
                                         id="frequencyId"
                                         name="frequencyId"
                                     >
-                                        <option > Choose an option</option>
+                                        <option value={1}> Choose an option</option>
                                         {frequencies.map(frequency => {
-                                            return <option selected value={frequency.id}>{frequency.name}</option>
+                                            return <option key={frequency.id} value={frequency.id}>{frequency.name}</option>
                                         }
                                         )}
                                     </Input>
                                 </FormGroup>
-                                    <FormGroup>
-                                        <Label for="dateOfExperience">Date of Experience</Label>
-                                        <Input
-                                            type="datetime-local"
-                                            id="dateOfExperience"
-                                            required
-                                            defaultValue={editedReview.dateOfExperience}
-                                            name="dateOfExperience"
-                                            onChange={handleFieldChange}
-                                        />
-                                    </FormGroup>
-                                    <FormGroup>
-                                        <Label for="rating">Rate the Experience</Label>
-                                        <Input
-                                            type="number"
-                                            id="rating"
-                                            required
-                                            defaultValue={editedReview.rating}
-                                            name="rating"
-                                            onChange={e => setRating(parseInt(e.target.value))}
-                                        />
-                                    </FormGroup>
+                                <FormGroup>
+                                    <Label for="dateOfExperience">Date of Experience</Label>
+                                    <Input
+                                        type="datetime-local"
+                                        id="dateOfExperience"
+                                        required
+                                        defaultValue={editedReview.dateOfExperience}
+                                        name="dateOfExperience"
+                                        onChange={handleFieldChange}
+                                    />
+                                </FormGroup>
+                                <FormGroup>
+                                    <Label for="rating">Rate the Experience</Label>
+                                    <Input
+                                        type="number"
+                                        id="rating"
+                                        required
+                                        defaultValue={editedReview.rating}
+                                        name="rating"
+                                        onChange={e => setRating(parseInt(e.target.value))}
+                                    />
+                                </FormGroup>
                             </Form>
-                                <Button type="button" color="success" onClick={e => { editReview() }}>Save</Button> &nbsp;&nbsp;
-                            <Link to={`/reviews`}><Button type="button" color="warning">Cancel</Button></Link>
+
+                            <div>
+                                <Button
+                                    className="newPostSubmitButton"
+                                    type="submit"
+                                    disabled={isLoading}
+                                    onClick={editReview}
+                                >Submit Review Changes</Button>
+                                <Link to={`/reviews`}><Button type="button" color="warning">Cancel</Button></Link>
+                            </div>
                         </CardBody>
                     </Card>
                 </div>
-                </div>
+            </div>
         </>
     );
 }

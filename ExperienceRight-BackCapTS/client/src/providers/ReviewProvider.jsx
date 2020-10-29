@@ -97,9 +97,9 @@ export const ReviewProvider = (props) => {
       }))
   };
 
-  const updateReview = (id, review) => {
+  const updateReview = (review) => {
     return getToken().then((token) =>
-      fetch(`/api/review/edit/${id}`, {
+      fetch(`/api/review/edit/${review.id}`, {
         method: "PUT",
         headers: {
           Authorization: `Bearer ${token}`,
