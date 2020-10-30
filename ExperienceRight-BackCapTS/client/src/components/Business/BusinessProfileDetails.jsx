@@ -92,7 +92,7 @@ export default function BusinessProfileDetails() {
 				<span class="fee"><strong>34K</strong>Followers</span>
 			</div> */}
                   <div class="appo">
-                    <a href="#" class="btn"><Link class="btn" to={`/reviews/add/${business.id}`}>Add a Review</Link></a>
+                    <a class="btn"><Link class="btn" to={`/reviews/add/${business.id}`}>Add a Review</Link></a>
                   </div>
                 </div>
                 <div class="locations">

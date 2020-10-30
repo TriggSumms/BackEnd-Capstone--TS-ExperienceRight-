@@ -89,6 +89,92 @@ namespace ExperienceRight_BackCapTS.Repositories
                 }
             };
         }
+
+        //May have to search by just the business paramenter only?
+        public List<Business> SearchBusinessesByCategory(string criterion)
+        {
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                              SELECT b.Id, b.EstablishmentName, b.Bio, b.Address, b.HoursOfOperation, b.Phone, b.UserProfileId, b.CategoryId,
+                              
+                              c.Name,
+
+                              up.FirstName, up.LastName, up.DisplayName, up.FirebaseUserId,
+                              up.Email, up.CreateDateTime AS UserProfileCreationDate, up.ProfileImageLocation, up.UserTypeId, 
+
+                              ut.Name AS UserTypeName
+
+                         FROM Business b
+                              
+                              LEFT JOIN UserProfile up ON b.UserProfileId = up.id
+                              LEFT JOIN UserType ut ON up.UserTypeId = ut.id
+                              LEFT JOIN Category c ON b.CategoryId = c.id
+
+                        WHERE c.Name LIKE @Criterion ";
+
+                    //OR b.EstablishmentName LIKE @Criterion
+                    //DbUtils.AddParameter(cmd, "@Criterion", $"%{criterion}%");
+                    //var reader = cmd.ExecuteReader();
+
+
+                    cmd.Parameters.AddWithValue("@criterion", $"%{criterion}%");
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    var businesses = new List<Business>();
+                   // List<Business> businesses = new List<Business>();
+
+                    while (reader.Read())
+                    {
+                        businesses.Add(new Business()
+                        {
+                            Id = reader.GetInt32(reader.GetOrdinal("Id")),
+                        EstablishmentName = reader.GetString(reader.GetOrdinal("EstablishmentName")),
+                        Bio = reader.GetString(reader.GetOrdinal("Bio")),
+                        Address = reader.GetString(reader.GetOrdinal("Address")),
+                        HoursOfOperation = reader.GetString(reader.GetOrdinal("HoursOfOperation")),
+                        Phone = reader.GetString(reader.GetOrdinal("Phone")),
+                        CategoryId = reader.GetInt32(reader.GetOrdinal("CategoryId")),
+                        Category = new Category()
+                        {
+                            Id = reader.GetInt32(reader.GetOrdinal("CategoryId")),
+                            Name = reader.GetString(reader.GetOrdinal("Name"))
+                        },
+                        UserProfileId = reader.GetInt32(reader.GetOrdinal("UserProfileId")),
+                        UserProfile = new UserProfile()
+                        {
+                            Id = reader.GetInt32(reader.GetOrdinal("UserProfileId")),
+                            FirebaseUserId = reader.GetString(reader.GetOrdinal("FirebaseUserId")),
+                            DisplayName = reader.GetString(reader.GetOrdinal("DisplayName")),
+                            FirstName = reader.GetString(reader.GetOrdinal("FirstName")),
+                            LastName = reader.GetString(reader.GetOrdinal("LastName")),
+                            Email = reader.GetString(reader.GetOrdinal("Email")),
+                            CreateDateTime = reader.GetDateTime(reader.GetOrdinal("UserProfileCreationDate")),
+                            ProfileImageLocation = DbUtils.GetNullableString(reader, "ProfileImageLocation"),
+                            UserTypeId = reader.GetInt32(reader.GetOrdinal("UserTypeId")),
+                            UserType = new UserType()
+                            {
+                                Id = reader.GetInt32(reader.GetOrdinal("UserTypeId")),
+                                Name = reader.GetString(reader.GetOrdinal("UserTypeName"))
+                            }
+                        }
+                         });
+
+                    }
+
+                    reader.Close();
+
+                    return businesses;
+                }
+            }
+        }
+
+
+
+
         public List<Business> GetAllBusinessesByCategory(int id)
         {
             using (var conn = Connection)

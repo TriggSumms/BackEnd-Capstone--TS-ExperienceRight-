@@ -57,17 +57,16 @@ export const ReviewProvider = (props) => {
         .then(setReviews));
   }
 
-//   const getAllUnapprovedPosts = () => {
-//     getToken().then((token) =>
-//       fetch(`${apiUrl}/unapproved`, {
-//         method: "GET",
-//         headers: {
-//           Authorization: `Bearer ${token}`
-//         }
-//       }).then(resp => resp.json())
-//         .then(setUnapprovedPosts));
-
-//   };
+  const searchReviews = (searchTerm) => {
+    getToken().then((token) =>
+      fetch(`/api/review/search?q=${searchTerm}`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }).then(resp => resp.json())
+        .then(setReviews));
+  };
 
   const getById = (id) => {
     getToken().then((token) =>
@@ -132,7 +131,7 @@ export const ReviewProvider = (props) => {
 
   return (
     <ReviewContext.Provider value={{
-     frequencies, review, reviews, getAllReviews, getById, addReview, updateReview, deleteReview, setReview, getAllFrequencies,  getAllReviewsforBusiness, getAllReviewsforUserList
+     frequencies, review, reviews, getAllReviews, getById, addReview, updateReview, deleteReview, setReview, getAllFrequencies,  getAllReviewsforBusiness, getAllReviewsforUserList, searchReviews
     }}>
       {props.children}
     </ReviewContext.Provider>

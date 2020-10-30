@@ -49,7 +49,7 @@ export default function UserSpecificReviewsList() {
                                             <a href="/netsi1964/settings/profile/" class="button button-outline edit-profile-link" id="edit-profile-link">Edit Profile</a>
                                             <div class="profile-name" id="profile-name">
                                                 <h1 id="profile-name-header">
-                                                    <br></br>
+                                                    
                                                     Welcome,
                                                     <br></br>{(JSON.parse(userProfile).firstName)}
                                                     <span class="profile-badges" id="profile-badges">
@@ -84,7 +84,9 @@ export default function UserSpecificReviewsList() {
 				<span class="fee"><strong>34K</strong>Followers</span>
 			</div> */}
                                     <div class="appo">
-                                        <a href="#" class="btn">Check Out Local Business's</a>
+                                 
+                    <a class="btn"><Link class="btn" to={`/businesses`}>Check Out Local Business's</Link></a>
+                  
                                     </div>
                                 </div>
                                 <div class="locations">

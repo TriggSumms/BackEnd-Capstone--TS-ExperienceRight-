@@ -13,7 +13,7 @@ import BusinessProfileEdit from "./Business/BusinessProfileEdit"
 import UserSpecificReviewsList from "./Reviews/UserSpecificReviewsList";
 import BusinessList from "./Business/BusinessList";
 import BusinessProfileDetails from "./Business/BusinessProfileDetails";
- import ProfileReviewList from "./Reviews/ProfileReviewList";
+ import ProfileReviewList from "./Reviews/ReviewList";
  import ReviewDetail from "./Reviews/ReviewDetail";
 import ReviewAddForm from "./Reviews/ReviewAddForm";
 import ReviewEditForm from "./Reviews/ReviewEditForm";

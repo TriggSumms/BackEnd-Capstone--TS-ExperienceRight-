@@ -64,6 +64,12 @@ namespace ExperienceRight_BackCapTS.Controllers
                 return Ok(business);
             }
 
+        [HttpGet("search")]
+        public IActionResult SearchForBusinessviaCat(string q)
+        {
+            return Ok(_businessRepository.SearchBusinessesByCategory(q));
+        }
+
         //[HttpPost]
         //public IActionResult Business(Business business)
         //{
