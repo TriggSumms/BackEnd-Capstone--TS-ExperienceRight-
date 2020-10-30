@@ -2,14 +2,15 @@ import React, { useContext, useEffect, useState } from "react";
 import Business from "./Business";
 import { BusinessContext } from "../../providers/BusinessProvider";
 import { Link, useHistory } from "react-router-dom";
-
+import { Button, Form, FormGroup, Label, Input, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 
 export default function BusinessList() {
   // const { posts, getAllPosts } = useContext(PostContext);
   // const userProfile = JSON.parse(sessionStorage.getItem("userProfile"))
-  const { businesses, getAllBusinesses } = useContext(BusinessContext);
+  const { businesses,  getAllBusinesses, categories, getAllCategories, getAllBusinessesByCategory } = useContext(BusinessContext);
   const sessionUser = JSON.parse(sessionStorage.getItem("userProfile"));
-  
+  const [categoryId, setCategoryId] = useState();
+  const [businesszByCat, setBusinesszByCat] = useState();
 
   
   
@@ -17,6 +18,37 @@ export default function BusinessList() {
   useEffect(() => {
     getAllBusinesses();
   }, []);
+
+
+
+  // useEffect(() => {
+  //   // getUserId(id)
+  //   getAllBusinessesByCategory()
+  //   .then((businesszByCat) => {
+  //       setBusinesszByCat(businesszByCat)
+  //       // getAllBusinesses();
+  //   })
+  // }, []);
+
+
+
+
+
+    //START Category GRAB
+    // const parsedCat = parseInt(categoryId);
+    // categoryId = parsedCat;
+
+    useEffect(() => {
+        getAllCategories();
+    }, [])
+
+    const handleChange = (e) => {
+        setCategoryId(e.target.value);
+    }
+    //END =Category GRAB
+
+
+
 
   //if (sessionUser.userTypeId === 1) {
     return (
@@ -44,26 +76,35 @@ export default function BusinessList() {
           <div className="post-container">
             <table className="postTable">
               <thead className="postTableHeader">
+               
                 <tr>
-                  <th className="postTitle-header">
-                    LIST OF BUSINESSES
+                  <th className="postTitle-header"> Business List
+
                 </th>
-                  {/* <th className="postUserName-header">
-                    DisplayName
+                  <th className="postUserName-header">
+                   
                 </th>
                   <th className="postCategory-header">
-                    Frequency Of Visits
+                    
                 </th>
                   <th className="postDate-header">
-                    Experience Date
-                </th> */}
+                                      <select className="float-right" onChange={handleChange}>
+                            {categories.map(category =>
+                                    <option value={category.id}>
+                                        {category.name}
+                                    </option>
+                            )}
+                        </select>          
+                </th>
                   <th></th>
                 </tr>
               </thead>
-              {businesses.map(b =>
+              <div className="BusinessCardsForList">
+         {businesses.map(b =>
                 <Business key={b.id} business={b} />
               )}
-            </table>
+              </div>
+            </table>     
           </div>
         </div>
       </section>

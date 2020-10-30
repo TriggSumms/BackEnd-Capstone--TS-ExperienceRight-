@@ -89,6 +89,55 @@ namespace ExperienceRight_BackCapTS.Repositories
                 }
             };
         }
+        public List<Business> GetAllBusinessesByCategory(int id)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                       SELECT b.Id, b.EstablishmentName, b.Bio, b.Address, b.HoursOfOperation, b.Phone, b.UserProfileId, b.CategoryId,
+                              
+                              c.Name AS CategoryName,
+                              
+                              up.FirstName, up.LastName, up.DisplayName, up.FirebaseUserId,
+                              up.Email, up.CreateDateTime AS UserProfileCreationDate, up.ProfileImageLocation, up.UserTypeId, 
+
+                              ut.Name AS UserTypeName
+
+                         FROM Business b
+                              
+                              LEFT JOIN UserProfile up ON b.UserProfileId = up.id
+                              LEFT JOIN UserType ut ON up.UserTypeId = ut.id
+                              LEFT JOIN Category c ON b.CategoryId = c.id
+
+                        WHERE c.id= @id
+                            ORDER BY EstablishmentName ASC";
+
+
+               
+                    DbUtils.AddParameter(cmd, "@id", id);
+                    //DbUtils.AddParameter(cmd, "@userProfileId", userProfileId);
+                    var reader = cmd.ExecuteReader();
+
+                    var businessz = new List<Business>();
+
+                    while (reader.Read())
+                    {
+                        businessz.Add(NewBusinessFromReader(reader));
+                    }
+
+                    reader.Close();
+
+                    return businessz;
+                }
+            };
+        }
+
+
+
+
         //public List<Review> GetBusinessForSpecificUser(int userProfileId)
         //{
         //    using (var conn = Connection)

@@ -80,7 +80,8 @@
     padding: 0px;
     box-shadow: 1px 1px 2px 1px #747272;
     background: white;
-    margin-top: 20px
+    margin-top: 20px;
+    
 }
 
 .buttons {
@@ -262,6 +263,7 @@ fieldset {
 .postContainer {
     display: flex;
     justify-content: center;
+   
 }
 
 .tagsList {
@@ -298,6 +300,7 @@ fieldset {
     border-radius: 15px;
     padding: 20px 40px;
     box-shadow: 3px 3px 5px;
+    
 }
 
 .tagCard {
@@ -405,8 +408,8 @@ fieldset {
 /* .postTagManagementButtons{
   float:right;
 } */
-.theHashTagtoSetOtherstoShame{
-    color: goldenrod;
+.theUserSpecificREviewsGlowtoSetOtherstoShame{
+    color: rgb(0, 0, 0);
     text-shadow: 0 0 1px  whitesmoke;
       /* Control the  timing of frames */
     animation: glow 7.0s ease infinite;
@@ -417,20 +420,30 @@ fieldset {
     0%,
     100% {
     /* text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px  #e62300, 0 0 40px  #e62300, 0 0 50px  #e62300, 0 0 60px #e62300, 0 0 70px #e62300; */
-       text-shadow: 0 0 1vw goldenrod, 0 0 3vw gold, 0 0 10vw goldenrod, 0 0 10vw gold, 0 0 .4vw goldenrod, .5 vw .5 vw .1vw gold;
-      color: #FED128; 
+       text-shadow: 0 0 1vw rgb(202, 240, 248), 0 0 3vw rgb(202, 240, 248), 0 0 10vw rgb(202, 240, 248), 0 0 10vw rgb(202, 240, 248), 0 0 .4vw rgb(202, 240, 248), .5 vw .5 vw .1vw rgb(202, 240, 248);
+      color: rgb(202, 240, 248); 
     }
+    
     50% {
     /* text-shadow: 0 0 20px #fff, 0 0 30px #37dbc0, 0 0 40px  #37dbc0, 0 0 50px  #37dbc0, 0 0 60px  #37dbc0, 0 0 70px  #37dbc0, 0 0 80px #37dbc0; */
-         text-shadow: 0 0 .5vw goldenrod, 0 0 1.5vw gold, 0 0 5vw goldenrod, 0 0 5vw gold, 0 0 .2vw goldenrod, .5 vw .5 vw .1vw goldenrod;
-      color: #806914; 
+         text-shadow: 0 0 .5vw rgb(0, 0, 0), 0 0 1.5vw rgb(0, 0, 0), 0 0 5vw rgb(0, 0, 0), 0 0 5vw rgb(0, 0, 0), 0 0 .2vw rgb(0, 0, 0), .5 vw .5 vw .1vw rgb(0, 0, 0);
+      color: rgb(0, 0, 0); 
+     
     }
   }
 
+  .ALittleSpaceBetweenIcons{
+      margin-left:1px;
+  }
+
+  .ALittleSpaceBetweenIconsTWO{
+      margin-left:12px;
+  }
   
 /* PostTag CSS end */
 .postTable {
     width: 100%;
+    
 }
 
 .postTitle {
@@ -449,7 +462,7 @@ fieldset {
 }
 
 .postTitle-header {
-    width: 45%;
+    width: 99%;
     padding: 10px 0;
     padding-right: 10px;
     padding-left: 20px
@@ -465,6 +478,7 @@ fieldset {
 
 .postCard-admin {
     width: 100%;
+    
 }
 
 .postContent {
@@ -487,6 +501,7 @@ fieldset {
 
 .postCard-details {
     border-bottom: 1px solid #373737;
+    
 }
 
 .postTableHeader {
@@ -498,12 +513,14 @@ fieldset {
     position: sticky;
     top: 0;
     border-radius: 15px;
+    
 }
 
 .authorPostCards {
     display: grid;
     grid-template-columns: auto auto auto;
     padding: 10px;
+    
 }
 
 .authorPostItem {
@@ -516,17 +533,20 @@ fieldset {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    
 }
 
 .authorPostDetails {
     display: flex;
     justify-content: space-between;
+    
 }
 
 .authorPostItems {
     display: flex;
     justify-content: space-between;
     width: 100%;
+    
 }
 
 .authorButtons, .authorViewOnlyButton {
@@ -547,6 +567,7 @@ fieldset {
 
 .authorPostCardContainer {
     background: gray;
+    
 }
 
 .authorPostHeaderRight {
@@ -765,5 +786,63 @@ input:checked + .slider:before {
 
 
 /* USER PROFILE DROP */
+/* .BusinessCardsForList{
+    display: ;
+    justify-content: flex-start;    
+} */
 
+#profile-header {
+	background: rgb(255, 255, 255);
+}
+
+#profile-name-header:after {
+	content: "👤";
+	 animation-duration: 4s;
+  animation-name: fadein;
+}
+#profile-name-header {
+	 animation-duration: 3s;
+  animation-name: slidein;
+}
+
+#profile-username {
+	color: black;
+	animation-duration: 5s;
+  animation-name: collect;
+}
+
+@keyframes slidein {
+  from {
+    transform: translateX(-1000px);
+		letter-spacing: 20px;
+  }
+
+  to {
+    transform: translateX(0px);
+		letter-spacing: 0px;
+  }
+}
+
+@keyframes collect {
+  from {
+		letter-spacing: 200px;
+		color:rgb(255, 255, 255);
+  }
+
+  to {
+    transform: translateX(0px);
+		letter-spacing: 0px;
+		color:black;
+  }
+}
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
 /* END USER PROFILE DROP */

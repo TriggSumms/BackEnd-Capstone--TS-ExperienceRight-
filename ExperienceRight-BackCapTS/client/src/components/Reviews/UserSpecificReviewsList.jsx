@@ -38,34 +38,32 @@ export default function UserSpecificReviewsList() {
                     <div className="postHeader">
                         <div className="postHeaderDetails">
                             <div>
-                          
                             </div>
                             <div class="doctor-card">
                                 <div class="info">
                                     <div class="avatar">
-                                        <img className="imageBackground" src={userProfile.profileImageLocation} alt="image" />
+                                        {/* <img className="imageBackground" src={userProfile.profileImageLocation} alt="image" /> */}
                                     </div>
-                                    <div class="details">
-                                    <h1>USER: {(JSON.parse(userProfile).displayName)}'s</h1>
-                                <h3>....Remember your incongonito while utilizing<div>ExperienceRight</div> </h3>
-                                        <div class="name">{userProfile.displayName}
-                                        </div>
-
-                                        <div class="meta-info">
-                                            <span class="sp">{userProfile.email}</span>
-                                            <div>
-
+                                    <header class="profile-header group" id="profile-header">
+                                        <div class="profile-header-content">
+                                            <a href="/netsi1964/settings/profile/" class="button button-outline edit-profile-link" id="edit-profile-link">Edit Profile</a>
+                                            <div class="profile-name" id="profile-name">
+                                                <h1 id="profile-name-header">
+                                                    <br></br>
+                                                    Welcome,
+                                                    <br></br>{(JSON.parse(userProfile).firstName)}
+                                                    <span class="profile-badges" id="profile-badges">
+                                                        <a id="profile-badge-pro" href="/helloreviewer" class="badge badge-pro" title="Member Since October 11, 2012">
+                                                            ExperienceRight</a>
+                                                    </span>
+                                                </h1>
+                                                <div class="profile-username-area" id="profile-username-area">
+                                                    <span class="profile-username" id="profile-username">{(JSON.parse(userProfile).email)}
+                                                    </span>
+                                                </div>
                                             </div>
-
-
-                                            <div>
-                                            </div>
-
                                         </div>
-                                        <div>
-                                            <span class="prac-area"> XR Member Since: {userProfile.createDateTime}</span>
-                                        </div>
-                                    </div>
+                                    </header>
 
                                 </div>
                                 <div class="actions">
@@ -77,7 +75,7 @@ export default function UserSpecificReviewsList() {
                                             <i class="fa fa-star-o"></i>
                                             <i class="fa fa-star-o"></i>
                                         </span>
-                                        {/* <span class="rating-count">000 Ratings</span> */}
+                                        <span class="rating-count">000 Ratings</span>
                                     </div>
                                     <div class="comments">
                                         <span class="comment-count"><strong>{reviews.length}</strong> Reviews Made</span>
@@ -86,7 +84,7 @@ export default function UserSpecificReviewsList() {
 				<span class="fee"><strong>34K</strong>Followers</span>
 			</div> */}
                                     <div class="appo">
-                                        {/* <a href="#" class="btn">Add Review</a> */}
+                                        <a href="#" class="btn">Check Out Local Business's</a>
                                     </div>
                                 </div>
                                 <div class="locations">
@@ -96,27 +94,13 @@ export default function UserSpecificReviewsList() {
                         </div>
 
                     </div>
-                    <div class="toggle">
-                        <div>
-                            {/* <a href="/reviews/unapproved" className="unapprovedPosts">View All Unapproved</a> */}
-                        </div>
-                    </div>
                     <div className="post-container">
                         <table className="postTable">
                             <thead className="postTableHeader">
                                 <tr>
                                     <th className="postTitle-header">
-                                        Title
-                </th>
-                                    <th className="postUserName-header">
-                                        DisplayName
-                </th>
-                                    <th className="postCategory-header">
-                                        Frequency Of Visits
-                </th>
-                                    <th className="postDate-header">
-                                        Experience Date
-                </th>
+                                        User Specific Reviews
+                                    </th>
                                     <th></th>
                                 </tr>
                             </thead>
@@ -126,6 +110,7 @@ export default function UserSpecificReviewsList() {
                         </table>
                     </div>
                 </div>
+
             </section>
 
 

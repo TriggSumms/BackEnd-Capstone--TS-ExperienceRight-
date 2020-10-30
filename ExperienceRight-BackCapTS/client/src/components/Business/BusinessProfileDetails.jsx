@@ -96,7 +96,9 @@ export default function BusinessProfileDetails() {
                   </div>
                 </div>
                 <div class="locations">
-                  Business Bio: {business.bio}
+                <Link to={`/businesses/edit/${id}`}><img src="https://img.icons8.com/ultraviolet/30/000000/edit-property.png"/></Link>
+               
+                 <div>Business Bio: {business.bio}</div> 
                 </div>
               </div>
             </div>

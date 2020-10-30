@@ -32,14 +32,28 @@ namespace ExperienceRight_BackCapTS.Controllers
                 return Ok(businessz);
             }
 
-            //        [HttpGet("unapproved")]
-            //        public IActionResult GetUnapproved()
-            //        {
-            //            var posts = _postRepository.GetAllUnapprovedPosts();
-            //            return Ok(posts);
-            //        }
+        //        [HttpGet("unapproved")]
+        //        public IActionResult GetUnapproved()
+        //        {
+        //            var posts = _postRepository.GetAllUnapprovedPosts();
+        //            return Ok(posts);
+        //        }
 
-            [HttpGet("{id}")]
+        
+       [HttpGet("categories/{id}")]
+        public IActionResult GetByCategory(int id)
+        {
+            var catbusiness = _businessRepository.GetAllBusinessesByCategory(id);
+            if (catbusiness == null)
+            {
+                return NotFound();
+            }
+            return Ok(catbusiness);
+        }
+
+
+
+        [HttpGet("{id}")]
             public IActionResult Get(int id)
             {
                 var business = _businessRepository.GetBusinessById(id);

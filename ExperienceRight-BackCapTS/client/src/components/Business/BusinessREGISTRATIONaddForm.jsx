@@ -110,7 +110,7 @@ export default function BusinessREGISTRATIONaddForm() {
                             //onChange={e => setBio(e.target.value)}
                             />
                         </FormGroup>
-                        <Label for="category">Sector Category</Label>
+                        <Label for="category">Sector Selection:</Label>
                         <select className="userEditDropdown" onChange={handleChange}>
                             {categories.map(category =>
                                 business.id === business.categoryId ?

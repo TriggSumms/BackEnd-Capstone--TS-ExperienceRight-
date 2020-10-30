@@ -14,6 +14,8 @@ namespace ExperienceRight_BackCapTS.Repositories
         Business GetBusinessById(int id);
         //Business GetUserBusinessById(int id, int userProfileId);
 
+        List<Business> GetAllBusinessesByCategory(int id);
+
         Business GetUserBusinessById(int id);
     }
 }

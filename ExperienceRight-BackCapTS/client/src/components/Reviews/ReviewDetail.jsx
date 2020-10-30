@@ -32,7 +32,7 @@ export default function ReviewDetail() {
     }
 
 
-    if (sessionUser.userTypeId === 2) {
+    if (sessionUser.id === review.userProfile.id) {
         return (
             <>
                 <Link style={{ textDecoration: 'none' }} to={`/reviews`}>
@@ -73,10 +73,6 @@ export default function ReviewDetail() {
                             </section>
                         </section>
                         <hr />
-
-
-
-
                         {/* <a href={`/posts/details/${post.id}/posttags`} className="btn btn-outline-primary mx-1">View Tags</a> */}
                         <Link to={`/businesses/details/${review.businessId}`}><Button type="button" color="warning">Back to Business Page</Button></Link>
                         <a href={`/review/${review.id}/comments`} className="btn btn-outline-primary mx-1">View Business Response</a>
@@ -126,7 +122,48 @@ export default function ReviewDetail() {
             </>
         );
     }
+    //Made Null Route In Case I make a subuser
     else {
-        return null
+        return (
+            <>
+            <Link style={{ textDecoration: 'none' }} to={`/reviews`}>
+            <button className="std-btn">&#x2190; Back to Reviews</button>
+        </Link>
+        <div className="postContainer">
+            <div className="post">
+                <section className="px-3">
+                    <div className="row justify-content-between">
+                        <div className="titleANDPostTag">
+                            <h1 className="text-secondary">TITLE:{review.title}</h1>
+                        </div>
+                        <h1 className="text-black-50">FREQ:{review.frequency.name}</h1>
+                    </div>
+                    <div className="row justify-content-between">
+                        <p className="text-black-50">Experience Date {new Intl.DateTimeFormat('en-US').format(new Date(review.dateOfExperience))}</p>
+                    </div>
+                    <p className="text-secondary">DISPLAY NAME: {review.userProfile.displayName}</p>
+
+                    <div className="row postBtns justify-content-between">
+                        <div>
+                            <section className="row post__content">
+                                <p className="col-sm-12 mt-5">{review.content}</p>
+                            </section></div>
+
+                    </div>
+                    <section className="row justify-content-center">
+                        {/* <div>
+                        <img src={review.imageLocation} />
+                    </div> */}
+                    </section>
+                </section>
+                <hr />
+                {/* <a href={`/posts/details/${post.id}/posttags`} className="btn btn-outline-primary mx-1">View Tags</a> */}
+                <Link to={`/businesses/details/${review.businessId}`}><Button type="button" color="warning">Back to Business Page</Button></Link>
+                <a href={`/review/${review.id}/comments`} className="btn btn-outline-primary mx-1">View Business Response</a>
+
+            </div>
+        </div>
+        </>
+        );
     }
 }

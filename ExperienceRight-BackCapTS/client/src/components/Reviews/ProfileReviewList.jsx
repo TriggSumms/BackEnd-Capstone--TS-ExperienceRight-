@@ -9,58 +9,36 @@ export default function ProfileReviewList() {
   // const userProfile = JSON.parse(sessionStorage.getItem("userProfile"))
   const { reviews, getAllReviews } = useContext(ReviewContext);
   const sessionUser = JSON.parse(sessionStorage.getItem("userProfile"));
-  
 
-  
-  
+
+
+
 
   useEffect(() => {
     getAllReviews();
   }, []);
 
-//   if (sessionUser.userTypeId === 1) {
-    return (
+  //   if (sessionUser.userTypeId === 1) {
+  return (
 
-        <>
-        
-     <section>
+    <>
+      <section>
         <div class="postCard">
           <div className="postHeader">
             <div className="postHeaderDetails">
               <div>
-                <h1>Reviews</h1>
-              </div>
-              <div>
-                <p>
-                    
-                  {/* <a class="btn-red" href="/reviews/userview">User View</a> */}
-                </p>
               </div>
 
             </div>
 
-          </div>
-          <div class="toggle">
-            <div>
-              {/* <a href="/reviews/unapproved" className="unapprovedPosts">View All Unapproved</a> */}
-            </div>
           </div>
           <div className="post-container">
             <table className="postTable">
               <thead className="postTableHeader">
                 <tr>
                   <th className="postTitle-header">
-                    The List of every Review
-                </th>
-                  <th className="postUserName-header">
-           
-                </th>
-                  <th className="postCategory-header">
-                   
-                </th>
-                  <th className="postDate-header">
-                   
-                </th>
+                    All Reviews
+             </th>
                   <th></th>
                 </tr>
               </thead>
@@ -70,9 +48,9 @@ export default function ProfileReviewList() {
             </table>
           </div>
         </div>
-      </section>
-   
 
-        </>
-    );
+      </section>
+
+    </>
+  );
 }

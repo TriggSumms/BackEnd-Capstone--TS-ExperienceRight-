@@ -9,6 +9,9 @@ export const BusinessProvider = (props) => {
   const [businesses, setBusinesses] = useState([]);
   const [business, setBusiness] = useState({});
   const [categories, setCategories] = useState([]);
+  const [businesszByCat, setBusinesszByCat] = useState([]);
+  
+
   
 
 
@@ -87,6 +90,18 @@ const getAllCategories = () => {
   .then(setCategories);
 }
 
+
+const getAllBusinessesByCategory = (id) => {
+  getToken().then((token) =>
+    fetch(`/api/business/categories/${id}`,{
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    }).then(resp => resp.json())
+      .then(setBusinesszByCat));
+};
+
 // getTheCount(id) {
 //     return fetch(`${remoteURL}/plants/?userId=${id}&_expand=user`).then(result => result.json())
 // }
@@ -95,7 +110,7 @@ const getAllCategories = () => {
   return (
     <BusinessContext.Provider value={{
     //   business, businesses, getAllBusinesses, getById, addReview setBusiness, getAllReviewsByUser
-    categories, business, businesses, getAllBusinesses, setBusiness, getBusinessById, addBusiness, getAllCategories, updateBusiness
+    businesszByCat, categories, business, businesses, getAllBusinesses, setBusiness, getBusinessById, addBusiness, getAllCategories, getAllBusinessesByCategory, updateBusiness
     }}>
       {props.children}
     </BusinessContext.Provider>
