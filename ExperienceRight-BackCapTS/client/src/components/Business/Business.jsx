@@ -10,106 +10,126 @@ import "./BusinessProfile.scss";
 export default function Business({ business }) {
   const sessionUser = JSON.parse(sessionStorage.getItem("userProfile"));
   //const defaultImage = 'https://res.cloudinary.com/dhduglm4j/image/upload/v1602603540/tabloid_euehri.png';
-  //const { updateReview } = useContext(ReviewContext);
   const { reviews, getAllReviewsforBusiness, getAllReviews } = useContext(ReviewContext);
-  const {  getBusinessById } = useContext(BusinessContext);
-  const { id } = useParams();
+  const { businesses, getBusinessById,  getAllBusinesses } = useContext(BusinessContext);
+  const { businessId, reviewId } = useParams();
+
   const history = useHistory();
 
-  //console.log("whats in sessionstorage", sessionStorage)
 
 
-  useEffect(() => {
-    getBusinessById(id)
-  }, []);
 
-     useEffect(() => {
-    getAllReviews();
-  }, []); 
-  
-  // var total = 0;
-  // for(var i = 0; i < reviews.length; i++) {
-  //     total += review[i];
+  // useEffect(() => {
+  //   getBusinessById()
+  // }, []);
+
+  // useEffect(() => {
+  //   getAllReviews();
+  // }, []);
+
+
+
+  //   useEffect(() => {
+  //     getAllBusinesses(business)
+  //     .then(())
+  // }, []);
+
+  // console.log(reviews)
+  // // useEffect(() => {
+  // //   getBusinessById(businessId)
+  // // }, []);
+
+
+  // useEffect(() => {
+  //   getAllReviewsforBusiness(businessId);
+  // }, []);
+
+
+//console.log(businessId)
+
+  // const reviewTotalRatingAvg = reviews.map(y => y.rating)
+  // let sum = 0;
+  // for (let num of reviewTotalRatingAvg) {
+  //   sum = sum + num
   // }
+  // const finalRating = sum / reviews.length
+  // console.log("finalavg", finalRating)
 
 
-  
-  // var avg = total / reviews.length;
-//   let reviewCountperBiz = business.reviews.filter(it => it.id.includes(''));
 
-// console.log("count", reviewCountperBiz)
-  
+//  const doodle = reviews.map(y => y.businessId)
 
 
-console.log(business)
 
-    return (
-      <>
-       <div class="doctor-card"> 
-         <div className="">
-            <Link className="authorBtn" style={{ textDecoration: 'none' }} to={`/businesses/details/${business.id}`}>
-              
-               <img className="postAuthorBtn" src="https://res.cloudinary.com/dhduglm4j/image/upload/v1603121574/icons/eye_rimwzo.png" alt="details"/> 
-            </Link>
-            {/* <Link className="authorBtn" style={{ textDecoration: 'none' }} to={`/posts/edit/${post.id}`}>
+// const doodle = businesses.map(y => y)
+ //console.log("mappin", reviews[businessId].length)
+
+
+  return (
+    <>
+      <div class="doctor-card">
+        <div className="">
+          <Link className="authorBtn" style={{ textDecoration: 'none' }} to={`/businesses/details/${business.id}`}>
+
+            <img className="postAuthorBtn" src="https://res.cloudinary.com/dhduglm4j/image/upload/v1603121574/icons/eye_rimwzo.png" alt="details" />
+          </Link>
+          {/* <Link className="authorBtn" style={{ textDecoration: 'none' }} to={`/posts/edit/${post.id}`}>
               <img className="postAuthorBtn" src="https://res.cloudinary.com/dhduglm4j/image/upload/v1603121858/icons/edit_oeexa4.png"/>
             </Link>
             <Link className="authorBtn" style={{ textDecoration: 'none' }} to={`/posts/delete/${post.id}`}>
               <img className="postAuthorBtn" src="https://res.cloudinary.com/dhduglm4j/image/upload/v1603121902/icons/delete_mr2ko5.png" alt="delete"/>
             </Link>  */}
-          </div> 
+        </div>
 
-		<div class="info">
-			<div class="avatar">
-             <img className="imageBackground" src={business.userProfile.profileImageLocation} alt="image"/> 
-			</div>
-      <div class="details">
-          <div class="name">{business.establishmentName}</div>
-          
-          <div class="meta-info">
-            <span class="sp">{business.category.name}</span>
-            <div>
-            <span class="exp-yr">Hours of Business: {business.hoursOfOperation}</span>
-            </div>
-          
-          <span class="exp-yr">* {business.address}</span>
-          <div>
+        <div class="info">
+          <div class="avatar">
+            <img className="imageBackground" src={business.userProfile.profileImageLocation} alt="image" />
           </div>
-          <span class="exp-yr">Phone: {business.phone}</span>
-      </div>
-      <div>
-            <span class="prac-area"> XR Member Since: {new Intl.DateTimeFormat('en-US').format(new Date(business.userProfile.createDateTime))}</span>
+          <div class="details">
+            <div class="name">{business.establishmentName}</div>
+
+            <div class="meta-info">
+              <span class="sp">{business.category.name}</span>
+              <div>
+                <span class="exp-yr">Hours of Business: {business.hoursOfOperation}</span>
+              </div>
+
+              <span class="exp-yr">* {business.address}</span>
+              <div>
+
+              </div>
+              <span class="exp-yr">Phone: {business.phone}</span>
             </div>
+            <div>
+              <span class="prac-area"> XR Member Since: {new Intl.DateTimeFormat('en-US').format(new Date(business.userProfile.createDateTime))}</span>
+            </div>
+          </div>
+
+        </div>
+        <div class="actions">
+          <div class="ratings">
+            <span class="rating-control">
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star-half-o"></i>
+              <i class="fa fa-star-o"></i>
+              <i class="fa fa-star-o"></i>
+            </span>
+            <span class="rating-count">000 Ratings </span>
+          </div>
+          <div class="comments">
+            <span class="comment-count"><strong>{business[reviews]}</strong> Reviews</span>
+          </div>
+          <div class="appo">
+            <a href={`/businesses/details/${business.id}`} className="btn btn-outline-primary mx-1">View Business Profile</a>
+          </div>
+        </div>
+        <div class="locations">
+          Business Bio: {business.bio}
+        </div>
       </div>
-      
-		</div>
-		<div class="actions">
-			<div class="ratings">
-				<span class="rating-control">
-					<i class="fa fa-star"></i>
-					<i class="fa fa-star"></i>
-					<i class="fa fa-star-half-o"></i>
-					<i class="fa fa-star-o"></i>
-					<i class="fa fa-star-o"></i>
-				</span>
-				<span class="rating-count">000 Ratings</span>
-			</div>
-			<div class="comments">
-				<span class="comment-count"><strong>{reviews.length}</strong> Reviews</span>
-			</div>
-			{/* <div class="consultation">
-				<span class="fee"><strong>34K</strong>Followers</span>
-			</div> */}
-			<div class="appo">
-      <a href={`/businesses/details/${business.id}`} className="btn btn-outline-primary mx-1">View Business Profile</a>
-			</div>
-		</div>
-		<div class="locations">
-      Business Bio: {business.bio}
-  </div>
-	</div>
     </>
 
-    );
-  } 
+  );
+}
 

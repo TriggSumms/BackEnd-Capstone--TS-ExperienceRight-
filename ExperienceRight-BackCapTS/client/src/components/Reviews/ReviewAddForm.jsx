@@ -3,7 +3,7 @@ import { ReviewContext } from "../../providers/ReviewProvider";
 import { BusinessContext } from "../../providers/BusinessProvider";
 import { useHistory, Link, useParams } from "react-router-dom";
 import { Button, Form, FormGroup, Label, Input, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
-import ReactStars from 'react-stars'
+import Stars from 'react-stars'
 import { render } from 'react-dom'
 
 
@@ -49,27 +49,20 @@ export default function ReviewAddForm() {
     const parsedRating = parseInt(rating);
     review.rating = parsedRating;
 
-    const secondExample = {
-        size: 50,
+    
+    const formStarRating = {
+        size: 60,
         count: 10,
         char: '',
         color1: '#ff9900',
         color2: '#6599ff',
-
-        // onChange={ratingChanged},
-        //onChange={e => setRating(parseInt(e.target.value))}
-        onChange: newValue => {
-            // //     setRating(newValue)
-            console.log(`Example 2: new value is ${newValue}`)
+        // half: false,
+        // onChange: e => setRating(parseInt(e.target.value)),
+        onChange: parsedRating => {
+            // console.log(`Example 2: new value is ${newValue}`)
+            setRating(parsedRating);
         }
     }
-
-    // console.log("wowtest", setRating);
-    //console.log("wowtest", newValue);
-
-    //  const ratingChanged = (newRating) => {
-    //     console.log(newRating)
-    //   }
     //END RATING REVIEW
 
 
@@ -203,28 +196,10 @@ export default function ReviewAddForm() {
                             placeholder="Publication Date"
                             value={review.dateOfExperience}
                         />
-                        <Label for="rating">Rating Of Your Experience</Label>
-                        <Input
-                            type="number"
-                            required
-                            onChange={e => setRating(parseInt(e.target.value))}
-                            id="rating"
-                            placeholder="Rate your experience 1-10"
-                            value={review.rating}
-                        />
-                        <ReactStars {...secondExample}
-                        // type="text"
-                        // required
-                        //  onChange={handleFieldChange}
-                        //  id="rating"
-                        // id="rating" 
-                        //  value= {review.rating}
-                        // onChange={onChange} value={review.rating}
-                        //onChange ={handleFieldyChange}
-                        //onChange={e => setRating(parseInt(e.target.value))}
-                        // placeholder="rating"
-                        // value={parseInt(review.rating)}
-                        />
+                        <br></br>
+                        <Label for="rating">Rate Your Experience</Label>
+                        {/* <Input type="number" required onChange={e => setRating(parseInt(e.target.value))} id="rating" placeholder="Rate your experience 1-10" value={review.rating}/> */}
+                        <Stars {...formStarRating}/>
                         <br />
                         <div>
                             <Button

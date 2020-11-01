@@ -99,7 +99,7 @@ namespace ExperienceRight_BackCapTS.Repositories
                               LEFT JOIN Business b ON r.BusinessId = b.id
                               LEFT JOIN Category c ON b.CategoryId = c.id
                         
-                        ORDER BY DateofExperience DESC";
+                        ORDER BY r.DateofExperience ASC";
                     var reader = cmd.ExecuteReader();
 
                     var reviews = new List<Review>();
@@ -292,7 +292,7 @@ namespace ExperienceRight_BackCapTS.Repositories
                                 
                               b.EstablishmentName, b.Bio, b.Address, b.HoursOfOperation, b.Phone, b.UserProfileId, b.CategoryId,
                               
-                              c.Name AS CatName
+                              c.Name 
 
                          FROM Review r
                               LEFT JOIN Frequency f ON r.FrequencyId = f.id
@@ -302,7 +302,7 @@ namespace ExperienceRight_BackCapTS.Repositories
                               LEFT JOIN Category c ON b.CategoryId = c.id
                         
                         
-                        WHERE CatName LIKE @Criterion ";
+                        WHERE c.Name LIKE @Criterion OR r.Title LIKE @Criterion";
 
                     
 
@@ -345,24 +345,23 @@ namespace ExperienceRight_BackCapTS.Repositories
                                 {
                                     Id = reader.GetInt32(reader.GetOrdinal("UserTypeId")),
                                     Name = reader.GetString(reader.GetOrdinal("UserTypeName"))
-                                }
+                                },
                             },
                             BusinessId = reader.GetInt32(reader.GetOrdinal("BusinessId")),
                             Business = new Business()
                             {
-                                Id = DbUtils.GetInt(reader, "BusinessId"),
-                                EstablishmentName = DbUtils.GetString(reader, "EstablishmentName"),
-                                Bio = DbUtils.GetString(reader, "Bio"),
-                                Address = DbUtils.GetString(reader, "Address"),
-                                HoursOfOperation = DbUtils.GetString(reader, "HoursOfOperation"),
-                                Phone = DbUtils.GetString(reader, "Phone"),
-                                UserProfileId = DbUtils.GetInt(reader, "UserProfileId"),
-                                CategoryId = DbUtils.GetInt(reader, "CategoryId"),
+                                Id = reader.GetInt32(reader.GetOrdinal("BusinessId")),
+                                EstablishmentName = reader.GetString(reader.GetOrdinal("EstablishmentName")),
+                                Bio = reader.GetString(reader.GetOrdinal("Bio")),
+                                Address = reader.GetString(reader.GetOrdinal("Address")),
+                                HoursOfOperation = reader.GetString(reader.GetOrdinal("HoursOfOperation")),
+                                Phone = reader.GetString(reader.GetOrdinal("Phone")),
+                                CategoryId = reader.GetInt32(reader.GetOrdinal("CategoryId")),
                                 Category = new Category()
                                 {
-                                    Id = DbUtils.GetInt(reader, "CategoryId"),
-                                    Name = DbUtils.GetString(reader, "CatName")
-                                }
+                                    Id = reader.GetInt32(reader.GetOrdinal("CategoryId")),
+                                    Name = reader.GetString(reader.GetOrdinal("Name"))
+                                },
                             }
                         
                     });

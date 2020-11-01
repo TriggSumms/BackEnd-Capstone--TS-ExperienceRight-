@@ -222,6 +222,76 @@ namespace ExperienceRight_BackCapTS.Repositories
         }
 
 
+        //public List<Business> GetAllBusinessesANDREVIEWS(int id)
+        //{
+        //    using (var conn = Connection)
+        //    {
+        //        conn.Open();
+        //        using (var cmd = conn.CreateCommand())
+        //        {
+        //            cmd.CommandText = @"
+
+        //                  SELECT
+        //                      r.Id, r.Title, r.Content, 
+        //                      r.CreateDateTime, r.DateOfExperience, r.Rating,
+        //                      r.FrequencyId, r.UserProfileId, r.BusinessId,
+                              
+                                
+        //                      b.EstablishmentName, b.Bio, b.Address, b.HoursOfOperation, b.Phone, b.UserProfileId, b.CategoryId
+                              
+                             
+
+        //                 FROM Business b
+                              
+        //                      LEFT JOIN Review r ON  b.id = r.BusinessId";
+
+
+
+        //            DbUtils.AddParameter(cmd, "@id", id);
+        //            //DbUtils.AddParameter(cmd, "@userProfileId", userProfileId);
+        //            var reader = cmd.ExecuteReader();
+
+        //            var businessz = new List<Business>();
+
+        //            while (reader.Read())
+        //            {
+        //                businessz.Add(new Business()
+        //                {
+        //                    Id = reader.GetInt32(reader.GetOrdinal("Id")),
+        //                    EstablishmentName = reader.GetString(reader.GetOrdinal("EstablishmentName")),
+        //                    Bio = reader.GetString(reader.GetOrdinal("Bio")),
+        //                    Address = reader.GetString(reader.GetOrdinal("Address")),
+        //                    HoursOfOperation = reader.GetString(reader.GetOrdinal("HoursOfOperation")),
+        //                    Phone = reader.GetString(reader.GetOrdinal("Phone")),
+        //                    CategoryId = reader.GetInt32(reader.GetOrdinal("CategoryId")),
+        //                    Category = new Category()
+        //                    {
+        //                        Id = reader.GetInt32(reader.GetOrdinal("CategoryId")),
+        //                        Name = reader.GetString(reader.GetOrdinal("Name"))
+        //                    },
+        //                    UserProfileId = reader.GetInt32(reader.GetOrdinal("UserProfileId")),
+        //                    Id = reader.GetInt32(reader.GetOrdinal("Id")),
+        //                    Title = reader.GetString(reader.GetOrdinal("Title")),
+        //                    Content = reader.GetString(reader.GetOrdinal("Content")),
+        //                    CreateDateTime = reader.GetDateTime(reader.GetOrdinal("CreateDateTime")),
+        //                    DateOfExperience = DbUtils.GetNullableDateTime(reader, "DateOfExperience"),
+        //                    Rating = reader.GetInt32(reader.GetOrdinal("Rating")),
+        //                    FrequencyId = reader.GetInt32(reader.GetOrdinal("FrequencyId")),
+        //                    UserProfileId = reader.GetInt32(reader.GetOrdinal("UserProfileId")),
+        //                    BusinessId = reader.GetInt32(reader.GetOrdinal("BusinessId"))
+
+        //                });
+        //            }
+
+
+        //            reader.Close();
+
+        //            return businessz;
+        //        }
+        //    };
+        //}
+
+
 
 
         //public List<Review> GetBusinessForSpecificUser(int userProfileId)

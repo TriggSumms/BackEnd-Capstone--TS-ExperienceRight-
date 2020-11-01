@@ -6,7 +6,6 @@ import { Link, useHistory } from "react-router-dom";
 
 
 export default function ProfileReviewList() {
-  // const userProfile = JSON.parse(sessionStorage.getItem("userProfile"))
   const { categories, getAllCategories } = useContext(BusinessContext);
   const { reviews, getAllReviews, searchReviews } = useContext(ReviewContext);
   const sessionUser = JSON.parse(sessionStorage.getItem("userProfile"));
@@ -14,6 +13,7 @@ export default function ProfileReviewList() {
   const [filteredReviews, setReviews] = useState([]);
   const [searchedTerm, setTerm] = useState("");
   const [categorySelected, setCategorySelected] = useState("");
+  const [titleSelected, setTitleSelected] = useState("");
 
 
 
@@ -45,11 +45,17 @@ export default function ProfileReviewList() {
 
 
   const filterAllReviews = (event) => {
-    const filteredReviewsByCategory = reviews.filter(review => review.categoryId === parseInt(event.target.value))
+    const filteredReviewsByCategory = reviews.filter(review => review.business.categoryId === parseInt(event.target.value))
     setReviews(filteredReviewsByCategory)
     setCategorySelected(parseInt(event.target.value))
   }
-//END SET FOR FILTER METHOD
+
+  const filterAllReviewsVIATitle = (event) => {
+    const filteredReviewsByTitle = reviews.filter(review => review.title === event.target.value)
+    setReviews(filteredReviewsByTitle)
+    setTitleSelected(event.target.value)
+  }
+  //END SET FOR FILTER METHOD
 
 
 
@@ -62,9 +68,7 @@ export default function ProfileReviewList() {
             <div className="postHeaderDetails">
               <div>
               </div>
-
             </div>
-
           </div>
           <div className="post-container">
             <table className="postTable">
@@ -75,27 +79,34 @@ export default function ProfileReviewList() {
              </th>
                   <th>
                     <em>
-                  <button onClick={() => { setReviews(reviews); setCategorySelected("")}}><img src="https://img.icons8.com/officel/20/000000/clear-search.png" /></button>
-                  </em> <em><select className="float-right" onClick={filterAllReviews} >
-                      <option > Choose a Business Sector</option>
-                      {categories.map(category =>
-                        <option checked={categorySelected === category.id} value={category.id}>
-                          {category.name}
-                        </option>
-                      )}
-                    </select>
+                      <select className="float-right" onClick={filterAllReviews} >
+                        <option > Choose a Business Sector</option>
+                        {categories.map(category =>
+                          <option checked={categorySelected === category.id} value={category.id}>
+                            {category.name}
+                          </option>
+                        )}
+                      </select>
                     </em>
+                  </th>
+                  <th>
+                    <input onChange={filterAllReviewsVIATitle} checked={titleSelected === reviews.title} value={reviews.title} type="text" placeholder="Search via Title..." onKeyUp={
+                      (event) => {
+                        const searchTerm = event.target.value
+                        setTerm(searchTerm)
+                      }
+                    } />
+                  </th>
+                  <th>
+                  <button onClick={() => { setReviews(reviews); setCategorySelected("") ; setTitleSelected("") }}><img src="https://img.icons8.com/officel/20/000000/clear-search.png" /></button>
                   </th>
                 </tr>
               </thead>
-              {/* {reviews.map(r =>
-                <Review key={r.id} review={r} />
-              )} */}
-                              <div className="entries">
-                  {filteredReviews.map(review => {
-                    return <Review key={review.id} review={review} categories={categories} />;
-                  })}
-                </div>
+              <div className="entries">
+                {filteredReviews.map(review => {
+                  return <Review key={review.id} review={review} categories={categories} title={review.title} />;
+                })}
+              </div>
             </table>
           </div>
         </div>

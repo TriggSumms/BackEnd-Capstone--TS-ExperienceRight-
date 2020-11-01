@@ -1,27 +1,29 @@
 import React, { useContext, useEffect, useState, useRef } from "react";
 import Business from "./Business";
 import { BusinessContext } from "../../providers/BusinessProvider";
-import { Link, useHistory } from "react-router-dom";
+import { ReviewContext } from "../../providers/ReviewProvider";
+import { Link, useHistory, useParams } from "react-router-dom";
 import { Button, Form, FormGroup, Label, Input, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 
 export default function BusinessList() {
-  // const { posts, getAllPosts } = useContext(PostContext);
-  // const userProfile = JSON.parse(sessionStorage.getItem("userProfile"))
-  const { businesses, getAllBusinesses, searchBusinesses, getBusinessById, categories, getAllCategories, getAllBusinessesByCategory } = useContext(BusinessContext);
+  const { business, businesses, getAllBusinesses, searchBusinesses, getBusinessById, categories, getAllCategories, getAllBusinessesByCategory } = useContext(BusinessContext);
   const sessionUser = JSON.parse(sessionStorage.getItem("userProfile"));
   const [categoryId, setCategoryId] = useState();
-  //const [selectedCategoryId, setBusinesszByCat] = useState();
   const [filteredBusinesses, setBusinesses] = useState([]);
   const [searchedTerm, setTerm] = useState("");
   const [categorySelected, setCategorySelected] = useState("");
 
+  // const { reviews, reviewz, getAllReviewsforBusiness, getAllReviews } = useContext(ReviewContext);
+  // const [review, setReview] = useState({});
+  // const { businessId} = useParams();
 
 
 
 
-    //START BULK GRAB
-    // const parsedCat = parseInt(categoryId);
-    // categoryId = parsedCat;
+
+  //START BULKGRAB
+  // const parsedCat = parseInt(categoryId);
+  // categoryId = parsedCat;
   const handleChange = e => {
     const stateToChange = { ...categories };
     stateToChange[e.target.id] = e.target.value;
@@ -35,16 +37,41 @@ export default function BusinessList() {
 
   useEffect(() => {
     getAllCategories()
-
   }, []);
-//END BULK GRAB
+  //END BULK GRAB
+
+
+  // useEffect(() => {
+  //   getAllReviews()
+  // }, [businessId]);
+
+  // console.log(reviews)
+  // // useEffect(() => {
+  // //   getBusinessById(businessId)
+  // // }, []);
+
+
+  // useEffect(() => {
+  //   getAllReviewsforBusiness(businessId);
+  // }, []);
 
 
 
 
 
 
-//BEGIN SET FOR FILTER METHOD
+  // const reviewTotalRatingAvg = reviews.map(y => y.businessId).Length
+  // let sum = 0;
+  // for (let num of reviewTotalRatingAvg) {
+  //   sum = sum + num
+  // }
+  // console.log(reviewTotalRatingAvg)
+
+
+
+
+
+  //BEGIN SET FOR FILTER METHOD
   useEffect(() => {
     setBusinesses(businesses)
   }, [businesses])
@@ -59,7 +86,7 @@ export default function BusinessList() {
     setBusinesses(filteredBusinessesByCategory)
     setCategorySelected(parseInt(event.target.value))
   }
-//END SET FOR FILTER METHOD
+  //END SET FOR FILTER METHOD
 
 
 
@@ -89,17 +116,17 @@ export default function BusinessList() {
               <thead className="postTableHeader">
                 <tr>
                   <th className="postTitle-header">
-                     Business List
+                    Business List
                 </th>
                   <th className="postUserName-header">
                   </th>
                   <th className="postCategory-header">
                   </th>
                   <th className="postDate-header">
-                  
+
+             
                     <em>
-                  <button onClick={() => { setBusinesses(businesses); setCategorySelected("")}}><img src="https://img.icons8.com/officel/20/000000/clear-search.png" /></button>
-                  </em> <em><select className="float-right" onClick={filterAllBusinesses} >
+                      <select className="float-right" onClick={filterAllBusinesses} >
                       <option > Choose a Business Sector</option>
                       {categories.map(category =>
                         <option checked={categorySelected === category.id} value={category.id}>
@@ -110,7 +137,11 @@ export default function BusinessList() {
                     </em>
 
                   </th>
-                  <th></th>
+                  <th>
+                           <em>
+                      <button onClick={() => { setBusinesses(businesses); setCategorySelected("") }}><img src="https://img.icons8.com/officel/20/000000/clear-search.png" /></button>
+                    </em> 
+                  </th>
                 </tr>
               </thead>
               <div className="BusinessCardsForList">

@@ -4,6 +4,9 @@ import { BusinessContext } from "../../providers/BusinessProvider";
 //import { FrequencyContext } from "../../providers/FrequencyProvider";
 import { useHistory, useParams, Link } from "react-router-dom";
 import { Card, CardBody, Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import Stars from 'react-stars'
+import { render } from 'react-dom'
+
 
 export default function ReviewEditForm() {
 
@@ -59,6 +62,29 @@ export default function ReviewEditForm() {
 
 
 
+        //START RATING REVIEW INPUT
+    // const onChange = event => setRating(parseInt(event.target.value));
+
+    const parsedRating = parseInt(rating);
+    review.rating = parsedRating;
+
+    
+    const formStarRating = {
+        size: 60,
+        count: 10,
+        char: '',
+        color1: '#ff9900',
+        color2: '#6599ff',
+        edit: true,
+        // half: false,
+        // onChange: e => setRating(parseInt(e.target.value)),
+        onChange: parsedRating => {
+            // console.log(`Example 2: new value is ${newValue}`)
+            setRating(parsedRating);
+        }
+    }
+    //END RATING REVIEW
+
 
 
 
@@ -90,9 +116,13 @@ export default function ReviewEditForm() {
 
 
 
+
     // if (!editedReview) {
     //     return null
     // }
+
+
+    
 
     return (
         <>
@@ -110,7 +140,6 @@ export default function ReviewEditForm() {
                                         type="hidden"
                                         value={review.id}
                                     />
-
                                 </FormGroup>
                                 <Label for="title">Edit your Review: </Label>
                                 {/* This form has been hidden and set to default */}
@@ -126,8 +155,6 @@ export default function ReviewEditForm() {
                                             </option>
                                     )}
                                 </select>
-
-
                                 <FormGroup>
                                     <Label for="title">Title</Label>
                                     <Input
@@ -178,7 +205,10 @@ export default function ReviewEditForm() {
                                         onChange={handleFieldChange}
                                     />
                                 </FormGroup>
-                                <FormGroup>
+                                <Label for="rating">Rate Your Experience</Label>
+
+                                <Stars {...formStarRating} />
+                                {/* <FormGroup>
                                     <Label for="rating">Rate the Experience</Label>
                                     <Input
                                         type="number"
@@ -188,7 +218,7 @@ export default function ReviewEditForm() {
                                         name="rating"
                                         onChange={e => setRating(parseInt(e.target.value))}
                                     />
-                                </FormGroup>
+                                </FormGroup> */}
                             </Form>
 
                             <div>

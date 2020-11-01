@@ -7,6 +7,7 @@ export const ReviewProvider = (props) => {
   const apiUrl = "/api/review";
   const { getToken } = useContext(UserProfileContext);
   const [reviews, setReviews] = useState([]);
+ // const [reviewz, setReviewz] = useState({});
   const [review, setReview] = useState({});
   const [frequencies, setFrequencies] = useState([]);
 
@@ -131,7 +132,7 @@ export const ReviewProvider = (props) => {
 
   return (
     <ReviewContext.Provider value={{
-     frequencies, review, reviews, getAllReviews, getById, addReview, updateReview, deleteReview, setReview, getAllFrequencies,  getAllReviewsforBusiness, getAllReviewsforUserList, searchReviews
+    frequencies, review, reviews, getAllReviews, getById, addReview, updateReview, deleteReview, setReview, getAllFrequencies,  getAllReviewsforBusiness, getAllReviewsforUserList, searchReviews
     }}>
       {props.children}
     </ReviewContext.Provider>

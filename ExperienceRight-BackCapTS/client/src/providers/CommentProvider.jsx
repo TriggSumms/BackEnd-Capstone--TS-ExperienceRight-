@@ -16,6 +16,17 @@ export function CommentProvider(props) {
 
     //List all the Action Methods in Code Blocks Below
     //Get all Comments by id,must match API. Makes fetch calls to the API.
+    const getAllComments = () =>
+    getToken().then((token) =>
+        fetch(apiUrl + "/review/", {
+            method: "GET",
+            headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-type": "application/json"
+            }
+        }).then(resp => resp.json())
+            .then(setComments));
+       
     const getAllCommentsByReviewId = (id) =>
         getToken().then((token) =>
             fetch(apiUrl + "/review/" + id, {
@@ -107,7 +118,7 @@ export function CommentProvider(props) {
     ///Must return your catalog of actions
     return (
 
-        <CommentContext.Provider value={{ CommentAlertONComment, getCommentById, comment, setComment, comments, getAllsmallCommentsByReviewId, getAllCommentsByReviewId, addComment, editComment, deleteComment, getCommentByIdFORDELETE }}>
+        <CommentContext.Provider value={{ CommentAlertONComment, getCommentById, comment, setComment, comments, getAllsmallCommentsByReviewId, getAllComments, getAllCommentsByReviewId, addComment, editComment, deleteComment, getCommentByIdFORDELETE }}>
             {props.children}
         </CommentContext.Provider>
     );

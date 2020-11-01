@@ -5,15 +5,19 @@ import { ReviewContext } from "../../providers/ReviewProvider";
 import { useParams, Link, useHistory } from "react-router-dom";
 import { Card, CardBody, Button, CardHeader } from "reactstrap";
 import "./BusinessProfile.scss";
+import ReactStars from 'react-stars'
+import { render } from 'react-dom'
 
 
 export default function BusinessProfileDetails() {
-  // const { posts, getAllPosts } = useContext(PostContext);
-  // const userProfile = JSON.parse(sessionStorage.getItem("userProfile"))
-  const { reviews, getAllReviewsforBusiness } = useContext(ReviewContext);
+  const { reviews, reviewz, getAllReviewsforBusiness } = useContext(ReviewContext);
   const sessionUser = JSON.parse(sessionStorage.getItem("userProfile"));
   const { business, getBusinessById } = useContext(BusinessContext);
+  const [review, setReview] = useState({});
   const { id } = useParams();
+
+  const [rating, setRating] = useState();
+
 
 
   console.log("whats in sessionstorage", sessionStorage)
@@ -28,20 +32,58 @@ export default function BusinessProfileDetails() {
   }, []);
 
 
+
+
+
+
+  //START RATING AVERAGE
+
+  const reviewTotalRatingAvg = reviews.map(y => y.rating)
+  let sum = 0;
+  for (let num of reviewTotalRatingAvg) {
+    sum = sum + num
+  }
+  const averageRating = sum / reviews.length
+  console.log("finalavg", averageRating)
+
+  //Trial Examples, not needed....*overcomplicated the issue
+
+  // let sum = reviewzz.reduce(function(prev, current) {
+  //   return prev + +current.rating
+  // });
+  // const sum = reviewzz.reduce((totalRatings, reviewzz) => totalRatings + reviewzz.rating, 0)
+  // const sum = reviewzz.reduce((totalRatings, reviewzz) => totalRatings + parseInt(reviewzz.rating), 0)
+
+//Physical Representation Below
+
+  const parsedRating = parseInt(rating);
+  review.rating = parsedRating;
+
+  const starRepresentation = {
+      size: 35,
+      count: 10,
+      //char: '',
+      // color1: '#ff9900',
+      // color2: '#6599ff',
+      edit: false,
+      half: false
+  }
+  //END RATING AVERAGE
+
+
+
+  
+
   if (!business || !business.userProfile) {
     return null
   }
-
-
-
-  console.log(business.rating)
 
   return (
 
     <>
 
       <section>
-        
+
         <div class="postCard">
           <div></div>
           <div className="postHeader">
@@ -71,34 +113,30 @@ export default function BusinessProfileDetails() {
                     <div>
                       <span class="prac-area"> XR Member Since: {new Intl.DateTimeFormat('en-US').format(new Date(business.userProfile.createDateTime))}</span>
                     </div>
-                  </div>
-
+                 <ReactStars {...starRepresentation} value= {averageRating} /> </div>
+                  
                 </div>
                 <div class="actions">
                   <div class="ratings">
-                    <span class="rating-control">
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star-half-o"></i>
-                      <i class="fa fa-star-o"></i>
-                      <i class="fa fa-star-o"></i>
-                    </span>
-                    <span class="rating-count">000 Ratings</span>
+{/* <ReactStars {...starRepresentation} value= {averageRating} /> */}
+                    <span class="rating-count"></span>
+                    <Link to={`/businesses/edit/${id}`}><img src="https://img.icons8.com/ultraviolet/30/000000/edit-property.png" /></Link>
                   </div>
                   <div class="comments">
-                    <span class="comment-count"><strong>{reviews.length}</strong> Review</span>
+                    <span class="comment-count"><strong>{reviews.length}</strong> Reviews</span>
                   </div>
                   {/* <div class="consultation">
 				<span class="fee"><strong>34K</strong>Followers</span>
 			</div> */}
+      
                   <div class="appo">
-                    <a class="btn"><Link class="btn" to={`/reviews/add/${business.id}`}>Add a Review</Link></a>
+                    <a class="btn"><Link class="btn" to={`/reviews/add/${business.id}`}>Add Review</Link></a>
                   </div>
                 </div>
                 <div class="locations">
-                <Link to={`/businesses/edit/${id}`}><img src="https://img.icons8.com/ultraviolet/30/000000/edit-property.png"/></Link>
-               
-                 <div>Business Bio: {business.bio}</div> 
+                  
+
+                  <div>Business Bio: {business.bio}</div>
                 </div>
               </div>
             </div>
