@@ -4,6 +4,11 @@ import { BusinessContext } from "../../providers/BusinessProvider";
 import { ReviewContext } from "../../providers/ReviewProvider";
 import { Link, useHistory, useParams } from "react-router-dom";
 import { Button, Form, FormGroup, Label, Input, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
+import "./BusinessList.scss";
+
+
+
+
 
 export default function BusinessList() {
   const { business, businesses, getAllBusinesses, searchBusinesses, getBusinessById, categories, getAllCategories, getAllBusinessesByCategory } = useContext(BusinessContext);
@@ -146,25 +151,15 @@ export default function BusinessList() {
                   </th>
                 </tr>
               </thead>
-              <div className="BusinessCardsForList">
-                {/* {businesses.map(b =>
-                <Business key={b.id} business={b} />
-              )} */}
-                {/* {businesses.filter(b => {
-                return businesses.categories.some(category => {
-                  return category.id === selectedCategoryId;
-                });
-              })} */}
-
-                <div className="entries">
+              <div className= "businessPond">
                   {filteredBusinesses.map(business => {
-                    return <Business key={business.id} business={business} categories={categories}  />;
+                    return <Business key={business.id} business={business} categories={categories} />;
                   })}
-                </div>
-              </div>
+               </div>
+ 
             </table>
           </div>
-        </div>
+        </div>               
       </section>
 
     </>

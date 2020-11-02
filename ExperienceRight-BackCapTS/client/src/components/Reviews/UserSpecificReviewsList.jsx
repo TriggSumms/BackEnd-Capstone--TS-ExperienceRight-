@@ -46,7 +46,7 @@ export default function UserSpecificReviewsList() {
                                     </div>
                                     <header class="profile-header group" id="profile-header">
                                         <div class="profile-header-content">
-                                            <a href="/netsi1964/settings/profile/" class="button button-outline edit-profile-link" id="edit-profile-link">Edit Profile</a>
+                                            <a href="/netsi1964/settings/profile/" class="button button-outline edit-profile-link" id="edit-profile-link"></a>
                                             <div class="profile-name" id="profile-name">
                                                 <h1 id="profile-name-header">
                                                     
@@ -54,7 +54,7 @@ export default function UserSpecificReviewsList() {
                                                     <br></br>{(JSON.parse(userProfile).firstName)}
                                                     <span class="profile-badges" id="profile-badges">
                                                         <a id="profile-badge-pro" href="/helloreviewer" class="badge badge-pro" title="Member Since October 11, 2012">
-                                                            ExperienceRight</a>
+                                                           to  ExperienceRight</a>
                                                     </span>
                                                 </h1>
                                                 <div class="profile-username-area" id="profile-username-area">

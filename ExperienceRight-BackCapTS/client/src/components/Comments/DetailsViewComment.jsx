@@ -1,7 +1,8 @@
 import React from "react";
 import { Card, CardBody, Button, CardHeader } from "reactstrap";
 import { useHistory, useParams } from "react-router-dom";
-import "./DetailsViewCommentz.scss";
+import "./DetailsViewCommentz.css";
+
 
 
 
@@ -15,61 +16,65 @@ export default function DetailsViewComment ({ DetailsViewComment }) {
 if (sessionUser.userTypeId === 2) {
     return (
       <>
-        {/* <Card border="dark" className="border border-primary m-3">
-            <CardHeader className="">
+<div class="comments-container">
+		<ul id="comments-list" class="comments-list">
+			<li>
+				<div class="comment-main-level">
+					<div class="comment-avatar"><img src={DetailsViewComment.userProfile.profileImageLocation} alt=""></img>
+                    </div>
+					<div class="comment-box">
+						<div class="comment-head">
+							<h6 class="comment-name by-author">{DetailsViewComment.userProfile.firstName}</h6>
+							<span>{new Intl.DateTimeFormat('en-US').format(new Date(DetailsViewComment.createDateTime))}</span>
+							<i class="fa fa-reply"></i>
+							<i class="fa fa-heart"></i>
+						</div>
+						<div class="comment-content">
+                        {DetailsViewComment.content}
+						</div>
+					</div>
+				</div>
 
-                <div className="justify-content-between mt-10 mb-0">
-                    <p className="float-left">Business Owner's Name: {DetailsViewComment.userProfile.displayName}</p>
-                    <p className="float-right">Posted on: {new Intl.DateTimeFormat('en-US').format(new Date(DetailsViewComment.createDateTime))}</p>
-                </div>
-            </CardHeader>
-            <CardBody className="text-center">
-                {DetailsViewComment.content}
-            </CardBody>
-            <div>
-            </div>
-        </Card> */}
+			</li>
+
+		</ul>
+	</div>
       </>
     );
   }
   else if (sessionUser.userTypeId === 1) {
     return (
       <>
-        {/* <Card border="dark" className="border border-primary m-3">
-            <CardHeader className="">
+<div class="comments-container">
+		<ul id="comments-list" class="comments-list">
+			<li>
+				<div class="comment-main-level">
+					<div class="comment-avatar"><img src={DetailsViewComment.userProfile.profileImageLocation} alt=""></img>
+                    </div>
+					<div class="comment-box">
+						<div class="comment-head">
+							<h6 class="comment-name by-author">{DetailsViewComment.userProfile.firstName}</h6>
+							<span>{new Intl.DateTimeFormat('en-US').format(new Date(DetailsViewComment.createDateTime))}</span>
+							<i class="fa fa-reply"></i>
 
-                <div className="justify-content-between mt-10 mb-0">
-                    <p className="float-left">Business Owner's Name: {DetailsViewComment.userProfile.displayName}</p>
-                    <p className="float-right">Posted on: {new Intl.DateTimeFormat('en-US').format(new Date(DetailsViewComment.createDateTime))}</p>
-                </div>
-            </CardHeader>
-            <CardBody className="text-center">
-                {DetailsViewComment.content}
-            </CardBody>
-            <div>
-            </div>
-        </Card> */}
-
-<div class="comments">
-		<div class="comment-wrap">
-				<div class="photo">
-						{/* <div class="avatar" style="background-image: url('https://s3.amazonaws.com/uifaces/faces/twitter/felipenogs/128.jpg')"></div> */}
-				</div>
-				<div class="comment-block">
-						<p class="comment-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iusto temporibus iste nostrum dolorem natus recusandae incidunt voluptatum. Eligendi voluptatum ducimus architecto tempore, quaerat explicabo veniam fuga corporis totam.</p>
-						<div class="bottom-comment">
-								<div class="comment-date">Aug 23, 2014 @ 10:32 AM</div>
-								<ul class="comment-actions">
-										<li class="complain">Complain</li>
-										<li class="reply">Reply</li>
-								</ul>
+							<i class="fa fa-heart"></i>
 						</div>
+						<div class="comment-content">
+                        {DetailsViewComment.content}
+						</div>
+					</div>
+                    
 				</div>
-		</div>
-</div>
+                {sessionUser.userProfileId == DetailsViewComment.userProfileId ? "" :
+                    <>
+                        <Button size="sm" variant="outline-primary" onClick={() => history.push(`/comments/edit/${DetailsViewComment.id}`)}>Edit </Button>{' '}
+                        <Button size="sm" variant="outline-primary" onClick={() => history.push(`/review/${reviewId}/comments/delete/${DetailsViewComment.id}`)}>Delete</Button>{' '}
+                    </>
+                }
+			</li>
 
-
-
+		</ul>
+	</div>
       </>
     );
   }

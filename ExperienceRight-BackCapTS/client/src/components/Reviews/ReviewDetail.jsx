@@ -111,7 +111,7 @@ export default function ReviewDetail() {
                             </section>
                         <hr />
                         <section className="row justify-content-center">
-
+                        <h1>Business Response: </h1>
                             {comments.map(c => {
                                 return <DetailsViewComment key={c.id} DetailsViewComment={c} />
                             })}
@@ -171,18 +171,16 @@ export default function ReviewDetail() {
                         <hr />
 
                         <section className="row justify-content-center">
+                        <h1>Business Response: </h1>
+                        </section>
+                        <section className="row justify-content-center">
+                             {/* {sessionUser.businessId === review.businessId ? "" :<> */}
+                             <a href={`/review/${review.id}/comments`} className="btn btn-outline-primary mx-1">View & Write Comments</a>
+                        <Link to={`/businesses/details/${review.businessId}`}><Button type="button" color="warning">Back to Your Profile</Button></Link>
                             {comments.map(c => {
                                 return <DetailsViewComment key={c.id} DetailsViewComment={c} />
                             })}
                         </section>
-
-
-                        {/* {sessionUser.businessId === review.businessId ? "" :
-                            <> */}
-                        <a href={`/review/${review.id}/comments`} className="btn btn-outline-primary mx-1">View & Write Comments</a>
-                        <Link to={`/businesses/details/${review.businessId}`}><Button type="button" color="warning">Back to Your Profile</Button></Link>
-                        {/* </>
-                        } */}
                     </div>
                 </div>
             </>
@@ -232,7 +230,7 @@ export default function ReviewDetail() {
                         </section>
                         <hr />
                         <section className="row justify-content-center">
-
+                        <h1>Business Response: </h1>
                             {comments.map(c => {
                                 return <DetailsViewComment key={c.id} DetailsViewComment={c} />
                             })}

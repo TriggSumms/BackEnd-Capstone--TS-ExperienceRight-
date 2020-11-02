@@ -4,7 +4,7 @@ import { BusinessContext } from "../../providers/BusinessProvider";
 import { ReviewContext } from "../../providers/ReviewProvider";
 import { useParams, Link, useHistory } from "react-router-dom";
 import { Card, CardBody, Button, CardHeader } from "reactstrap";
-import "./BusinessProfile.scss";
+import "./BusinessList.scss";
 
 
 export default function Business({ business }) {
@@ -72,12 +72,12 @@ export default function Business({ business }) {
 
   return (
     <>
-      <div class="doctor-card">
+      <div class="doctor-card2">
         <div className="">
-          <Link className="authorBtn" style={{ textDecoration: 'none' }} to={`/businesses/details/${business.id}`}>
+          {/* <Link className="authorBtn" style={{ textDecoration: 'none' }} to={`/businesses/details/${business.id}`}>
 
             <img className="postAuthorBtn" src="https://res.cloudinary.com/dhduglm4j/image/upload/v1603121574/icons/eye_rimwzo.png" alt="details" />
-          </Link>
+          </Link> */}
           {/* <Link className="authorBtn" style={{ textDecoration: 'none' }} to={`/posts/edit/${post.id}`}>
               <img className="postAuthorBtn" src="https://res.cloudinary.com/dhduglm4j/image/upload/v1603121858/icons/edit_oeexa4.png"/>
             </Link>
@@ -86,14 +86,14 @@ export default function Business({ business }) {
             </Link>  */}
         </div>
 
-        <div class="info">
-          <div class="avatar">
+        <div class="info2">
+          <div class="avatar2">
             <img className="imageBackground" src={business.userProfile.profileImageLocation} alt="image" />
           </div>
           <div class="details">
             <div class="name">{business.establishmentName}</div>
 
-            <div class="meta-info">
+            <div class="meta-info2">
               <span class="sp">{business.category.name}</span>
               <div>
                 <span class="exp-yr">Hours of Business: {business.hoursOfOperation}</span>
@@ -129,7 +129,7 @@ export default function Business({ business }) {
              <span class="comment-count"><strong>{review.business.length}</strong> Reviews</span>
           </div> */}
           <div class="appo">
-            <a href={`/businesses/details/${business.id}`} className="btn btn-outline-primary mx-1">View Business Profile</a>
+            <a href={`/businesses/details/${business.id}`} className="btn btn-outline-primary  mx-1">View Business Profile</a>
           </div>
         </div>
         {/* <div class="locations">

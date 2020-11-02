@@ -3,7 +3,7 @@ import {Button } from "reactstrap";
 import { useParams, Link, useHistory } from "react-router-dom";
 import { UserProfileContext } from "../providers/UserProfileProvider";
 import { BusinessContext } from "../providers/BusinessProvider";
-
+import "./Hello.scss";
 
 export default function HelloBusiness() {
   const { userProfile, getUserId } = useContext(UserProfileContext);
@@ -26,32 +26,37 @@ export default function HelloBusiness() {
 
 
   return (
+
     <span style={{
       position: "fixed",
       left: 0,
       right: 0,
       top: "50%",
-      marginTop: "-0.5rem",
+      marginTop: "-3.5rem",
       textAlign: "center",
-      fontSize: "15px",
+      fontSize: "12px",
     }}>
 
-    Hello! Welcome to Experience Right. As a user and pridefull Business Owner, you have agreed on creating transparency between your consumers and your business. Kudos, Experience Right is here to assist with fostering that connection! 
-    <br></br>Heres the deal,<br></br>
-   Feel Free to read your reviews and respond back to your users reviews on your profile page (*via the comments option). 
-   <br></br>Lastly, keep your businesses profile as acurate as possible so your customers can keep utilizing your services!
-    <br></br>
-    
-    {/* <Link to={`/businesses/details/${businessId}`}><Button type="button" color="warning">Get Started</Button></Link></span> */}
-    {/* <>
-     <Button onClick={() => history.push(`/businesses/details/${businessId}`)}>Get Started </Button>
-     </> */}
-     
-     <Button>
-       
-     <Link className="primary-btn" style={{ textDecoration: 'none' }} to={`/businesses/details/${sessionUser.id}`}>GET STARTED</Link>
-     {/* <Link className="primary-btn" style={{ textDecoration: 'none' }} to={`/businesses/details/${sessionUser.userProfile.buisnessId}`}>GET STARTED</Link> */}
-     </Button>
-     </span>
+<div class="splash">
+  <div class="splash_logo">
+ <img class="movethePic" src="https://res.cloudinary.com/triggsumms/image/upload/v1604285119/kfm7cqjg5hh5o3fcdwlb.gif" alt="ER Logo" />
+
+  </div>
+  <div class="splash_svg">
+  </div>
+  <div class="splash_minimize">
+  </div>
+</div>
+<div class="text">
+  <p> Hello! Welcome to Experience Right. As a user and pridefull Business Owner, you have agreed on creating transparency between your consumers and your business. Kudos, Experience Right is here to assist with fostering that connection! </p>
+    <p> Heres the deal,</p>
+  <p> Feel Free to read your reviews and respond back to your users reviews on your profile page (*via the comments option). </p>
+  <p>Lastly, keep your businesses profile as acurate as possible so your customers can keep utilizing your services! </p>
+  <button><Link className="primary-btn" style={{ textDecoration: 'none' }} to={`/businesses/details/${sessionUser.id}`}>Get Started</Link></button>
+</div>
+
+</span> 
+
+
   );
 }

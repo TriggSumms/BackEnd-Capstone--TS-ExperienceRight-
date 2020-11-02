@@ -6,24 +6,26 @@ import { Card, CardBody, Button } from "reactstrap";
 import { Link, useHistory, useParams } from "react-router-dom";
 import ReactStars from 'react-stars'
 import { render } from 'react-dom'
+import CommentAlertONComment from "../Comments/CommentAlertONReview";
 
 
 export default function Review({ review }) {
   const sessionUser = JSON.parse(sessionStorage.getItem("userProfile"));
-  const defaultImage = 'https://res.cloudinary.com/triggsumms/image/upload/v1604257859/qgozormcgwwr80iyllqr.png'
-  //  'https://res.cloudinary.com/triggsumms/image/upload/v1604259136/abcxlwlas8lakm6bl7kc.png' 
   const { updateReview, getAllReviews } = useContext(ReviewContext);
   const { business } = useContext(BusinessContext);
   const { comments, getAllComments, getAllCommentsByReviewId } = useContext(CommentContext);
   const history = useHistory();
-  //const { id } = useParams();
-
+  let RandomProfileImage = ['https://res.cloudinary.com/triggsumms/image/upload/v1604257859/qgozormcgwwr80iyllqr.png', 'https://res.cloudinary.com/triggsumms/image/upload/v1604259136/abcxlwlas8lakm6bl7kc.png', 'https://res.cloudinary.com/triggsumms/image/upload/v1604297221/hobklkiykqpk98xlitiq.png'];
+  let randomProfiles = RandomProfileImage[Math.floor(Math.random() * RandomProfileImage.length)];
 
 
   //   useEffect(() => {
 
   //      getAllCommentsByReviewId(review.id)
   // }, [])
+
+
+
 
 
 
@@ -67,8 +69,8 @@ export default function Review({ review }) {
               <div className="authorPostDetails">
                 <div className="authorPostItems">
                   <div className="authorPostHeaderLeft">
-                 
-                    <h5 className="apht"> <img className="reviewAvatar" src={defaultImage} alt="image" />Title: {review.title}</h5>
+                  
+                    <h5 className="apht"> <img className="reviewAvatar" src={randomProfiles} alt="image" />Title: {review.title}</h5>
                     <i>Business Reviewed: {review.business.establishmentName}</i>
                     <br></br>
                     <em className="ALittleSpaceBetweenIcons"><img src="https://img.icons8.com/windows/22/000000/user-lock--v1.png" /></em>
@@ -116,7 +118,7 @@ export default function Review({ review }) {
             <div className="authorPostDetails">
               <div className="authorPostItems">
                 <div className="authorPostHeaderLeft">
-                <h5 className="apht"> <img className="reviewAvatar" src={defaultImage} alt="image" />Title: {review.title}</h5>
+                <h5 className="apht"> <img className="reviewAvatar" src={randomProfiles} alt="image" />Title: {review.title}</h5>
                   <i>Business Reviewed: {review.business.establishmentName}</i>
                   <br></br>
                   <em className="ALittleSpaceBetweenIcons"><img src="https://img.icons8.com/windows/22/000000/user-lock--v1.png" /></em>
@@ -163,13 +165,16 @@ export default function Review({ review }) {
             <div className="authorPostDetails">
               <div className="authorPostItems">
                 <div className="authorPostHeaderLeft">
-                <h5 className="apht"> <img className="reviewAvatar" src={defaultImage} alt="image" />Title: {review.title}</h5>
+                <h5 className="apht"> <img className="reviewAvatar" src={randomProfiles} alt="image" />Title: {review.title}</h5>
                   <i>Business Reviewed: {review.business.establishmentName}</i>
                   <br></br>
                   <em className="ALittleSpaceBetweenIcons"><img src="https://img.icons8.com/windows/22/000000/user-lock--v1.png" /></em>
                   {/* {review.userProfile.fullName}  */}
                   {/* {reviewId > 1? <em className="admin"></em> :<em className="ALittleSpaceBetweenIconsTWO"><img src="https://img.icons8.com/carbon-copy/35/000000/favorite-chat.png" /></em>} */}
                 </div>
+                {/* {comments.map(c => {
+                                return <CommentAlertONComment key={c.id} CommentAlertONComment={c} review={review} />
+                            })} */}
                 <div className="authorPostHeaderRight">
                   {/* <h5>Rate:{review.rating}/10</h5> */}
                   <h5 className="float-right"><ReactStars {...starRepresentation} value={parseInt(review.rating / 2)} /></h5>
