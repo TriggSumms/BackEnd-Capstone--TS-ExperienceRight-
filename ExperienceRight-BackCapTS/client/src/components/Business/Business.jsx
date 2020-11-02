@@ -10,13 +10,13 @@ import "./BusinessProfile.scss";
 export default function Business({ business }) {
   const sessionUser = JSON.parse(sessionStorage.getItem("userProfile"));
   //const defaultImage = 'https://res.cloudinary.com/dhduglm4j/image/upload/v1602603540/tabloid_euehri.png';
-  const { reviews, getAllReviewsforBusiness, getAllReviews } = useContext(ReviewContext);
+  const { reviews, review, getAllReviewsforBusiness, getAllReviews } = useContext(ReviewContext);
   const { businesses, getBusinessById,  getAllBusinesses } = useContext(BusinessContext);
   const { businessId, reviewId } = useParams();
 
   const history = useHistory();
 
-
+//console.log("TESTS", reviews.length )
 
 
   // useEffect(() => {
@@ -40,12 +40,17 @@ export default function Business({ business }) {
   // // }, []);
 
 
-  // useEffect(() => {
-  //   getAllReviewsforBusiness(businessId);
-  // }, []);
+//   useEffect(() => {
+//     getAllReviewsforBusiness(business.id);
+//   }, []);
 
 
-//console.log(businessId)
+// console.log("yeeee", business)
+
+
+
+
+
 
   // const reviewTotalRatingAvg = reviews.map(y => y.rating)
   // let sum = 0;
@@ -62,7 +67,7 @@ export default function Business({ business }) {
 
 
 // const doodle = businesses.map(y => y)
- //console.log("mappin", reviews[businessId].length)
+//  console.log("mappin", reviews[businessId].length)
 
 
   return (
@@ -107,7 +112,7 @@ export default function Business({ business }) {
 
         </div>
         <div class="actions">
-          <div class="ratings">
+          {/* <div class="ratings">
             <span class="rating-control">
               <i class="fa fa-star"></i>
               <i class="fa fa-star"></i>
@@ -116,17 +121,20 @@ export default function Business({ business }) {
               <i class="fa fa-star-o"></i>
             </span>
             <span class="rating-count">000 Ratings </span>
-          </div>
-          <div class="comments">
-            <span class="comment-count"><strong>{business[reviews]}</strong> Reviews</span>
-          </div>
+          </div> */}
+          {/* <div class="comments">
+            <span class="comment-count"><strong>{reviews.length}</strong> Reviews</span>
+           
+  
+             <span class="comment-count"><strong>{review.business.length}</strong> Reviews</span>
+          </div> */}
           <div class="appo">
             <a href={`/businesses/details/${business.id}`} className="btn btn-outline-primary mx-1">View Business Profile</a>
           </div>
         </div>
-        <div class="locations">
+        {/* <div class="locations">
           Business Bio: {business.bio}
-        </div>
+        </div> */}
       </div>
     </>
 

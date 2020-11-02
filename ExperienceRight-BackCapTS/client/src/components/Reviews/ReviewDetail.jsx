@@ -1,27 +1,55 @@
 import React, { useContext, useEffect, useState } from "react";
 import { ReviewContext } from "../../providers/ReviewProvider";
-//import { PostTagContext } from "../../providers/PostTagProvider";
-//import { TagContext } from "../../providers/TagProvider";
+import { CommentContext } from "../../providers/CommentProvider";
+//import { UserProfile } from "../../providers/ UserProfile ";
 import { Card, CardBody, Button, ListGroup } from "reactstrap";
+import DetailsViewComment from "../Comments/DetailsViewComment";
 import { useParams, Link } from "react-router-dom";
-
+import ReactStars from 'react-stars'
+import { render } from 'react-dom'
 
 
 
 export default function ReviewDetail() {
     const sessionUser = JSON.parse(sessionStorage.getItem("userProfile"));
+    const { comments, getAllCommentsByReviewId } = useContext(CommentContext);
     const { review, getById } = useContext(ReviewContext);
+    // const { userProfiles } = useContext( UserProfile );
+    // const { business, getAllBusinesses } = useContext(BusinessContext);
     const { id } = useParams();
 
+    const parsedId = parseInt(id)
 
     useEffect(() => {
         getById(id)
 
     }, []);
 
+    useEffect(() => {
+        getAllCommentsByReviewId(id);
 
-    const parsedId = parseInt(id)
+    }, []);
 
+
+
+
+
+
+
+
+    const starRepresentation = {
+        size: 25,
+        count: 10,
+        //char: '',
+        // color1: '#ff9900',
+        // color2: '#6599ff',
+        edit: false,
+        half: false
+    }
+
+    // console.log("Testing", business)
+
+    console.log("Testing2", sessionUser)
 
     // we need the if statement to return true on the first render.
     // so we must include !post.userProfile because react will not let us
@@ -32,7 +60,7 @@ export default function ReviewDetail() {
     }
 
 
-    if (sessionUser.id === review.userProfile.id) {
+    if (sessionUser.id === review.userProfileId && sessionUser.userTypeId === 2) {
         return (
             <>
                 <Link style={{ textDecoration: 'none' }} to={`/reviews`}>
@@ -45,10 +73,23 @@ export default function ReviewDetail() {
                                 <div className="titleANDPostTag">
                                     <h1 className="text-secondary">TITLE:{review.title}</h1>
                                 </div>
-                                <h1 className="text-black-50">FREQ:{review.frequency.name}</h1>
+                                <div className="authorPostHeaderRight">
+                                    {/* <h5>Rate:{review.rating}/10</h5> */}
+                                    <h5 className="float-right"><ReactStars {...starRepresentation} value={parseInt(review.rating)} /></h5>
+                                    <br></br>
+                                    <br></br>
+                                    <em>Posted Date:{new Intl.DateTimeFormat('en-US').format(new Date(review.createDateTime))}</em>
+                                    <br></br>
+                                    <i>Date of Experience:{new Intl.DateTimeFormat('en-US').format(new Date(review.dateOfExperience))}</i>
+                                    <br></br>
+                                    <i>Customer visit's a Month:<b>{review.frequency.name}</b></i>
+                                    <br></br>
+                                    <i>Business Reviewed: {review.business.establishmentName}</i>
+                                </div>
                             </div>
                             <div className="row justify-content-between">
-                                <p className="text-black-50">Experience Date {new Intl.DateTimeFormat('en-US').format(new Date(review.dateOfExperience))}</p>
+                                {/* <h1 className="text-black-50">FREQ:{review.frequency.name}</h1> */}
+                                {/* <p className="text-black-50">Experience Date {new Intl.DateTimeFormat('en-US').format(new Date(review.dateOfExperience))}</p> */}
                             </div>
                             <p className="text-secondary">DISPLAY NAME: {review.userProfile.displayName}</p>
 
@@ -56,7 +97,8 @@ export default function ReviewDetail() {
                                 <div>
                                     <section className="row post__content">
                                         <p className="col-sm-12 mt-5">{review.content}</p>
-                                    </section></div>
+                                    </section>
+                                </div>
                                 <div>
                                     <a href={`/reviews/edit/${review.id}`} className="btn btn-outline-primary mx-1" title="Edit">
                                         <i className="fas fa-pencil-alt">Edit</i>
@@ -66,13 +108,14 @@ export default function ReviewDetail() {
                                     </a>
                                 </div>
                             </div>
-                            <section className="row justify-content-center">
-                                {/* <div>
-                                <img src={review.imageLocation} />
-                            </div> */}
                             </section>
-                        </section>
                         <hr />
+                        <section className="row justify-content-center">
+
+                            {comments.map(c => {
+                                return <DetailsViewComment key={c.id} DetailsViewComment={c} />
+                            })}
+                        </section>
                         {/* <a href={`/posts/details/${post.id}/posttags`} className="btn btn-outline-primary mx-1">View Tags</a> */}
                         <Link to={`/businesses/details/${review.businessId}`}><Button type="button" color="warning">Back to Business Page</Button></Link>
                         <a href={`/review/${review.id}/comments`} className="btn btn-outline-primary mx-1">View Business Response</a>
@@ -82,6 +125,8 @@ export default function ReviewDetail() {
             </>
         );
     }
+    // else if (review.businessId === sessionUser.businessId && sessionUser.userTypeId === 1) {
+    // else if (review.businessId === userProfile.businessId && sessionUser.userTypeId === 1) {
     else if (sessionUser.userTypeId === 1) {
         return (
             <>
@@ -93,30 +138,51 @@ export default function ReviewDetail() {
                         <section className="px-3">
                             <div className="row justify-content-between">
                                 <div className="titleANDPostTag">
-                                    <h1 className="text-secondary">{review.title}</h1>
+                                    <h1 className="text-secondary">Title: {review.title}</h1>
+                                    {/* <br></br> */}
+
                                 </div>
-                                <h1 className="text-black-50">{review.frequency.name}</h1>
+                                <div className="authorPostHeaderRight">
+                                    {/* <h5>Rate:{review.rating}/10</h5> */}
+                                    <h5 className="float-right"><ReactStars {...starRepresentation} value={parseInt(review.rating)} /></h5>
+                                    <br></br>
+                                    <br></br>
+                                    <em>Posted Date:{new Intl.DateTimeFormat('en-US').format(new Date(review.createDateTime))}</em>
+                                    <br></br>
+                                    <i>Date of Experience:{new Intl.DateTimeFormat('en-US').format(new Date(review.dateOfExperience))}</i>
+                                    <br></br>
+                                    <i>Customer visit's a Month:<b>{review.frequency.name}</b></i>
+
+
+                                </div>
                             </div>
+
                             <div className="row justify-content-between">
-                                <p className="text-black-50">Experience Date {new Intl.DateTimeFormat('en-US').format(new Date(review.dateOfExperience))}</p>
+
+                                {/* <p className="text-black-50">Experience Date {new Intl.DateTimeFormat('en-US').format(new Date(review.dateOfExperience))}</p> */}
                             </div>
-                            <p className="text-secondary">DISPLAY NAME: {review.userProfile.displayName}</p>
+                            {/* <p className="text-secondary">DISPLAY NAME: {review.userProfile.displayName}</p> */}
                             <div>       <section className="row post__content">
                                 <p className="col-sm-12 mt-5">{review.content}</p>
                             </section></div>
                             <div>
                             </div>
-                            <section className="row justify-content-center">
-                                {/* <div>
-                                <img src={review.imageLocation} />
-                            </div> */}
-                            </section>
                         </section>
                         <hr />
-                        {/* <a href={`/posts/details/${post.id}/posttags`} className="btn btn-outline-primary mx-1">View Tags</a> */}
+
+                        <section className="row justify-content-center">
+                            {comments.map(c => {
+                                return <DetailsViewComment key={c.id} DetailsViewComment={c} />
+                            })}
+                        </section>
+
+
+                        {/* {sessionUser.businessId === review.businessId ? "" :
+                            <> */}
                         <a href={`/review/${review.id}/comments`} className="btn btn-outline-primary mx-1">View & Write Comments</a>
                         <Link to={`/businesses/details/${review.businessId}`}><Button type="button" color="warning">Back to Your Profile</Button></Link>
-                        {/* <Link to={`/reviews`}><Button type="button" color="warning">Back to Reviews</Button></Link> */}
+                        {/* </>
+                        } */}
                     </div>
                 </div>
             </>
@@ -126,44 +192,60 @@ export default function ReviewDetail() {
     else {
         return (
             <>
-            <Link style={{ textDecoration: 'none' }} to={`/reviews`}>
-            <button className="std-btn">&#x2190; Back to Reviews</button>
-        </Link>
-        <div className="postContainer">
-            <div className="post">
-                <section className="px-3">
-                    <div className="row justify-content-between">
-                        <div className="titleANDPostTag">
-                            <h1 className="text-secondary">TITLE:{review.title}</h1>
-                        </div>
-                        <h1 className="text-black-50">FREQ:{review.frequency.name}</h1>
-                    </div>
-                    <div className="row justify-content-between">
-                        <p className="text-black-50">Experience Date {new Intl.DateTimeFormat('en-US').format(new Date(review.dateOfExperience))}</p>
-                    </div>
-                    <p className="text-secondary">DISPLAY NAME: {review.userProfile.displayName}</p>
+                <Link style={{ textDecoration: 'none' }} to={`/reviews`}>
+                    <button className="std-btn">&#x2190; Back to Reviews</button>
+                </Link>
+                <div className="postContainer">
+                    <div className="post">
+                        <section className="px-3">
+                            <div className="row justify-content-between">
+                                <div className="titleANDPostTag">
+                                    <h1 className="text-secondary">TITLE:{review.title}</h1>
+                                </div>
+                                <div className="authorPostHeaderRight">
+                                    {/* <h5>Rate:{review.rating}/10</h5> */}
+                                    <h5 className="float-right"><ReactStars {...starRepresentation} value={parseInt(review.rating)} /></h5>
+                                    <br></br>
+                                    <br></br>
+                                    <em>Posted Date:{new Intl.DateTimeFormat('en-US').format(new Date(review.createDateTime))}</em>
+                                    <br></br>
+                                    <i>Date of Experience:{new Intl.DateTimeFormat('en-US').format(new Date(review.dateOfExperience))}</i>
+                                    <br></br>
+                                    <i>Customer visit's a Month:<b>{review.frequency.name}</b></i>
+                                    <br></br>
+                                    <i>Business Reviewed: {review.business.establishmentName}</i>
+                                </div>
+                            </div>
+                            <div className="row justify-content-between">
+                                {/* <h1 className="text-black-50">FREQ:{review.frequency.name}</h1> */}
+                                {/* <p className="text-black-50">Experience Date {new Intl.DateTimeFormat('en-US').format(new Date(review.dateOfExperience))}</p> */}
+                            </div>
+                            <p className="text-secondary">DISPLAY NAME: {review.userProfile.displayName}</p>
 
-                    <div className="row postBtns justify-content-between">
-                        <div>
-                            <section className="row post__content">
-                                <p className="col-sm-12 mt-5">{review.content}</p>
-                            </section></div>
+                            <div className="row postBtns justify-content-between">
+                                <div>
+                                    <section className="row post__content">
+                                        <p className="col-sm-12 mt-5">{review.content}</p>
+                                    </section></div>
+
+                            </div>
+                        </section>
+                        <hr />
+                        <section className="row justify-content-center">
+
+                            {comments.map(c => {
+                                return <DetailsViewComment key={c.id} DetailsViewComment={c} />
+                            })}
+                        </section>
+
+
+                        {/* <a href={`/posts/details/${post.id}/posttags`} className="btn btn-outline-primary mx-1">View Tags</a> */}
+                        {/* <Link to={`/businesses/details/${review.businessId}`}><Button type="button" color="warning">Back to Business Page</Button></Link>
+                        <a href={`/review/${review.id}/comments`} className="btn btn-outline-primary mx-1">View Business Response</a> */}
 
                     </div>
-                    <section className="row justify-content-center">
-                        {/* <div>
-                        <img src={review.imageLocation} />
-                    </div> */}
-                    </section>
-                </section>
-                <hr />
-                {/* <a href={`/posts/details/${post.id}/posttags`} className="btn btn-outline-primary mx-1">View Tags</a> */}
-                <Link to={`/businesses/details/${review.businessId}`}><Button type="button" color="warning">Back to Business Page</Button></Link>
-                <a href={`/review/${review.id}/comments`} className="btn btn-outline-primary mx-1">View Business Response</a>
-
-            </div>
-        </div>
-        </>
+                </div>
+            </>
         );
     }
 }

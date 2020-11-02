@@ -10,10 +10,11 @@
 .card-container {
     display: flex;
     justify-content: space-between;
+    /* width: 100%; */
 }
 
 .navLogo {
-    width: 150px;
+    width: 125px;
 }
 
 .navLogo > img {
@@ -497,22 +498,27 @@ fieldset {
 
 .adminBtn {
     padding: 0 5px;
+    
 }
 
 .postCard-details {
     border-bottom: 1px solid #373737;
+    
     
 }
 
 .postTableHeader {
     border-bottom: 2px solid black;
     box-shadow: 0px 3px 5px 0px #373737;
+    
 }
 
 .post-container {
     position: sticky;
     top: 0;
     border-radius: 15px;
+    
+    
     
 }
 
@@ -521,18 +527,21 @@ fieldset {
     grid-template-columns: auto auto auto;
     padding: 10px;
     
+    
 }
 
 .authorPostItem {
     background-color: rgba(255, 255, 255, 0.8);
     border: 1px solid rgba(0, 0, 0, 0.8);
     border-radius: 15px;
-    margin: 10px;
+    margin: 12px;
     padding: 0px;
     font-size: 14px; 
     display: flex;
     flex-direction: column;
+    float: center;
     justify-content: space-between;
+    width: 95%;
     
 }
 
@@ -546,6 +555,7 @@ fieldset {
     display: flex;
     justify-content: space-between;
     width: 100%;
+    
     
 }
 
@@ -567,6 +577,7 @@ fieldset {
 
 .authorPostCardContainer {
     background: gray;
+    
     
 }
 
@@ -594,6 +605,7 @@ fieldset {
 .postsAuthor {
     font-family: sans-serif;
     color: #373737
+    
 }
 
 .imageBackground {
@@ -704,7 +716,7 @@ input:checked + .slider:before {
 }
 
 .postHeader {
-    width: 100%;
+    width: 80%;
     display: flex;
     justify-content: center;
 }
@@ -791,6 +803,14 @@ input:checked + .slider:before {
     justify-content: flex-start;    
 } */
 
+.reviewAvatar {
+    /* vertical-align: middle; */
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border-color: #000000;
+  }
+
 #profile-header {
 	background: rgb(255, 255, 255);
 }
@@ -846,3 +866,26 @@ input:checked + .slider:before {
   }
 }
 /* END USER PROFILE DROP */
+
+  
+  /* Dropdown Contianer */
+
+/* DROPDOWN INFO */
+
+
+
+
+
+
+
+/* Comments */
+.centerCrResponse{
+    display: flex;
+    justify-content: center;
+    align-self: center;
+    align-items: center;
+
+}
+
+
+/* End Comments */

@@ -3,6 +3,7 @@ import Review from "./Review";
 import { ReviewContext } from "../../providers/ReviewProvider";
 import { BusinessContext } from "../../providers/BusinessProvider";
 import { Link, useHistory } from "react-router-dom";
+import "./SearchBar.scss";
 
 
 export default function ProfileReviewList() {
@@ -90,25 +91,28 @@ export default function ProfileReviewList() {
                     </em>
                   </th>
                   <th>
-                    <input onChange={filterAllReviewsVIATitle} checked={titleSelected === reviews.title} value={reviews.title} type="text" placeholder="Search via Title..." onKeyUp={
-                      (event) => {
-                        const searchTerm = event.target.value
-                        setTerm(searchTerm)
-                      }
-                    } />
+                    <div class="container">
+                      <input onChange={filterAllReviewsVIATitle} checked={titleSelected === reviews.title} value={reviews.title} type="text" class="searchbar" maxlength="12" placeholder="Search via Title..." onKeyUp={
+                        (event) => {
+                          const searchTerm = event.target.value
+                          setTerm(searchTerm)
+                        }
+                      } />
+                    </div>
                   </th>
                   <th>
-                  <button onClick={() => { setReviews(reviews); setCategorySelected("") ; setTitleSelected("") }}><img src="https://img.icons8.com/officel/20/000000/clear-search.png" /></button>
+                    <button onClick={() => { setReviews(reviews); setCategorySelected(""); setTitleSelected("") }}><img src="https://img.icons8.com/officel/20/000000/clear-search.png" /></button>
                   </th>
                 </tr>
               </thead>
-              <div className="entries">
-                {filteredReviews.map(review => {
-                  return <Review key={review.id} review={review} categories={categories} title={review.title} />;
-                })}
-              </div>
-            </table>
+            </table>  
+            </div> {/* DIVIDER */}<div>
+            {filteredReviews.map(review => {
+              return <Review key={review.id} review={review} categories={categories} title={review.title} />;
+            })}
           </div>
+
+
         </div>
 
       </section>

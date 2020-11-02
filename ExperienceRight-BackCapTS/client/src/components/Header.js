@@ -25,9 +25,9 @@ export default function Header() {
   //Tabs for the navBar on landing page go here
   return (
     <div>
-      <Navbar color="light" light expand="md">
+      <Navbar color="" light expand="md">
         <NavbarBrand className="navLogo" tag={RRNavLink} to="/">
-          <img src="" alt="ER Logo" />
+          <img src="https://res.cloudinary.com/triggsumms/image/upload/c_crop,h_150,w_420/v1604283529/mlrxn3jgv2ckqposszwv.gif" alt="ER Logo" />
         </NavbarBrand>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
@@ -40,9 +40,9 @@ export default function Header() {
             }
             {isLoggedIn &&
               <>
-                <NavItem>
-                  <NavLink tag={RRNavLink} to="/reviews">Review LIST</NavLink>
-                </NavItem>
+                {/* <NavItem>
+                  <NavLink tag={RRNavLink} to="/reviews">ER Reviews</NavLink>
+                </NavItem> */}
                 {/* <NavItem>
                   <NavLink tag={RRNavLink} to="/">Home List</NavLink>
                 </NavItem> */}
@@ -51,20 +51,23 @@ export default function Header() {
             {isLoggedIn && sessionUser.userTypeId === 2 && 
               <>
                 <NavItem>
-                  <NavLink tag={RRNavLink} to="/businesses">Businesses</NavLink>
+                  <NavLink tag={RRNavLink} to="/reviews">ER Reviews</NavLink>
                 </NavItem>
                 <NavItem>
-                  <NavLink tag={RRNavLink} to={`/reviews/myreviews/${sessionUser.id}`}>My Reviews</NavLink>
+                  <NavLink tag={RRNavLink} to="/businesses">ER Businesses</NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink tag={RRNavLink} to={`/reviews/myreviews/${sessionUser.id}`}>My Profile/Reviews</NavLink>
                 </NavItem>
               </>
             }
             {isLoggedIn && sessionUser.userTypeId === 1 &&
               <>
                 <NavItem>
-                  <NavLink tag={RRNavLink} to={`/businesses/details/${sessionUser.id}`}>My Business Profile</NavLink>
+                  <NavLink tag={RRNavLink} to={`/businesses/details/${sessionUser.id}`}>My Business Profile & Reviews</NavLink>
                   </NavItem>
-                  {/* <NavItem>
-                  <NavLink tag={RRNavLink} to="/users">BUIZ USER TEST</NavLink>
+                {/* <NavItem>
+                  <NavLink tag={RRNavLink} to="/reviews">ER Reviews</NavLink>
                 </NavItem> */}
 
               </>

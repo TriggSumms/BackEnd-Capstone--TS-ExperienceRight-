@@ -71,7 +71,6 @@ export default function BusinessProfileDetails() {
   //END RATING AVERAGE
 
 
-
   
 
   if (!business || !business.userProfile) {

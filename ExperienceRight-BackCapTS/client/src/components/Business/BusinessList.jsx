@@ -56,6 +56,10 @@ export default function BusinessList() {
   // }, []);
 
 
+  // useEffect(() => {
+  //   getAllReviewsforBusiness(business.id);
+  // }, []);
+
 
 
 
@@ -123,24 +127,22 @@ export default function BusinessList() {
                   <th className="postCategory-header">
                   </th>
                   <th className="postDate-header">
-
-             
                     <em>
                       <select className="float-right" onClick={filterAllBusinesses} >
-                      <option > Choose a Business Sector</option>
-                      {categories.map(category =>
-                        <option checked={categorySelected === category.id} value={category.id}>
-                          {category.name}
-                        </option>
-                      )}
-                    </select>
+                        <option > Choose a Business Sector</option>
+                        {categories.map(category =>
+                          <option checked={categorySelected === category.id} value={category.id}>
+                            {category.name}
+                          </option>
+                        )}
+                      </select>
                     </em>
 
                   </th>
                   <th>
-                           <em>
+                    <em>
                       <button onClick={() => { setBusinesses(businesses); setCategorySelected("") }}><img src="https://img.icons8.com/officel/20/000000/clear-search.png" /></button>
-                    </em> 
+                    </em>
                   </th>
                 </tr>
               </thead>
@@ -156,52 +158,14 @@ export default function BusinessList() {
 
                 <div className="entries">
                   {filteredBusinesses.map(business => {
-                    return <Business key={business.id} business={business} categories={categories} />;
+                    return <Business key={business.id} business={business} categories={categories}  />;
                   })}
                 </div>
-
-
-
               </div>
             </table>
           </div>
         </div>
       </section>
-      {/* {
-        categories.map(category => {
-          return <>
-            <input type="radio" value={category.id} name="categoryId" checked={categorySelected === category.id}
-              onClick={filterAllBusinesses}
-            /> {category.name}
-          </>
-        })
-      } */}
-
-      {/* <div >
-        <button onClick={() => {
-          setBusinesses(businesses)
-          setCategorySelected("")
-        }}>Clear Filter</button>
-      </div> */}
-
-      {/* <div>
-
-        <input type="text" placeholder="Search" onKeyUp={
-          (event) => {
-            const searchTerm = event.target.value
-            setTerm(searchTerm)
-          }
-        } />
-
-      </div> */}
-
-      {/* <h1>Entries</h1> */}
-
-      {/* <div className="entries">
-        {filteredBusinesses.map(business => {
-          return <Business key={business.id} business={business} categories={categories} />;
-        })}
-      </div> */}
 
     </>
 

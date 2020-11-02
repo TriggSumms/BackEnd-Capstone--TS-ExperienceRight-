@@ -10,95 +10,88 @@ import { render } from 'react-dom'
 
 export default function Review({ review }) {
   const sessionUser = JSON.parse(sessionStorage.getItem("userProfile"));
-  //const defaultImage = 'https://res.cloudinary.com/dhduglm4j/image/upload/v1602603540/tabloid_euehri.png';
+  const defaultImage = 'https://res.cloudinary.com/triggsumms/image/upload/v1604257859/qgozormcgwwr80iyllqr.png'
+  //  'https://res.cloudinary.com/triggsumms/image/upload/v1604259136/abcxlwlas8lakm6bl7kc.png' 
   const { updateReview, getAllReviews } = useContext(ReviewContext);
   const { business } = useContext(BusinessContext);
-  const { comment, getAllComments, getAllCommentsByReviewId } = useContext(CommentContext);
+  const { comments, getAllComments, getAllCommentsByReviewId } = useContext(CommentContext);
   const history = useHistory();
-  const { id } = useParams();
- 
-
-
-//   useEffect(() => {
-//     // getAllComments()
-    
-//      getAllCommentsByReviewId(id)
-// }, [])
+  //const { id } = useParams();
 
 
 
+  //   useEffect(() => {
 
-const starRepresentation = {
-  size: 25,
-  count: 5,
-  //char: '',
-  // color1: '#ff9900',
-  // color2: '#6599ff',
-  edit: false,
-  half: false
-}
-
-// const reviewTotalRatingAvg = comments.map(y => y.subject)
-
-
-
-// console.log("test", business)
-// console.log("comment", review.comments.subject)
+  //      getAllCommentsByReviewId(review.id)
+  // }, [])
 
 
 
 
-  if (sessionUser.id === review.userProfile.id) {
+  const starRepresentation = {
+    size: 25,
+    count: 5,
+    //char: '',
+    // color1: '#ff9900',
+    // color2: '#6599ff',
+    edit: false,
+    half: false
+  }
+
+
+
+  if (sessionUser.id === review.userProfile.id && sessionUser.userTypeId === 2) {
     return (
       <>
-      <div className="theUserSpecificREviewsGlowtoSetOtherstoShame">
-        <div className="authorPostItem">
-          <div className="authorButtonsOverlay">
-            <div className="imageButtonHeader">
-              <a className="postImagePreview" href={`/reviews/details/${review.id}`}>
-                {/* <img className="imageBackground" src={post.imageLocation} alt="image"/> */}
-              </a>
-              {/* } */}
-    
-              <div className="authorButtons">
-                <Link className="authorBtn" style={{ textDecoration: 'none' }} to={`/reviews/edit/${review.id}`}>
-                  <img className="postAuthorBtn" src="https://res.cloudinary.com/dhduglm4j/image/upload/v1603121858/icons/edit_oeexa4.png" />
-                </Link>
-                <Link className="authorBtn" style={{ textDecoration: 'none' }} to={`/reviews/delete/${review.id}`}>
-                  <img className="postAuthorBtn" src="https://res.cloudinary.com/dhduglm4j/image/upload/v1603121902/icons/delete_mr2ko5.png" alt="delete" />
-                </Link>
-                <Link className="authorBtn" style={{ textDecoration: 'none' }} to={`/reviews/details/${review.id}`}>
-                  <img className="postAuthorBtn" src="https://res.cloudinary.com/dhduglm4j/image/upload/v1603121574/icons/eye_rimwzo.png" alt="details" />
-                </Link>
-              </div>
-            </div>
-            <div className="authorPostDetails">
-              <div className="authorPostItems">
-                <div className="authorPostHeaderLeft">
-                  <h5 className="apht">Title: {review.title}</h5>
-                  <i>Business Reviewed: {review.business.establishmentName}</i>
-                  <br></br>
-                  <em className="ALittleSpaceBetweenIcons"><img src="https://img.icons8.com/windows/22/000000/user-lock--v1.png"/></em>
-                  {/* {review.userProfile.fullName}  */}
-
-                  {review.businessId >= 1
-                ? <em className="admin"></em> :
-                <em className="ALittleSpaceBetweenIconsTWO"><img src="https://img.icons8.com/fluent/30/000000/important-mail.png"/></em>}
+        <div className="theUserSpecificREviewsGlowtoSetOtherstoShame">
+          
+            {/* <img className="reviewAvatar" src={defaultImage} alt="image" /> */}
+          
+          <div className="authorPostItem">
+            <div className="authorButtonsOverlay">
+              <div className="imageButtonHeader">
+                <a className="postImagePreview" href={`/reviews/details/${review.id}`}>   
+                </a>
+                <div className="authorButtons">
+                  <Link className="authorBtn" style={{ textDecoration: 'none' }} to={`/reviews/edit/${review.id}`}>
+                    <img className="postAuthorBtn" src="https://res.cloudinary.com/dhduglm4j/image/upload/v1603121858/icons/edit_oeexa4.png" />
+                  </Link>
+                  <Link className="authorBtn" style={{ textDecoration: 'none' }} to={`/reviews/delete/${review.id}`}>
+                    <img className="postAuthorBtn" src="https://res.cloudinary.com/dhduglm4j/image/upload/v1603121902/icons/delete_mr2ko5.png" alt="delete" />
+                  </Link>
+                  <Link className="authorBtn" style={{ textDecoration: 'none' }} to={`/reviews/details/${review.id}`}>
+                    <img className="postAuthorBtn" src="https://res.cloudinary.com/dhduglm4j/image/upload/v1603121574/icons/eye_rimwzo.png" alt="details" />
+                  </Link>
                 </div>
-                <div className="authorPostHeaderRight">
+              </div>
+              <div className="authorPostDetails">
+                <div className="authorPostItems">
+                  <div className="authorPostHeaderLeft">
+                 
+                    <h5 className="apht"> <img className="reviewAvatar" src={defaultImage} alt="image" />Title: {review.title}</h5>
+                    <i>Business Reviewed: {review.business.establishmentName}</i>
+                    <br></br>
+                    <em className="ALittleSpaceBetweenIcons"><img src="https://img.icons8.com/windows/22/000000/user-lock--v1.png" /></em>
+                    {/* {review.userProfile.fullName}  */}
+
+                    {/* {review.businessId >= 1
+                      ? <em className="admin"></em> :
+                      <em className="ALittleSpaceBetweenIconsTWO"><img src="https://img.icons8.com/fluent/30/000000/important-mail.png" /></em>} */}
+                  </div>
+                  <div className="authorPostHeaderRight">
                     {/* <h5>Rate:{review.rating}/10</h5> */}
-                    <h5 className="float-right"><ReactStars {...starRepresentation} value= {parseInt(review.rating/2)} /></h5>
+                    <h5 className="float-right"><ReactStars {...starRepresentation} value={parseInt(review.rating / 2)} /></h5>
                     <br></br>
                     <br></br>
                     <em>Posted Date:{new Intl.DateTimeFormat('en-US').format(new Date(review.createDateTime))}</em>
                     <br></br>
-                    <i>Date of Experience:{new Intl.DateTimeFormat('en-US').format(new Date(review.dateOfExperience))}</i>  
+                    <i>Date of Experience:{new Intl.DateTimeFormat('en-US').format(new Date(review.dateOfExperience))}</i>
+                  </div>
+                  {/* {parseInt(review.commentlength)} */}
                 </div>
-                {parseInt(review.commentlength)}
               </div>
             </div>
           </div>
-        </div>
         </div>
       </>
     );
@@ -123,24 +116,24 @@ const starRepresentation = {
             <div className="authorPostDetails">
               <div className="authorPostItems">
                 <div className="authorPostHeaderLeft">
-                  <h5 className="apht">Title: {review.title}</h5>
+                <h5 className="apht"> <img className="reviewAvatar" src={defaultImage} alt="image" />Title: {review.title}</h5>
                   <i>Business Reviewed: {review.business.establishmentName}</i>
                   <br></br>
                   <em className="ALittleSpaceBetweenIcons"><img src="https://img.icons8.com/windows/22/000000/user-lock--v1.png" /></em>
                   {/* {review.userProfile.fullName}  */}
                   {/* {review.businessId.comment.length > 1 */}
-                  {review.businessId <= 1
-                ? <em className="admin"></em> :
-                <em className="ALittleSpaceBetweenIconsTWO"><img src="https://img.icons8.com/cotton/24/000000/check-inbox--v2.png"/></em>}
+                  {/* {review.businessId <= 1
+                    ? <em className="admin"></em> :
+                    <em className="ALittleSpaceBetweenIconsTWO"><img src="https://img.icons8.com/cotton/24/000000/check-inbox--v2.png" /></em>} */}
                 </div>
                 <div className="authorPostHeaderRight">
-                    {/* <h5>Rate:{review.rating}/10</h5> */}
-                    <h5 className="float-right"><ReactStars {...starRepresentation} value= {parseInt(review.rating/2)} /></h5>
-                    <br></br>
-                    <br></br>
-                    <em>Posted Date:{new Intl.DateTimeFormat('en-US').format(new Date(review.createDateTime))}</em>
-                    <br></br>
-                    <i>Date of Experience:{new Intl.DateTimeFormat('en-US').format(new Date(review.dateOfExperience))}</i>  
+                  {/* <h5>Rate:{review.rating}/10</h5> */}
+                  <h5 className="float-right"><ReactStars {...starRepresentation} value={parseInt(review.rating / 2)} /></h5>
+                  <br></br>
+                  <br></br>
+                  <em>Posted Date:{new Intl.DateTimeFormat('en-US').format(new Date(review.createDateTime))}</em>
+                  <br></br>
+                  <i>Date of Experience:{new Intl.DateTimeFormat('en-US').format(new Date(review.dateOfExperience))}</i>
                 </div>
               </div>
             </div>
@@ -151,7 +144,7 @@ const starRepresentation = {
   }
   //MADE THIS ROUTE IN CASE I WANT TO INTRODUCE A SUBSET USER
   else {
-    return(
+    return (
       <>
         <div className="authorPostItem">
           <div className="authorButtonsOverlay">
@@ -170,25 +163,23 @@ const starRepresentation = {
             <div className="authorPostDetails">
               <div className="authorPostItems">
                 <div className="authorPostHeaderLeft">
-                  <h5 className="apht">Title: {review.title}</h5>
+                <h5 className="apht"> <img className="reviewAvatar" src={defaultImage} alt="image" />Title: {review.title}</h5>
                   <i>Business Reviewed: {review.business.establishmentName}</i>
                   <br></br>
                   <em className="ALittleSpaceBetweenIcons"><img src="https://img.icons8.com/windows/22/000000/user-lock--v1.png" /></em>
                   {/* {review.userProfile.fullName}  */}
-                  {comment.reviewId > 1
-                ? <em className="admin"></em> :
-                <em className="ALittleSpaceBetweenIconsTWO"><img src="https://img.icons8.com/carbon-copy/35/000000/favorite-chat.png"/></em>}
+                  {/* {reviewId > 1? <em className="admin"></em> :<em className="ALittleSpaceBetweenIconsTWO"><img src="https://img.icons8.com/carbon-copy/35/000000/favorite-chat.png" /></em>} */}
                 </div>
                 <div className="authorPostHeaderRight">
-                    {/* <h5>Rate:{review.rating}/10</h5> */}
-                    <h5 className="float-right"><ReactStars {...starRepresentation} value= {parseInt(review.rating/2)} /></h5>
-                    <br></br>
-                    <br></br>
-                    <em>Posted Date:{new Intl.DateTimeFormat('en-US').format(new Date(review.createDateTime))}</em>
-                    <br></br>
-                    <i>Date of Experience:{new Intl.DateTimeFormat('en-US').format(new Date(review.dateOfExperience))}</i>  
+                  {/* <h5>Rate:{review.rating}/10</h5> */}
+                  <h5 className="float-right"><ReactStars {...starRepresentation} value={parseInt(review.rating / 2)} /></h5>
+                  <br></br>
+                  <br></br>
+                  <em>Posted Date:{new Intl.DateTimeFormat('en-US').format(new Date(review.createDateTime))}</em>
+                  <br></br>
+                  <i>Date of Experience:{new Intl.DateTimeFormat('en-US').format(new Date(review.dateOfExperience))}</i>
                 </div>
-                {parseInt(review.commentlength)}
+                {/* {parseInt(review.comment.length)} */}
               </div>
             </div>
           </div>

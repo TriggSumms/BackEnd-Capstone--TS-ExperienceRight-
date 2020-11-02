@@ -99,7 +99,7 @@ namespace ExperienceRight_BackCapTS.Repositories
                               LEFT JOIN Business b ON r.BusinessId = b.id
                               LEFT JOIN Category c ON b.CategoryId = c.id
                         
-                        ORDER BY r.DateofExperience ASC";
+                        ORDER BY r.DateOfExperience DESC";
                     var reader = cmd.ExecuteReader();
 
                     var reviews = new List<Review>();

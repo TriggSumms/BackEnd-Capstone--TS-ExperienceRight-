@@ -24,7 +24,9 @@ export default function CommentList() {
         return (
             <>
                 <section>
-                    <div>
+                    <div className="centerCrResponse">
+                        <br></br>
+                        <br></br>
                         <h3>Business Response's</h3>
                     </div>
                     <br></br>
@@ -42,14 +44,17 @@ export default function CommentList() {
         return (
             <>
                 <section>
-                    <div>
+                    <div className="centerCRReponse">
+                        <br></br>
+                        <br></br>
                         <h3>Customer Response Manager: </h3>
+                        <Link to={`/reviews/details/${reviewId}`}>
+                            <Button> Back To the Review Details</Button>
+                        </Link>
                         <Link to={`comments/add`}><Button color="primary">Add New Comment</Button></Link>
                     </div>
-                    <br></br>
-                    <Link to={`/reviews/details/${reviewId}`}>
-                        <Button> Back To the Review Details</Button>
-                    </Link>
+
+
                     {comments.map(c => {
                         return <Comment key={c.id} comment={c} />
                     })}
