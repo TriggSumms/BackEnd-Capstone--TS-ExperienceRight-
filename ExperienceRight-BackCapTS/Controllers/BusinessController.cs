@@ -51,6 +51,16 @@ namespace ExperienceRight_BackCapTS.Controllers
             return Ok(catbusiness);
         }
 
+        [HttpGet("bizbyup/{id}")]
+        public IActionResult GetBuisByUserId(int id)
+        {
+            var business = _businessRepository.GetUserBusinessById(id);
+            if (business == null)
+            {
+                return NotFound();
+            }
+            return Ok(business);
+        }
 
 
         [HttpGet("{id}")]

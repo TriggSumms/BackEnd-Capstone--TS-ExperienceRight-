@@ -53,6 +53,7 @@ export default function BusinessREGISTRATIONaddForm() {
             // .then((b) => {
             //     history.push(`/businesses/details/${b.id}`)
            //  })
+           
            .then(() => {
             history.push(`/businesshello`)
            })

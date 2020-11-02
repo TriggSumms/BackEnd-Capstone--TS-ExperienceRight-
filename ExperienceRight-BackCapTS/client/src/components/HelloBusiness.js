@@ -1,28 +1,24 @@
 import React, { useState, useContext, useEffect } from "react";
 import {Button } from "reactstrap";
-import { useParams, Link, useHistory } from "react-router-dom";
+import {  Link } from "react-router-dom";
 import { UserProfileContext } from "../providers/UserProfileProvider";
 import { BusinessContext } from "../providers/BusinessProvider";
 import "./Hello.scss";
 
 export default function HelloBusiness() {
-  const { userProfile, getUserId } = useContext(UserProfileContext);
-  const {  getBusinessById } = useContext(BusinessContext);
+  const { userProfile, getUserId, getUserProfile } = useContext(UserProfileContext);
+  const {  business, getBusinessById, getBusinessByUserId } = useContext(BusinessContext);
   const sessionUser = JSON.parse(sessionStorage.getItem("userProfile"));
-  const { id } = useParams();
-  const history = useHistory();
   console.log("hello", userProfile);
   
-  useEffect(() => {
-    getBusinessById(id)  
-}, []);
+
+
+let userId = sessionUser.id;
 
   useEffect(() => {
-    getUserId(id)
+    getBusinessByUserId(userId)  
 }, []);
 
-
-//console.log("hello2", sessionUser.businessz);
 
 
   return (
@@ -48,11 +44,11 @@ export default function HelloBusiness() {
   </div>
 </div>
 <div class="text">
-  <p> Hello! Welcome to Experience Right. As a user and pridefull Business Owner, you have agreed on creating transparency between your consumers and your business. Kudos, Experience Right is here to assist with fostering that connection! </p>
+  <p> Hello {sessionUser.fullName} ! Welcome to Experience Right. As a user and pridefull Business Owner, you have agreed on creating transparency between your consumers and your business. Kudos, Experience Right is here to assist with fostering that connection! </p>
     <p> Heres the deal,</p>
   <p> Feel Free to read your reviews and respond back to your users reviews on your profile page (*via the comments option). </p>
   <p>Lastly, keep your businesses profile as acurate as possible so your customers can keep utilizing your services! </p>
-  <button><Link className="primary-btn" style={{ textDecoration: 'none' }} to={`/businesses/details/${sessionUser.id}`}>Get Started</Link></button>
+  <button><Link className="primary-btn" style={{ textDecoration: 'none' }} to={`/businesses/details/${business.id}`}>Get Started</Link></button>
 </div>
 
 </span> 

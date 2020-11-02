@@ -59,7 +59,8 @@ console.log("TEST", userTypeId)
        <fieldset>
       <Label for="userTypeId">What Type of user are you?</Label>
       <br />
-      <select id="userTypeId" className="userEditDropdown"  /* defaultValue={userType.id === 1} */ onChange={e => setUserTypeId(parseInt(e.target.value))}>
+      <select id="userTypeId" className="userEditDropdown"   type="select" onChange={e => setUserTypeId(parseInt(e.target.value))}>
+                        <option>USER CHOICE</option>
                         {userTypes.map(userType =>
                             
                                 <option value={userType.id}>

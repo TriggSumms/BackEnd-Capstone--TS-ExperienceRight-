@@ -203,7 +203,7 @@ namespace ExperienceRight_BackCapTS.Repositories
                     DbUtils.AddParameter(cmd, "@businessId", businessId);
 
                     var reader = cmd.ExecuteReader();
-
+                    
                     var reviews = new List<Review>();
 
                     while (reader.Read())

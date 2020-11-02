@@ -42,7 +42,7 @@ namespace ExperienceRight_BackCapTS.Controllers
 
 
 
-        [HttpGet("user/{id}")]
+        [HttpGet("userprofile/{id}")]
         public IActionResult GetUserProfileById(int id)
         {
             return Ok(_userProfileRepository.GetProfileById(id));

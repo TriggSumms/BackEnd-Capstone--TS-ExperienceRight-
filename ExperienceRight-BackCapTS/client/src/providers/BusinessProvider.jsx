@@ -8,6 +8,7 @@ export const BusinessProvider = (props) => {
   const { getToken } = useContext(UserProfileContext);
   const [businesses, setBusinesses] = useState([]);
   const [business, setBusiness] = useState({});
+  const [userBusiness, setUserBusiness] = useState({});
   const [categories, setCategories] = useState([]);
   //const [businesszByCat, setBusinesszByCat] = useState([]);
   
@@ -48,6 +49,19 @@ export const BusinessProvider = (props) => {
       })).then((resp) => resp.json())
       .then(setBusiness);
   };
+
+  const getBusinessByUserId = (id) => {
+    getToken().then((token) =>
+      fetch(`/api/business/bizbyup/${id}`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })).then((resp) => resp.json())
+      .then(setBusiness);
+  };
+
+
 
   const addBusiness = (business) => {
     return getToken().then((token) =>
@@ -122,7 +136,7 @@ const getAllCategories = () => {
   return (
     <BusinessContext.Provider value={{
     //   business, businesses, getAllBusinesses, getById, addReview setBusiness, getAllReviewsByUser
-    categories, business, businesses, getAllBusinesses, setBusiness, getBusinessById, addBusiness, getAllCategories, updateBusiness, searchBusinesses
+    categories, business, userBusiness, businesses, getAllBusinesses, setBusiness, getBusinessById, addBusiness, getAllCategories, updateBusiness, searchBusinesses, getBusinessByUserId
     }}>
       {props.children}
     </BusinessContext.Provider>

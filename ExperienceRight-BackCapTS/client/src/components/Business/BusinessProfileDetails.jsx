@@ -4,7 +4,7 @@ import { BusinessContext } from "../../providers/BusinessProvider";
 import { ReviewContext } from "../../providers/ReviewProvider";
 import { useParams, Link, useHistory } from "react-router-dom";
 import { Card, CardBody, Button, CardHeader } from "reactstrap";
-import "./BusinessProfile.scss";
+//import "./BusinessProfile.scss";
 import ReactStars from 'react-stars'
 import { render } from 'react-dom'
 
@@ -20,7 +20,7 @@ export default function BusinessProfileDetails() {
 
 
 
-  console.log("whats in sessionstorage", sessionStorage)
+  // console.log("whats in sessionstorage", sessionStorage)
 
   useEffect(() => {
     getBusinessById(id)
@@ -44,7 +44,7 @@ export default function BusinessProfileDetails() {
     sum = sum + num
   }
   const averageRating = sum / reviews.length
-  console.log("finalavg", averageRating)
+  // console.log("finalavg", averageRating)
 
   //Trial Examples, not needed....*overcomplicated the issue
 
@@ -117,7 +117,7 @@ export default function BusinessProfileDetails() {
                 </div>
                 <div class="actions">
                   <div class="ratings">
-{/* <ReactStars {...starRepresentation} value= {averageRating} /> */}
+                  {/* <ReactStars {...starRepresentation} value= {averageRating} /> */}
                     <span class="rating-count"></span>
                     <Link to={`/businesses/edit/${id}`}><img src="https://img.icons8.com/ultraviolet/30/000000/edit-property.png" /></Link>
                   </div>
@@ -125,8 +125,8 @@ export default function BusinessProfileDetails() {
                     <span class="comment-count"><strong>{reviews.length}</strong> Reviews</span>
                   </div>
                   {/* <div class="consultation">
-				<span class="fee"><strong>34K</strong>Followers</span>
-			</div> */}
+		        		<span class="fee"><strong>34K</strong>Followers</span>
+			      </div> */}
       
                   <div class="appo">
                     <a class="btn"><Link class="btn" to={`/reviews/add/${business.id}`}>Add Review</Link></a>
@@ -166,9 +166,9 @@ export default function BusinessProfileDetails() {
                   <th></th> */}
                 </tr>
               </thead>
-              {reviews.map(r =>
+              {/* {reviews.map(r =>
                 <Review key={r.id} review={r} />
-              )}
+              )} */}
             </table>
           </div>
         </div>

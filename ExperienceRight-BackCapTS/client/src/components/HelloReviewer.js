@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import "./Hello.scss";
 
 export default function HelloReviewer() {
+  const sessionUser = JSON.parse(sessionStorage.getItem("userProfile"));
   return (
     <span style={{
       position: "fixed",
@@ -26,7 +27,7 @@ export default function HelloReviewer() {
   </div>
 </div>
 <div class="text">
-  <p>Hello, and welcome to Experience Right! During your session you will act with anoynmous posting rights and will be able to review your experience(s) with the businesses of your choice!</p>
+  <p>Hello {sessionUser.fullName}, and welcome to Experience Right! During your session you will act with anoynmous posting rights and will be able to review your experience(s) with the businesses of your choice!</p>
   <p>Its important for your voice to be heard, and the businesses with XR accounts want to hear and respond to your thoughts,</p>
     <p> so if you check back into your account after a day or so you should see a response from the business in your comments section!</p>
   <p>Instructions, press the button below and select the business you would like to review. If youd like to edit/delete your review you will be prompted in the details view!</p>

@@ -255,34 +255,16 @@ namespace ExperienceRight_BackCapTS.Repositories
 
         //            while (reader.Read())
         //            {
-        //                businessz.Add(new Business()
-        //                {
-        //                    Id = reader.GetInt32(reader.GetOrdinal("Id")),
-        //                    EstablishmentName = reader.GetString(reader.GetOrdinal("EstablishmentName")),
-        //                    Bio = reader.GetString(reader.GetOrdinal("Bio")),
-        //                    Address = reader.GetString(reader.GetOrdinal("Address")),
-        //                    HoursOfOperation = reader.GetString(reader.GetOrdinal("HoursOfOperation")),
-        //                    Phone = reader.GetString(reader.GetOrdinal("Phone")),
-        //                    CategoryId = reader.GetInt32(reader.GetOrdinal("CategoryId")),
-        //                    Category = new Category()
-        //                    {
-        //                        Id = reader.GetInt32(reader.GetOrdinal("CategoryId")),
-        //                        Name = reader.GetString(reader.GetOrdinal("Name"))
-        //                    },
-        //                    UserProfileId = reader.GetInt32(reader.GetOrdinal("UserProfileId")),
-        //                    Id = reader.GetInt32(reader.GetOrdinal("Id")),
-        //                    Title = reader.GetString(reader.GetOrdinal("Title")),
-        //                    Content = reader.GetString(reader.GetOrdinal("Content")),
-        //                    CreateDateTime = reader.GetDateTime(reader.GetOrdinal("CreateDateTime")),
-        //                    DateOfExperience = DbUtils.GetNullableDateTime(reader, "DateOfExperience"),
-        //                    Rating = reader.GetInt32(reader.GetOrdinal("Rating")),
-        //                    FrequencyId = reader.GetInt32(reader.GetOrdinal("FrequencyId")),
-        //                    UserProfileId = reader.GetInt32(reader.GetOrdinal("UserProfileId")),
-        //                    BusinessId = reader.GetInt32(reader.GetOrdinal("BusinessId"))
-
-        //                });
+        //            Id = reader.GetInt32(reader.GetOrdinal("Id")),
+        //            Title = reader.GetString(reader.GetOrdinal("Title")),
+        //            Content = reader.GetString(reader.GetOrdinal("Content")),
+        //            CreateDateTime = reader.GetDateTime(reader.GetOrdinal("CreateDateTime")),
+        //            DateOfExperience = DbUtils.GetNullableDateTime(reader, "DateOfExperience"),
+        //            Rating = reader.GetInt32(reader.GetOrdinal("Rating")),
+        //            FrequencyId = reader.GetInt32(reader.GetOrdinal("FrequencyId")),
+        //            UserProfileId = reader.GetInt32(reader.GetOrdinal("UserProfileId")),
+        //            BusinessId = reader.GetInt32(reader.GetOrdinal("BusinessId"))
         //            }
-
 
         //            reader.Close();
 
@@ -354,9 +336,10 @@ namespace ExperienceRight_BackCapTS.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                         SELECT b.Id, b.EstablishmentName, b.Bio, b.Address, b.HoursOfOperation, b.Phone, b.UserProfileId, b.CategoryId,
+
+                            SELECT  b.EstablishmentName, b.Bio, b.Address, b.HoursOfOperation, b.Phone, b.UserProfileId, b.CategoryId,
                               
-                               c.Name AS CategoryName,
+                              c.Id, c.Name AS CategoryName,
                               
                               up.FirstName, up.LastName, up.DisplayName, up.FirebaseUserId,
                               up.Email, up.CreateDateTime AS UserProfileCreationDate, up.ProfileImageLocation, up.UserTypeId, 
@@ -398,7 +381,7 @@ namespace ExperienceRight_BackCapTS.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                              SELECT b.EstablishmentName, b.Bio, b.Address, b.HoursOfOperation, b.Phone, b.UserProfileId, b.CategoryId,
+                              SELECT b.Id AS BusinessId, b.EstablishmentName, b.Bio, b.Address, b.HoursOfOperation, b.Phone, b.UserProfileId, b.CategoryId,
                               
                               c.Id, c.Name AS CategoryName,
                               
@@ -413,7 +396,7 @@ namespace ExperienceRight_BackCapTS.Repositories
                               LEFT JOIN UserType ut ON up.UserTypeId = ut.id
                               LEFT JOIN Category c ON b.CategoryId = c.id
                        
-                            WHERE b.id = @id AND up.id = @id";
+                            WHERE up.id = @id";
 
                     //WHERE b.id = @id AND up.UserProfileId = @userProfileId";
 
@@ -425,7 +408,39 @@ namespace ExperienceRight_BackCapTS.Repositories
 
                     if (reader.Read())
                     {
-                        business = NewBusinessFromReader(reader);
+                        return new Business()
+                        {
+                            Id = reader.GetInt32(reader.GetOrdinal("BusinessId")),
+                            EstablishmentName = reader.GetString(reader.GetOrdinal("EstablishmentName")),
+                            Bio = reader.GetString(reader.GetOrdinal("Bio")),
+                            Address = reader.GetString(reader.GetOrdinal("Address")),
+                            HoursOfOperation = reader.GetString(reader.GetOrdinal("HoursOfOperation")),
+                            Phone = reader.GetString(reader.GetOrdinal("Phone")),
+                            CategoryId = reader.GetInt32(reader.GetOrdinal("CategoryId")),
+                            Category = new Category()
+                            {
+                                Id = reader.GetInt32(reader.GetOrdinal("CategoryId")),
+                                Name = reader.GetString(reader.GetOrdinal("CategoryName"))
+                            },
+                            UserProfileId = reader.GetInt32(reader.GetOrdinal("UserProfileId")),
+                            UserProfile = new UserProfile()
+                            {
+                                Id = reader.GetInt32(reader.GetOrdinal("UserProfileId")),
+                                FirebaseUserId = reader.GetString(reader.GetOrdinal("FirebaseUserId")),
+                                DisplayName = reader.GetString(reader.GetOrdinal("DisplayName")),
+                                FirstName = reader.GetString(reader.GetOrdinal("FirstName")),
+                                LastName = reader.GetString(reader.GetOrdinal("LastName")),
+                                Email = reader.GetString(reader.GetOrdinal("Email")),
+                                CreateDateTime = reader.GetDateTime(reader.GetOrdinal("UserProfileCreationDate")),
+                                ProfileImageLocation = DbUtils.GetNullableString(reader, "ProfileImageLocation"),
+                                UserTypeId = reader.GetInt32(reader.GetOrdinal("UserTypeId")),
+                                UserType = new UserType()
+                                {
+                                    Id = reader.GetInt32(reader.GetOrdinal("UserTypeId")),
+                                    Name = reader.GetString(reader.GetOrdinal("UserTypeName"))
+                                }
+                            },
+                        };
                     }
 
                     reader.Close();
