@@ -35,9 +35,9 @@ export default function ReviewAddForm() {
         userProfileId: sessionUser.id
     });
 
-    console.log("Testing Review", review)
-    console.log("test", id)
-    console.log("test2", sessionUser.id)
+    // console.log("Testing Review", review)
+    // console.log("test", id)
+    // console.log("test2", sessionUser.id)
 
 
 

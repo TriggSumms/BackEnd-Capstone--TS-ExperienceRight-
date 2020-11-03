@@ -410,7 +410,7 @@ namespace ExperienceRight_BackCapTS.Repositories
                     {
                         return new Business()
                         {
-                            Id = reader.GetInt32(reader.GetOrdinal("Id")),
+                            Id = reader.GetInt32(reader.GetOrdinal("BusinessId")),
                             EstablishmentName = reader.GetString(reader.GetOrdinal("EstablishmentName")),
                             Bio = reader.GetString(reader.GetOrdinal("Bio")),
                             Address = reader.GetString(reader.GetOrdinal("Address")),

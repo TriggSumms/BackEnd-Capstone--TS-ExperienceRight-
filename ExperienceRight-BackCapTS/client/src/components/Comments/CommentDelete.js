@@ -4,6 +4,8 @@ import { useHistory } from "react-router-dom";
 import { CommentContext } from "../../providers/CommentProvider";
 import { Card, CardBody, Button, CardHeader } from "reactstrap";
 import { Link } from "react-router-dom";
+import "./DetailsViewCommentz.css";
+
 
 const CommentDelete = () => {
     const history = useHistory();
@@ -19,7 +21,7 @@ const CommentDelete = () => {
 
     const deleteAComment = (id) => {
         deleteComment(commentId)
-            .then(() => history.push(`/review/${reviewId}/comments`))
+            .then(() => history.push(`/reviews/details/${reviewId}`))
     }
 
     if (!comment) {
@@ -39,23 +41,31 @@ const CommentDelete = () => {
             </Link>
             {(currentUser === comment.userProfileId) ?
                 <Button onClick={deleteAComment} color="danger" className="commentButton">Delete</Button> : <p>a</p>}
-            <Card border="dark" className="border border-primary m-3">
-                <CardHeader className="">
-                    <div className="d-flex justify-content-between">
-                        SUBJECT:  {comment.subject}
+            <div class="comments-container">
+		<ul id="comments-list" class="comments-list">
+			<li>
+				<div class="comment-main-level">
+					<div class="comment-avatar"><img src={comment.userProfile.profileImageLocation} alt=""></img>
+                    </div>
+					<div class="comment-box">
+						<div class="comment-head">
+							<h6 class="comment-name by-author">{comment.userProfile.firstName}</h6>
+							<span>{new Intl.DateTimeFormat('en-US').format(new Date(comment.createDateTime))}</span>
+							<i class="fa fa-reply"></i>
 
-                    </div>
-                    <div className="justify-content-between mt-10 mb-0">
-                        <p className="float-left">Business Owner's Name: {comment.userProfile.displayName}</p>
-                        <p className="float-right">Posted on: {new Intl.DateTimeFormat('en-US').format(new Date(comment.createDateTime))}</p>
-                    </div>
-                </CardHeader>
-                <CardBody className="text-center">
-                    {comment.content}
-                </CardBody>
-                <div>
-                </div>
-            </Card>
+							<i class="fa fa-heart"></i>
+						</div>
+						<div class="comment-content">
+                        {comment.content}
+						</div>
+					</div>
+                    
+				</div>
+
+			</li>
+
+		</ul>
+	</div>
         </>
     )
 

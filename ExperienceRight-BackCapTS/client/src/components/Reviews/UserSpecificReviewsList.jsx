@@ -75,7 +75,7 @@ export default function UserSpecificReviewsList() {
                                             <i class="fa fa-star-o"></i>
                                             <i class="fa fa-star-o"></i>
                                         </span>
-                                        <span class="rating-count">000 Ratings</span>
+                                        {/* <span class="rating-count">000 Ratings</span> */}
                                     </div>
                                     <div class="comments">
                                         <span class="comment-count"><strong>{reviews.length}</strong> Reviews Made</span>

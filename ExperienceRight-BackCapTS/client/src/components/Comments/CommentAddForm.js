@@ -8,7 +8,7 @@ import { useParams, Link } from "react-router-dom";
 ///Use History allows us to use the back button.
 const CommentAddForm = () => {
     let userId = sessionStorage.userProfileId
-    console.log(userId);
+    //console.log(userId);
     const history = useHistory();
     const { reviewId } = useParams();
     const { addComment } = useContext(CommentContext);
@@ -48,7 +48,7 @@ const CommentAddForm = () => {
             comment.createDateTime = new Date()
 
             addComment(comment).then((evt) => history.push(`/review/${reviewId}/comments`))
-            setIsLoading(false);
+            //setIsLoading(false);
         }
     }
 

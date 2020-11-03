@@ -20,7 +20,6 @@ export default function BusinessProfileDetails() {
 
 
 
-  console.log("whats in sessionstorage", sessionStorage)
 
 
 
@@ -36,15 +35,6 @@ export default function BusinessProfileDetails() {
 
 
 
-//   let userId = sessionUser.id;
-
-//   useEffect(() => {
-//     getBusinessByUserId(userId)  
-// }, []);
-
-// console.log(userId)
-
-
 
 
 
@@ -58,17 +48,13 @@ export default function BusinessProfileDetails() {
     sum = sum + num
   }
   const averageRating = sum / reviews.length
-  console.log("finalavg", averageRating)
+  //console.log("finalavg", averageRating)
 
-  //Trial Examples, not needed....*overcomplicated the issue
-
-  // let sum = reviewzz.reduce(function(prev, current) {
-  //   return prev + +current.rating
-  // });
-  // const sum = reviewzz.reduce((totalRatings, reviewzz) => totalRatings + reviewzz.rating, 0)
-  // const sum = reviewzz.reduce((totalRatings, reviewzz) => totalRatings + parseInt(reviewzz.rating), 0)
 
 //Physical Representation Below
+
+
+
 
   const parsedRating = parseInt(rating);
   review.rating = parsedRating;
@@ -83,7 +69,6 @@ export default function BusinessProfileDetails() {
       half: false
   }
   //END RATING AVERAGE
-
 
   
 
@@ -102,7 +87,7 @@ export default function BusinessProfileDetails() {
           <div className="postHeader">
             <div className="postHeaderDetails">
               <div>
-                <h1>Business</h1>
+                {/* <h1>Business</h1> */}
               </div>
               <div class="doctor-card">
                 <div class="info">
@@ -132,7 +117,7 @@ export default function BusinessProfileDetails() {
                 <div class="actions">
                   <div class="ratings">
                     <span class="rating-count"></span>
-                    {sessionUser.userType === 2 ?  
+                    {parseInt(sessionUser.userTypeId) == 1 ?  
                     <>
                         <Link to={`/businesses/edit/${id}`}><img src="https://img.icons8.com/ultraviolet/30/000000/edit-property.png" /></Link>
                     </>
@@ -147,7 +132,16 @@ export default function BusinessProfileDetails() {
                     <span class="comment-count"><strong>{reviews.length}</strong> Reviews</span>
                   </div>
                   <div class="appo">
-                    <a class="btn"><Link class="btn" to={`/reviews/add/${id}`}>Add Review</Link></a>
+                  {parseInt(sessionUser.userTypeId) == 2 ?  
+                    <>
+                         <a class="btn"><Link class="btn" to={`/reviews/add/${id}`}>Add Review</Link></a>
+                    </>
+                    :
+                   <>
+                   <em></em>
+                    </> 
+                }
+                   
                   </div>
                 </div>
                 <div class="locations">

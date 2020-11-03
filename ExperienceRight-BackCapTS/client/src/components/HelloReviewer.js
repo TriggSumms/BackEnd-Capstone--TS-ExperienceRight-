@@ -12,6 +12,7 @@ export default function HelloReviewer() {
       right: 0,
       top: "50%",
       marginTop: "-3.5rem",
+      marginLeft: "10rem",
       textAlign: "center",
       fontSize: "12px",
     }}>

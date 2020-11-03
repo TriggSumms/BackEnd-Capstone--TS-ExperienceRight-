@@ -33,32 +33,6 @@ export function UserProfileProvider(props) {
       }).then(resp => resp.json())
         .then(setUsers));
 
-  // const getAllInactiveUsers = () =>
-  //   getToken().then((token) =>
-  //     fetch(`${apiUrl}/inactive`, {
-  //       method: "GET",
-  //       headers: {
-  //         Authorization: `Bearer ${token}`
-  //       }
-  //     }).then(resp => resp.json())
-  //       .then(setUsers));
-
-
-// //Had to adjust some spare code here and remove the parameter for Isactive 
-//   const login = (email, pw) => {
-//     return firebase.auth().signInWithEmailAndPassword(email, pw)
-//       .then((signInResponse) => getUserProfile(signInResponse.user.uid))
-//       .then((userProfile) => {
-//         { console.log(userProfile) }
-//         if (userProfile) {
-//           sessionStorage.setItem("userProfile", JSON.stringify(userProfile));
-//           setIsLoggedIn(true);
-//         }
-//         else {
-//           alert("This account has been deactivated by an administrator.")
-//         }
-//       });
-//   };
 
   const login = (email, pw) => {
     return firebase.auth().signInWithEmailAndPassword(email, pw)
@@ -161,17 +135,7 @@ export function UserProfileProvider(props) {
       }));
   };
 
-  // const getAllUserTypes = () =>{
-    
-  // getToken().then((token) =>
-  //     fetch("/api/usertype", {
-  //       method: "GET",
-  //       headers: {
-  //         Authorization: `Bearer ${token}`
-  //       }
-  //     }).then(resp => resp.json())
-  //       .then(setUserTypes));
-  //   }
+
         const getAllUserTypes = () => {
           return fetch("/api/usertype", {
               method: "GET",

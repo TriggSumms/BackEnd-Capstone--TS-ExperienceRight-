@@ -4,7 +4,7 @@ import { ListGroup, ListGroupItem } from "reactstrap";
 import { useParams, Link } from "react-router-dom";
 import { Button, } from "reactstrap";
 import { ReviewContext } from "../../providers/ReviewProvider";
-import Comment from "./Comment";
+//import Comment from "./Comment";
 import DetailsViewComment from "../Comments/DetailsViewComment";
 import { useHistory } from "react-router-dom";
 

@@ -14,15 +14,16 @@ export default function ReviewEditForm() {
     const { businesses, getAllBusinesses } = useContext(BusinessContext);
     const [businessId, setBusinessId] = useState();
     const [frequencyId, setFrequencyId] = useState();
-    const [rating, setRating] = useState();
+    //const [ratingios, setRating] = useState();
     const [isLoading, setIsLoading] = useState(false);
     //UseParams pulls in the id information from applications view 
     const { id } = useParams();
     const history = useHistory();
 
-
-
     const [editedReview, setEditedReview] = useState({});
+
+
+
 
 
 
@@ -65,9 +66,11 @@ export default function ReviewEditForm() {
         //START RATING REVIEW INPUT
     // const onChange = event => setRating(parseInt(event.target.value));
 
-    const parsedRating = parseInt(rating);
+    const parsedRating = parseInt(review.rating);
     review.rating = parsedRating;
-
+ 
+    // const parsedRating2 = parseInt(review.rating);
+    // review.rating = parsedRating2;
     
     const formStarRating = {
         size: 60,
@@ -75,16 +78,22 @@ export default function ReviewEditForm() {
         char: '',
         color1: '#ff9900',
         color2: '#6599ff',
+       // value: parsedRating,
         edit: true,
         // half: false,
-        // onChange: e => setRating(parseInt(e.target.value)),
-        onChange: parsedRating => {
+        
+        // onChange: parsedRating2 => {
+        //     // console.log(`Example 2: new value is ${newValue}`)
+        //     setRating(parsedRating2)
+        // },
+         onChange: parsedRating => {
             // console.log(`Example 2: new value is ${newValue}`)
-            setRating(parsedRating);
+            setEditedReview(parsedRating);
         }
+ 
+
     }
     //END RATING REVIEW
-
 
 
 
@@ -98,7 +107,7 @@ export default function ReviewEditForm() {
             id: parseInt(review.id),
             title: editedReview.title,
             content: editedReview.content,
-            rating: editedReview.rating,
+            rating: parseInt(editedReview.rating),
             frequencyId: parseInt(editedReview.frequencyId),
             userProfileId: parseInt(review.userProfileId),
             businessId: parseInt(review.businessId),
@@ -169,9 +178,10 @@ export default function ReviewEditForm() {
                                 <FormGroup>
                                     <Label for="content">Content</Label>
                                     <Input
-                                        type="textarea"
+                                        type="text"
                                         id="content"
                                         required
+                                       // defaultValue= {review.content}
                                         defaultValue={editedReview.content}
                                         name="content"
                                         onChange={handleFieldChange}
@@ -207,8 +217,8 @@ export default function ReviewEditForm() {
                                 </FormGroup>
                                 <Label for="rating">Rate Your Experience</Label>
 
-                                <Stars {...formStarRating} />
-                                {/* <FormGroup>
+                                {/* <Stars {...formStarRating} id="rating" required defaultValue={editedReview.rating} /> */}
+                                <FormGroup>
                                     <Label for="rating">Rate the Experience</Label>
                                     <Input
                                         type="number"
@@ -216,9 +226,10 @@ export default function ReviewEditForm() {
                                         required
                                         defaultValue={editedReview.rating}
                                         name="rating"
-                                        onChange={e => setRating(parseInt(e.target.value))}
+                                        // onChange={e => setRating(parseInt(e.target.value))}
+                                        onChange={handleFieldChange}
                                     />
-                                </FormGroup> */}
+                                </FormGroup>
                             </Form>
 
                             <div>

@@ -53,7 +53,7 @@ export default function ReviewDetail() {
 
     // console.log("Testing", business)
 
-    console.log("Testing2", sessionUser)
+    //console.log("Testing2", sessionUser)
 
     // we need the if statement to return true on the first render.
     // so we must include !post.userProfile because react will not let us
@@ -144,9 +144,7 @@ export default function ReviewDetail() {
     else if (sessionUser.userTypeId === 1) {
         return (
             <>
-                <Link style={{ textDecoration: 'none' }} to={`/reviews`}>
-                    <button className="std-btn">&#x2190; Back to Reviews</button>
-                </Link>
+
                 <div className="postContainer">
                     <div className="post">
                         <section className="px-3">
@@ -188,9 +186,7 @@ export default function ReviewDetail() {
                             </div>
 
                             <div>
-                                <section className="row post__content">
-                                    <p className="col-sm-12 mt-5">{review.content}</p>
-                                </section></div>
+                           </div>
                             <div>
                             </div>
                         </section>

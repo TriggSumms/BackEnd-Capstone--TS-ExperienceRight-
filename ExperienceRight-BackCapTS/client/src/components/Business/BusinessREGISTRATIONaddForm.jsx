@@ -9,7 +9,6 @@ import { Button, Form, FormGroup, Label, Input, DropdownToggle, DropdownMenu, Dr
 
 export default function BusinessREGISTRATIONaddForm() {
     const history = useHistory();
-    //    const { frequencies, AllFrequencies} = useContext(ReviewContext);
     const { addBusiness, categories, getAllCategories } = useContext(BusinessContext);
     const [categoryId, setCategoryId] = useState();
     const sessionUser = JSON.parse(sessionStorage.getItem("userProfile"));
@@ -30,7 +29,7 @@ export default function BusinessREGISTRATIONaddForm() {
 
 
     
-    console.log("testingbusinessvalue", business)
+   // console.log("testingbusinessvalue", business)
 
     const handleFieldChange = e => {
         const stateToChange = { ...business };
@@ -42,17 +41,12 @@ export default function BusinessREGISTRATIONaddForm() {
     //START REVIEW CREATION METHOD
     const createNewBusiness = e => {
         e.preventDefault();
-        if (business.establishment === "") {
-            alert("Does your Business have a name!")
-
+        if (business.establishment === "" || business.bio === "" || business.hoursOfOperation === "" || business.address === "" || business.phone === "") {
+            alert("Fill out all the fields for your business, otherwise a customer wont be able recognize you!");       
         } else {
             setIsLoading(true);
         }
         addBusiness(business)
-            // .then((b) => {
-            //     history.push(`/businesses/details/${b.id}`)
-           //  })
-
            .then(() => {
             history.push(`/businesshello`)
            })

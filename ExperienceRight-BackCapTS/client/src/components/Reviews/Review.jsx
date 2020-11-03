@@ -70,7 +70,7 @@ export default function Review({ review }) {
                 <div className="authorPostItems">
                   <div className="authorPostHeaderLeft">
                   
-                    <h5 className="apht"> <img className="reviewAvatar" src={randomProfiles} alt="image" />Title: {review.title}</h5>
+                    <h5 className="apht"> <img className="reviewAvatar" src={randomProfiles} alt="image" />...{review.title}</h5>
                     <i>Business Reviewed: {review.business.establishmentName}</i>
                     <br></br>
                     <em className="ALittleSpaceBetweenIcons"><img src="https://img.icons8.com/windows/22/000000/user-lock--v1.png" /></em>
@@ -118,7 +118,7 @@ export default function Review({ review }) {
             <div className="authorPostDetails">
               <div className="authorPostItems">
                 <div className="authorPostHeaderLeft">
-                <h5 className="apht"> <img className="reviewAvatar" src={randomProfiles} alt="image" />Title: {review.title}</h5>
+                <h5 className="apht"> <img className="reviewAvatar" src={randomProfiles} alt="image" />...{review.title}</h5>
                   <i>Business Reviewed: {review.business.establishmentName}</i>
                   <br></br>
                   <em className="ALittleSpaceBetweenIcons"><img src="https://img.icons8.com/windows/22/000000/user-lock--v1.png" /></em>
@@ -165,7 +165,7 @@ export default function Review({ review }) {
             <div className="authorPostDetails">
               <div className="authorPostItems">
                 <div className="authorPostHeaderLeft">
-                <h5 className="apht"> <img className="reviewAvatar" src={randomProfiles} alt="image" />Title: {review.title}</h5>
+                <h5 className="apht"> <img className="reviewAvatar" src={randomProfiles} alt="image" />...{review.title}</h5>
                   <i>Business Reviewed: {review.business.establishmentName}</i>
                   <br></br>
                   <em className="ALittleSpaceBetweenIcons"><img src="https://img.icons8.com/windows/22/000000/user-lock--v1.png" /></em>

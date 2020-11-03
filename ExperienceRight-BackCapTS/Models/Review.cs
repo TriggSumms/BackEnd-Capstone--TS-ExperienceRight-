@@ -12,7 +12,7 @@ namespace ExperienceRight_BackCapTS.Models
         public int Id { get; set; }
 
         [Required]
-        [MaxLength(100)]
+        [MaxLength(75)]
         public string Title { get; set; }
 
         [Required]
@@ -31,6 +31,8 @@ namespace ExperienceRight_BackCapTS.Models
         public DateTime? DateOfExperience { get; set; }
 
         [Required]
+        //[MinLength(0)]
+        //[MaxLength(10)]
         public int Rating { get; set; }
 
         [Required]
