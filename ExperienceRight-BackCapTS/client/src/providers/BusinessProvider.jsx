@@ -58,7 +58,7 @@ export const BusinessProvider = (props) => {
           Authorization: `Bearer ${token}`
         }
       })).then((resp) => resp.json())
-      .then(setBusiness);
+      .then(setUserBusiness);
   };
 
 

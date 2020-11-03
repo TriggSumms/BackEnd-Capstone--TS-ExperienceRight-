@@ -17,10 +17,6 @@ export default function BusinessREGISTRATIONaddForm() {
 
 
 
-
-
-    
-
     const [business, setBusiness] = useState({
         establishmentName: "",
         bio: "",
@@ -31,6 +27,9 @@ export default function BusinessREGISTRATIONaddForm() {
         userProfileId: sessionUser.id
     });
 
+
+
+    
     console.log("testingbusinessvalue", business)
 
     const handleFieldChange = e => {
@@ -53,7 +52,7 @@ export default function BusinessREGISTRATIONaddForm() {
             // .then((b) => {
             //     history.push(`/businesses/details/${b.id}`)
            //  })
-           
+
            .then(() => {
             history.push(`/businesshello`)
            })

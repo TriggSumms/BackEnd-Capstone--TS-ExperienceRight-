@@ -36,8 +36,8 @@ export default function ReviewAddForm() {
     });
 
     console.log("Testing Review", review)
-
-
+    console.log("test", id)
+    console.log("test2", sessionUser.id)
 
 
 

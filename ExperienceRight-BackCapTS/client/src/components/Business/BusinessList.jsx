@@ -151,7 +151,7 @@ export default function BusinessList() {
                   </th>
                 </tr>
               </thead>
-              <div className= "businessPond">
+              <div className= "businessPond1">
                   {filteredBusinesses.map(business => {
                     return <Business key={business.id} business={business} categories={categories} />;
                   })}

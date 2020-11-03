@@ -1,0 +1,114 @@
+:root {
+    --overlap: 160px;
+    --overlap-border: 15px;
+  }
+  
+  body {
+    padding: 2.5rem 0;
+  }
+  
+  .row {
+    display: flex;
+    align-items: center;
+  }
+  
+  .image-wrap {
+    position: relative;
+    height: 60vh;
+    width: 100%;
+    flex: 1 0 100%;
+    overflow: hidden;
+    transform: translateX(calc(-1 * var(--overlap)));
+    z-index: 0;
+    
+    @media screen and (min-width: 978px) {
+      transform: translateX(calc(-1 * var(--overlap)));
+      height: auto;
+      width: 66%;
+    }
+  }
+  
+  .demoImage {
+    width: 1260px;
+    height: 750px;
+    object-fit: cover;
+    position: relative;
+    left: -70%;
+    
+    @media (min-width: 768px) {
+      
+    }
+  }
+  
+  /* Box
+  ========================================================================== */
+  .box {
+    display: flex;
+    z-index: 1;
+    position: relative;
+    align-items: center;
+    flex: 1 0 40vw;
+    
+    
+    /* Call to Action
+      ========================================================================== */
+    &--cta {
+      position: relative;
+      z-index: 2;
+      
+      @media screen and (min-width: 978px) {
+  
+      }
+  
+      &:before,
+      &:after {
+        content: "";
+        position: absolute;
+        top: 0;
+        height: calc(100% + (var(--overlap-border) * 2));
+        z-index: 1;
+  
+        @media screen and (min-width: 978px) {
+  
+        }
+  
+      }
+  
+      &:before {
+        width: calc(100% - var(--overlap) + var(--overlap-border));
+        left: 0;
+        background: #ededed;
+        transform: translate(calc(-1*var(--overlap-border)), calc(-1*var(--overlap-border)));
+  
+        @media screen and (min-width: 978px) {
+  
+        }
+  
+      }
+  
+      &:after {
+        width: calc(var(--overlap) + var(--overlap-border));
+        right: 0;
+        margin: 0;
+        padding: 0;
+       // background: RGBA(139, 0, 0, 0.66);
+        transform: translate(var(--overlap-border), calc(-1*var(--overlap-border)));
+  
+        @media screen and (min-width: 978px) {
+  
+        }
+  
+      }
+  
+      .content {
+        padding: 1em;
+        background: #fff;
+        position: relative;
+        z-index: 3;
+      }
+  
+    }
+  
+  }
+  
+  

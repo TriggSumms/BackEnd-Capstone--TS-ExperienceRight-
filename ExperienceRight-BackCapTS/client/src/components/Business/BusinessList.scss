@@ -6,17 +6,18 @@ body {
  
 }
 
-.businessPond{
+.businessPond1{
     display: flex;
     flex-wrap: wrap;
-    //flex-basis: auto;
+    flex-basis: auto;
     justify-content: center;
 
 .doctor-card2 {
 flex-direction: column;    
 align-self: flex-start;
-align-items: baseline;
-  max-width: 300px;
+// align-items: baseline;
+  max-width: 450px;
+  max-height: 250px;
   margin: 35px 75px; 
   background: #fff;
   border-radius: 50%;
@@ -32,8 +33,8 @@ align-items: baseline;
 
     .avatar2 {
       overflow: hidden;
-      height: 100px;
-      width: 100px;
+      height: 150px;
+      width: 150px;
       border-radius: 50%;
       margin-top: 5px;
 
@@ -46,12 +47,13 @@ align-items: baseline;
 }
 
     .details2 {
-      align-self: center;
+      align-self: right;
       //padding: 10px 0;
+      margin-left: 70px;
 
       .name2 {
-        font-size: 18px;
-        line-height: 1;
+        font-size: 20px;
+        line-height: 3;
         padding: 2px 0;
         font-weight: 400;
       }

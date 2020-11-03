@@ -90,10 +90,10 @@ export default function Business({ business }) {
           <div class="avatar2">
             <img className="imageBackground" src={business.userProfile.profileImageLocation} alt="image" />
           </div>
-          <div class="details">
+          <div class="details2">
             <div class="name">{business.establishmentName}</div>
 
-            <div class="meta-info2">
+            <div class="meta-info">
               <span class="sp">{business.category.name}</span>
               <div>
                 <span class="exp-yr">Hours of Business: {business.hoursOfOperation}</span>

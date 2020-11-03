@@ -7,7 +7,7 @@ import "./Hello.scss";
 
 export default function HelloBusiness() {
   const { userProfile, getUserId, getUserProfile } = useContext(UserProfileContext);
-  const {  business, getBusinessById, getBusinessByUserId } = useContext(BusinessContext);
+  const {  userBusiness, getBusinessById, getBusinessByUserId } = useContext(BusinessContext);
   const sessionUser = JSON.parse(sessionStorage.getItem("userProfile"));
   console.log("hello", userProfile);
   
@@ -19,6 +19,7 @@ let userId = sessionUser.id;
     getBusinessByUserId(userId)  
 }, []);
 
+console.log("test", userBusiness.id)
 
 
   return (
@@ -48,7 +49,7 @@ let userId = sessionUser.id;
     <p> Heres the deal,</p>
   <p> Feel Free to read your reviews and respond back to your users reviews on your profile page (*via the comments option). </p>
   <p>Lastly, keep your businesses profile as acurate as possible so your customers can keep utilizing your services! </p>
-  <button><Link className="primary-btn" style={{ textDecoration: 'none' }} to={`/businesses/details/${business.id}`}>Get Started</Link></button>
+  <button><Link className="primary-btn" style={{ textDecoration: 'none' }} to={`/businesses/details/${userBusiness.id}`}>Get Started</Link></button>
 </div>
 
 </span> 
