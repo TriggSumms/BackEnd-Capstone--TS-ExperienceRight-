@@ -30,6 +30,8 @@ console.log("test", userBusiness.id)
       right: 0,
       top: "50%",
       marginTop: "-3.5rem",
+      marginLeft: "2rem",
+
       textAlign: "center",
       fontSize: "12px",
     }}>
@@ -45,8 +47,9 @@ console.log("test", userBusiness.id)
   </div>
 </div>
 <div class="text">
-  <p> Hello {sessionUser.fullName} ! Welcome to Experience Right. As a user and pridefull Business Owner, you have agreed on creating transparency between your consumers and your business. Kudos, Experience Right is here to assist with fostering that connection! </p>
-    <p> Heres the deal,</p>
+  <p> Hello {sessionUser.fullName} ! Welcome to Experience Right. As a user and pridefull Business Owner, you have agreed on creating transparency between your consumers and your business.</p>
+  <p> Kudos, Experience Right is here to assist with fostering that connection! </p>
+    <p> Lets get Started,</p>
   <p> Feel Free to read your reviews and respond back to your users reviews on your profile page (*via the comments option). </p>
   <p>Lastly, keep your businesses profile as acurate as possible so your customers can keep utilizing your services! </p>
   <button><Link className="primary-btn" style={{ textDecoration: 'none' }} to={`/businesses/details/${userBusiness.id}`}>Get Started</Link></button>

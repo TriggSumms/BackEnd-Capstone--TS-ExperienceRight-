@@ -32,7 +32,7 @@ export default function Review({ review }) {
 
   const starRepresentation = {
     size: 25,
-    count: 5,
+    count: 10,
     //char: '',
     // color1: '#ff9900',
     // color2: '#6599ff',
@@ -82,7 +82,8 @@ export default function Review({ review }) {
                   </div>
                   <div className="authorPostHeaderRight">
                     {/* <h5>Rate:{review.rating}/10</h5> */}
-                    <h5 className="float-right"><ReactStars {...starRepresentation} value={parseInt(review.rating / 2)} /></h5>
+                    <h5 className="float-right"><ReactStars {...starRepresentation} value={parseInt(review.rating)} /></h5>
+                    {/* <h5 className="float-right"><ReactStars {...starRepresentation} value={parseInt(review.rating / 2)} /></h5> */}
                     <br></br>
                     <br></br>
                     <em>Posted Date:{new Intl.DateTimeFormat('en-US').format(new Date(review.createDateTime))}</em>
@@ -130,7 +131,8 @@ export default function Review({ review }) {
                 </div>
                 <div className="authorPostHeaderRight">
                   {/* <h5>Rate:{review.rating}/10</h5> */}
-                  <h5 className="float-right"><ReactStars {...starRepresentation} value={parseInt(review.rating / 2)} /></h5>
+                  <h5 className="float-right"><ReactStars {...starRepresentation} value={parseInt(review.rating)} /></h5>
+                   {/* <h5 className="float-right"><ReactStars {...starRepresentation} value={parseInt(review.rating / 2)} /></h5> */}
                   <br></br>
                   <br></br>
                   <em>Posted Date:{new Intl.DateTimeFormat('en-US').format(new Date(review.createDateTime))}</em>
@@ -177,7 +179,8 @@ export default function Review({ review }) {
                             })} */}
                 <div className="authorPostHeaderRight">
                   {/* <h5>Rate:{review.rating}/10</h5> */}
-                  <h5 className="float-right"><ReactStars {...starRepresentation} value={parseInt(review.rating / 2)} /></h5>
+                  <h5 className="float-right"><ReactStars {...starRepresentation} value={parseInt(review.rating)} /></h5>
+                   {/* <h5 className="float-right"><ReactStars {...starRepresentation} value={parseInt(review.rating / 2)} /></h5> */}
                   <br></br>
                   <br></br>
                   <em>Posted Date:{new Intl.DateTimeFormat('en-US').format(new Date(review.createDateTime))}</em>

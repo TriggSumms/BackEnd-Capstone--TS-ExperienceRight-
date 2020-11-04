@@ -115,10 +115,13 @@ export default function ReviewEditForm() {
 
         })
 
-        updateReview(thatEditedReview);
-        setIsLoading(false)
+        updateReview(thatEditedReview)
+        
 
-        history.push(`/reviews/details/${id}`);
+        .then((r) => {
+            history.push(`/reviews/details/${id}`)
+        })
+        setIsLoading(false);
     }
 
 

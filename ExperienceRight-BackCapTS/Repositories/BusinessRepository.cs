@@ -373,7 +373,7 @@ namespace ExperienceRight_BackCapTS.Repositories
         }
 
        // public Business GetUserBusinessById(int id, int userProfileId)
-            public Business GetUserBusinessById(int id)
+            public Business GetUserBusinessById(int id, int userProfileId)
         {
             using (var conn = Connection)
             {
@@ -401,7 +401,7 @@ namespace ExperienceRight_BackCapTS.Repositories
                     //WHERE b.id = @id AND up.UserProfileId = @userProfileId";
 
                     DbUtils.AddParameter(cmd, "@id", id);
-                    //DbUtils.AddParameter(cmd, "@userProfileId", userProfileId);
+                    DbUtils.AddParameter(cmd, "@userProfileId", userProfileId);
                     var reader = cmd.ExecuteReader();
 
                     Business business = null;

@@ -60,7 +60,7 @@ export default function BusinessProfileEdit() {
             address: editedBusiness.address,
             hoursOfOperation: editedBusiness.hoursOfOperation,
             categoryId: parseInt(editedBusiness.categoryId),
-            phone: editedBusiness.phone,
+            phone: editedBusiness.phone
 
         })
 
@@ -71,12 +71,11 @@ export default function BusinessProfileEdit() {
         //     editedBusiness.categoryId = business.categoryId;
         // }
 
-        updateBusiness(thatEditedBusiness);
-        setIsLoading(false)
-
-        history.push(`/businesses/details/${id}`);
-
-
+        updateBusiness(thatEditedBusiness)
+        .then((e) => {
+            history.push(`/businesses/details/${id}`)
+        })
+        setIsLoading(false);
 
     }
 
@@ -111,7 +110,7 @@ export default function BusinessProfileEdit() {
                                 onChange={handleFieldChange}
                                 id="establishmentName"
                                 placeholder="Name of Business"
-                                value={editedBusiness.establishmentName}
+                                defaukt value={editedBusiness.establishmentName}
                             //onChange={e => setEstablishmentName(e.target.value)} 
                             />
                         </FormGroup>
@@ -123,7 +122,7 @@ export default function BusinessProfileEdit() {
                                 onChange={handleFieldChange}
                                 id="bio"
                                 placeholder="Tell your customer about the business"
-                                value={editedBusiness.bio}
+                                defaukt value={editedBusiness.bio}
                             //onChange={e => setBio(e.target.value)}
                             />
                         </FormGroup>
@@ -150,7 +149,7 @@ export default function BusinessProfileEdit() {
                                 onChange={handleFieldChange}
                                 id="address"
                                 placeholder="Address of the Location"
-                                value={editedBusiness.address}
+                                defaukt value={editedBusiness.address}
                             // onChange={e => setAddress(e.target.value)}
                             />
                         </FormGroup>
@@ -162,7 +161,7 @@ export default function BusinessProfileEdit() {
                                 required
                                 onChange={handleFieldChange}
                                 placeholder="What are the Business Hours..."
-                                value={editedBusiness.hoursOfOperation}
+                                defaukt value={editedBusiness.hoursOfOperation}
                             // onChange={e => setHoursOfOperation(e.target.value)}
                             />
                         </FormGroup>
@@ -174,7 +173,7 @@ export default function BusinessProfileEdit() {
                                 required
                                 onChange={handleFieldChange}
                                 placeholder="Phone #..."
-                                value={editedBusiness.phone}
+                                defaukt value={editedBusiness.phone}
                             // onChange={e => setPhone(e.target.value)}
                             />
                         </FormGroup>

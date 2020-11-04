@@ -5,12 +5,13 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using ExperienceRight_BackCapTS.Models;
 using ExperienceRight_BackCapTS.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ExperienceRight_BackCapTS.Controllers
 {
    
-        //[Authorize]
+        [Authorize]
         [Route("api/[controller]")]
         [ApiController]
         public class BusinessController : ControllerBase
@@ -32,13 +33,6 @@ namespace ExperienceRight_BackCapTS.Controllers
                 return Ok(businessz);
             }
 
-        //        [HttpGet("unapproved")]
-        //        public IActionResult GetUnapproved()
-        //        {
-        //            var posts = _postRepository.GetAllUnapprovedPosts();
-        //            return Ok(posts);
-        //        }
-
         
        [HttpGet("categories/{id}")]
         public IActionResult GetByCategory(int id)
@@ -52,9 +46,9 @@ namespace ExperienceRight_BackCapTS.Controllers
         }
 
         [HttpGet("bizbyup/{id}")]
-        public IActionResult GetBuisByUserId(int id)
+        public IActionResult GetBuisByUserId(int id, int userProfileId)
         {
-            var business = _businessRepository.GetUserBusinessById(id);
+            var business = _businessRepository.GetUserBusinessById(id, userProfileId);
             if (business == null)
             {
                 return NotFound();
@@ -79,15 +73,6 @@ namespace ExperienceRight_BackCapTS.Controllers
         {
             return Ok(_businessRepository.SearchBusinessesByCategory(q));
         }
-
-        //[HttpPost]
-        //public IActionResult Business(Business business)
-        //{
-
-        //    //review.CreateDateTime = DateTime.Now;
-        //    _businessRepository.AddBusiness(business);
-        //    return CreatedAtAction("Get", new { id = business.Id }, business);
-        //}
 
         [HttpPost]
         public IActionResult Business(Business business)
@@ -125,16 +110,16 @@ namespace ExperienceRight_BackCapTS.Controllers
             return _userProfileRepository.GetUserByFirebaseUserId(firebaseUserId);
         }
 
-        // **Add the id with no slash before it in the route and do the same in the provider with the fetch call. 
-        // Because React doesn't like it when it has to go down more than one level for the id.
+
+
+       //  **Add the id with no slash before it in the route and do the same in the provider with the fetch call.
+       //  Because React doesn't like it when it has to go down more than one level for the id.
         //[HttpGet("myreviews{id}")]
         //public IActionResult GetUserReviews(int id)
         //{
         //    var businessz = _businessRepository.GetAllBusinesszForSpecificUser(id);
         //    return Ok(businessz);
         //}
-
-
 
     }
     }

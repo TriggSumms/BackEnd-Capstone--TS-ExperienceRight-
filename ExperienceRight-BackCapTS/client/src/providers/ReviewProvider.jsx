@@ -36,7 +36,7 @@ export const ReviewProvider = (props) => {
 //         .then(setReviews));
 //   }
 
-  const  getAllReviewsforBusiness = (id) => {
+  const  getAllReviewsforBusiness = (id, reviews) => {
     return getToken().then((token) =>
       fetch(`/api/review/business${id}`, {
         method: "GET",

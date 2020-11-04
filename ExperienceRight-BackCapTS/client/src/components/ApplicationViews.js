@@ -12,7 +12,8 @@ import BusinessREGISTRATIONaddForm from "./Business/BusinessREGISTRATIONaddForm"
 import BusinessProfileEdit from "./Business/BusinessProfileEdit"
 import UserSpecificReviewsList from "./Reviews/UserSpecificReviewsList";
 import BusinessList from "./Business/BusinessList";
-import BusinessProfileDetails from "./Business/BusinessProfileDetails";
+import BizProfileForReviewer from "./Business/BizProfileForReviewer";
+import BizProfileForBuisness  from "./Business/BizProfileForBuisness";
  import ProfileReviewList from "./Reviews/ReviewList";
  import ReviewDetail from "./Reviews/ReviewDetail";
 import ReviewAddForm from "./Reviews/ReviewAddForm";
@@ -59,7 +60,10 @@ export default function ApplicationViews() {
 
 {/*  */}
         <Route path="/businesses/details/:id" exact>
-          {isLoggedIn ? <BusinessProfileDetails /> : <Redirect to="/login" />}
+          {isLoggedIn ? <BizProfileForReviewer /> : <Redirect to="/login" />}
+        </Route>
+        <Route path="/businessprofile/details/:id" exact>
+          {isLoggedIn  && sessionUser.userTypeId === 1 ? <BizProfileForBuisness/> : <Redirect to="/login" />}
         </Route>
         <Route path="/businesses" exact>
           {isLoggedIn  && sessionUser.userTypeId === 2 ? <BusinessList /> : <Redirect to="/login" />}

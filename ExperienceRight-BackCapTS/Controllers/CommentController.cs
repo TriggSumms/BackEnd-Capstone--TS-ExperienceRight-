@@ -9,7 +9,7 @@ using ExperienceRight_BackCapTS.Repositories;
 
 namespace ExperienceRight_BackCapTS.Controllers
 {
-   // [Authorize]
+   [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class CommentController : ControllerBase

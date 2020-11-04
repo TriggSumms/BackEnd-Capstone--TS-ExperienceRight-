@@ -74,16 +74,7 @@ export default function Business({ business }) {
     <>
       <div class="doctor-card2">
         <div className="">
-          {/* <Link className="authorBtn" style={{ textDecoration: 'none' }} to={`/businesses/details/${business.id}`}>
 
-            <img className="postAuthorBtn" src="https://res.cloudinary.com/dhduglm4j/image/upload/v1603121574/icons/eye_rimwzo.png" alt="details" />
-          </Link> */}
-          {/* <Link className="authorBtn" style={{ textDecoration: 'none' }} to={`/posts/edit/${post.id}`}>
-              <img className="postAuthorBtn" src="https://res.cloudinary.com/dhduglm4j/image/upload/v1603121858/icons/edit_oeexa4.png"/>
-            </Link>
-            <Link className="authorBtn" style={{ textDecoration: 'none' }} to={`/posts/delete/${post.id}`}>
-              <img className="postAuthorBtn" src="https://res.cloudinary.com/dhduglm4j/image/upload/v1603121902/icons/delete_mr2ko5.png" alt="delete"/>
-            </Link>  */}
         </div>
 
         <div class="info2">

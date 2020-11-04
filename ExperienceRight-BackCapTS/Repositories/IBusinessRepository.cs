@@ -16,7 +16,7 @@ namespace ExperienceRight_BackCapTS.Repositories
 
         List<Business> GetAllBusinessesByCategory(int id);
 
-        Business GetUserBusinessById(int id);
+        Business GetUserBusinessById(int id, int userProfileId);
 
         List<Business> SearchBusinessesByCategory(string criterion);
     }

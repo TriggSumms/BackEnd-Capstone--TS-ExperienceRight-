@@ -19,7 +19,7 @@ import { BusinessContext } from "../providers/BusinessProvider";
 
 export default function Header() {
   const { userProfile, isLoggedIn, logout } = useContext(UserProfileContext);
-  const {  userBusiness, getBusinessByUserId } = useContext(BusinessContext);
+  const { userBusiness, getBusinessByUserId } = useContext(BusinessContext);
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
   const sessionUser = JSON.parse(sessionStorage.getItem("userProfile"));
@@ -27,16 +27,19 @@ export default function Header() {
 
 
 
-  
 
-//If a user Logs out....we have to adjust this useEffect so that the Login page isnt expecting a sessionUser value
-useEffect(() => {
-  if (sessionUser != null){
-(getBusinessByUserId(sessionUser.id))
-  }  
 
-}, []);
+  //If a user Logs out....we have to adjust this useEffect so that the Login page isnt expecting a sessionUser value
+  useEffect(() => {
+    if (sessionUser != null) {
+      (getBusinessByUserId(parseInt(sessionUser.id)))
+    }
 
+  }, []);
+
+
+  console.log("TESTSESSIONUSERONHEADER", sessionUser)
+  console.log("TESTBUIZNESsHEADER", userBusiness)
 
 
 
@@ -67,29 +70,29 @@ useEffect(() => {
                 </NavItem> */}
               </>
             }
-            {isLoggedIn && sessionUser.userTypeId === 2 && 
+            {isLoggedIn && sessionUser.userTypeId === 2 &&
               <>
-                <NavItem>
-                  <NavLink tag={RRNavLink} to="/reviews">Other User's Reviews</NavLink>
-                </NavItem>
                 <NavItem>
                   <NavLink tag={RRNavLink} to="/businesses">Businesses Available</NavLink>
                 </NavItem>
                 <NavItem>
+                  <NavLink tag={RRNavLink} to="/reviews">Other User's Reviews</NavLink>
+                </NavItem>
+
+                <NavItem>
                   {/* <NavLink tag={RRNavLink} to={`/reviews/myreviews/${userzId}`}>My Profile/Reviews</NavLink> */}
-                  <NavLink tag={RRNavLink} to={`/reviews/myreviews/${sessionUser.id}`}>My Profile & Reviews</NavLink>
+                  <NavLink tag={RRNavLink} to={`/reviews/myreviews/${sessionUser.id}`}>My Profile </NavLink>
                 </NavItem>
               </>
             }
             {isLoggedIn && sessionUser.userTypeId === 1 &&
               <>
                 <NavItem>
-                  <NavLink tag={RRNavLink} to={`/businesses/details/${userBusiness.id}`}>My Business Profile & Reviews</NavLink>
-                  </NavItem>
+                  <NavLink tag={RRNavLink} to={`/businessprofile/details/${userBusiness.id}`}>My Business Profile </NavLink>
+                </NavItem>
                 {/* <NavItem>
                   <NavLink tag={RRNavLink} to="/reviews">ER Reviews</NavLink>
                 </NavItem> */}
-
               </>
             }
           </Nav>

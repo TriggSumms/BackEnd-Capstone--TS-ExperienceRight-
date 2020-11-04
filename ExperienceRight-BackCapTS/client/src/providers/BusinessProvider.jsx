@@ -61,6 +61,17 @@ export const BusinessProvider = (props) => {
       .then(setUserBusiness);
   };
 
+  const getBusinessByUserIdForBusinessProfile = (id) => {
+    getToken().then((token) =>
+      fetch(`/api/business/bizbyup/${id}`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })).then((resp) => resp.json())
+      .then(setUserBusiness);
+  };
+
 
 
   const addBusiness = (business) => {
@@ -136,7 +147,7 @@ const getAllCategories = () => {
   return (
     <BusinessContext.Provider value={{
     //   business, businesses, getAllBusinesses, getById, addReview setBusiness, getAllReviewsByUser
-    categories, business, userBusiness, businesses, getAllBusinesses, setBusiness, getBusinessById, addBusiness, getAllCategories, updateBusiness, searchBusinesses, getBusinessByUserId
+    getBusinessByUserIdForBusinessProfile, categories, business, userBusiness, businesses, getAllBusinesses, setBusiness, getBusinessById, addBusiness, getAllCategories, updateBusiness, searchBusinesses, getBusinessByUserId
     }}>
       {props.children}
     </BusinessContext.Provider>
