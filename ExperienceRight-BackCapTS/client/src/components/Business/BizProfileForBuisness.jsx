@@ -46,14 +46,13 @@ export default function BizProfileForBuisness() {
 
   //START RATING AVERAGE
 
-  // const reviewTotalRatingAvg = reviews.map(y => y.rating)
-  // let sum = 0;
-  // for (let num of reviewTotalRatingAvg) {
-  //   sum = sum + num
-  // }
-  // const averageRating = sum / reviews.length
-  // console.log("finalavg", averageRating)
-
+  const reviewTotalRatingAvg = reviews.map(y => y.rating)
+  let sum = 0;
+  for (let num of reviewTotalRatingAvg) {
+    sum = sum + num
+  }
+  const averageRating = sum / reviews.length
+  
 
 //Physical Representation Below
 
@@ -115,7 +114,7 @@ export default function BizProfileForBuisness() {
                     <div>
                       <span class="prac-area"> XR Member Since: {new Intl.DateTimeFormat('en-US').format(new Date(userBusiness.userProfile.createDateTime))}</span>
                     </div>
-                 <ReactStars {...starRepresentation} /* value= {averageRating} */ /> </div>
+                 <ReactStars {...starRepresentation}  value= {averageRating} /> </div>
                   
                 </div>
                 <div class="actions">

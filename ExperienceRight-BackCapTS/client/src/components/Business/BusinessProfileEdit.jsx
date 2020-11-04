@@ -66,7 +66,7 @@ const categorySelector = (e) => {
         })
 
         updateBusiness(thatEditedBusiness)
-        .then(console.log("Editbuiz", thatEditedBusiness))
+    
 
         .then((e) => {
             history.push(`/businesses/details/${id}`)
