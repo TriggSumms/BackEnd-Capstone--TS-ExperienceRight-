@@ -198,8 +198,8 @@ export default function ReviewAddForm() {
                         />
                         <br></br>
                         <Label for="rating">Rate Your Experience</Label>
-                        {/* <Input type="number" required onChange={e => setRating(parseInt(e.target.value))} id="rating" placeholder="Rate your experience 1-10" value={review.rating}/> */}
-                        <Stars {...formStarRating}/>
+                        <Input type="number" required onChange={e => setRating(parseInt(e.target.value))} id="rating" placeholder="Rate your experience 1-10" value={review.rating}/>
+                        {/* <Stars {...formStarRating}/> */}
                         <br />
                         <div>
                             <Button

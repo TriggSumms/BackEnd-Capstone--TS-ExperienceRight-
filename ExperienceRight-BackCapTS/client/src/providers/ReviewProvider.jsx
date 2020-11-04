@@ -130,6 +130,10 @@ export const ReviewProvider = (props) => {
         .then(setFrequencies);
     }
 
+
+
+
+
   return (
     <ReviewContext.Provider value={{
     frequencies, review, reviews, getAllReviews, getById, addReview, updateReview, deleteReview, setReview, getAllFrequencies,  getAllReviewsforBusiness, getAllReviewsforUserList, searchReviews

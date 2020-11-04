@@ -14,9 +14,10 @@ export default function BusinessProfileDetails() {
   const sessionUser = JSON.parse(sessionStorage.getItem("userProfile"));
   const { business, getBusinessById, getBusinessByUserId } = useContext(BusinessContext);
   const [review, setReview] = useState({});
+  const [rating, SetRating] = useState("");
   const { id } = useParams();
 
-  const [rating, setRating] = useState();
+  //const [rating, setRating] = useState();
 
 
 
@@ -35,20 +36,21 @@ export default function BusinessProfileDetails() {
 
 
 
-
+console.log("TESTSESSIONUSER", sessionUser.id)
+console.log("TESTBUIZNESS", business.id)
 
 
 
 
   //START RATING AVERAGE
 
-  const reviewTotalRatingAvg = reviews.map(y => y.rating)
-  let sum = 0;
-  for (let num of reviewTotalRatingAvg) {
-    sum = sum + num
-  }
-  const averageRating = sum / reviews.length
-  //console.log("finalavg", averageRating)
+  // const reviewTotalRatingAvg = reviews.map(y => y.rating)
+  // let sum = 0;
+  // for (let num of reviewTotalRatingAvg) {
+  //   sum = sum + num
+  // }
+  // const averageRating = sum / reviews.length
+  // console.log("finalavg", averageRating)
 
 
 //Physical Representation Below
@@ -81,7 +83,55 @@ export default function BusinessProfileDetails() {
     <>
 
       <section>
+      {/* <div class="card">
+        
+        <div class="img"></div>
 
+        <div class="content">
+
+            <div class="overlay"></div>
+
+            <div class="card-body">
+
+                <h4 class="card-title user-name text-uppercase">Phillip Christian</h4>     
+                <p class="card-text user-bio">Curabitur at bibendum magna, et maximus nunc. Etiam ornare, quam sit amet imperdiet sagittis, sapien tellus mollis nulla, at ultrices diam ligula ac purus. Vivamus id orci orci. </p>
+                <hr></hr>
+                
+                <div class="down">
+                    
+                    <div class="row text-center">
+
+                        <div class="col">
+
+                            Followers<br>398</br>
+
+                        </div>
+                        <div class="col">
+
+                                Following<br>312</br>
+        
+                        </div>
+                        <div class="col">
+
+                                <button class="btn btn-primary">Follow</button>
+        
+                        </div>
+
+                    </div>
+                    <br></br>
+                    <a href="#" class="btn btn-info">View Profile</a>
+                    <button class="btn btn-default float-right" id="next">
+                        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                    </button>
+                    <button class="btn btn-default float-right" id="prev" style="margin-right:10px">
+                            <i class="fa fa-chevron-left" aria-hidden="true"></i>
+                    </button>
+                </div>                
+            </div>
+
+        </div> 
+
+    </div>*/}
         <div class="postCard">
           <div></div>
           <div className="postHeader">
@@ -111,7 +161,7 @@ export default function BusinessProfileDetails() {
                     <div>
                       <span class="prac-area"> XR Member Since: {new Intl.DateTimeFormat('en-US').format(new Date(business.userProfile.createDateTime))}</span>
                     </div>
-                 <ReactStars {...starRepresentation} value= {averageRating} /> </div>
+                 <ReactStars {...starRepresentation} /* value= {averageRating} */ /> </div>
                   
                 </div>
                 <div class="actions">

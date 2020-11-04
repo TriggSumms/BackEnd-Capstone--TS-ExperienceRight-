@@ -70,6 +70,10 @@ export default function ReviewDetail() {
                 <Link style={{ textDecoration: 'none' }} to={`/reviews`}>
                     <button className="std-btn">&#x2190; Back to Reviews</button>
                 </Link>
+<br></br>
+                <Link style={{ textDecoration: 'none' }}  to={`/businesses/details/${review.businessId}`}>
+                     <button className="std-btn">&#x2190; Back to Business</button>
+                </Link>
                 <div className="postContainer">
                     <div className="post">
                         <section className="px-3">
@@ -131,7 +135,7 @@ export default function ReviewDetail() {
                             })}
                         </section>
                         {/* <a href={`/posts/details/${post.id}/posttags`} className="btn btn-outline-primary mx-1">View Tags</a> */}
-                        <Link to={`/businesses/details/${review.businessId}`}><Button type="button" color="warning">Back to Business Page</Button></Link>
+                        {/* <Link to={`/businesses/details/${review.businessId}`}><Button type="button" color="warning">Back to Business Page</Button></Link> */}
                         {/* <a href={`/review/${review.id}/comments`} className="btn btn-outline-primary mx-1">View Business Response</a> */}
 
                     </div>

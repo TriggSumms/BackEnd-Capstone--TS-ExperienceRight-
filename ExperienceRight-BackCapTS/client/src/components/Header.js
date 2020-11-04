@@ -70,7 +70,7 @@ useEffect(() => {
             {isLoggedIn && sessionUser.userTypeId === 2 && 
               <>
                 <NavItem>
-                  <NavLink tag={RRNavLink} to="/reviews">User's Reviews</NavLink>
+                  <NavLink tag={RRNavLink} to="/reviews">Other User's Reviews</NavLink>
                 </NavItem>
                 <NavItem>
                   <NavLink tag={RRNavLink} to="/businesses">Businesses Available</NavLink>
