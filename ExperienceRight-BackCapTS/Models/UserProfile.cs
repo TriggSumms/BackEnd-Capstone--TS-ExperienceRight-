@@ -38,7 +38,7 @@ namespace ExperienceRight_BackCapTS.Models
         public DateTime CreateDateTime { get; set; }
 
         [DataType(DataType.Url)]
-        [MaxLength(255)]
+        [MaxLength(1000)]
         public string ProfileImageLocation { get; set; }
 
         [Required]

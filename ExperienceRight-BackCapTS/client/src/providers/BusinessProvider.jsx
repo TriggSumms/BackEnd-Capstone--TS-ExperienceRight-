@@ -51,14 +51,18 @@ export const BusinessProvider = (props) => {
   };
 
   const getBusinessByUserId = (id) => {
-    getToken().then((token) =>
+   return getToken().then((token) =>
       fetch(`/api/business/bizbyup/${id}`, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`
         }
       })).then((resp) => resp.json())
-      .then(setUserBusiness);
+      .then(business => {
+        
+        setUserBusiness(business)
+        return business;
+       } );
   };
 
   const getBusinessByUserIdForBusinessProfile = (id) => {

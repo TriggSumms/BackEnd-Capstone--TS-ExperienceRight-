@@ -9,14 +9,17 @@ export default function BusinessProfileEdit() {
 
     const { updateBusiness, getBusinessById, business, categories, getAllCategories } = useContext(BusinessContext);
     const [isLoading, setIsLoading] = useState(false);
-    const [categoryId, setCategoryId] = useState();
+   // const [categoryId, setCategoryId] = useState();
+    const [categorySelected, setCategorySelected] = useState(business.categoryId);
     const { id } = useParams();
     const history = useHistory();
     const [editedBusiness, setEditedBusiness] = useState({});
 
 
 
-
+const categorySelector = (e) => {
+    setCategorySelected(parseInt(e.target.value));
+}
 
     useEffect(() => {
         getAllCategories();
@@ -33,11 +36,9 @@ export default function BusinessProfileEdit() {
 
 
 
-    const handleCatChange = (e) => {
-        const stateToChange = { ...editedBusiness };
-        stateToChange[e.target.id] = e.target.value;
-        setEditedBusiness(stateToChange);
-    }
+    // const handleCatChange = (e) => { 
+    //     setCategoryId(parseInt(e.target.value));
+    // }
 
     const handleFieldChange = e => {
         const stateToChange = { ...editedBusiness };
@@ -59,19 +60,14 @@ export default function BusinessProfileEdit() {
             bio: editedBusiness.bio,
             address: editedBusiness.address,
             hoursOfOperation: editedBusiness.hoursOfOperation,
-            categoryId: parseInt(editedBusiness.categoryId),
+            categoryId: parseInt(categorySelected),
             phone: editedBusiness.phone
 
         })
 
-        // const parsedCat = parseInt(categoryId);
-        // editedBusiness.categoryId = parsedCat;
-
-        // if (!editedBusiness.businessId) {
-        //     editedBusiness.categoryId = business.categoryId;
-        // }
-
         updateBusiness(thatEditedBusiness)
+        .then(console.log("Editbuiz", thatEditedBusiness))
+
         .then((e) => {
             history.push(`/businesses/details/${id}`)
         })
@@ -79,7 +75,7 @@ export default function BusinessProfileEdit() {
 
     }
 
-
+ console.log("yoooo", categorySelected)
 
     // console.log("TEST3", editedBusiness)
 
@@ -110,7 +106,7 @@ export default function BusinessProfileEdit() {
                                 onChange={handleFieldChange}
                                 id="establishmentName"
                                 placeholder="Name of Business"
-                                defaukt value={editedBusiness.establishmentName}
+                                value={editedBusiness.establishmentName}
                             //onChange={e => setEstablishmentName(e.target.value)} 
                             />
                         </FormGroup>
@@ -122,19 +118,19 @@ export default function BusinessProfileEdit() {
                                 onChange={handleFieldChange}
                                 id="bio"
                                 placeholder="Tell your customer about the business"
-                                defaukt value={editedBusiness.bio}
+                                value={editedBusiness.bio}
                             //onChange={e => setBio(e.target.value)}
                             />
                         </FormGroup>
                         <Input
                             type="select"
                             className="userEditDropDown"
-                            onChange={handleCatChange}
-                            value={parseInt(editedBusiness.categoryId)}
+                            onChange={categorySelector}
+                            //value={parseInt(editedBusiness.categorySelected)}
                             id="categoryId"
                             name="categoryId"
                         >
-                            <option value={1}>Choose a new Sector:</option>
+                           
                             {categories.map(category => {
                                 return <option key={category.id} value={category.id}>{category.name}</option>
                             }
@@ -149,7 +145,7 @@ export default function BusinessProfileEdit() {
                                 onChange={handleFieldChange}
                                 id="address"
                                 placeholder="Address of the Location"
-                                defaukt value={editedBusiness.address}
+                                value={editedBusiness.address}
                             // onChange={e => setAddress(e.target.value)}
                             />
                         </FormGroup>
@@ -161,7 +157,7 @@ export default function BusinessProfileEdit() {
                                 required
                                 onChange={handleFieldChange}
                                 placeholder="What are the Business Hours..."
-                                defaukt value={editedBusiness.hoursOfOperation}
+                                value={editedBusiness.hoursOfOperation}
                             // onChange={e => setHoursOfOperation(e.target.value)}
                             />
                         </FormGroup>
@@ -173,7 +169,7 @@ export default function BusinessProfileEdit() {
                                 required
                                 onChange={handleFieldChange}
                                 placeholder="Phone #..."
-                                defaukt value={editedBusiness.phone}
+                                value={editedBusiness.phone}
                             // onChange={e => setPhone(e.target.value)}
                             />
                         </FormGroup>

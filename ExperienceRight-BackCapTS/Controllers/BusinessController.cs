@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace ExperienceRight_BackCapTS.Controllers
 {
    
-        [Authorize]
+        //[Authorize]
         [Route("api/[controller]")]
         [ApiController]
         public class BusinessController : ControllerBase
@@ -94,6 +94,7 @@ namespace ExperienceRight_BackCapTS.Controllers
                 _businessRepository.UpdateBusiness(business);
                 return NoContent();
             }
+
 
             [HttpDelete("delete/{id}")]
             public IActionResult Delete(int id)

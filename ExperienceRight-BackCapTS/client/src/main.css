@@ -868,10 +868,6 @@ input:checked + .slider:before {
 /* END USER PROFILE DROP */
 
   
-  /* Dropdown Contianer */
-
-/* DROPDOWN INFO */
-
 
 
 
@@ -886,6 +882,20 @@ input:checked + .slider:before {
     align-items: center;
 
 }
+
+.LoginLogo{
+    padding-left: 825px;
+    padding-bottom: 100px;
+
+
+}
+.LoginLogoImage{
+width: 250px;
+height: 250px;  
+
+}
+
+
 
 
 /* End Comments */

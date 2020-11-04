@@ -26,7 +26,7 @@ namespace ExperienceRight_BackCapTS.Repositories
                 CategoryId = reader.GetInt32(reader.GetOrdinal("CategoryId")),
                 Category = new Category()
                 {
-                    Id = reader.GetInt32(reader.GetOrdinal("CategoryId")),
+                    Id = reader.GetInt32(reader.GetOrdinal("CatId")),
                     Name = reader.GetString(reader.GetOrdinal("CategoryName"))
                 },
                 UserProfileId = reader.GetInt32(reader.GetOrdinal("UserProfileId")),
@@ -60,7 +60,7 @@ namespace ExperienceRight_BackCapTS.Repositories
                     cmd.CommandText = @"
                               SELECT b.Id, b.EstablishmentName, b.Bio, b.Address, b.HoursOfOperation, b.Phone, b.UserProfileId, b.CategoryId,
                               
-                              c.Name AS CategoryName,
+                              c.Id AS CatId, c.Name AS CategoryName,
                               
                               up.FirstName, up.LastName, up.DisplayName, up.FirebaseUserId,
                               up.Email, up.CreateDateTime AS UserProfileCreationDate, up.ProfileImageLocation, up.UserTypeId, 
@@ -101,7 +101,7 @@ namespace ExperienceRight_BackCapTS.Repositories
                     cmd.CommandText = @"
                               SELECT b.Id, b.EstablishmentName, b.Bio, b.Address, b.HoursOfOperation, b.Phone, b.UserProfileId, b.CategoryId,
                               
-                              c.Name,
+                               c.Id AS CatId, c.Name,
 
                               up.FirstName, up.LastName, up.DisplayName, up.FirebaseUserId,
                               up.Email, up.CreateDateTime AS UserProfileCreationDate, up.ProfileImageLocation, up.UserTypeId, 
@@ -140,7 +140,7 @@ namespace ExperienceRight_BackCapTS.Repositories
                         CategoryId = reader.GetInt32(reader.GetOrdinal("CategoryId")),
                         Category = new Category()
                         {
-                            Id = reader.GetInt32(reader.GetOrdinal("CategoryId")),
+                            Id = reader.GetInt32(reader.GetOrdinal("CatId")),
                             Name = reader.GetString(reader.GetOrdinal("Name"))
                         },
                         UserProfileId = reader.GetInt32(reader.GetOrdinal("UserProfileId")),
@@ -185,7 +185,7 @@ namespace ExperienceRight_BackCapTS.Repositories
                     cmd.CommandText = @"
                        SELECT b.Id, b.EstablishmentName, b.Bio, b.Address, b.HoursOfOperation, b.Phone, b.UserProfileId, b.CategoryId,
                               
-                              c.Name AS CategoryName,
+                               c.Id AS CatId, c.Name AS CategoryName,
                               
                               up.FirstName, up.LastName, up.DisplayName, up.FirebaseUserId,
                               up.Email, up.CreateDateTime AS UserProfileCreationDate, up.ProfileImageLocation, up.UserTypeId, 
@@ -337,9 +337,9 @@ namespace ExperienceRight_BackCapTS.Repositories
                 {
                     cmd.CommandText = @"
 
-                            SELECT  b.EstablishmentName, b.Bio, b.Address, b.HoursOfOperation, b.Phone, b.UserProfileId, b.CategoryId,
+                            SELECT  b.Id, b.EstablishmentName, b.Bio, b.Address, b.HoursOfOperation, b.Phone, b.UserProfileId, b.CategoryId,
                               
-                              c.Id, c.Name AS CategoryName,
+                              c.Id AS CatId, c.Name AS CategoryName,
                               
                               up.FirstName, up.LastName, up.DisplayName, up.FirebaseUserId,
                               up.Email, up.CreateDateTime AS UserProfileCreationDate, up.ProfileImageLocation, up.UserTypeId, 
@@ -353,7 +353,7 @@ namespace ExperienceRight_BackCapTS.Repositories
                               LEFT JOIN Category c ON b.CategoryId = c.id
                         
                         
-                              WHERE b.id = @id";
+                              WHERE b.Id = @id";
 
                     DbUtils.AddParameter(cmd, "@id", id);
 
@@ -381,7 +381,7 @@ namespace ExperienceRight_BackCapTS.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                              SELECT b.Id AS BusinessId, b.EstablishmentName, b.Bio, b.Address, b.HoursOfOperation, b.Phone, b.UserProfileId, b.CategoryId,
+                              SELECT b.Id, b.EstablishmentName, b.Bio, b.Address, b.HoursOfOperation, b.Phone, b.UserProfileId, b.CategoryId,
                               
                               c.Id, c.Name AS CategoryName,
                               
@@ -410,7 +410,7 @@ namespace ExperienceRight_BackCapTS.Repositories
                     {
                         return new Business()
                         {
-                            Id = reader.GetInt32(reader.GetOrdinal("BusinessId")),
+                            Id = reader.GetInt32(reader.GetOrdinal("Id")),
                             EstablishmentName = reader.GetString(reader.GetOrdinal("EstablishmentName")),
                             Bio = reader.GetString(reader.GetOrdinal("Bio")),
                             Address = reader.GetString(reader.GetOrdinal("Address")),
@@ -468,9 +468,6 @@ namespace ExperienceRight_BackCapTS.Repositories
                     
                     DbUtils.AddParameter(cmd, "@EstablishmentName", business.EstablishmentName);
                     DbUtils.AddParameter(cmd, "@Bio", business.Bio);
-                    //DbUtils.AddParameter(cmd, "@ImageLocation", DbUtils.ValueOrDBNull(review.ImageLocation));
-                    //DbUtils.AddParameter(cmd, "@CreateDateTime", DateTime.Now);
-                    //DbUtils.AddParameter(cmd, "@DateOfExperience", DbUtils.ValueOrDBNull(business.DateOfExperience));
                     DbUtils.AddParameter(cmd, "@Address", business.Address);
                     DbUtils.AddParameter(cmd, "@HoursOfOperation", business.HoursOfOperation);
                     DbUtils.AddParameter(cmd, "@Phone", business.Phone);
@@ -504,9 +501,6 @@ namespace ExperienceRight_BackCapTS.Repositories
                     DbUtils.AddParameter(cmd, "@id", business.Id);
                     DbUtils.AddParameter(cmd, "@EstablishmentName", business.EstablishmentName);
                     DbUtils.AddParameter(cmd, "@Bio", business.Bio);
-                    //DbUtils.AddParameter(cmd, "@ImageLocation", DbUtils.ValueOrDBNull(review.ImageLocation));
-                    //DbUtils.AddParameter(cmd, "@CreateDateTime", DateTime.Now);
-                    //DbUtils.AddParameter(cmd, "@DateOfExperience", DbUtils.ValueOrDBNull(business.DateOfExperience));
                     DbUtils.AddParameter(cmd, "@Address", business.Address);
                     DbUtils.AddParameter(cmd, "@HoursOfOperation", business.HoursOfOperation);
                     DbUtils.AddParameter(cmd, "@Phone", business.Phone);

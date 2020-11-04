@@ -85,7 +85,7 @@ export default function UserSpecificReviewsList() {
 			</div> */}
                                     <div class="appo">
                                  
-                    <a class="btn"><Link class="btn" to={`/businesses`}>Check Out Local Business's</Link></a>
+                    <a class="btn"><Link class="btn" to={`/businesses`}>Check Out Local Businesses</Link></a>
                   
                                     </div>
                                 </div>

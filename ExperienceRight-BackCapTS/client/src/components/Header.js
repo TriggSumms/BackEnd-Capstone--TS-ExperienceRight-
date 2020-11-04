@@ -30,16 +30,25 @@ export default function Header() {
 
 
   //If a user Logs out....we have to adjust this useEffect so that the Login page isnt expecting a sessionUser value
-  useEffect(() => {
-    if (sessionUser != null) {
-      (getBusinessByUserId(parseInt(sessionUser.id)))
-    }
+  // useEffect(() => {
+  //   if (sessionUser != null) {
+  //     (getBusinessByUserId(parseInt(sessionUser.id)))
+  //   }
 
-  }, []);
+  // }, []);
 
 
-  console.log("TESTSESSIONUSERONHEADER", sessionUser)
-  console.log("TESTBUIZNESsHEADER", userBusiness)
+    //If a user Logs out....we have to adjust this useEffect so that the Login page isnt expecting a sessionUser value
+    // useEffect(() => {
+    //   if (sessionUser != null) {
+    //     (getBusinessByUserId(parseInt(sessionUser.id)))
+    //   }
+  
+    // }, []);
+
+
+  // console.log("TESTSESSIONUSERONHEADER", sessionUser)
+  // console.log("TESTBUIZNESsHEADER", userBusiness)
 
 
 

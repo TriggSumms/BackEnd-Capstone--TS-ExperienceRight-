@@ -24,33 +24,19 @@ export default function BizProfileForBuisness() {
 
   useEffect(() => {
     if (sessionUser != null){
-  (getBusinessByUserId(sessionUser.id))
+  getBusinessByUserId(sessionUser.id).then(business => {getAllReviewsforBusiness(business.id)})
     }  
   
   }, []);
 
 
 
-//const parsedBusiness = parseInt(userBusiness.id);
- 
-
-
-  useEffect(() => {
-    getBusinessById(parseInt(userBusiness.id))
-  }, []);
-
-  // const buizID= userBusiness.id
-
-  useEffect(() => {
-    getAllReviewsforBusiness(parseInt(userBusiness.id));
-  }, []);
 
 
 
-
-// console.log("TESTSESSIONUSERONPROFILE", sessionUser.id)
-console.log("TESTBUIZNESSONPROFILE", userBusiness.id)
-// console.log("TESTINGBUSINESSREVIEWSPULL", reviews)
+//  console.log("TESTSESSIONUSERONPROFILE", sessionUser.id)
+// console.log("TESTBUIZNESSONPROFILE", userBusiness.id)
+//  console.log("TESTINGBUSINESSREVIEWSPULL", reviews)
 
 
 

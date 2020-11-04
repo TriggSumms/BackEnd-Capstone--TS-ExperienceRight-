@@ -31,7 +31,8 @@ console.log("TEST", userTypeId)
 
   const registerClick = (e) => {
     e.preventDefault();
-    if (password && password !== confirmPassword) {
+    // if (password && password !== confirmPassword || firstName === "" || lastName === "" || displayName  === "" || email === "" || profileImageLocation === "") {
+      if (password && password !== confirmPassword ) {
       alert("Passwords don't match. Please correct.");
     } else {
       
@@ -60,11 +61,11 @@ console.log("TEST", userTypeId)
       <Label for="userTypeId">What Type of user are you?</Label>
       <br />
       <select id="userTypeId" className="userEditDropdown"   type="select" onChange={e => setUserTypeId(parseInt(e.target.value))}>
-                        <option>USER CHOICE</option>
+                        <option>Choose......</option>
                         {userTypes.map(userType =>
                             
                                 <option value={userType.id}>
-                                    {userType.name}
+                                    A {userType.name}
                                 </option>
                         )}
     </select> 

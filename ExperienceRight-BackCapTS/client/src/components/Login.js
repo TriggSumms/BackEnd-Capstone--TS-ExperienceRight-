@@ -1,11 +1,16 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { useHistory, Link } from "react-router-dom";
 import { UserProfileContext } from "../providers/UserProfileProvider";
+// import { BusinessContext } from "../providers/BusinessProvider";
+// import { ReviewContext } from "../providers/ReviewProvider";
 
 export default function Login() {
   const history = useHistory();
-  const { login } = useContext(UserProfileContext);
+  const {  login } = useContext(UserProfileContext);
+ // const { userBusiness, getBusinessByUserId } = useContext(BusinessContext);
+  //const { getAllReviewsforBusiness } = useContext(ReviewContext);
+  //const sessionUser = JSON.parse(sessionStorage.getItem("userProfile"));
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
 
@@ -15,34 +20,29 @@ export default function Login() {
   const loginSubmit = (e) => {
     e.preventDefault();
     login(email, password)
+    // .then(getAllReviewsforBusiness(parseInt(userBusiness.id)))
       .then(() => history.push("/"))
       .catch(() => alert("Invalid email or password"));
+
   };
 
+  // useEffect(() => {
+  //   if (sessionUser != null) {
+  //     (getBusinessByUserId(parseInt(sessionUser.id)))
+      
+  //   }
 
-//Working on a Route after login
-  // useEffect(() => {      
-  //   getAllUserTypes()
   // }, []);
-  // const loginSubmit = (e) => {
-  //   e.preventDefault();
-  //   login(email, password)
-  //     // .then(() => history.push("/"))
 
-  //     .then(() => {
-  //       if (userProfile.userTypeId === 2) {
-  //         history.push("/helloreviewer");
-  //       } else if (userProfile.userTypeId === 1) {
-  //         history.push("/businesses/registerthebusiness");
-  //       }
-  //     })
-  //     .catch(() => alert("Invalid email or password"));
-  // };
-//End Practice Route
+  //console.log("Loginuserb", userBusiness)
 
 
   return (
+    <>
+
+    
     <Form className="login-form" onSubmit={loginSubmit}>
+      <Label><img className="LoginLogoImage" src="https://res.cloudinary.com/triggsumms/image/upload/v1604514032/wpxa7kd7urfvefe0z5as.png" alt="ER Logo" /></Label>
       <fieldset>
         <FormGroup>
           <Label for="email">Email</Label>
@@ -60,6 +60,9 @@ export default function Login() {
           Not Registered? <br></br>...<Link to="/register">Register </Link> 
         </em>
       </fieldset>
+      {/* <Label><img className="LoginLogoImage" src="https://res.cloudinary.com/triggsumms/image/upload/v1604514032/wpxa7kd7urfvefe0z5as.png" alt="ER Logo" /></Label> */}
     </Form>
+  
+    </>
   );
 }
