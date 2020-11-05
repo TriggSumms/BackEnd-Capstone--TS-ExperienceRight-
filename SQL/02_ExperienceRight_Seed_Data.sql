@@ -16,7 +16,7 @@ insert into [Category] ([Id], [Name])
 values (1, 'Finance'), (2, 'Goverment'), (3, 'Education'), (4, 'Food & Beverage'), (5, 'Music'),
 	   (6, 'Transportation'), (7, 'Construction & Repairs'), (8, 'Legal'), (9, 'Healthcare'), (10, 'Outdoor Activities'), (11, 'Indoor Activities')
 
-set identity_insert [Category] off
+set identity_insert [Category] off  
 
 set identity_insert [Frequency] on
 insert into [Frequency] ([Id], [Name])
