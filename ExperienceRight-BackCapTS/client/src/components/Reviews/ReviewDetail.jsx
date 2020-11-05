@@ -56,11 +56,10 @@ export default function ReviewDetail() {
 
 
 
-
-
+    
 
     // we need the if statement to return true on the first render.
-    // so we must include !review.userProfile because react will not let us
+    // so we must include !post.userProfile because react will not let us
     // ask for the property of an undefined object
 
     if (!review || !review.userProfile) {

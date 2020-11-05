@@ -77,7 +77,7 @@
       &:before {
         width: calc(100% - var(--overlap) + var(--overlap-border));
         left: 0;
-        background: #9e3535;
+        background: #f1eeee;
         transform: translate(calc(-1*var(--overlap-border)), calc(-1*var(--overlap-border)));
   
         @media screen and (min-width: 978px) {
@@ -91,7 +91,7 @@
         right: 0;
         margin: 0;
         padding: 0;
-       background: RGBA(139, 0, 0, 0.66);
+       background: RGBA(250, 243, 243, 0.66);
         transform: translate(var(--overlap-border), calc(-1*var(--overlap-border)));
   
         @media screen and (min-width: 978px) {

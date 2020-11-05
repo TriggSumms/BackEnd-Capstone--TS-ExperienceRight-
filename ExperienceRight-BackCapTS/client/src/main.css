@@ -110,8 +110,29 @@
 
 }
 
+.std-btn2{
+    display: block;
+    color: black;
+    cursor: pointer;
+    outline: none;
+    border: none;
+    background-color: rgb(255, 255, 255);
+    width: 125px;
+    height: 30px;
+    border: 1px solid #9c0a0a;
+    border-radius: 30px;
+    font-size: .8rem;
+    font-weight: 500;
+    box-shadow: 1px 1px 2px 1px #747272;
+    float:right;
+
+}
+
+
+
 .std-btn:hover,
-.tag-btn:hover{
+.std-btn2:hover,
+.tag-btn{
     background-color: black;
     color: white;
     border-color: black;

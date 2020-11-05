@@ -56,13 +56,13 @@ export default function Review({ review }) {
                 </a>
                 <div className="authorButtons">
                   <Link className="authorBtn" style={{ textDecoration: 'none' }} to={`/reviews/edit/${review.id}`}>
-                    <img className="postAuthorBtn" src="https://res.cloudinary.com/dhduglm4j/image/upload/v1603121858/icons/edit_oeexa4.png" />
+                  <img className="postAuthorBtn" src="https://img.icons8.com/ultraviolet/30/000000/edit.png"/>
                   </Link>
                   <Link className="authorBtn" style={{ textDecoration: 'none' }} to={`/reviews/delete/${review.id}`}>
                     <img className="postAuthorBtn" src="https://res.cloudinary.com/dhduglm4j/image/upload/v1603121902/icons/delete_mr2ko5.png" alt="delete" />
                   </Link>
                   <Link className="authorBtn" style={{ textDecoration: 'none' }} to={`/reviews/details/${review.id}`}>
-                    <img className="postAuthorBtn" src="https://res.cloudinary.com/dhduglm4j/image/upload/v1603121574/icons/eye_rimwzo.png" alt="details" />
+                    <img className="postAuthorBtn"  src="https://img.icons8.com/ultraviolet/30/000000/zoom-in.png" alt="details" />
                   </Link>
                 </div>
               </div>
@@ -74,6 +74,7 @@ export default function Review({ review }) {
                     <i>Business Reviewed: {review.business.establishmentName}</i>
                     <br></br>
                     <em className="ALittleSpaceBetweenIcons"><img src="https://img.icons8.com/windows/22/000000/user-lock--v1.png" /></em>
+                   
                     {/* {review.userProfile.fullName}  */}
 
                     {/* {review.businessId >= 1
@@ -89,6 +90,8 @@ export default function Review({ review }) {
                     <em>Posted Date:{new Intl.DateTimeFormat('en-US').format(new Date(review.createDateTime))}</em>
                     <br></br>
                     <i>Date of Experience:{new Intl.DateTimeFormat('en-US').format(new Date(review.dateOfExperience))}</i>
+                    <br></br>
+                    <em><Link to={`/businesses/details/${review.businessId}`}><button className="std-btn2">Business Page</button></Link></em>
                   </div>
                   {/* {parseInt(review.commentlength)} */}
                 </div>
@@ -112,7 +115,7 @@ export default function Review({ review }) {
 
               <div className="authorButtons">
                 <Link className="authorBtn" style={{ textDecoration: 'none' }} to={`/reviews/details/${review.id}`}>
-                  <img className="postAuthorBtn" src="https://res.cloudinary.com/dhduglm4j/image/upload/v1603121574/icons/eye_rimwzo.png" alt="details" />
+                <img className="postAuthorBtn"  src="https://img.icons8.com/ultraviolet/30/000000/zoom-in.png" alt="details" />
                 </Link>
               </div>
             </div>
@@ -160,7 +163,7 @@ export default function Review({ review }) {
 
               <div className="authorButtons">
                 <Link className="authorBtn" style={{ textDecoration: 'none' }} to={`/reviews/details/${review.id}`}>
-                  <img className="postAuthorBtn" src="https://res.cloudinary.com/dhduglm4j/image/upload/v1603121574/icons/eye_rimwzo.png" alt="details" />
+                <img className="postAuthorBtn"  src="https://img.icons8.com/ultraviolet/30/000000/zoom-in.png" alt="details" />
                 </Link>
               </div>
             </div>
@@ -186,6 +189,8 @@ export default function Review({ review }) {
                   <em>Posted Date:{new Intl.DateTimeFormat('en-US').format(new Date(review.createDateTime))}</em>
                   <br></br>
                   <i>Date of Experience:{new Intl.DateTimeFormat('en-US').format(new Date(review.dateOfExperience))}</i>
+                  <br></br>
+                    <em><Link to={`/businesses/details/${review.businessId}`}><button className="std-btn2">Business Page</button></Link></em>
                 </div>
                 {/* {parseInt(review.comment.length)} */}
               </div>

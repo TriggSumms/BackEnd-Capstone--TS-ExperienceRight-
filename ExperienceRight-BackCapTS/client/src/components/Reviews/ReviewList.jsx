@@ -101,7 +101,7 @@ export default function ProfileReviewList() {
                     </div>
                   </th>
                   <th>
-                    <button onClick={() => { setReviews(reviews); setCategorySelected(""); setTitleSelected("") }}><img src="https://img.icons8.com/officel/20/000000/clear-search.png" /></button>
+                    <button className="btn" onClick={() => { setReviews(reviews); setCategorySelected(""); setTitleSelected("") }}><img src="https://img.icons8.com/color/30/000000/clear-search.png"/></button>
                   </th>
                 </tr>
               </thead>

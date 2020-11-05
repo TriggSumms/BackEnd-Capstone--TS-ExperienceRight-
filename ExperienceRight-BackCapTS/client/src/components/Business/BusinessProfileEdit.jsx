@@ -75,9 +75,6 @@ const categorySelector = (e) => {
 
     }
 
- console.log("yoooo", categorySelected)
-
-    // console.log("TEST3", editedBusiness)
 
 
     return (

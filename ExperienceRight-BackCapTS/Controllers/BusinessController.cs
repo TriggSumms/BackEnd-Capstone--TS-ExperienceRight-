@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace ExperienceRight_BackCapTS.Controllers
 {
    
-        //[Authorize]
+        [Authorize]
         [Route("api/[controller]")]
         [ApiController]
         public class BusinessController : ControllerBase
