@@ -8,27 +8,19 @@ import { Form, FormGroup, Label, Input, Button } from "reactstrap";
 
 const CommentEditForm = () => {
     let userId = sessionStorage.userProfileId
-    console.log(userId);
     const history = useHistory();
     const { reviewId, id } = useParams();
-
     const { editComment, comment, getCommentById } = useContext(CommentContext);
-    console.log(comment);
-    //useState is invoked when a user makes an event happen.( the UserInterface changes state).
-    //UseState is watching the Review, or all the Posts based on what developer tells it to watch.
     const [isLoading, setIsLoading] = useState(false);
     const [editedComment, setEditedComment] = useState();
-    console.log(editedComment);
+ 
 
 
-    //useEffect has to happen after a page is rendered.
     useEffect(() => {
         getCommentById(id);
     }, [id]);
 
 
-    ///console.log("Hello World", id)
-    ////console.log(JSON.parse(comment.id))
     const handleEditFieldChange = (e) => {
         const stateToChange = { ...editedComment };
         stateToChange[e.target.id] = e.target.value;
@@ -40,12 +32,11 @@ const CommentEditForm = () => {
         setEditedComment(comment);
     }, [comment]);
 
-    //Edit comment and push to details on posts.
+
     const editCurrentComment = (e) => {
 
         e.preventDefault();
         setIsLoading(true);
-        console.log("edited Comment", editedComment)
         editComment({
             subject: editedComment.subject,
             content: editedComment.content,
@@ -55,7 +46,6 @@ const CommentEditForm = () => {
             createDateTime: editedComment.createDateTime
 
         });
-        console.log("edited Commofoment", editedComment)
 
         setIsLoading(false);
         editComment(editedComment).then(() =>

@@ -3,25 +3,27 @@ import { ReviewContext } from "../../providers/ReviewProvider";
 import { BusinessContext } from "../../providers/BusinessProvider";
 import { useHistory, Link, useParams } from "react-router-dom";
 import { Button, Form, FormGroup, Label, Input, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
-import ReactStars from 'react-stars'
+import Stars from 'react-stars'
 import { render } from 'react-dom'
 
 
 export default function ReviewAddForm() {
-
+    const sessionUser = JSON.parse(sessionStorage.getItem("userProfile"));
     const { addReview, frequencies, getAllFrequencies } = useContext(ReviewContext);
     const { businesses, getAllBusinesses } = useContext(BusinessContext);
     const history = useHistory();
     const [frequencyId, setFrequencyId] = useState();
-    const [businessId, setBusinessId] = useState();
+    //const [businessId, setBusinessId] = useState();
     const [rating, setRating] = useState();
-    //const { businessId } = useParams();
+    const { id } = useParams();
 
-    const sessionUser = JSON.parse(sessionStorage.getItem("userProfile"));
-
+    
     const [isLoading, setIsLoading] = useState(false);
 
 
+
+
+    // console.log(id)
 
     const [review, setReview] = useState({
         title: "",
@@ -29,13 +31,13 @@ export default function ReviewAddForm() {
         rating: "",
         dateOfExperience: "",
         frequencyId: "",
-        businessId: businessId,
+        businessId: parseInt(id),
         userProfileId: sessionUser.id
     });
 
-    console.log("Testing Review", review)
-
-
+    // console.log("Testing Review", review)
+    // console.log("test", id)
+    // console.log("test2", sessionUser.id)
 
 
 
@@ -47,43 +49,41 @@ export default function ReviewAddForm() {
     const parsedRating = parseInt(rating);
     review.rating = parsedRating;
 
-    const secondExample = {
-        size: 50,
+    
+    const formStarRating = {
+        size: 60,
         count: 10,
         char: '',
         color1: '#ff9900',
         color2: '#6599ff',
-
-        // onChange={ratingChanged},
-        //onChange={e => setRating(parseInt(e.target.value))}
-        onChange: newValue => {
-            // //     setRating(newValue)
-            console.log(`Example 2: new value is ${newValue}`)
+        // half: false,
+        // onChange: e => setRating(parseInt(e.target.value)),
+        onChange: parsedRating => {
+            // console.log(`Example 2: new value is ${newValue}`)
+            setRating(parsedRating);
         }
     }
-
-    // console.log("wowtest", setRating);
-    //console.log("wowtest", newValue);
-
-    //  const ratingChanged = (newRating) => {
-    //     console.log(newRating)
-    //   }
     //END RATING REVIEW
 
 
-    //START Business GRAB
 
-    const parsedBuiz = parseInt(businessId);
-    review.businessId = parsedBuiz;
 
-    useEffect(() => {
-        getAllBusinesses();
-    }, [])
+    
+    // //START Business GRAB
 
-    const handleBuizChange = (e) => {
-        setBusinessId(e.target.value);
-    }
-    //END Business GRAB
+//Will need this info in the scenario that I want a user to select the business under review
+
+    // const parsedBuiz = parseInt(businessId);
+    // review.businessId = parsedBuiz;
+
+    // useEffect(() => {
+    //     getAllBusinesses();
+    // }, [])
+
+    // const handleBuizChange = (e) => {
+    //     setBusinessId(e.target.value);
+    // }
+    // //END Business GRAB
 
 
 
@@ -128,14 +128,17 @@ export default function ReviewAddForm() {
     //END REVIEW CREATION
 
 
+
+
     return (
         <>
             <Form className="newPostForm">
                 <FormGroup className="newPost">
                     <div >
-                    <Label for="title">Business Selector</Label>
-                    {/* {business.id} */}
-                    <br />
+                {/* Might use this selector process in later list */}
+                        {/* <Label for="title">Business Selector</Label> */}
+                        {/* {business.id} */}
+                        {/* <br />
                         <select className="userEditDropdown" onChange={handleBuizChange}>
                         <option default value={review.businessId}></option>
                             {businesses.map(business =>
@@ -143,9 +146,14 @@ export default function ReviewAddForm() {
                                         {business.establishmentName}
                                     </option>
                             )}
-                        </select>
-                        <br />
-
+                        </select> */}
+                        <div>
+                            <br></br>
+                            <h4>Tell the Business about your experience...</h4>
+                            ...and remember reviews are anonymous
+                            <br></br>
+                        </div>
+                        <br></br>
                         <Label for="title">Title</Label>
                         <Input
                             type="text"
@@ -156,29 +164,20 @@ export default function ReviewAddForm() {
                             value={review.title}
                         />
                         <Label for="category">Frequency Of Visit</Label>
-                        {/* <br />
-                        <select id="frequencyId" className="userEditDropdown" onChange={e => setFrequencyId(parseInt(e.target.value))}>
-                        {frequencies.map(frequency =>
-                            
-                                <option value={frequency.id}>
-                                    {frequency.name}
-                                </option>
-                        )}
-                        </select>
-                        <br /> */}
-                        <br />
-                        <select className="userEditDropdown" onChange={handleFreqChange}>
-                            {frequencies.map(frequency =>
-                                review.id === review.frequencyId ?
-                                    <option selected value={frequency.id}>
-                                        {frequency.name}
-                                    </option> :
-                                    <option value={frequency.id}>
-                                        {frequency.name}
-                                    </option>
+                        <Input
+                            type="select"
+                            className="userEditDropDown"
+                            onChange={handleFreqChange}
+                            value={parseInt(frequencyId)}
+                            id="frequencyId"
+                            name="frequencyId"
+                        >
+                            <option > Choose an option</option>
+                            {frequencies.map(frequency => {
+                                return <option selected value={frequency.id}>{frequency.name}</option>
+                            }
                             )}
-                        </select>
-                        <br />
+                        </Input>
                         <Label for="content">Content</Label>
                         <Input
                             type="text"
@@ -197,28 +196,10 @@ export default function ReviewAddForm() {
                             placeholder="Publication Date"
                             value={review.dateOfExperience}
                         />
-                        <Label for="rating">Rating Of Your Experience</Label>
-                        <Input
-                            type="number"
-                            required
-                            onChange={e => setRating(parseInt(e.target.value))}
-                            id="rating"
-                            placeholder="Rate your experience 1-10"
-                            value={review.rating}
-                        />
-                        <ReactStars {...secondExample}
-                        // type="text"
-                        // required
-                        //  onChange={handleFieldChange}
-                        //  id="rating"
-                        // id="rating" 
-                        //  value= {review.rating}
-                        // onChange={onChange} value={review.rating}
-                        //onChange ={handleFieldyChange}
-                        //onChange={e => setRating(parseInt(e.target.value))}
-                        // placeholder="rating"
-                        // value={parseInt(review.rating)}
-                        />
+                        <br></br>
+                        <Label for="rating">Rate Your Experience</Label>
+                        <Input type="number" required onChange={e => setRating(parseInt(e.target.value))} id="rating" placeholder="Rate your experience 1-10" value={review.rating}/>
+                        {/* <Stars {...formStarRating}/> */}
                         <br />
                         <div>
                             <Button

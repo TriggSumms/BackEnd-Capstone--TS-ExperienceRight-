@@ -9,10 +9,12 @@ import MainPageMessage from "./MainPageMessage";
 import HelloReviewer from "./HelloReviewer";
 import HelloBusiness from "./HelloBusiness";
 import BusinessREGISTRATIONaddForm from "./Business/BusinessREGISTRATIONaddForm";
+import BusinessProfileEdit from "./Business/BusinessProfileEdit"
 import UserSpecificReviewsList from "./Reviews/UserSpecificReviewsList";
 import BusinessList from "./Business/BusinessList";
-import BusinessProfileDetails from "./Business/BusinessProfileDetails";
- import ProfileReviewList from "./Reviews/ProfileReviewList";
+import BizProfileForReviewer from "./Business/BizProfileForReviewer";
+import BizProfileForBuisness  from "./Business/BizProfileForBuisness";
+ import ProfileReviewList from "./Reviews/ReviewList";
  import ReviewDetail from "./Reviews/ReviewDetail";
 import ReviewAddForm from "./Reviews/ReviewAddForm";
 import ReviewEditForm from "./Reviews/ReviewEditForm";
@@ -58,7 +60,10 @@ export default function ApplicationViews() {
 
 {/*  */}
         <Route path="/businesses/details/:id" exact>
-          {isLoggedIn ? <BusinessProfileDetails /> : <Redirect to="/login" />}
+          {isLoggedIn ? <BizProfileForReviewer /> : <Redirect to="/login" />}
+        </Route>
+        <Route path="/businessprofile/details/:id" exact>
+          {isLoggedIn  && sessionUser.userTypeId === 1 ? <BizProfileForBuisness/> : <Redirect to="/login" />}
         </Route>
         <Route path="/businesses" exact>
           {isLoggedIn  && sessionUser.userTypeId === 2 ? <BusinessList /> : <Redirect to="/login" />}
@@ -67,7 +72,9 @@ export default function ApplicationViews() {
           {/* {isLoggedIn && sessionUser.userTypeId === 1 ? <BusinessREGISTRATIONaddForm /> : <Redirect to="/login" />} */}
           {isLoggedIn  && sessionUser.userTypeId === 1 ? <BusinessREGISTRATIONaddForm /> : <Redirect to="/login" />}
         </Route>
-       
+        <Route path="/businesses/edit/:id" exact>
+          {isLoggedIn ?  <BusinessProfileEdit /> : <Redirect to="/login" />}
+        </Route>
  
 
 
@@ -97,22 +104,8 @@ export default function ApplicationViews() {
         </Route>
 
 
-        {/* <Route path="/review/:id/comments" exact>
-          {isLoggedIn ? <CommentList /> : <Redirect to="/login" />}
-        </Route>
 
-        <Route path="/review/:postId/comments/add" exact>
-          {isLoggedIn ? <CommentAddForm /> : <Redirect to="/login" />}
-        </Route>
 
-        <Route path="/comments/edit/:id" exact>
-          {isLoggedIn ? <CommentEditForm /> : <Redirect to="/login" />}
-        </Route>
-
-        <Route path="/comments/:id/delete" exact>
-          {isLoggedIn ? <CommentDelete /> : <Redirect to="/login" />}
-        </Route> */}
-                {/* Comment Routes */}
 
         <Route path="/review/:reviewId/comments" exact>
           {isLoggedIn ? <CommentList /> : <Redirect to="/login" />}

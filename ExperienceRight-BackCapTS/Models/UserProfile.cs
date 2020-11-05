@@ -38,7 +38,7 @@ namespace ExperienceRight_BackCapTS.Models
         public DateTime CreateDateTime { get; set; }
 
         [DataType(DataType.Url)]
-        [MaxLength(255)]
+        [MaxLength(1000)]
         public string ProfileImageLocation { get; set; }
 
         [Required]
@@ -55,14 +55,11 @@ namespace ExperienceRight_BackCapTS.Models
         }
 
         //Had to bring in elements to tie to the get all userprofile SQL call:
-        public Business Business { get; set; }
+        //public Business Business { get; set; }
 
         public List<Business> Businessz { get; set; }
 
-        public Category Category { get; set; }
+        //public Category Category { get; set; }
 
-
-       // [DisplayName("Played by")]
-       // public List<Business> Businesss { get; set; }
     }
 }

@@ -31,12 +31,6 @@ namespace ExperienceRight_BackCapTS.Repositories
                     Id = reader.GetInt32(reader.GetOrdinal("FrequencyId")),
                     Name = reader.GetString(reader.GetOrdinal("FrequencyOfVisit"))
                 },
-                //CategoryId = reader.GetInt32(reader.GetOrdinal("CategoryId")),
-                //Category = new Category()
-                //{
-                //    Id = reader.GetInt32(reader.GetOrdinal("CategoryId")),
-                //    Name = reader.GetString(reader.GetOrdinal("CategoryName"))
-                //},
                 UserProfileId = reader.GetInt32(reader.GetOrdinal("UserProfileId")),
                 UserProfile = new UserProfile()
                 {
@@ -105,7 +99,7 @@ namespace ExperienceRight_BackCapTS.Repositories
                               LEFT JOIN Business b ON r.BusinessId = b.id
                               LEFT JOIN Category c ON b.CategoryId = c.id
                         
-                        ORDER BY DateofExperience DESC";
+                        ORDER BY r.DateOfExperience DESC";
                     var reader = cmd.ExecuteReader();
 
                     var reviews = new List<Review>();
@@ -209,7 +203,7 @@ namespace ExperienceRight_BackCapTS.Repositories
                     DbUtils.AddParameter(cmd, "@businessId", businessId);
 
                     var reader = cmd.ExecuteReader();
-
+                    
                     var reviews = new List<Review>();
 
                     while (reader.Read())
@@ -275,63 +269,112 @@ namespace ExperienceRight_BackCapTS.Repositories
             };
         }
 
-        //public List<Post> GetAllUnapprovedPosts()
-        //{
-        //    using (var conn = Connection)
-        //    {
-        //        conn.Open();
-        //        using (var cmd = conn.CreateCommand())
-        //        {
-        //            cmd.CommandText = @"
-        //               SELECT p.Id, p.Title, p.Content, 
-        //                      p.ImageLocation AS HeaderImage,
-        //                      p.CreateDateTime, p.PublishDateTime, p.IsApproved,
-        //                      p.CategoryId, p.UserProfileId,
+        //May have to search by just the business paramenter only?
+        public List<Review> SearchReviewsByCategoryANDotherinfo(string criterion)
+        {
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                          SELECT r.Id, r.Title, r.Content, 
+                              r.CreateDateTime, r.DateOfExperience, r.Rating,
+                              r.FrequencyId, r.UserProfileId, r.BusinessId,
+                              
+                              f.Name AS FrequencyOfVisit,
 
-        //                      c.[Name] AS CategoryName,
-        //                      u.FirstName, u.LastName, u.DisplayName, u.FirebaseUserId,
-        //                      u.Email, u.CreateDateTime, u.ImageLocation AS AvatarImage,
-        //                      u.UserTypeId, u.IsActive,
-        //                      ut.[Name] AS UserTypeName
-        //                 FROM Post p
-        //                      LEFT JOIN Category c ON p.CategoryId = c.id
-        //                      LEFT JOIN UserProfile u ON p.UserProfileId = u.id
-        //                      LEFT JOIN UserType ut ON u.UserTypeId = ut.id
-        //                WHERE IsApproved = 0 AND PublishDateTime < SYSDATETIME()
-        //                ORDER BY PublishDateTime DESC";
-        //            var reader = cmd.ExecuteReader();
+                              up.FirstName, up.LastName, up.DisplayName, up.FirebaseUserId,
+                              up.Email, up.CreateDateTime AS UserProfileCreationDate, up.ProfileImageLocation,
+                              up.UserTypeId, 
 
-        //            var posts = new List<Post>();
+                              ut.Name AS UserTypeName,
+                                
+                              b.EstablishmentName, b.Bio, b.Address, b.HoursOfOperation, b.Phone, b.UserProfileId, b.CategoryId,
+                              
+                              c.Name 
 
-        //            while (reader.Read())
-        //            {
-        //                posts.Add(NewPostFromReader(reader));
-        //            }
+                         FROM Review r
+                              LEFT JOIN Frequency f ON r.FrequencyId = f.id
+                              LEFT JOIN UserProfile up ON r.UserProfileId = up.id
+                              LEFT JOIN UserType ut ON up.UserTypeId = ut.id
+                              LEFT JOIN Business b ON r.BusinessId = b.id
+                              LEFT JOIN Category c ON b.CategoryId = c.id
+                        
+                        
+                        WHERE c.Name LIKE @Criterion OR r.Title LIKE @Criterion";
 
-        //            reader.Close();
-
-        //            return posts;
-        //        }
-        //    };
-        //}
+                    
 
 
-        ////public List<Post> GetAllUnapprovedPosts()
+                    cmd.Parameters.AddWithValue("@criterion", $"%{criterion}%");
+                    SqlDataReader reader = cmd.ExecuteReader();
 
+                    var reviews = new List<Review>();
+                   
 
-        ////      c.[Name] AS CategoryName,
+                    while (reader.Read())
+                    {
+                        reviews.Add(new Review()
+                        {
+                            Id = reader.GetInt32(reader.GetOrdinal("Id")),
+                            Title = reader.GetString(reader.GetOrdinal("Title")),
+                            Content = reader.GetString(reader.GetOrdinal("Content")),
+                            CreateDateTime = reader.GetDateTime(reader.GetOrdinal("CreateDateTime")),
+                            DateOfExperience = DbUtils.GetNullableDateTime(reader, "DateOfExperience"),
+                            Rating = reader.GetInt32(reader.GetOrdinal("Rating")),
+                            FrequencyId = reader.GetInt32(reader.GetOrdinal("FrequencyId")),
+                            Frequency = new Frequency()
+                            {
+                                Id = reader.GetInt32(reader.GetOrdinal("FrequencyId")),
+                                Name = reader.GetString(reader.GetOrdinal("FrequencyOfVisit"))
+                            },
+                            UserProfileId = reader.GetInt32(reader.GetOrdinal("UserProfileId")),
+                            UserProfile = new UserProfile()
+                            {
+                                Id = reader.GetInt32(reader.GetOrdinal("UserProfileId")),
+                                FirebaseUserId = reader.GetString(reader.GetOrdinal("FirebaseUserId")),
+                                DisplayName = reader.GetString(reader.GetOrdinal("DisplayName")),
+                                FirstName = reader.GetString(reader.GetOrdinal("FirstName")),
+                                LastName = reader.GetString(reader.GetOrdinal("LastName")),
+                                Email = reader.GetString(reader.GetOrdinal("Email")),
+                                CreateDateTime = reader.GetDateTime(reader.GetOrdinal("UserProfileCreationDate")),
+                                ProfileImageLocation = DbUtils.GetNullableString(reader, "ProfileImageLocation"),
+                                UserTypeId = reader.GetInt32(reader.GetOrdinal("UserTypeId")),
+                                UserType = new UserType()
+                                {
+                                    Id = reader.GetInt32(reader.GetOrdinal("UserTypeId")),
+                                    Name = reader.GetString(reader.GetOrdinal("UserTypeName"))
+                                },
+                            },
+                            BusinessId = reader.GetInt32(reader.GetOrdinal("BusinessId")),
+                            Business = new Business()
+                            {
+                                Id = reader.GetInt32(reader.GetOrdinal("BusinessId")),
+                                EstablishmentName = reader.GetString(reader.GetOrdinal("EstablishmentName")),
+                                Bio = reader.GetString(reader.GetOrdinal("Bio")),
+                                Address = reader.GetString(reader.GetOrdinal("Address")),
+                                HoursOfOperation = reader.GetString(reader.GetOrdinal("HoursOfOperation")),
+                                Phone = reader.GetString(reader.GetOrdinal("Phone")),
+                                CategoryId = reader.GetInt32(reader.GetOrdinal("CategoryId")),
+                                Category = new Category()
+                                {
+                                    Id = reader.GetInt32(reader.GetOrdinal("CategoryId")),
+                                    Name = reader.GetString(reader.GetOrdinal("Name"))
+                                },
+                            }
+                        
+                    });
 
-        ////      u.FirstName, u.LastName, u.DisplayName, u.FirebaseUserId,
-        ////      u.Email, u.CreateDateTime, u.ImageLocation AS AvatarImage,
-        ////      u.UserTypeId, u.IsActive,
+                    }
 
-        ////      ut.[Name] AS UserTypeName
-        //// FROM Post p
-        ////      LEFT JOIN Category c ON p.CategoryId = c.id
-        ////      LEFT JOIN UserProfile u ON p.UserProfileId = u.id
-        ////      LEFT JOIN UserType ut ON u.UserTypeId = ut.id
-        ////WHERE IsApproved = 0 AND PublishDateTime < SYSDATETIME()
-        ////ORDER BY PublishDateTime DESC";
+                    reader.Close();
+
+                    return reviews;
+                }
+            }
+        }
+
 
         public Review GetReviewsById(int id)
         {
@@ -499,7 +542,7 @@ namespace ExperienceRight_BackCapTS.Repositories
             }
         }
 
-        public void DeleteReview(int id)
+        public void DeleteReview(int reviewId)
         {
             using (var conn = Connection)
             {
@@ -507,10 +550,11 @@ namespace ExperienceRight_BackCapTS.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                            DELETE FROM Review
-                            WHERE Id = @id
-                        ";
-                    DbUtils.AddParameter(cmd, "@id", id);
+                            
+                            DELETE FROM Comment WHERE ReviewId = @Id;
+                            DELETE FROM Review WHERE Id = @Id";
+                    
+                    DbUtils.AddParameter(cmd, "@Id", reviewId);
                     cmd.ExecuteNonQuery();
 
 

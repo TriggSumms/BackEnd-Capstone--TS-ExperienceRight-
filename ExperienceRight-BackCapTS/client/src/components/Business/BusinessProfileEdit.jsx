@@ -1,73 +1,79 @@
-import React, { useContext, useState, useEffect } from "react";
-//import { FrequencyContext } from "../../providers/FrequencyProvider";
+import React, { useState, useEffect, useContext } from "react";
 import { BusinessContext } from "../../providers/BusinessProvider";
-import { useHistory, Link } from "react-router-dom";
+import { useHistory, useParams, Link } from "react-router-dom";
 import { Button, Form, FormGroup, Label, Input, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
-//import ReactStars from 'react-stars'
-//import { render } from 'react-dom'
+import BusinessREGISTRATIONaddForm from "./BusinessREGISTRATIONaddForm";
+import Business from "./Business";
 
+export default function BusinessProfileEdit() {
 
-export default function BusinessREGISTRATIONaddForm() {
-    const history = useHistory();
-    const { addBusiness, categories, getAllCategories } = useContext(BusinessContext);
-    const [categoryId, setCategoryId] = useState();
-    const sessionUser = JSON.parse(sessionStorage.getItem("userProfile"));
+    const { updateBusiness, getBusinessById, business, categories, getAllCategories } = useContext(BusinessContext);
     const [isLoading, setIsLoading] = useState(false);
+   // const [categoryId, setCategoryId] = useState();
+    const [categorySelected, setCategorySelected] = useState(business.categoryId);
+    const { id } = useParams();
+    const history = useHistory();
+    const [editedBusiness, setEditedBusiness] = useState({});
 
 
 
-    const [business, setBusiness] = useState({
-        establishmentName: "",
-        bio: "",
-        address: "",
-        hoursOfOperation: "",
-        categoryId: "",
-        phone: "",
-        userProfileId: sessionUser.id
-    });
-
-
-
-    
-   // console.log("testingbusinessvalue", business)
-
-    const handleFieldChange = e => {
-        const stateToChange = { ...business };
-        stateToChange[e.target.id] = e.target.value;
-        setBusiness(stateToChange);
-    };
-
-
-    //START REVIEW CREATION METHOD
-    const createNewBusiness = e => {
-        e.preventDefault();
-        if (business.establishment === "" || business.bio === "" || business.hoursOfOperation === "" || business.address === "" || business.phone === "") {
-            alert("Fill out all the fields for your business, otherwise a customer wont be able recognize you!");       
-        } else {
-            setIsLoading(true);
-        }
-        addBusiness(business)
-           .then(() => {
-            history.push(`/businesshello`)
-           })
-    };
-    //END REVIEW CREATION
-
-
-
-    //START Category GRAB
-    const parsedCat = parseInt(categoryId);
-    business.categoryId = parsedCat;
+const categorySelector = (e) => {
+    setCategorySelected(parseInt(e.target.value));
+}
 
     useEffect(() => {
         getAllCategories();
     }, [])
 
-    const handleChange = (e) => {
-        setCategoryId(e.target.value);
-    }
-    //END =Category GRAB
 
+    useEffect(() => {
+        getBusinessById(parseInt(id));
+    }, [])
+
+    useEffect(() => {
+        setEditedBusiness(business)
+    }, [business]);
+
+
+
+    // const handleCatChange = (e) => { 
+    //     setCategoryId(parseInt(e.target.value));
+    // }
+
+    const handleFieldChange = e => {
+        const stateToChange = { ...editedBusiness };
+        stateToChange[e.target.id] = e.target.value;
+        setEditedBusiness(stateToChange);
+    };
+
+
+
+
+    const editBusiness = (e) => {
+        e.preventDefault();
+        setIsLoading(true);
+        const thatEditedBusiness = ({
+
+            id: parseInt(business.id),
+            userProfileId: parseInt(business.userProfileId),
+            establishmentName: editedBusiness.establishmentName,
+            bio: editedBusiness.bio,
+            address: editedBusiness.address,
+            hoursOfOperation: editedBusiness.hoursOfOperation,
+            categoryId: parseInt(categorySelected),
+            phone: editedBusiness.phone
+
+        })
+
+        updateBusiness(thatEditedBusiness)
+    
+
+        .then((e) => {
+            history.push(`/businesses/details/${id}`)
+        })
+        setIsLoading(false);
+
+    }
 
 
 
@@ -79,7 +85,16 @@ export default function BusinessREGISTRATIONaddForm() {
                         {/* CREATE A HELLO DIALOGUE FOR THE ACCOUNT HOLDER */}
                         {/* <div>Hello, {business.userProfile.profileImageLocation} please fill out </div> */}
 
+                        <FormGroup>
 
+                            <Input
+                                id={editedBusiness.id}
+                                onChange={handleFieldChange}
+                                type="hidden"
+                                value={business.id}
+                            />
+
+                        </FormGroup>
                         <FormGroup>
                             <Label for="EstablishmentName">Establishment Name...</Label>
                             <Input
@@ -88,7 +103,7 @@ export default function BusinessREGISTRATIONaddForm() {
                                 onChange={handleFieldChange}
                                 id="establishmentName"
                                 placeholder="Name of Business"
-                                value={business.establishmentName}
+                                value={editedBusiness.establishmentName}
                             //onChange={e => setEstablishmentName(e.target.value)} 
                             />
                         </FormGroup>
@@ -100,23 +115,25 @@ export default function BusinessREGISTRATIONaddForm() {
                                 onChange={handleFieldChange}
                                 id="bio"
                                 placeholder="Tell your customer about the business"
-                                value={business.bio}
+                                value={editedBusiness.bio}
                             //onChange={e => setBio(e.target.value)}
                             />
                         </FormGroup>
-                        <Label for="category">Sector Selection:</Label>
-                        <select className="userEditDropdown" onChange={handleChange}>
-                            {categories.map(category =>
-                                business.id === business.categoryId ?
-                                    <option selected value={category.id}>
-                                        {category.name}
-                                    </option> :
-                                    <option value={category.id}>
-                                        {category.name}
-                                    </option>
+                        <Input
+                            type="select"
+                            className="userEditDropDown"
+                            onChange={categorySelector}
+                            //value={parseInt(editedBusiness.categorySelected)}
+                            id="categoryId"
+                            name="categoryId"
+                        >
+                           
+                            {categories.map(category => {
+                                return <option key={category.id} value={category.id}>{category.name}</option>
+                            }
                             )}
-                        </select>
-                        <br />
+                        </Input>
+
                         <FormGroup>
                             <Label for="Address">Address...</Label>
                             <Input
@@ -125,7 +142,7 @@ export default function BusinessREGISTRATIONaddForm() {
                                 onChange={handleFieldChange}
                                 id="address"
                                 placeholder="Address of the Location"
-                                value={business.address}
+                                value={editedBusiness.address}
                             // onChange={e => setAddress(e.target.value)}
                             />
                         </FormGroup>
@@ -137,7 +154,7 @@ export default function BusinessREGISTRATIONaddForm() {
                                 required
                                 onChange={handleFieldChange}
                                 placeholder="What are the Business Hours..."
-                                value={business.hoursOfOperation}
+                                value={editedBusiness.hoursOfOperation}
                             // onChange={e => setHoursOfOperation(e.target.value)}
                             />
                         </FormGroup>
@@ -149,7 +166,7 @@ export default function BusinessREGISTRATIONaddForm() {
                                 required
                                 onChange={handleFieldChange}
                                 placeholder="Phone #..."
-                                value={business.phone}
+                                value={editedBusiness.phone}
                             // onChange={e => setPhone(e.target.value)}
                             />
                         </FormGroup>
@@ -158,13 +175,14 @@ export default function BusinessREGISTRATIONaddForm() {
                                 className="newPostSubmitButton"
                                 type="submit"
                                 disabled={isLoading}
-                                onClick={createNewBusiness}
-                            >Submit Sign Up </Button>
+                                onClick={editBusiness}
+                            >Submit Profile Changes</Button>
                             <Link to={`/`}><Button type="button" color="warning">Cancel</Button></Link>
                         </div>
                     </div>
                 </FormGroup>
             </Form>
         </>
-    )
+    );
 }
+

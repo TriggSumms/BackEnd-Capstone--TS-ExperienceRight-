@@ -6,7 +6,7 @@ using ExperienceRight_BackCapTS.Repositories;
 
 namespace ExperienceRight_BackCapTS.Controllers
 {
-    //[Authorize]
+   [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class UserProfileController : ControllerBase
@@ -42,7 +42,7 @@ namespace ExperienceRight_BackCapTS.Controllers
 
 
 
-        [HttpGet("user/{id}")]
+        [HttpGet("userprofile/{id}")]
         public IActionResult GetUserProfileById(int id)
         {
             return Ok(_userProfileRepository.GetProfileById(id));

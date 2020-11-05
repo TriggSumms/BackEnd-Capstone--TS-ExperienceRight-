@@ -9,7 +9,7 @@ using ExperienceRight_BackCapTS.Repositories;
 
 namespace ExperienceRight_BackCapTS.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ReviewController : ControllerBase
@@ -74,6 +74,11 @@ namespace ExperienceRight_BackCapTS.Controllers
         }
         //END USER SPECIFIC LISTS
 
+        [HttpGet("search")]
+        public IActionResult SearchReviewsByCategoryANDotherinfo(string q)
+        {
+            return Ok(_reviewRepository.SearchReviewsByCategoryANDotherinfo(q));
+        }
 
         [HttpPost]
         public IActionResult Review(Review review)

@@ -1,0 +1,64 @@
+@import url('https://fonts.googleapis.com/css?family=Sarabun');
+
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+
+
+
+.container {
+  width: 25rem;
+  height: 100%;
+  margin: 0rem;
+  position: relative;
+}
+
+
+.searchbar {
+  font-size: 1rem;
+  color: black;
+  width: 15rem;
+  height: 2rem;
+  border: none;
+  outline: none;
+  border-radius: 10rem;
+  box-shadow: 0 1rem 2rem rgba(black, .1);
+  padding: 1rem;
+  margin: 8px 8px;
+  // position: relative;
+  transition: all .2s;
+  transition-delay: .1s;
+}
+
+.searchbar:hover {
+  width: 17rem;
+  height: 1rem;
+}
+
+.searchbutton {
+  height: 2rem;
+  position: absolute;
+  top: 1.5rem;
+  right: 1rem;
+  transition: all .2s;
+  transition-delay: .1s;
+}
+
+.searchbutton:hover {
+  cursor: pointer;
+}
+
+.searchbar:hover + .searchbutton {
+  height: 0rem;
+  top: 0rem;
+  right: 0;
+}
+
+.searchbar::placeholder {
+  opacity: .8;
+}

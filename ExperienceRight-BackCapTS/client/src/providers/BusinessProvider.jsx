@@ -8,7 +8,11 @@ export const BusinessProvider = (props) => {
   const { getToken } = useContext(UserProfileContext);
   const [businesses, setBusinesses] = useState([]);
   const [business, setBusiness] = useState({});
+  const [userBusiness, setUserBusiness] = useState({});
   const [categories, setCategories] = useState([]);
+  //const [businesszByCat, setBusinesszByCat] = useState([]);
+  
+
   
 
 
@@ -23,30 +27,17 @@ export const BusinessProvider = (props) => {
         .then(setBusinesses));
   };
 
-  // React js seems to hate multiple slashes in the fetch routes.
-  // So just add the id with no slash but inside string interpolation
-//   const getAllReviewsForBusiness = (id) => {
-//     return getToken().then((token) =>
-//       fetch(`/api/reviews/reviews${id}`, {
-//         method: "GET",
-//         headers: {
-//           Authorization: `Bearer ${token}`
-//         }
-//       }).then((resp) => resp.json())
-//         .then(setReviews));
-//   }
+  const searchBusinesses = (searchTerm) => {
+    getToken().then((token) =>
+      fetch(`/api/business/search?q=${searchTerm}`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }).then(resp => resp.json())
+        .then(setBusinesses));
+  };
 
-//   const getAllUnapprovedPosts = () => {
-//     getToken().then((token) =>
-//       fetch(`${apiUrl}/unapproved`, {
-//         method: "GET",
-//         headers: {
-//           Authorization: `Bearer ${token}`
-//         }
-//       }).then(resp => resp.json())
-//         .then(setUnapprovedPosts));
-
-//   };
 
   const getBusinessById = (id) => {
     getToken().then((token) =>
@@ -58,6 +49,34 @@ export const BusinessProvider = (props) => {
       })).then((resp) => resp.json())
       .then(setBusiness);
   };
+
+  const getBusinessByUserId = (id) => {
+   return getToken().then((token) =>
+      fetch(`/api/business/bizbyup/${id}`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })).then((resp) => resp.json())
+      .then(business => {
+        
+        setUserBusiness(business)
+        return business;
+       } );
+  };
+
+  const getBusinessByUserIdForBusinessProfile = (id) => {
+    getToken().then((token) =>
+      fetch(`/api/business/bizbyup/${id}`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })).then((resp) => resp.json())
+      .then(setUserBusiness);
+  };
+
+
 
   const addBusiness = (business) => {
     return getToken().then((token) =>
@@ -77,17 +96,18 @@ export const BusinessProvider = (props) => {
       }))
   };
 
-//   const updateReview = (id, review) => {
-//     return getToken().then((token) =>
-//       fetch(`/api/review/edit/${id}`, {
-//         method: "PUT",
-//         headers: {
-//           Authorization: `Bearer ${token}`,
-//           "Content-Type": "application/json"
-//         },
-//         body: JSON.stringify(review)
-//       }))
-//   };
+  const updateBusiness = (business) => {
+    return getToken().then((token) =>
+      fetch(`/api/business/edit/${business.id}`, {
+        method: "PUT",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(business)
+      }))
+  };
+
 
 //   const deleteReview = (id) =>
 //     getToken().then((token) =>
@@ -111,6 +131,18 @@ const getAllCategories = () => {
   .then(setCategories);
 }
 
+
+// const getAllBusinessesByCategory = (id) => {
+//   getToken().then((token) =>
+//     fetch(`/api/business/categories/${id}`,{
+//       method: "GET",
+//       headers: {
+//         Authorization: `Bearer ${token}`
+//       }
+//     }).then(resp => resp.json())
+//       .then(setBusinesszByCat));
+// };
+
 // getTheCount(id) {
 //     return fetch(`${remoteURL}/plants/?userId=${id}&_expand=user`).then(result => result.json())
 // }
@@ -119,7 +151,7 @@ const getAllCategories = () => {
   return (
     <BusinessContext.Provider value={{
     //   business, businesses, getAllBusinesses, getById, addReview setBusiness, getAllReviewsByUser
-    categories, business, businesses, getAllBusinesses, setBusiness, getBusinessById, addBusiness, getAllCategories
+    getBusinessByUserIdForBusinessProfile, categories, business, userBusiness, businesses, getAllBusinesses, setBusiness, getBusinessById, addBusiness, getAllCategories, updateBusiness, searchBusinesses, getBusinessByUserId
     }}>
       {props.children}
     </BusinessContext.Provider>

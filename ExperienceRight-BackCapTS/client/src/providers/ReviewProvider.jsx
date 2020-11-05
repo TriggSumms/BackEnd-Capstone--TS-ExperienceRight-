@@ -7,6 +7,7 @@ export const ReviewProvider = (props) => {
   const apiUrl = "/api/review";
   const { getToken } = useContext(UserProfileContext);
   const [reviews, setReviews] = useState([]);
+ // const [reviewz, setReviewz] = useState({});
   const [review, setReview] = useState({});
   const [frequencies, setFrequencies] = useState([]);
 
@@ -35,7 +36,7 @@ export const ReviewProvider = (props) => {
 //         .then(setReviews));
 //   }
 
-  const  getAllReviewsforBusiness = (id) => {
+  const  getAllReviewsforBusiness = (id, reviews) => {
     return getToken().then((token) =>
       fetch(`/api/review/business${id}`, {
         method: "GET",
@@ -57,17 +58,16 @@ export const ReviewProvider = (props) => {
         .then(setReviews));
   }
 
-//   const getAllUnapprovedPosts = () => {
-//     getToken().then((token) =>
-//       fetch(`${apiUrl}/unapproved`, {
-//         method: "GET",
-//         headers: {
-//           Authorization: `Bearer ${token}`
-//         }
-//       }).then(resp => resp.json())
-//         .then(setUnapprovedPosts));
-
-//   };
+  const searchReviews = (searchTerm) => {
+    getToken().then((token) =>
+      fetch(`/api/review/search?q=${searchTerm}`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }).then(resp => resp.json())
+        .then(setReviews));
+  };
 
   const getById = (id) => {
     getToken().then((token) =>
@@ -97,9 +97,9 @@ export const ReviewProvider = (props) => {
       }))
   };
 
-  const updateReview = (id, review) => {
+  const updateReview = (review) => {
     return getToken().then((token) =>
-      fetch(`/api/review/edit/${id}`, {
+      fetch(`/api/review/edit/${review.id}`, {
         method: "PUT",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -130,9 +130,13 @@ export const ReviewProvider = (props) => {
         .then(setFrequencies);
     }
 
+
+
+
+
   return (
     <ReviewContext.Provider value={{
-     frequencies, review, reviews, getAllReviews, getById, addReview, updateReview, deleteReview, setReview, getAllFrequencies,  getAllReviewsforBusiness, getAllReviewsforUserList
+    frequencies, review, reviews, getAllReviews, getById, addReview, updateReview, deleteReview, setReview, getAllFrequencies,  getAllReviewsforBusiness, getAllReviewsforUserList, searchReviews
     }}>
       {props.children}
     </ReviewContext.Provider>

@@ -5,6 +5,10 @@ import { useHistory, useParams } from "react-router-dom";
 
 
 export default function CommentAlertONComment({ CommentAlertONComment }) {
+  const history = useHistory();
+  const { reviewId, commentId } = useParams();
+  const sessionUser = JSON.parse(sessionStorage.getItem("userProfile"));
+
 
     return (
 
@@ -14,15 +18,6 @@ export default function CommentAlertONComment({ CommentAlertONComment }) {
              <h5 className="theHashTagtoSetOtherstoShame"> # </h5>
                  "{CommentAlertONComment.subject}"
             </div>
-           {/* <div className="postTagManagementButtons">   
-                <Link to={`/tags/${PostTag.id}`}>
-                <button className="tag-btn">Edit</button>
-              </Link> */}
-              &nbsp;&nbsp;&nbsp;
-              {/* <Link to={`/tags/delete/${PostTag.id}`}>
-                <button className="tag-btn">Delete</button>
-              </Link> 
-            </div> */}
           </section>
         </main>
       );

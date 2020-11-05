@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { NavLink as RRNavLink } from "react-router-dom";
 import {
   Collapse,
@@ -15,19 +15,50 @@ import {
 
 } from 'reactstrap';
 import { UserProfileContext } from "../providers/UserProfileProvider";
+import { BusinessContext } from "../providers/BusinessProvider";
 
 export default function Header() {
-  const { isLoggedIn, logout } = useContext(UserProfileContext);
+  const { userProfile, isLoggedIn, logout } = useContext(UserProfileContext);
+  const { userBusiness, getBusinessByUserId } = useContext(BusinessContext);
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
   const sessionUser = JSON.parse(sessionStorage.getItem("userProfile"));
 
+
+
+
+
+
+  //If a user Logs out....we have to adjust this useEffect so that the Login page isnt expecting a sessionUser value
+  // useEffect(() => {
+  //   if (sessionUser != null) {
+  //     (getBusinessByUserId(parseInt(sessionUser.id)))
+  //   }
+
+  // }, []);
+
+
+    //If a user Logs out....we have to adjust this useEffect so that the Login page isnt expecting a sessionUser value
+    // useEffect(() => {
+    //   if (sessionUser != null) {
+    //     (getBusinessByUserId(parseInt(sessionUser.id)))
+    //   }
+  
+    // }, []);
+
+
+  // console.log("TESTSESSIONUSERONHEADER", sessionUser)
+  // console.log("TESTBUIZNESsHEADER", userBusiness)
+
+
+
+
   //Tabs for the navBar on landing page go here
   return (
     <div>
-      <Navbar color="light" light expand="md">
+      <Navbar color="" light expand="md">
         <NavbarBrand className="navLogo" tag={RRNavLink} to="/">
-          <img src="" alt="ER Logo" />
+          <img src="https://res.cloudinary.com/triggsumms/image/upload/c_crop,h_150,w_420/v1604283529/mlrxn3jgv2ckqposszwv.gif" alt="ER Logo" />
         </NavbarBrand>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
@@ -40,33 +71,37 @@ export default function Header() {
             }
             {isLoggedIn &&
               <>
-                <NavItem>
-                  <NavLink tag={RRNavLink} to="/reviews">Reviews</NavLink>
-                </NavItem>
+                {/* <NavItem>
+                  <NavLink tag={RRNavLink} to="/reviews">ER Reviews</NavLink>
+                </NavItem> */}
                 {/* <NavItem>
                   <NavLink tag={RRNavLink} to="/">Home List</NavLink>
                 </NavItem> */}
               </>
             }
-            {isLoggedIn && sessionUser.userTypeId === 2 && 
+            {isLoggedIn && sessionUser.userTypeId === 2 &&
               <>
                 <NavItem>
-                  <NavLink tag={RRNavLink} to="/businesses">Businesses</NavLink>
+                  <NavLink tag={RRNavLink} to="/businesses">Businesses Available</NavLink>
                 </NavItem>
                 <NavItem>
-                  <NavLink tag={RRNavLink} to={`/reviews/myreviews/${sessionUser.id}`}>My Reviews</NavLink>
+                  <NavLink tag={RRNavLink} to="/reviews">Other User's Reviews</NavLink>
+                </NavItem>
+
+                <NavItem>
+                  {/* <NavLink tag={RRNavLink} to={`/reviews/myreviews/${userzId}`}>My Profile/Reviews</NavLink> */}
+                  <NavLink tag={RRNavLink} to={`/reviews/myreviews/${sessionUser.id}`}>My Profile </NavLink>
                 </NavItem>
               </>
             }
             {isLoggedIn && sessionUser.userTypeId === 1 &&
               <>
                 <NavItem>
-                  <NavLink tag={RRNavLink} to={`/businesses/details/${sessionUser.id}`}>My Business Profile</NavLink>
-                  </NavItem>
-                  <NavItem>
-                  <NavLink tag={RRNavLink} to="/users">BUIZ USER TEST</NavLink>
+                  <NavLink tag={RRNavLink} to={`/businessprofile/details/${userBusiness.id}`}>My Business Profile </NavLink>
                 </NavItem>
-
+                {/* <NavItem>
+                  <NavLink tag={RRNavLink} to="/reviews">ER Reviews</NavLink>
+                </NavItem> */}
               </>
             }
           </Nav>

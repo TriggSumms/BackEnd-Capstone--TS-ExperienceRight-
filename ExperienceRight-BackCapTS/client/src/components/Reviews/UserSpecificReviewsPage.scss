@@ -1,0 +1,184 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:600,300);
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+// variables
+$usercard-bg: #fff;
+$btn-border-bg: #cdcdcd;
+$pinterest-bg: #bd081c;
+$instagram-bg: #517fa4;
+$github-bg: #35465c;
+$twitter-bg: #55acee;
+
+// flex box prefixes
+@mixin d-flex() {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+}
+body {
+    font-family: 'Open Sans', Helvetica;
+    background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
+}
+
+// Page container
+.container {
+    max-width: 1100px;
+    margin: 50px auto;
+
+    .row {
+        @include d-flex();
+        margin: -10px;
+
+        .col {
+            margin: 10px;
+            felx-grow: 1;
+        }
+
+        @media screen and (max-width: 900px) {
+            flex-direction: column;
+        }
+    }
+}
+
+.usercard {
+    background: $usercard-bg;
+    @include d-flex();
+    flex-basis: 0;
+    min-height: 250px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    overflow: hidden;
+    border-radius: 4px;
+
+    .usercard-avatar {
+        position: relative;
+        width: 50%;
+        z-index: 49;
+        overflow: hidden;
+
+        .usercard-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: .3s;
+        }
+
+        &:after {
+            content: '';
+            position: absolute;
+            right: -16%;
+            top: 0;
+            transform: skewx(-10deg);
+            height: 100%;
+            width: 20%;
+            min-width: 90px;
+            background: $usercard-bg;
+        }
+    }
+
+    .usercard-body {
+        position: relative;
+        width: 50%;
+        padding: 40px 10px 20px;
+
+        .usercard-title {
+            font-size: 30px;
+            margin-bottom: 6px;
+        }
+
+        .usercard-badge {
+            padding: 4px 6px;
+            font-size: 12px;
+            font-weight: bold;
+            border-radius: 4px;
+            background: rgba(#35465c, .1);
+            color: #35465c;
+            margin: 4px 0;
+            display: inline-block;
+        }
+
+        .usercard-btn-container {
+            margin: 15px 0;
+        }
+
+        .usercard-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: none;
+            outline: none;
+            font-size: 25px;
+            color: white;
+            cursor: pointer;
+            opacity: .9;
+
+            &:active {
+                opacity: 1;
+            }
+
+            &.github {
+                background: $github-bg;
+            }
+            &.pinterest {
+                background: $pinterest-bg;
+            }
+            &.instagram {
+                background: $instagram-bg;
+            }
+            &.twitter {
+                background: $twitter-bg;
+            }
+        }
+    }
+
+    &:hover {
+
+        .usercard-img {
+            transform: scale(1.1) rotate(3deg);
+        }
+    }
+
+}
+
+
+.author{
+	font-family: inherit;
+	padding: 3em;
+	text-align: center;
+	width: 100%;
+	a:link,
+	a:visited{
+		color: #404040;
+		&:hover{
+			text-decoration: none;
+		}
+	}
+	.btn:link,
+	.btn:visited{
+		margin-top: 1em;
+		text-decoration: none;
+		display: inline-block;
+		font-family: inherit;
+		font-weight: 100;
+		color: white;
+		text-align: center;
+		vertical-align: middle;
+		user-select: none;
+		background-color: black;
+		padding: 1.5em 2rem;
+		border-radius: 1em;
+		transition: .5s all;
+		&:hover,
+		&:focus,
+		&:active{
+			background-color: lighten(black, 10%);
+		}
+	}
+}

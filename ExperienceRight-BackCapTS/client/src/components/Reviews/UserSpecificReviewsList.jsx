@@ -3,7 +3,8 @@ import Review from "../Reviews/Review"
 import { ReviewContext } from "../../providers/ReviewProvider";
 import { UserProfileContext } from "../../providers/UserProfileProvider";
 import { useParams, Link, useHistory } from "react-router-dom";
-import "../Business/BusinessProfile.scss";
+// import "../Business/BusinessProfile.scss";
+import "./UserSpecificReviewsPage.scss";
 
 
 export default function UserSpecificReviewsList() {
@@ -20,13 +21,14 @@ export default function UserSpecificReviewsList() {
         getAllReviewsforUserList(JSON.parse(userProfile).id);
     }, []);
 
-   // console.log("userProfile:", JSON.parse(userProfile));
+
+
+
+
 
     //   if (!review || !review.userProfile) {
     //     return null
     // }
-
-
 
     return (
 
@@ -35,87 +37,37 @@ export default function UserSpecificReviewsList() {
             <section>
                 <div class="postCard">
                     <div className="postHeader">
-                        <div className="postHeaderDetails">
-                            <div>
-                          
-                            </div>
-                            <div class="doctor-card">
-                                <div class="info">
-                                    <div class="avatar">
-                                        <img className="imageBackground" src={userProfile.profileImageLocation} alt="image" />
-                                    </div>
-                                    <div class="details">
-                                    <h1>USER: {(JSON.parse(userProfile).displayName)}'s</h1>
-                                <h3>....Remember your incongonito while utilizing<div>ExperienceRight</div> </h3>
-                                        <div class="name">{userProfile.displayName}
+                        <div class="container">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="usercard">
+                                        <div class="usercard-avatar">
+                                            <img src="https://res.cloudinary.com/triggsumms/image/upload/v1604548891/gqnlntrlc0axvgtvk2yl.png" alt="" class="usercard-img"></img>
                                         </div>
-
-                                        <div class="meta-info">
-                                            <span class="sp">{userProfile.email}</span>
-                                            <div>
+                                        <div class="usercard-body">
+                                            <h2 class="usercard-title">Welcome, {(JSON.parse(userProfile).firstName)}</h2>
+                                            <span class="usercard-badge">Reviews Made: <strong>{reviews.length}</strong> </span>
+                                            <br></br>
+                                            <span class="usercard-badge">{(JSON.parse(userProfile).email)}</span>
+                                            <br></br>
+                                            <span class="usercard-badge">XR Member Since:{new Intl.DateTimeFormat('en-US').format(new Date(JSON.parse(userProfile).createDateTime))} </span>
+                                            <div class="usercard-btn-container">
+                                                <a ><Link class="btn" to={`/businesses`}>Check Out Businesses with XR</Link></a>
 
                                             </div>
-
-
-                                            <div>
-                                            </div>
-
-                                        </div>
-                                        <div>
-                                            <span class="prac-area"> XR Member Since: {userProfile.createDateTime}</span>
                                         </div>
                                     </div>
-
                                 </div>
-                                <div class="actions">
-                                    <div class="ratings">
-                                        <span class="rating-control">
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star-half-o"></i>
-                                            <i class="fa fa-star-o"></i>
-                                            <i class="fa fa-star-o"></i>
-                                        </span>
-                                        <span class="rating-count">000 Ratings</span>
-                                    </div>
-                                    <div class="comments">
-                                        <span class="comment-count"><strong>340</strong> Reviews</span>
-                                    </div>
-                                    {/* <div class="consultation">
-				<span class="fee"><strong>34K</strong>Followers</span>
-			</div> */}
-                                    <div class="appo">
-                                        {/* <a href="#" class="btn">Add Review</a> */}
-                                    </div>
-                                </div>
-                                <div class="locations">
+                            </div></div>
 
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class="toggle">
-                        <div>
-                            {/* <a href="/reviews/unapproved" className="unapprovedPosts">View All Unapproved</a> */}
-                        </div>
                     </div>
                     <div className="post-container">
                         <table className="postTable">
                             <thead className="postTableHeader">
                                 <tr>
                                     <th className="postTitle-header">
-                                        Title
-                </th>
-                                    <th className="postUserName-header">
-                                        DisplayName
-                </th>
-                                    <th className="postCategory-header">
-                                        Frequency Of Visits
-                </th>
-                                    <th className="postDate-header">
-                                        Experience Date
-                </th>
+                                        Your Reviews
+                                    </th>
                                     <th></th>
                                 </tr>
                             </thead>
@@ -125,6 +77,7 @@ export default function UserSpecificReviewsList() {
                         </table>
                     </div>
                 </div>
+
             </section>
 
 

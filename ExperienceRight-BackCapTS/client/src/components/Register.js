@@ -27,16 +27,16 @@ console.log("TEST", userTypeId)
 
 
 
-
+// if (password && password !== confirmPassword || firstName === "" || lastName === "" || displayName  === "" || email === "" || profileImageLocation === "") {
 
   const registerClick = (e) => {
     e.preventDefault();
-    if (password && password !== confirmPassword) {
+      if (password && password !== confirmPassword ) {
       alert("Passwords don't match. Please correct.");
     } else {
       
       const userProfile = {  userTypeId, firstName, lastName, displayName, profileImageLocation, email };
-      console.log("test5", userProfile);
+     // console.log("test5", userProfile);
       register(userProfile, password)
      
 
@@ -59,11 +59,12 @@ console.log("TEST", userTypeId)
        <fieldset>
       <Label for="userTypeId">What Type of user are you?</Label>
       <br />
-      <select id="userTypeId" className="userEditDropdown"  /* defaultValue={userType.id === 1} */ onChange={e => setUserTypeId(parseInt(e.target.value))}>
+      <select id="userTypeId" className="userEditDropdown"   type="select" onChange={e => setUserTypeId(parseInt(e.target.value))}>
+                        <option>Choose......</option>
                         {userTypes.map(userType =>
                             
                                 <option value={userType.id}>
-                                    {userType.name}
+                                    A {userType.name}
                                 </option>
                         )}
     </select> 
