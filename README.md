@@ -18,6 +18,7 @@ The application was designed to act as a liaison between the consumer and the bu
 
 ....more information to come
 
+HERE is a quick Video demo: https://youtu.be/c7JfTILzopI
 
 ### Sketching Out the Project 
 [Link to SketchBoard](https://sketchboard.me/BCofWoKCUoAq)
