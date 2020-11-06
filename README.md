@@ -9,14 +9,17 @@
 
 # BACKEND CAPSTONE- "EXPERIENCE RIGHT"
 
-The application was designed to act as a liaison between the consumer and the business they are reviewing and ultimately is geared towards improving the customer experience! This is done through registering as either a business (to be reviewed) or a consumer (to do the reviewing).  
+An application built to improve the customer experience, specifically allowing customers to review businesses and then immediately gain insight into how the community has rated that business. Furthermore, the application attracts businesses willing to improve their services
 
-| As a reviewer, you will be directed towards this app by the business registered with XR. Thus, being able to create an account and post an experience you had with said business. After the reviewer finishes, they are free to read through other reviews for the business....to gage the communities rating or to check out other reviews written by users of the app.  
+| As a reviewer, you will be directed towards this app by the business (registered with XR). 
+*First a reviewer will create an account 
+*Then the reviewer will find a list of businesses to post an experience with. 
+*After the reviewer finishes posting their review.... they are free to read through other user’s experiences via the business or another business registered with XR. *Lastly, there are search features available for a user to quickly find posts matching possible products/services of interest. 
 
-| As a business, you will register in our system and then spread the word that you have a futuristic application designed to hear out their concerns or answer questions they may have.  As soon as they review your business.... you can respond back and create that relationship with your consumer that you always wanted!
+| As a business, you will register in the XR system and then spread the word! As the reviews pile into the businesses profile, you will have a chance to receive feedback and suggestions….and most importantly directly communicate with your customers. 
 
+.... more information to come but for a quick run through of the app..... please watch the short demo video below
 
-....more information to come
 
 Quick Video Demo: https://youtu.be/c7JfTILzopI
 
