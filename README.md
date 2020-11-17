@@ -54,12 +54,12 @@ Quick Video Demo: https://youtu.be/c7JfTILzopI
 
 ### Sketching Out the Project 
 [Link to SketchBoard](https://sketchboard.me/BCofWoKCUoAq)
-![Title]
+
 
 
 ### ERD
 [Link to DBDiagram](https://dbdiagram.io/d/5f91b7b53a78976d7b78c927)
-![Title]
+
 <p align="left">
     <a >
         <img width="45%" src="https://res.cloudinary.com/triggsumms/image/upload/v1603575585/de1rup2jmwk7jnha6slp.png"  alt="DB">
