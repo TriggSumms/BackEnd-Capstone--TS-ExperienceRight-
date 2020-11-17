@@ -25,14 +25,14 @@ An application built to improve the customer experience, specifically allowing c
 As the reviews pile into your businesses profile, you will have a chance to receive feedback and suggestions….and most importantly directly communicate with your customers. 
 
 ### Gallery
-```gallery(autoplay=2000)
+gallery(autoplay=2000)
 https://res.cloudinary.com/triggsumms/image/upload/v1605636177/vcz7d0mbwbngs9a4gusm.png/1024x600
 https://res.cloudinary.com/triggsumms/image/upload/v1605636176/rqn6h1313vqydwuu2pyn.png/1024x600
 https://res.cloudinary.com/triggsumms/image/upload/v1605636176/dbtgdggavn1cniweaqcj.png/1024x600
 https://res.cloudinary.com/triggsumms/image/upload/v1605636177/htcgeuz9pi3pymtz6wbj.png/1024x600
 https://res.cloudinary.com/triggsumms/image/upload/v1605636324/uzxsabyxpcc1cv3oh8bl.png/1024x600
-```
-> Use `gallery(autoplay=2000)` for 2 seconds image rotation.
+
+
 
 
 Quick Video Demo: https://youtu.be/c7JfTILzopI
