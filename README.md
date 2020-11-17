@@ -13,7 +13,7 @@
 An application built to improve the customer experience, specifically allowing customers to review businesses and then immediately gain insight into how the community has rated that business. Furthermore, the application attracts businesses willing to improve their services
 
 ### As a reviewer...
-> you will be directed towards this app by the business (registered with XR). 
+> You will be directed towards this app by the business (registered with XR). 
 > 
 1. First a reviewer will create an account 
 2. Then the reviewer will find a list of businesses to post an experience with. 
