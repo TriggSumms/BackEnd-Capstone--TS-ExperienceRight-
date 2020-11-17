@@ -34,7 +34,7 @@ An application built to improve the customer experience, specifically allowing c
 As the reviews pile into your businesses profile, you will have a chance to receive feedback and suggestions….and most importantly directly communicate with your customers. 
 
 <br></br>
-### Gallery View Of Reviewer & Business (Application Experience)
+### View Of (Application Experience)
 <img src="https://res.cloudinary.com/triggsumms/image/upload/v1605636177/vcz7d0mbwbngs9a4gusm.png" width="30%"></img>
 <img src="https://res.cloudinary.com/triggsumms/image/upload/v1605636176/rqn6h1313vqydwuu2pyn.png" width="30%"></img>
 <img src="https://res.cloudinary.com/triggsumms/image/upload/v1605636176/dbtgdggavn1cniweaqcj.png" width="30%"></img> 
