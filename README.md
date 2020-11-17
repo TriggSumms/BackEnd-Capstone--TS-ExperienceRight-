@@ -20,6 +20,7 @@
 
 An application built to improve the customer experience, specifically allowing customers to review businesses and then immediately gain insight into how the community has rated that business. Furthermore, the application attracts businesses willing to improve their services
 
+<br>
 ### As a reviewer...
 > You will be directed towards this app by the business (registered with XR). 
 > 
@@ -32,6 +33,7 @@ An application built to improve the customer experience, specifically allowing c
 > You will register in the XR system and then spread the word! 
 As the reviews pile into your businesses profile, you will have a chance to receive feedback and suggestions….and most importantly directly communicate with your customers. 
 
+<br>
 ### Gallery View Of Reviewer & Business (Application Experience)
 <img src="https://res.cloudinary.com/triggsumms/image/upload/v1605636177/vcz7d0mbwbngs9a4gusm.png" width="30%"></img>
 <img src="https://res.cloudinary.com/triggsumms/image/upload/v1605636176/rqn6h1313vqydwuu2pyn.png" width="30%"></img>
@@ -46,6 +48,7 @@ As the reviews pile into your businesses profile, you will have a chance to rece
 
 Quick Video Demo: https://youtu.be/c7JfTILzopI
 
+<br>
 ### Sketching Out the Project 
 [Link to SketchBoard](https://sketchboard.me/BCofWoKCUoAq)
 ![Title]
