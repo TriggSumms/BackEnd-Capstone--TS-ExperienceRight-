@@ -33,7 +33,6 @@ As the reviews pile into your businesses profile, you will have a chance to rece
 <img src="https://res.cloudinary.com/triggsumms/image/upload/v1605636177/msmmbsz9ltn3bodupndi.png" width="30%"></img> 
 <img src="https://res.cloudinary.com/triggsumms/image/upload/v1605636177/sadkrmbpls9iesj6umfa.png" width="30%"></img> 
 <img src="https://res.cloudinary.com/triggsumms/image/upload/v1605636177/ql75ptv4cltuhswa6tkn.png" width="30%"></img> 
-<img src="https://res.cloudinary.com/triggsumms/image/upload/v1605636185/np50s1irx9p6o4sitltx.png" width="30%"></img> 
 <img src="https://res.cloudinary.com/triggsumms/image/upload/v1605637460/ymqarcatsmhett9zwjhm.png" width="30%"></img> 
 
 
