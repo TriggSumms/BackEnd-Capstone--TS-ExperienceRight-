@@ -24,8 +24,18 @@ An application built to improve the customer experience, specifically allowing c
 >You will register in the XR system and then spread the word! 
 As the reviews pile into your businesses profile, you will have a chance to receive feedback and suggestions….and most importantly directly communicate with your customers. 
 
-### Gallery
-<img src="https://res.cloudinary.com/triggsumms/image/upload/v1605636177/vcz7d0mbwbngs9a4gusm.png" width="30%"></img> <img src="https://cloud.githubusercontent.com/assets/4307137/10105290/2a183f3a-63ae-11e5-9380-50d9f6d8afd6.png" width="30%"></img> <img src="https://res.cloudinary.com/triggsumms/image/upload/v1605636176/rqn6h1313vqydwuu2pyn.png" width="30%"></img> <img src="https://res.cloudinary.com/triggsumms/image/upload/v1605636176/dbtgdggavn1cniweaqcj.png" width="30%"></img> <img src="https://res.cloudinary.com/triggsumms/image/upload/v1605636177/htcgeuz9pi3pymtz6wbj.png" width="30%"></img> <img src="https://res.cloudinary.com/triggsumms/image/upload/v1605636324/uzxsabyxpcc1cv3oh8bl.png" width="30%"></img> 
+### Gallery View Of Reviewer & Business (Application Experience)
+<img src="https://res.cloudinary.com/triggsumms/image/upload/v1605636177/vcz7d0mbwbngs9a4gusm.png" width="30%"></img>
+<img src="https://res.cloudinary.com/triggsumms/image/upload/v1605636176/rqn6h1313vqydwuu2pyn.png" width="30%"></img>
+<img src="https://res.cloudinary.com/triggsumms/image/upload/v1605636176/dbtgdggavn1cniweaqcj.png" width="30%"></img> 
+<img src="https://res.cloudinary.com/triggsumms/image/upload/v1605636177/htcgeuz9pi3pymtz6wbj.png" width="30%"></img>
+<img src="https://res.cloudinary.com/triggsumms/image/upload/v1605636324/uzxsabyxpcc1cv3oh8bl.png" width="30%"></img> 
+<img src="https://res.cloudinary.com/triggsumms/image/upload/v1605636177/msmmbsz9ltn3bodupndi.png" width="30%"></img> 
+<img src="https://res.cloudinary.com/triggsumms/image/upload/v1605636177/sadkrmbpls9iesj6umfa.png" width="30%"></img> 
+<img src="https://res.cloudinary.com/triggsumms/image/upload/v1605636177/ql75ptv4cltuhswa6tkn.png" width="30%"></img> 
+<img src="https://res.cloudinary.com/triggsumms/image/upload/v1605636185/np50s1irx9p6o4sitltx.png" width="30%"></img> 
+<img src="https://res.cloudinary.com/triggsumms/image/upload/v1605637460/ymqarcatsmhett9zwjhm.png" width="30%"></img> 
+
 
 Quick Video Demo: https://youtu.be/c7JfTILzopI
 
