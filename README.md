@@ -49,6 +49,9 @@ As the reviews pile into your businesses profile, you will have a chance to rece
 Quick Video Demo: https://youtu.be/c7JfTILzopI
 
 <br></br>
+<br></br>
+# Project Planning:
+
 ### Sketching Out the Project 
 [Link to SketchBoard](https://sketchboard.me/BCofWoKCUoAq)
 ![Title]
