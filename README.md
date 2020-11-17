@@ -21,7 +21,7 @@
 An application built to improve the customer experience, specifically allowing customers to review businesses and then immediately gain insight into how the community has rated that business. Furthermore, the application attracts businesses willing to improve their services
 
 <br></br>
-### As a reviewer...
+### As a Reviewer...
 > You will be directed towards this app by the business (registered with XR). 
 > 
 1. First a reviewer will create an account 
@@ -29,7 +29,7 @@ An application built to improve the customer experience, specifically allowing c
 3. After the reviewer finishes posting their review.... they are free to read through other user’s experiences via the business or another business registered with XR.
 4. Lastly, there are search features available for a user to quickly find posts matching possible products/services of interest. 
 
-### As a business...
+### As a Business...
 > You will register in the XR system and then spread the word! 
 As the reviews pile into your businesses profile, you will have a chance to receive feedback and suggestions….and most importantly directly communicate with your customers. 
 
