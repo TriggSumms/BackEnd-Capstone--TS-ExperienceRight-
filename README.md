@@ -8,7 +8,14 @@
 
 <br/>
 
-# "EXPERIENCE RIGHT"/BACKEND CAPSTONE (Full Stack)
+
+<br/>
+<p align="center">
+# "EXPERIENCE RIGHT" (Full Stack Apllication)
+</p>
+
+<br/>
+
 
 An application built to improve the customer experience, specifically allowing customers to review businesses and then immediately gain insight into how the community has rated that business. Furthermore, the application attracts businesses willing to improve their services
 
