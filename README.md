@@ -25,15 +25,7 @@ An application built to improve the customer experience, specifically allowing c
 As the reviews pile into your businesses profile, you will have a chance to receive feedback and suggestions….and most importantly directly communicate with your customers. 
 
 ### Gallery
-gallery(autoplay=2000)
-https://res.cloudinary.com/triggsumms/image/upload/v1605636177/vcz7d0mbwbngs9a4gusm.png/1024x600
-https://res.cloudinary.com/triggsumms/image/upload/v1605636176/rqn6h1313vqydwuu2pyn.png/1024x600
-https://res.cloudinary.com/triggsumms/image/upload/v1605636176/dbtgdggavn1cniweaqcj.png/1024x600
-https://res.cloudinary.com/triggsumms/image/upload/v1605636177/htcgeuz9pi3pymtz6wbj.png/1024x600
-https://res.cloudinary.com/triggsumms/image/upload/v1605636324/uzxsabyxpcc1cv3oh8bl.png/1024x600
-
-
-
+<img src="https://res.cloudinary.com/triggsumms/image/upload/v1605636177/vcz7d0mbwbngs9a4gusm.png" width="30%"></img> <img src="https://cloud.githubusercontent.com/assets/4307137/10105290/2a183f3a-63ae-11e5-9380-50d9f6d8afd6.png" width="30%"></img> <img src="https://res.cloudinary.com/triggsumms/image/upload/v1605636176/rqn6h1313vqydwuu2pyn.png" width="30%"></img> <img src="https://res.cloudinary.com/triggsumms/image/upload/v1605636176/dbtgdggavn1cniweaqcj.png" width="30%"></img> <img src="https://res.cloudinary.com/triggsumms/image/upload/v1605636177/htcgeuz9pi3pymtz6wbj.png" width="30%"></img> <img src="https://res.cloudinary.com/triggsumms/image/upload/v1605636324/uzxsabyxpcc1cv3oh8bl.png" width="30%"></img> 
 
 Quick Video Demo: https://youtu.be/c7JfTILzopI
 
