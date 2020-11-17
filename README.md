@@ -1,3 +1,4 @@
+
 <br/>
 <p align="center">
     <a >
@@ -25,10 +26,19 @@ Quick Video Demo: https://youtu.be/c7JfTILzopI
 
 ### Sketching Out the Project 
 [Link to SketchBoard](https://sketchboard.me/BCofWoKCUoAq)
-
+![Title]
+<p align="left">
+    <a >
+        <img width="30%" src="https://res.cloudinary.com/triggsumms/image/upload/v1603575507/fj5zdbiqq3mf6en9tt5a.png"  alt="sketchboard">
+    </a>
+</p>
 
 ### ERD
 [Link to DBDiagram](https://dbdiagram.io/d/5f91b7b53a78976d7b78c927)
-![Title](https://res.cloudinary.com/triggsumms/image/upload/v1603575585/de1rup2jmwk7jnha6slp.png)
-
+![Title]
+<p align="left">
+    <a >
+        <img width="45%" src="https://res.cloudinary.com/triggsumms/image/upload/v1603575585/de1rup2jmwk7jnha6slp.png"  alt="DB">
+    </a>
+</p>
 
