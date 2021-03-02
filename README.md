@@ -46,7 +46,7 @@ As the reviews pile into your businesses profile, you will have a chance to rece
 <img src="https://res.cloudinary.com/triggsumms/image/upload/v1605637460/ymqarcatsmhett9zwjhm.png" width="30%"></img> 
 
 
-Quick Video Demo: https://youtu.be/c7JfTILzopI
+
 
 <br></br>
 
